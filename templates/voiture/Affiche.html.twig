@@ -22,6 +22,7 @@
         <th>Update</th>
         <th>Delete</th>
 
+
     </tr>
     <tr  {%  for v in voiture %} >
         <td>{{v.id}} </td>
@@ -29,12 +30,15 @@
         <td>{{ v.marque }}</td>
         <td>{{ v.puissance }}</td>
         <td>{{ v.prixJours }}</td>
+        <td><img class="img-profile " src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 80px"></td>
         <td>{{ v.puissance }}</td>
-        <td>{{ v.picture }}</td>
         <td>{{ v.etat }}</td>
         <td>{{ v.idLocateur }}</td>
-        <td></td>
-        <td></td>
+        <td> <a href="{{ path('updateVoiture',{'id': v.id})}}"> update</a> </td>
+        <td><a href="{{ path('app_DeleteVoiture',{'id':v.id}) }}">Delete</a></td>
+
+
+
 
     </tr {%  endfor %}>
 </table>

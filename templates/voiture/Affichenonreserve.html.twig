@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Matricule</th>
+        <th>Marque</th>
+        <th>puissance</th>
+        <th>prix par jour </th>
+        <th>picture</th>
+        <th>energie</th>
+        <th>etat</th>
+        <th>id_locateur</th>
+
+
+    </tr>
+    <tr  {%  for v in voiture %} >
+        <td>{{v.id}} </td>
+        <td>{{v.matricule}} </td>
+        <td>{{ v.marque }}</td>
+        <td>{{ v.puissance }}</td>
+        <td>{{ v.prixJours }}</td>
+        <td>{{ v.puissance }}</td>
+        <td><img class="img-profile " src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 80px"></td>
+        <td>{{ v.etat }}</td>
+        <td>{{ v.idLocateur }}</td>
+
+
+
+
+
+    </tr {%  endfor %}>
+</table>
+</body>
+</html>

@@ -2,55 +2,84 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Voiture;
 
-/**
- * Reservation
- *
- * @ORM\Table(name="reservation", indexes={@ORM\Index(name="fk_reservation", columns={"id_voiture"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_debut", type="date", nullable=false)
-     */
-    private $dateDebut;
+    #[ORM\Column(type: "datetime")]
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_fin", type="date", nullable=false)
-     */
-    private $dateFin;
+    private ?\DateTimeInterface $dateDebut = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_client", type="integer", nullable=false)
-     */
-    private $idClient;
+    #[ORM\Column(type: "datetime")]
+    private ?\DateTimeInterface $dateFin = null;
 
-    /**
-     * @var \Voiture
-     *
-     * @ORM\ManyToOne(targetEntity="Voiture")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_voiture", referencedColumnName="id")
-     * })
-     */
-    private $idVoiture;
+    #[ORM\Column]
+    private ?int $idClient=null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(name: "id_voiture", referencedColumnName: "id")]
+    private ?Voiture $voiture = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDateDebut(): ?\DateTimeInterface
+    {
+        return $this->dateDebut;
+    }
+
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(\DateTimeInterface $dateFin): self
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getIdClient(): ?int
+    {
+        return $this->idClient;
+    }
+
+    public function setIdClient(int $idClient): self
+    {
+        $this->idClient = $idClient;
+
+        return $this;
+    }
+
+    public function getIdVoiture(): ?voiture
+    {
+        return $this->idVoiture;
+    }
+
+    public function setIdVoiture(?voiture $idVoiture): self
+    {
+        $this->idVoiture = $idVoiture;
+
+        return $this;
+    }
 
 
 }

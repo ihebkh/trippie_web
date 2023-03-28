@@ -6,22 +6,71 @@ use App\Entity\Voiture;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class VoitureFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('matricule')
-            ->add('marque')
-            ->add('puissance')
+            ->add('marque', ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'BMW' => 'BMW',
+                        'Mercedes' => 'Mercedes',
+                        'Audi' => 'Audi',
+                        'clio' => 'clio',
+                        'porshe' => 'porshe',
+                        'peugeot' => 'peugeot',
+                        'hamer' => 'hamer',
+                    )
+                ))
+            ->add('puissance', ChoiceType::class,
+                array(
+                    'choices' => array(
+                        '5ch' => '5ch',
+                        '6ch' => '6ch',
+                        '7ch' => '7ch',
+                        '8ch' => '8ch',
+                        '9ch' => '9ch',
+                        '10ch' => '10ch',
+                        '11ch' => '11ch',
+                        '12ch' => '12ch',
+                        '13ch' => '13ch',
+
+                    )
+                ))
             ->add('prixJours')
-            ->add('picture')
-            ->add('energie')
-            ->add('etat')
+            ->add('picture', FileType::class, [
+                'label' => 'Image',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1000024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid JPEG or PNG image',
+                    ])
+                ],
+            ])
+            ->add('energie', ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'essence' => 'essence',
+                        'gazoil' => 'gazoil',
+                        'gpl' => 'gpl',
+
+                    )
+                ))
             ->add('idLocateur')
         ;
     }

@@ -14,6 +14,7 @@
       <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
+      <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -36,9 +37,14 @@
         <parameter key="path">C:\Users\khmir\Desktop\Allocationweb1\vendor\symfony\twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
       </parameter>
+      <parameter key="SensioFrameworkExtraBundle" type="collection">
+        <parameter key="path">C:\Users\khmir\Desktop\Allocationweb1\vendor\sensio\framework-extra-bundle\src</parameter>
+        <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
+      </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
+    <parameter key="uploads_directory">C:\Users\khmir\Desktop\Allocationweb1/public/uploads</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -67,6 +73,8 @@
     <parameter key="kernel.enabled_locales" type="collection"/>
     <parameter key="kernel.error_controller">error_controller</parameter>
     <parameter key="debug.file_link_format">null</parameter>
+    <parameter key="asset.request_context.base_path">null</parameter>
+    <parameter key="asset.request_context.secure">null</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
     <parameter key="debug.container.dump">C:\Users\khmir\Desktop\Allocationweb1\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
@@ -190,7 +198,7 @@
     <service id="App\Form\VoitureFormType" class="App\Form\VoitureFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Repository\TesteRepository" class="App\Repository\TesteRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\ReservationRepository" class="App\Repository\ReservationRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -198,6 +206,7 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Service\FileUploader" class="App\Service\FileUploader" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -1013,6 +1022,56 @@
         <argument key="cache.doctrine.orm.default.query" type="service" id="cache.doctrine.orm.default.query" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
+    <service id="assets.packages" class="Symfony\Component\Asset\Packages">
+      <argument type="service" id="assets._default_package"/>
+      <argument type="tagged_iterator" tag="assets.package" index-by="package" default-index-method="getDefaultPackageName" default-priority-method="getDefaultPackagePriority"/>
+    </service>
+    <service id="assets.empty_package" class="Symfony\Component\Asset\Package">
+      <argument type="service" id="assets.empty_version_strategy"/>
+    </service>
+    <service id="assets.context" class="Symfony\Component\Asset\Context\RequestStackContext">
+      <argument type="service" id="request_stack"/>
+      <argument type="service">
+        <service class="string">
+          <factory service="router.request_context" method="getBaseUrl"/>
+        </service>
+      </argument>
+      <argument type="service">
+        <service class="bool">
+          <factory service="router.request_context" method="isSecure"/>
+        </service>
+      </argument>
+    </service>
+    <service id="assets.path_package" class="Symfony\Component\Asset\PathPackage" abstract="true">
+      <argument type="abstract">base path</argument>
+      <argument type="abstract">version strategy</argument>
+      <argument type="service" id="assets.context"/>
+    </service>
+    <service id="assets.url_package" class="Symfony\Component\Asset\UrlPackage" abstract="true">
+      <argument type="abstract">base URLs</argument>
+      <argument type="abstract">version strategy</argument>
+      <argument type="service" id="assets.context"/>
+    </service>
+    <service id="assets.static_version_strategy" class="Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy" abstract="true">
+      <argument type="abstract">version</argument>
+      <argument type="abstract">format</argument>
+    </service>
+    <service id="assets.empty_version_strategy" class="Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy"/>
+    <service id="assets.json_manifest_version_strategy" class="Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy" abstract="true">
+      <argument type="abstract">manifest path</argument>
+      <argument type="service" id="http_client" on-invalid="null"/>
+      <argument>false</argument>
+    </service>
+    <service id="assets.remote_json_manifest_version_strategy" class="Symfony\Component\Asset\VersionStrategy\RemoteJsonManifestVersionStrategy" abstract="true">
+      <argument type="abstract">manifest url</argument>
+      <argument type="service" id="http_client"/>
+      <deprecated package="symfony/framework-bundle" version="5.3">The "%service_id%" service is deprecated, use "assets.json_manifest_version_strategy" instead.</deprecated>
+    </service>
+    <service id="assets._default_package" class="Symfony\Component\Asset\PathPackage">
+      <argument></argument>
+      <argument type="service" id="assets.empty_version_strategy"/>
+      <argument type="service" id="assets.context"/>
+    </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
       <tag name="monolog.logger" channel="php"/>
@@ -1246,6 +1305,62 @@
         <argument type="collection">
           <argument type="service_closure" id="maker.console_error_listener"/>
           <argument>onConsoleTerminate</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.controller.listener"/>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.converter.listener"/>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.view.listener"/>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>-128</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.view</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.view.listener"/>
+          <argument>onKernelView</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.cache.listener"/>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="sensio_framework_extra.cache.listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller_arguments</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="framework_extra_bundle.event.is_granted"/>
+          <argument>onKernelControllerArguments</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -1766,6 +1881,11 @@
       <argument type="service" id="property_info"/>
       <argument>null</argument>
     </service>
+    <service id="mime_types" class="Symfony\Component\Mime\MimeTypes">
+      <call method="setDefault">
+        <argument type="service" id="mime_types"/>
+      </call>
+    </service>
     <service id="data_collector.doctrine" class="Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector">
       <tag name="data_collector" template="@Doctrine/Collector/db.html.twig" id="db" priority="250"/>
       <argument type="service" id="doctrine"/>
@@ -1918,7 +2038,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.sHqcOum"/>
+      <argument type="service" id=".service_locator.dQRJizT"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -2538,6 +2658,9 @@
         <argument type="service" id="twig.extension.trans"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="twig.extension.assets"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.code"/>
       </call>
       <call method="addExtension">
@@ -2639,6 +2762,10 @@
     <service id="twig.extension.trans" class="Symfony\Bridge\Twig\Extension\TranslationExtension">
       <tag name="twig.extension"/>
       <argument>null</argument>
+    </service>
+    <service id="twig.extension.assets" class="Symfony\Bridge\Twig\Extension\AssetExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="assets.packages"/>
     </service>
     <service id="twig.extension.code" class="Symfony\Bridge\Twig\Extension\CodeExtension">
       <tag name="twig.extension"/>
@@ -2742,6 +2869,63 @@
         <argument>Lint a Twig template and outputs encountered errors</argument>
       </call>
     </service>
+    <service id="sensio_framework_extra.controller.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id="sensio_framework_extra.converter.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="sensio_framework_extra.converter.manager"/>
+      <argument>true</argument>
+    </service>
+    <service id="sensio_framework_extra.converter.manager" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager">
+      <call method="add">
+        <argument type="service" id="sensio_framework_extra.converter.doctrine.orm"/>
+        <argument>0</argument>
+        <argument>doctrine.orm</argument>
+      </call>
+      <call method="add">
+        <argument type="service" id="framework_extra_bundle.date_time_param_converter"/>
+        <argument>0</argument>
+        <argument>datetime</argument>
+      </call>
+    </service>
+    <service id="sensio_framework_extra.converter.doctrine.orm" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter">
+      <tag name="request.param_converter" converter="doctrine.orm"/>
+      <argument type="service" id="doctrine" on-invalid="ignore"/>
+      <argument>null</argument>
+    </service>
+    <service id="framework_extra_bundle.date_time_param_converter" class="Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter">
+      <tag name="request.param_converter" converter="datetime"/>
+    </service>
+    <service id="sensio_framework_extra.view.guesser" class="Sensio\Bundle\FrameworkExtraBundle\Templating\TemplateGuesser">
+      <argument type="service" id="kernel"/>
+    </service>
+    <service id="sensio_framework_extra.view.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.service_subscriber" id="twig"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="sensio_framework_extra.view.guesser"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.aNklfos.sensio_framework_extra.view.listener"/>
+      </call>
+    </service>
+    <service id="sensio_framework_extra.cache.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <tag name="container.hot_path"/>
+    </service>
+    <service id="framework_extra_bundle.event.is_granted" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="framework_extra_bundle.argument_name_convertor"/>
+      <argument>null</argument>
+    </service>
+    <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
+      <argument type="service" id="argument_metadata_factory"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -2752,8 +2936,8 @@
     <service id=".abstract.instanceof.App\Form\ReservationFormType" class="App\Form\ReservationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\VoitureFormType" class="App\Form\VoitureFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\VoitureFormType" class="App\Form\VoitureFormType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TesteRepository" class="App\Repository\TesteRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\TesteRepository" class="App\Repository\TesteRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ReservationRepository" class="App\Repository\ReservationRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ReservationRepository" class="App\Repository\ReservationRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\VoitureRepository" class="App\Repository\VoitureRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\VoitureRepository" class="App\Repository\VoitureRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.gSv9zYw" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -3091,21 +3275,68 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.aKM6MDa" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.vJKoCwu" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="repository" type="service_closure" id="App\Repository\ReservationRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.r.5pux9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.TiNt8je" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\VoitureController::Affiche" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="repo" type="service_closure" id="App\Repository\ReservationRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.U0A_QMQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repository" type="service_closure" id="App\Repository\VoitureRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.z6uZLW2" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="repo" type="service_closure" id="App\Repository\VoitureRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.bVC5iuU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+        <argument key="voiture" type="service_closure" id=".errored..service_locator.bVC5iuU.App\Entity\Voiture"/>
+      </argument>
+    </service>
+    <service id=".service_locator.GQZbvNR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+      </argument>
+    </service>
+    <service id=".service_locator.TrEtZJe" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\ReservationController::Affiche" type="service_closure" id=".service_locator.vJKoCwu"/>
+        <argument key="App\Controller\ReservationController::deleteStatique" type="service_closure" id=".service_locator.TiNt8je"/>
+        <argument key="App\Controller\VoitureController::Affiche" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController::Affichenonreserve" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController::Affichereserve" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController::addVoiture" type="service_closure" id=".service_locator.GQZbvNR"/>
+        <argument key="App\Controller\VoitureController::deleteStatique" type="service_closure" id=".service_locator.z6uZLW2"/>
+        <argument key="App\Controller\VoitureController::updateVoiture" type="service_closure" id=".service_locator.bVC5iuU"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
-        <argument key="App\Controller\VoitureController:Affiche" type="service_closure" id=".service_locator.aKM6MDa"/>
+        <argument key="App\Controller\ReservationController:Affiche" type="service_closure" id=".service_locator.vJKoCwu"/>
+        <argument key="App\Controller\ReservationController:deleteStatique" type="service_closure" id=".service_locator.TiNt8je"/>
+        <argument key="App\Controller\VoitureController:Affiche" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController:Affichenonreserve" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController:Affichereserve" type="service_closure" id=".service_locator.U0A_QMQ"/>
+        <argument key="App\Controller\VoitureController:addVoiture" type="service_closure" id=".service_locator.GQZbvNR"/>
+        <argument key="App\Controller\VoitureController:deleteStatique" type="service_closure" id=".service_locator.z6uZLW2"/>
+        <argument key="App\Controller\VoitureController:updateVoiture" type="service_closure" id=".service_locator.bVC5iuU"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
       </argument>
@@ -3183,10 +3414,10 @@
         <argument key="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.pdo_cache_adapter_doctrine_schema_subscriber"/>
       </argument>
     </service>
-    <service id=".service_locator.sHqcOum" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dQRJizT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Repository\TesteRepository" type="service_closure" id="App\Repository\TesteRepository"/>
+        <argument key="App\Repository\ReservationRepository" type="service_closure" id="App\Repository\ReservationRepository"/>
         <argument key="App\Repository\VoitureRepository" type="service_closure" id="App\Repository\VoitureRepository"/>
       </argument>
     </service>
@@ -3270,6 +3501,18 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.v.Wwsjy" method="withContext"/>
     </service>
+    <service id=".service_locator.aNklfos" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
+      </argument>
+    </service>
+    <service id=".service_locator.aNklfos.sensio_framework_extra.view.listener" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="sensio_framework_extra.view.listener"/>
+      <argument>sensio_framework_extra.view.listener</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.aNklfos" method="withContext"/>
+    </service>
     <service id=".service_locator.XXv1IfR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -3321,12 +3564,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.r.5pux9"/>
+      <argument type="service" id=".service_locator.TrEtZJe"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.r.5pux9"/>
+      <argument type="service" id=".service_locator.TrEtZJe"/>
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
@@ -3335,6 +3578,7 @@
       </call>
     </service>
     <service id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
+    <service id=".errored..service_locator.bVC5iuU.App\Entity\Voiture" class="App\Entity\Voiture"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -3914,6 +4158,7 @@
     </service>
     <service id="Symfony\Contracts\Cache\CacheInterface" alias="cache.app"/>
     <service id="Symfony\Contracts\Cache\TagAwareCacheInterface" alias="cache.app.taggable"/>
+    <service id="Symfony\Component\Asset\Packages" alias="assets.packages"/>
     <service id="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" alias="debug.file_link_formatter"/>
     <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch"/>
     <service id="router" alias="router.default" public="true"/>
@@ -3951,6 +4196,8 @@
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached"/>
     <service id="Symfony\Component\Validator\Validator\ValidatorInterface" alias="validator"/>
     <service id="validator.mapping.class_metadata_factory" alias="validator"/>
+    <service id="Symfony\Component\Mime\MimeTypesInterface" alias="mime_types"/>
+    <service id="Symfony\Component\Mime\MimeTypeGuesserInterface" alias="mime_types"/>
     <service id="Doctrine\DBAL\Connection" alias="doctrine.dbal.default_connection"/>
     <service id="Doctrine\Persistence\ManagerRegistry" alias="doctrine"/>
     <service id="Doctrine\Common\Persistence\ManagerRegistry" alias="doctrine"/>
@@ -3970,7 +4217,7 @@
     <service id="Twig\Environment" alias="twig"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.r.5pux9"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.TrEtZJe"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -3978,7 +4225,9 @@
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.Sx53XLy" alias=".service_locator.r.5pux9"/>
+    <service id=".service_locator.WVbgsgw" alias=".service_locator.TiNt8je"/>
+    <service id=".service_locator.AxKbDB." alias=".service_locator.z6uZLW2"/>
+    <service id=".service_locator.K.Qpm_O" alias=".service_locator.TrEtZJe"/>
     <service id=".service_locator.bkUSUfi" alias=".service_locator.AHPGEE6"/>
     <service id=".service_locator.AE_YMkk" alias=".service_locator.RQpLuzo"/>
     <service id=".service_locator.4hi2aOY" alias=".service_locator.bBRwv06"/>
@@ -3997,7 +4246,12 @@
     <service id="argument_resolver.not_tagged_controller" alias="debug.argument_resolver.not_tagged_controller"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
-    <service id=".service_locator.bInR.ll" alias=".service_locator.aKM6MDa"/>
+    <service id=".service_locator.uC2u9Bg" alias=".service_locator.vJKoCwu"/>
+    <service id=".service_locator.hyyRyKk" alias=".service_locator.TiNt8je"/>
+    <service id=".service_locator.5qApybi" alias=".service_locator.U0A_QMQ"/>
+    <service id=".service_locator.o0QBynm" alias=".service_locator.z6uZLW2"/>
+    <service id=".service_locator.ua3a.4O" alias=".service_locator.bVC5iuU"/>
+    <service id=".service_locator.FPFiL9q" alias=".service_locator.GQZbvNR"/>
     <service id=".service_locator.xwPrrlL" alias=".service_locator.mx0UMmY"/>
     <service id=".service_locator.L0rFhJm" alias=".service_locator.GVyCdgr"/>
   </services>

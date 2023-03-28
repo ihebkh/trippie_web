@@ -66,23 +66,35 @@ return [[
 '[C]App%5CController%5CReservationController' => 1,
 'App%5CController%5CReservationController%23index' => 0,
 '[C]App%5CController%5CReservationController%23index' => 1,
+'App%5CController%5CReservationController%23Affiche' => 0,
+'[C]App%5CController%5CReservationController%23Affiche' => 1,
 'App%5CController%5CVoitureController' => 0,
 '[C]App%5CController%5CVoitureController' => 1,
 'App%5CController%5CVoitureController%23index' => 0,
 '[C]App%5CController%5CVoitureController%23index' => 1,
 'App%5CController%5CVoitureController%23Affiche' => 0,
 '[C]App%5CController%5CVoitureController%23Affiche' => 1,
-'App%5CEntity%5CReservation' => 2,
+'App%5CController%5CVoitureController%23Affichenonreserve' => 0,
+'[C]App%5CController%5CVoitureController%23Affichenonreserve' => 1,
+'App%5CController%5CVoitureController%23Affichereserve' => 0,
+'[C]App%5CController%5CVoitureController%23Affichereserve' => 1,
+'App%5CController%5CVoitureController%23deleteStatique' => 0,
+'[C]App%5CController%5CVoitureController%23deleteStatique' => 1,
+'App%5CController%5CVoitureController%23updateVoiture' => 0,
+'[C]App%5CController%5CVoitureController%23updateVoiture' => 1,
+'App%5CController%5CVoitureController%23addVoiture' => 0,
+'[C]App%5CController%5CVoitureController%23addVoiture' => 1,
+'App%5CEntity%5CReservation' => 0,
 '[C]App%5CEntity%5CReservation' => 1,
-'App%5CEntity%5CReservation%24id' => 3,
+'App%5CEntity%5CReservation%24id' => 0,
 '[C]App%5CEntity%5CReservation%24id' => 1,
-'App%5CEntity%5CReservation%24dateDebut' => 4,
+'App%5CEntity%5CReservation%24dateDebut' => 0,
 '[C]App%5CEntity%5CReservation%24dateDebut' => 1,
-'App%5CEntity%5CReservation%24dateFin' => 5,
+'App%5CEntity%5CReservation%24dateFin' => 0,
 '[C]App%5CEntity%5CReservation%24dateFin' => 1,
-'App%5CEntity%5CReservation%24idClient' => 6,
+'App%5CEntity%5CReservation%24idClient' => 0,
 '[C]App%5CEntity%5CReservation%24idClient' => 1,
-'App%5CEntity%5CReservation%24idVoiture' => 7,
+'App%5CEntity%5CReservation%24idVoiture' => 0,
 '[C]App%5CEntity%5CReservation%24idVoiture' => 1,
 'App%5CEntity%5CVoiture' => 0,
 '[C]App%5CEntity%5CVoiture' => 1,
@@ -604,188 +616,6 @@ return [[
 ], [
 
 0 => [],
-1 => 1679787461,
-2 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
-            clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
-            clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'name' => [
-                    'reservation',
-                    'fk_reservation',
-                ],
-                'indexes' => [
-                    [
-                        $o[1],
-                    ],
-                ],
-                'columns' => [
-                    1 => [
-                        'id_voiture',
-                    ],
-                ],
-            ],
-        ],
-        [
-            $o[0],
-            $o[2],
-        ],
-        []
-    );
-},
-3 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
-            clone ($p['Doctrine\\ORM\\Mapping\\Id'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Id')),
-            clone ($p['Doctrine\\ORM\\Mapping\\GeneratedValue'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\GeneratedValue')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'name' => [
-                    'id',
-                ],
-                'type' => [
-                    'integer',
-                ],
-                'precision' => [
-                    null,
-                ],
-                'scale' => [
-                    null,
-                ],
-                'strategy' => [
-                    2 => 'IDENTITY',
-                ],
-            ],
-        ],
-        [
-            $o[0],
-            $o[1],
-            $o[2],
-        ],
-        []
-    );
-},
-4 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'name' => [
-                    'date_debut',
-                ],
-                'type' => [
-                    'date',
-                ],
-                'precision' => [
-                    null,
-                ],
-                'scale' => [
-                    null,
-                ],
-            ],
-        ],
-        [
-            $o[0],
-        ],
-        []
-    );
-},
-5 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'name' => [
-                    'date_fin',
-                ],
-                'type' => [
-                    'date',
-                ],
-                'precision' => [
-                    null,
-                ],
-                'scale' => [
-                    null,
-                ],
-            ],
-        ],
-        [
-            $o[0],
-        ],
-        []
-    );
-},
-6 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'name' => [
-                    'id_client',
-                ],
-                'type' => [
-                    'integer',
-                ],
-                'precision' => [
-                    null,
-                ],
-                'scale' => [
-                    null,
-                ],
-            ],
-        ],
-        [
-            $o[0],
-        ],
-        []
-    );
-},
-7 => static function () {
-    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
-        $o = [
-            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ManyToOne'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ManyToOne')),
-            clone ($p['Doctrine\\ORM\\Mapping\\JoinColumns'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\JoinColumns')),
-            clone ($p['Doctrine\\ORM\\Mapping\\JoinColumn'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\JoinColumn')),
-        ],
-        null,
-        [
-            'stdClass' => [
-                'targetEntity' => [
-                    'Voiture',
-                ],
-                'value' => [
-                    1 => [
-                        $o[2],
-                    ],
-                ],
-                'name' => [
-                    2 => 'id_voiture',
-                ],
-            ],
-        ],
-        [
-            $o[0],
-            $o[1],
-        ],
-        []
-    );
-},
+1 => 1679941817,
 
 ]];

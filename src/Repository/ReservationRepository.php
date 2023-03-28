@@ -1,27 +1,27 @@
 <?php
 
 namespace App\Repository;
-use App\Entity\Voiture;
+use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 
 /**
- * @extends ServiceEntityRepository<Voiture>
+ * @extends ServiceEntityRepository<Reservation>
  *
- * @method Voiture|null find($id, $lockMode = null, $lockVersion = null)
- * @method Voiture|null findOneBy(array $criteria, array $orderBy = null)
- * @method Voiture[]    findAll()
- * @method Voiture[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Reservation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Reservation[]    findAll()
+ * @method Reservation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VoitureRepository extends ServiceEntityRepository
+class ReservationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Voiture::class);
+        parent::__construct($registry, Reservation::class);
     }
 
-    public function save(Voiture $entity, bool $flush = false): void
+    public function save(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class VoitureRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Voiture $entity, bool $flush = false): void
+    public function remove(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class VoitureRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Voiture[] Returns an array of Voiture objects
+//     * @return Reservation[] Returns an array of Reservation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class VoitureRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Voiture
+//    public function findOneBySomeField($value): ?Reservation
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
@@ -64,3 +64,5 @@ class VoitureRepository extends ServiceEntityRepository
 //        ;
 //    }
 }
+
+

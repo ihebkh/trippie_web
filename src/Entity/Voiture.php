@@ -3,9 +3,6 @@
 namespace App\Entity;
 use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\EntityManagerInterface;
-
-
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
 {
@@ -39,6 +36,8 @@ class Voiture
     #[ORM\Column]
     private ?int $idLocateur = null;
 
+    #[ORM\OneToMany(mappedBy: 'Voiture', targetEntity: Reservation::class)]
+    private Collection $reservations;
     public function getId(): ?int
     {
         return $this->id;

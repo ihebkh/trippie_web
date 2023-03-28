@@ -11,31 +11,25 @@
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
-        <th>id_locateur</th>
+        <th>date debut reservation </th>
+        <th>date fin reservation</th>
+        <th>voiture reserve</th>
+        <th>id locateur </th>
         <th>Update</th>
         <th>Delete</th>
 
 
     </tr>
-    <tr  {%  for v in voiture %} >
-        <td>{{v.id}} </td>
-        <td>{{v.matricule}} </td>
-        <td>{{ v.marque }}</td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.prixJours }}</td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.picture }}</td>
-        <td>{{ v.etat }}</td>
-        <td>{{ v.idLocateur }}</td>
-        <td> <a href="{{ path('updateVoiture',{'id': v.id})}}"> update</a> </td>
-        <td><a href="{{ path('app_DeleteVoiture',{'id':v.id}) }}">Delete</a></td>
+    <tr  {%  for r in reservation %} >
+        <td>{{r.id}} </td>
+        <td>{{r.dateDebut |date('Y-m-d')}}</td>
+        <td>{{r.dateFin |date('Y-m-d')}}</td>
+       <td></td>
+<td>{{r.idClient}}</td>
+        <td></td>
+        <td><a href="{{ path('app_DeleteReservation',{'id':r.id}) }}">Delete</a></td>
+
+
 
 
 
