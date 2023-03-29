@@ -58,7 +58,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <th>picture</th>
         <th>energie</th>
         <th>etat</th>
-        <th>id_locateur</th>
+
         <th>Update</th>
         <th>Delete</th>
         <th>show</th>
@@ -103,26 +103,22 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
             // line 37
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 37), "html", null, true);
             echo "</td>
-        <td>";
-            // line 38
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "idLocateur", [], "any", false, false, false, 38), "html", null, true);
-            echo "</td>
         <td>
             <button class=\"btn btn-primary\">
             <a href=\"";
-            // line 41
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 41)]), "html", null, true);
+            // line 40
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 40)]), "html", null, true);
             echo "\"> update</a>
             </button></td>
         <td> <button class=\"btn btn-primary\">
             <a href=\"";
-            // line 44
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 44)]), "html", null, true);
+            // line 43
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 43)]), "html", null, true);
             echo "\">Delete</a>
             </button></td>
         <td><button class=\"btn btn-primary\"><a href=\"";
-            // line 46
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 46)]), "html", null, true);
+            // line 45
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 45)]), "html", null, true);
             echo "\">show</a></button></td>
 
 
@@ -133,7 +129,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 51
+        // line 50
         echo ">
 </table>
 </body>
@@ -155,7 +151,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
 
     public function getDebugInfo()
     {
-        return array (  137 => 51,  125 => 46,  120 => 44,  114 => 41,  108 => 38,  104 => 37,  100 => 36,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  70 => 29,  40 => 1,);
+        return array (  133 => 50,  121 => 45,  116 => 43,  110 => 40,  104 => 37,  100 => 36,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  70 => 29,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -181,7 +177,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <th>picture</th>
         <th>energie</th>
         <th>etat</th>
-        <th>id_locateur</th>
+
         <th>Update</th>
         <th>Delete</th>
         <th>show</th>
@@ -197,7 +193,6 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
         <td>{{ v.puissance }}</td>
         <td>{{ v.etat }}</td>
-        <td>{{ v.idLocateur }}</td>
         <td>
             <button class=\"btn btn-primary\">
             <a href=\"{{ path('updateVoiture',{'id': v.id})}}\"> update</a>

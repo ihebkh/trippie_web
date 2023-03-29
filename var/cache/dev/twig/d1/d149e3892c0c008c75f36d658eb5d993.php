@@ -71,7 +71,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
         // line 6
         echo "    <h1>Show Voiture</h1>
-
+<center>
     <table class=\"table\" border=\"2\">
         <tbody>
         <tr>
@@ -108,7 +108,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
             <td><img src=\"";
         // line 29
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 29, $this->source); })()), "picture", [], "any", false, false, false, 29))), "html", null, true);
-        echo "\" alt=\"Image du client\"></td>
+        echo "\" style=\"max-height: 80px\"></td>
         </tr>
         <tr>
             <th>Power</th>
@@ -125,7 +125,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
         echo "</td>
         </tr>
         <tr>
-            <th>ajouter reservation </th>
+          
            <td>  <button class=\"btn btn-primary\">
                    <a href=\"";
         // line 42
@@ -136,6 +136,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
         </tbody>
     </table>
+</center>
 
 
 
@@ -169,7 +170,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
 {% block body %}
     <h1>Show Voiture</h1>
-
+<center>
     <table class=\"table\" border=\"2\">
         <tbody>
         <tr>
@@ -191,7 +192,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
         <tr>
             <th>Picture</th>
-            <td><img src=\"{{ asset('uploads/' ~ voiture.picture) }}\" alt=\"Image du client\"></td>
+            <td><img src=\"{{ asset('uploads/' ~ voiture.picture) }}\" style=\"max-height: 80px\"></td>
         </tr>
         <tr>
             <th>Power</th>
@@ -202,7 +203,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
             <td>{{ voiture.etat }}</td>
         </tr>
         <tr>
-            <th>ajouter reservation </th>
+          
            <td>  <button class=\"btn btn-primary\">
                    <a href=\"{{ path('app_reservation_add', {'id': voiture.id}) }}\">reserver</a>
                </button></td>
@@ -210,6 +211,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
         </tbody>
     </table>
+</center>
 
 
 

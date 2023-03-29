@@ -7,6 +7,7 @@ return [
     'app_reservationaffiche' => [[], ['_controller' => 'App\\Controller\\ReservationController::Affiche'], [], [['text', '/reservation/Affichelist']], [], [], []],
     'app_reservation_add' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::addReservation'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id', true], ['text', '/reservation/Add']], [], [], []],
     'app_DeleteReservation' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::deleteStatique'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/deleteReservation']], [], [], []],
+    'updateReservation' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::updateReservation'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/updateReservation']], [], [], []],
     'app_voiture' => [[], ['_controller' => 'App\\Controller\\VoitureController::index'], [], [['text', '/voiture']], [], [], []],
     'app_voitureaffiche' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affiche'], [], [['text', '/voiture/Affichelist']], [], [], []],
     'app_voitureaffichenonreserve' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affichernoneserve'], [], [['text', '/voiture/Affichelistnonreserve']], [], [], []],

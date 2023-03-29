@@ -23,23 +23,27 @@ return [
                     .'|Reservation/([^/]++)(*:74)'
                     .'|Voiture/([^/]++)(*:97)'
                 .')'
-                .'|/updateVoiture/([^/]++)(*:128)'
-                .'|/([^/]++)(?'
-                    .'|(*:148)'
+                .'|/update(?'
+                    .'|Reservation/([^/]++)(*:135)'
+                    .'|Voiture/([^/]++)(*:159)'
                 .')'
-                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:185)'
+                .'|/([^/]++)(?'
+                    .'|(*:180)'
+                .')'
+                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:217)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         29 => [[['_route' => 'app_reservation_add', '_controller' => 'App\\Controller\\ReservationController::addReservation'], ['id'], null, null, false, true, null]],
         74 => [[['_route' => 'app_DeleteReservation', '_controller' => 'App\\Controller\\ReservationController::deleteStatique'], ['id'], null, null, false, true, null]],
         97 => [[['_route' => 'app_DeleteVoiture', '_controller' => 'App\\Controller\\VoitureController::deleteStatique'], ['id'], null, null, false, true, null]],
-        128 => [[['_route' => 'updateVoiture', '_controller' => 'App\\Controller\\VoitureController::updateVoiture'], ['id'], null, null, false, true, null]],
-        148 => [
+        135 => [[['_route' => 'updateReservation', '_controller' => 'App\\Controller\\ReservationController::updateReservation'], ['id'], null, null, false, true, null]],
+        159 => [[['_route' => 'updateVoiture', '_controller' => 'App\\Controller\\VoitureController::updateVoiture'], ['id'], null, null, false, true, null]],
+        180 => [
             [['_route' => 'app_voiture_show', '_controller' => 'App\\Controller\\VoitureController::show'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'app_voiture_show1', '_controller' => 'App\\Controller\\VoitureController::add'], ['id'], ['GET' => 0], null, false, true, null],
         ],
-        185 => [
+        217 => [
             [['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

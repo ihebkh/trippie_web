@@ -47,13 +47,13 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
     <title>Document</title>
 </head>
 <body>
+<h1>reservation list</h1>
 <table border=\"1\">
     <tr>
         <th>ID</th>
         <th>date debut reservation </th>
         <th>date fin reservation</th>
         <th>voiture reserve</th>
-        <th>id locateur </th>
         <th>Update</th>
         <th>Delete</th>
 
@@ -77,12 +77,9 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
             // line 26
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 26), "Y-m-d"), "html", null, true);
             echo "</td>
-       <td></td>
-<td>";
-            // line 28
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "idClient", [], "any", false, false, false, 28), "html", null, true);
-            echo "</td>
-        <td>
+        <td></td>
+        <td></td>
+
 
         <td>
             <button class=\"btn btn-primary\">
@@ -120,7 +117,7 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
 
     public function getDebugInfo()
     {
-        return array (  101 => 36,  91 => 33,  83 => 28,  78 => 26,  74 => 25,  70 => 24,  64 => 23,  40 => 1,);
+        return array (  98 => 36,  88 => 33,  78 => 26,  74 => 25,  70 => 24,  64 => 23,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -135,13 +132,13 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
     <title>Document</title>
 </head>
 <body>
+<h1>reservation list</h1>
 <table border=\"1\">
     <tr>
         <th>ID</th>
         <th>date debut reservation </th>
         <th>date fin reservation</th>
         <th>voiture reserve</th>
-        <th>id locateur </th>
         <th>Update</th>
         <th>Delete</th>
 
@@ -151,9 +148,9 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
         <td>{{r.id}} </td>
         <td>{{r.dateDebut |date('Y-m-d')}}</td>
         <td>{{r.dateFin |date('Y-m-d')}}</td>
-       <td></td>
-<td>{{r.idClient}}</td>
-        <td>
+        <td></td>
+        <td></td>
+
 
         <td>
             <button class=\"btn btn-primary\">

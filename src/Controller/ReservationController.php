@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class ReservationController extends AbstractController
 { #[Route('/reservation', name: 'app_reservation')]
 public function index(): JsonResponse
@@ -52,7 +53,9 @@ public function index(): JsonResponse
             'id' => $id,
             'form' => $form->createView(),
         ]);
+
     }
+
 
 
 
@@ -67,6 +70,24 @@ public function index(): JsonResponse
         return $this->redirectToRoute("app_reservationaffiche");
 
 
+    }
+    #[Route('/updateReservation/{id}', name: 'updateReservation')]
+
+    public function updateReservation(Request $request,ManagerRegistry $doctrine ,Reservation $reservation)
+    {
+        $form = $this->createForm(ReservationFormType::class, $reservation);
+        $form->add('Update',SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+            return $this->redirectToRoute('app_reservationaffiche', ['id' => $reservation->getId()]);
+        }
+        return $this->render('reservation/updateR.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 }

@@ -71,7 +71,6 @@ class VoitureFormType extends AbstractType
 
                     )
                 ))
-            ->add('idLocateur')
         ;
     }
 

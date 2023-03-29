@@ -19,7 +19,7 @@
         <th>picture</th>
         <th>energie</th>
         <th>etat</th>
-        <th>id_locateur</th>
+
         <th>Update</th>
         <th>Delete</th>
         <th>show</th>
@@ -35,7 +35,6 @@
         <td><img class="img-profile " src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 80px"></td>
         <td>{{ v.puissance }}</td>
         <td>{{ v.etat }}</td>
-        <td>{{ v.idLocateur }}</td>
         <td>
             <button class="btn btn-primary">
             <a href="{{ path('updateVoiture',{'id': v.id})}}"> update</a>
