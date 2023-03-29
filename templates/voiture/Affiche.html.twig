@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+<script src="//code.tidio.co/zft12zp6goxohlo4ifr87gxm9bbrjyn3.js" async></script>
 <table border="1">
     <tr>
         <th>ID</th>
@@ -21,6 +22,7 @@
         <th>id_locateur</th>
         <th>Update</th>
         <th>Delete</th>
+        <th>show</th>
 
 
     </tr>
@@ -34,8 +36,14 @@
         <td>{{ v.puissance }}</td>
         <td>{{ v.etat }}</td>
         <td>{{ v.idLocateur }}</td>
-        <td> <a href="{{ path('updateVoiture',{'id': v.id})}}"> update</a> </td>
-        <td><a href="{{ path('app_DeleteVoiture',{'id':v.id}) }}">Delete</a></td>
+        <td>
+            <button class="btn btn-primary">
+            <a href="{{ path('updateVoiture',{'id': v.id})}}"> update</a>
+            </button></td>
+        <td> <button class="btn btn-primary">
+            <a href="{{ path('app_DeleteVoiture',{'id':v.id}) }}">Delete</a>
+            </button></td>
+        <td><button class="btn btn-primary"><a href="{{ path('app_voiture_show', {'id': v.id}) }}">show</a></button></td>
 
 
 

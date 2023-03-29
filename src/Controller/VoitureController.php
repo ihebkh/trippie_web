@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile ;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 
@@ -24,6 +25,7 @@ class VoitureController extends AbstractController
             'controller_name' => 'VoitureController',
         ]);
     }
+
     #[Route('/voiture/Affichelist', name: 'app_voitureaffiche')]
     public function Affiche(VoitureRepository $repository)
     {
@@ -33,19 +35,21 @@ class VoitureController extends AbstractController
             ['voiture' => $voiture]);
     }
 
-       #[Route('/voiture/Affichelistnonreserve', name: 'app_voitureaffichenonreserve')]
-    public function Affichenonreserve(VoitureRepository $repository)
+
+    #[Route('/voiture/Affichelistnonreserve', name: 'app_voitureaffichenonreserve')]
+    public function Affichernoneserve(VoitureRepository $repository)
     {
         //$repo=$this->getDoctrine()->getRepository(Voiture::class);
-        $voiture = $repository->findby(['etat' => 'non reservé']);
-        return $this->render('voiture/Affichenonreserve.html.twig',
+        $voiture = $repository->findall();
+        return $this->render('voiture/Affichereserve.html.twig',
             ['voiture' => $voiture]);
     }
+
     #[Route('/voiture/Affichelistreserve', name: 'app_voitureaffichereserve')]
     public function Affichereserve(VoitureRepository $repository)
     {
-        //$repo=$this->getDoctrine()->getRepository(Voiture::class);
-        $voiture = $repository->findby(['etat' => 'reservé']);
+
+        $voiture = $repository->findby(['etat' => 'non reservé']);
         return $this->render('voiture/Affichereserve.html.twig',
             ['voiture' => $voiture]);
     }
@@ -118,7 +122,23 @@ class VoitureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/{id}', name: 'app_voiture_show', methods: ['GET'])]
+    public function show(Voiture $voiture): Response
+    {
 
+        return $this->render('voiture/show.html.twig', [
+            'voiture' => $voiture,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_voiture_show1', methods: ['GET'])]
+    public function add(Voiture $voiture): Response
+    {
+          $id = $voiture->getId();
+          return $this->redirectToRoute('app_reservation_add', ['id' => $id], Response::HTTP_SEE_OTHER);
+
+
+    }
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Reservation;
+use App\Entity\Voiture;
 use App\Form\ReservationFormType;
 use App\Repository\ReservationRepository;
 use App\Repository\VoitureRepository;
@@ -29,33 +30,33 @@ public function index(): JsonResponse
         $reservation = $repository->findAll();
         return $this->render('reservation/Affiche.html.twig', ['reservation' => $reservation]);
     }
-/*
+
     #[Route('/reservation/Add/{id<\d+>}', name: 'app_reservation_add')]
-    function AddS(Request $request , int $id,VoitureRepository $voitureRepository)
+    public function addReservation(Request $request, int $id, VoitureRepository $voitureRepository): Response
     {
         $voiture = $voitureRepository->find($id);
         $reservation = new Reservation();
-        $reservation->setIdVoiture($voiture);
-
-        $form = $this->createForm(ReservationFormType::class, $reservation);
+        $reservation->setVoiture($voiture);
+        $form = $this->createForm(ReservationFormType::class, $reservation, [
+            'data_class' => Reservation::class,
+        ]);
         $form->add('Ajouter', SubmitType::class);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
             return $this->redirectToRoute('app_reservationaffiche');
-
         }
         return $this->render('reservation/AddR.html.twig', [
-            'id_voiture' => $id,
-            'form' => $form->createView()
+            'id' => $id,
+            'form' => $form->createView(),
         ]);
     }
 
 
-*/
+
+
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
     public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
     {
@@ -67,4 +68,5 @@ public function index(): JsonResponse
 
 
     }
+
 }

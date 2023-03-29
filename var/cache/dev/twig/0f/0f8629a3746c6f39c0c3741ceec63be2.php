@@ -82,25 +82,25 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
             // line 28
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "idClient", [], "any", false, false, false, 28), "html", null, true);
             echo "</td>
-        <td></td>
-        <td><a href=\"";
-            // line 30
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 30)]), "html", null, true);
-            echo "\">Delete</a></td>
+        <td>
 
-
-
-
-
-
+        <td>
+            <button class=\"btn btn-primary\">
+            <a href=\"";
+            // line 33
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 33)]), "html", null, true);
+            echo "\">Delete</a>
+            </button>
+        </td>
     </tr ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['r'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 37
+        // line 36
         echo ">
 </table>
+
 </body>
 </html>";
         
@@ -120,7 +120,7 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
 
     public function getDebugInfo()
     {
-        return array (  102 => 37,  88 => 30,  83 => 28,  78 => 26,  74 => 25,  70 => 24,  64 => 23,  40 => 1,);
+        return array (  101 => 36,  91 => 33,  83 => 28,  78 => 26,  74 => 25,  70 => 24,  64 => 23,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -153,16 +153,16 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
         <td>{{r.dateFin |date('Y-m-d')}}</td>
        <td></td>
 <td>{{r.idClient}}</td>
-        <td></td>
-        <td><a href=\"{{ path('app_DeleteReservation',{'id':r.id}) }}\">Delete</a></td>
+        <td>
 
-
-
-
-
-
+        <td>
+            <button class=\"btn btn-primary\">
+            <a href=\"{{ path('app_DeleteReservation',{'id':r.id}) }}\">Delete</a>
+            </button>
+        </td>
     </tr {%  endfor %}>
 </table>
+
 </body>
 </html>", "reservation/Affiche.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\reservation\\Affiche.html.twig");
     }

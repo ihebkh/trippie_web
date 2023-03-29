@@ -40,7 +40,16 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
         echo "<h1>add Reservation</h1>
 ";
         // line 2
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 2, $this->source); })()), 'form');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 2, $this->source); })()), 'form_start');
+        echo "
+    ";
+        // line 3
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 3, $this->source); })()), 'widget');
+        echo "
+
+";
+        // line 5
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 5, $this->source); })()), 'form_end');
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -58,12 +67,15 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
 
     public function getDebugInfo()
     {
-        return array (  43 => 2,  40 => 1,);
+        return array (  52 => 5,  47 => 3,  43 => 2,  40 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<h1>add Reservation</h1>
-{{ form (form) }}", "reservation/AddR.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\reservation\\addR.html.twig");
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+{{ form_end(form) }}", "reservation/AddR.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\reservation\\addR.html.twig");
     }
 }

@@ -16,7 +16,6 @@ class ReservationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('dateDebut', DateTimeType::class, [
                 'constraints' => [
                     new NotBlank([
@@ -46,20 +45,21 @@ class ReservationFormType extends AbstractType
             ->add('idClient')
 
 
-            ->add('idVoiture', HiddenType::class, [
-                'data' => $options['id_voiture'],
+            ->add('Voiture', HiddenType::class, [
+                'data' => $options['id'],
                 'mapped' => false,
 
             ]);
+
 
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired('id_voiture');
+        $resolver->setRequired('id');
         $resolver->setDefaults([
             'data_class' => Reservation::class,
-            'id_voiture' => null,
+            'id' => null,
         ]);
     }
 }

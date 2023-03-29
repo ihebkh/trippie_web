@@ -26,15 +26,15 @@
         <td>{{r.dateFin |date('Y-m-d')}}</td>
        <td></td>
 <td>{{r.idClient}}</td>
-        <td></td>
-        <td><a href="{{ path('app_DeleteReservation',{'id':r.id}) }}">Delete</a></td>
+        <td>
 
-
-
-
-
-
+        <td>
+            <button class="btn btn-primary">
+            <a href="{{ path('app_DeleteReservation',{'id':r.id}) }}">Delete</a>
+            </button>
+        </td>
     </tr {%  endfor %}>
 </table>
+
 </body>
 </html>

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voiture{% endblock %}
+
+{% block body %}
+    <h1>Show Voiture</h1>
+
+    <table class="table" border="2">
+        <tbody>
+        <tr>
+            <th>Matricule</th>
+            <td>{{ voiture.matricule }}</td>
+        </tr>
+        <tr>
+            <th>Brand</th>
+            <td>{{ voiture.marque }}</td>
+        </tr>
+        <tr>
+            <th>power</th>
+            <td>{{ voiture.puissance }}</td>
+        </tr>
+        <tr>
+            <th>price per day</th>
+            <td>{{ voiture.prixJours }}</td>
+        </tr>
+
+        <tr>
+            <th>Picture</th>
+            <td><img src="{{ asset('uploads/' ~ voiture.picture) }}" alt="Image du client"></td>
+        </tr>
+        <tr>
+            <th>Power</th>
+            <td>{{ voiture.energie }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ voiture.etat }}</td>
+        </tr>
+        <tr>
+            <th>ajouter reservation </th>
+           <td>  <button class="btn btn-primary">
+                   <a href="{{ path('app_reservation_add', {'id': voiture.id}) }}">reserver</a>
+               </button></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

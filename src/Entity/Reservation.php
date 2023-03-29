@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Voiture;
 
+
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
@@ -69,14 +70,14 @@ class Reservation
         return $this;
     }
 
-    public function getIdVoiture(): ?voiture
+    public function getVoiture(): ?Voiture
     {
-        return $this->idVoiture;
+        return $this->Voiture;
     }
 
-    public function setIdVoiture(?voiture $idVoiture): self
+    public function setVoiture(?Voiture $Voiture): self
     {
-        $this->idVoiture = $idVoiture;
+        $this->Voiture = $Voiture;
 
         return $this;
     }

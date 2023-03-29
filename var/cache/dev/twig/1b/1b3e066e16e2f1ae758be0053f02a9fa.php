@@ -47,6 +47,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
     <title>Document</title>
 </head>
 <body>
+<script src=\"//code.tidio.co/zft12zp6goxohlo4ifr87gxm9bbrjyn3.js\" async></script>
 <table border=\"1\">
     <tr>
         <th>ID</th>
@@ -60,59 +61,69 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <th>id_locateur</th>
         <th>Update</th>
         <th>Delete</th>
+        <th>show</th>
 
 
     </tr>
     <tr  ";
-        // line 27
+        // line 29
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 27, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 29, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["v"]) {
             echo " >
         <td>";
-            // line 28
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 28), "html", null, true);
-            echo " </td>
-        <td>";
-            // line 29
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 29), "html", null, true);
-            echo " </td>
-        <td>";
             // line 30
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 30), "html", null, true);
-            echo "</td>
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 30), "html", null, true);
+            echo " </td>
         <td>";
             // line 31
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 31), "html", null, true);
-            echo "</td>
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 31), "html", null, true);
+            echo " </td>
         <td>";
             // line 32
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 32), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 32), "html", null, true);
             echo "</td>
-        <td><img class=\"img-profile \" src=\"";
+        <td>";
             // line 33
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 33))), "html", null, true);
-            echo "\" style=\"max-height: 80px\"></td>
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 33), "html", null, true);
+            echo "</td>
         <td>";
             // line 34
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 34), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 34), "html", null, true);
             echo "</td>
-        <td>";
+        <td><img class=\"img-profile \" src=\"";
             // line 35
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 35), "html", null, true);
-            echo "</td>
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 35))), "html", null, true);
+            echo "\" style=\"max-height: 80px\"></td>
         <td>";
             // line 36
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "idLocateur", [], "any", false, false, false, 36), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 36), "html", null, true);
             echo "</td>
-        <td> <a href=\"";
+        <td>";
             // line 37
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 37)]), "html", null, true);
-            echo "\"> update</a> </td>
-        <td><a href=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 37), "html", null, true);
+            echo "</td>
+        <td>";
             // line 38
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 38)]), "html", null, true);
-            echo "\">Delete</a></td>
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "idLocateur", [], "any", false, false, false, 38), "html", null, true);
+            echo "</td>
+        <td>
+            <button class=\"btn btn-primary\">
+            <a href=\"";
+            // line 41
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 41)]), "html", null, true);
+            echo "\"> update</a>
+            </button></td>
+        <td> <button class=\"btn btn-primary\">
+            <a href=\"";
+            // line 44
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 44)]), "html", null, true);
+            echo "\">Delete</a>
+            </button></td>
+        <td><button class=\"btn btn-primary\"><a href=\"";
+            // line 46
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 46)]), "html", null, true);
+            echo "\">show</a></button></td>
 
 
 
@@ -122,7 +133,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 43
+        // line 51
         echo ">
 </table>
 </body>
@@ -144,7 +155,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
 
     public function getDebugInfo()
     {
-        return array (  126 => 43,  114 => 38,  110 => 37,  106 => 36,  102 => 35,  98 => 34,  94 => 33,  90 => 32,  86 => 31,  82 => 30,  78 => 29,  74 => 28,  68 => 27,  40 => 1,);
+        return array (  137 => 51,  125 => 46,  120 => 44,  114 => 41,  108 => 38,  104 => 37,  100 => 36,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  70 => 29,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -159,6 +170,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
     <title>Document</title>
 </head>
 <body>
+<script src=\"//code.tidio.co/zft12zp6goxohlo4ifr87gxm9bbrjyn3.js\" async></script>
 <table border=\"1\">
     <tr>
         <th>ID</th>
@@ -172,6 +184,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <th>id_locateur</th>
         <th>Update</th>
         <th>Delete</th>
+        <th>show</th>
 
 
     </tr>
@@ -185,8 +198,14 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         <td>{{ v.puissance }}</td>
         <td>{{ v.etat }}</td>
         <td>{{ v.idLocateur }}</td>
-        <td> <a href=\"{{ path('updateVoiture',{'id': v.id})}}\"> update</a> </td>
-        <td><a href=\"{{ path('app_DeleteVoiture',{'id':v.id}) }}\">Delete</a></td>
+        <td>
+            <button class=\"btn btn-primary\">
+            <a href=\"{{ path('updateVoiture',{'id': v.id})}}\"> update</a>
+            </button></td>
+        <td> <button class=\"btn btn-primary\">
+            <a href=\"{{ path('app_DeleteVoiture',{'id':v.id}) }}\">Delete</a>
+            </button></td>
+        <td><button class=\"btn btn-primary\"><a href=\"{{ path('app_voiture_show', {'id': v.id}) }}\">show</a></button></td>
 
 
 

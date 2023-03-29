@@ -91,10 +91,10 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
             // line 31
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 31), "html", null, true);
             echo "</td>
-        <td>";
+        <td><img class=\"img-profile \" src=\"";
             // line 32
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 32), "html", null, true);
-            echo "</td>
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 32))), "html", null, true);
+            echo "\" style=\"max-height: 80px\"></td>
         <td>";
             // line 33
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 33), "html", null, true);
@@ -171,7 +171,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
         <td>{{ v.puissance }}</td>
         <td>{{ v.prixJours }}</td>
         <td>{{ v.puissance }}</td>
-        <td>{{ v.picture }}</td>
+        <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
         <td>{{ v.etat }}</td>
         <td>{{ v.idLocateur }}</td>
 
