@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CoVoiturage
+{% endblock %}
+
+{% block body %}
+
+	<main id="main" class="main">
+
+
+		<div class="pagetitle">
+			<h1>Les Articles</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="index.html">Home</a>
+					</li>
+					<li class="breadcrumb-item">Tables</li>
+					<li class="breadcrumb-item active">General</li>
+				</ol>
+
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+
+						{% for message in app.flashes('notice') %}
+							<div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+								{{ message }}
+							</div>
+
+						{% endfor %}
+
+
+						{% for message in app.flashes('noticedelete') %}
+							<div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+								{{ message }}
+							</div>
+
+						{% endfor %}
+
+						<div class="card-body">
+
+							<h5 class="card-title">List Articles</h5>
+
+
+							<table class="table">
+								<tbody>
+									<tr>
+										<th>Id</th>
+										<td>{{ co_voiturage.id }}</td>
+									</tr>
+									<tr>
+										<th>Depart</th>
+										<td>{{ co_voiturage.depart }}</td>
+									</tr>
+									<tr>
+										<th>Destination</th>
+										<td>{{ co_voiturage.destination }}</td>
+									</tr>
+									<tr>
+										<th>Date_dep</th>
+										<td>{{ co_voiturage.dateDep ? co_voiturage.dateDep|date('Y-m-d') : '' }}</td>
+									</tr>
+									<tr>
+										<th>Nmbr_place</th>
+										<td>{{ co_voiturage.nmbrPlace }}</td>
+									</tr>
+									<tr>
+										<th>Cov_img</th>
+										<td>{{ co_voiturage.covImg }}</td>
+									</tr>
+
+									<tr>
+										<th>
+											<center>
+												<a href="{{ path('app_co_voiturage_edit', {'id': co_voiturage.id}) }}">
+													<button type="button" class="btn btn-outline-success">Update</button>
+												</a>
+											</center>
+										</th>
+									</tr>
+
+
+								</tbody>
+							</table>
+
+							<td>
+								<a href="{{ path('app_co_voiturage_index') }}">
+									<button type="button" class="btn btn-outline-dark">back to list</button>
+								</a>
+							</td>
+
+
+							<a href="{{ path('app_co_voiturage_edit', {'id': co_voiturage.id}) }}">edit</a>
+
+							{{ include('co_voiturage/_delete_form.html.twig') }}
+
+
+							<!-- End Default Table Example -->
+
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+		</section>
+
+	</main>
+
+{% endblock %}
