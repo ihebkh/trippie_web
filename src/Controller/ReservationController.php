@@ -36,14 +36,17 @@ public function index(): JsonResponse
     public function addReservation(Request $request, int $id, VoitureRepository $voitureRepository): Response
     {
         $voiture = $voitureRepository->find($id);
+
         $reservation = new Reservation();
-        $reservation->setVoiture($voiture);
+        $reservation->setIdVoiture($voiture->getId());
+
         $form = $this->createForm(ReservationFormType::class, $reservation, [
             'data_class' => Reservation::class,
         ]);
         $form->add('Ajouter', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $voiture->setEtat("reservé");
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();

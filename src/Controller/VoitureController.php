@@ -70,7 +70,7 @@ class VoitureController extends AbstractController
     public function updateVoiture(Request $request,ManagerRegistry $doctrine ,Voiture $voiture)
     {
         $form = $this->createForm(VoitureFormType::class, $voiture);
-        $form->add('Update',SubmitType::class);
+       // $form->add('Update',SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -139,6 +139,4 @@ class VoitureController extends AbstractController
 
 
     }
-
-
 }

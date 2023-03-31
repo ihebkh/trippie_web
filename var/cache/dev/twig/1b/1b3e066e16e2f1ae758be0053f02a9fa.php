@@ -24,10 +24,15 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
+            'body' => [$this, 'block_body'],
         ];
+    }
+
+    protected function doGetParent(array $context)
+    {
+        // line 1
+        return "base.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -36,104 +41,169 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/Affiche.html.twig"));
 
-        // line 1
-        echo "<!doctype html>
-<html lang=\"en\">
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\"
-          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
-    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-    <title>Document</title>
-</head>
-<body>
-<script src=\"//code.tidio.co/zft12zp6goxohlo4ifr87gxm9bbrjyn3.js\" async></script>
-<table border=\"1\">
-    <tr>
-        <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
+        $this->parent = $this->loadTemplate("base.html.twig", "voiture/Affiche.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-        <th>Update</th>
-        <th>Delete</th>
-        <th>show</th>
+    }
+
+    // line 2
+    public function block_body($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
+
+        // line 3
+        echo "
+    <main id=\"main\" class=\"main\">
 
 
-    </tr>
-    <tr  ";
-        // line 29
+
+        <div class=\"pagetitle\">
+            <h1>Les Articles</h1>
+            <nav>
+                <ol class=\"breadcrumb\">
+                    <li class=\"breadcrumb-item\"><a href=\"index.html\">Home</a></li>
+                    <li class=\"breadcrumb-item\">Tables</li>
+                    <li class=\"breadcrumb-item active\">General</li>
+                </ol>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class=\"section\">
+            <div class=\"row\">
+                <div class=\"col-lg-12\">
+
+                    <div class=\"card\">
+
+                        ";
+        // line 26
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 29, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 26, $this->source); })()), "flashes", [0 => "notice"], "method", false, false, false, 26));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 27
+            echo "                            <div class=\"alert alert-success bg-success text-light border-0 alert-dismissible fade show\" role=\"alert\">
+                                ";
+            // line 28
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+                            </div>
+
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 32
+        echo "
+
+                        ";
+        // line 34
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", [0 => "noticedelete"], "method", false, false, false, 34));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 35
+            echo "                            <div class=\"alert alert-danger bg-danger text-light border-0 alert-dismissible fade show\" role=\"alert\">
+                                ";
+            // line 36
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+                            </div>
+
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 40
+        echo "
+                        <div class=\"card-body\">
+
+                            <h5 class=\"card-title\">car list</h5>
+
+
+                            <!-- Default Table -->
+                            <table class=\"table\">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>registration number</th>
+                                    <th>brand</th>
+                                    <th>picture</th>
+                                    <th>show</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+
+                                <tr  ";
+        // line 62
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 62, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["v"]) {
             echo " >
-        <td>";
-            // line 30
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 30), "html", null, true);
+
+
+
+                                    <tr>
+
+                                    <td>";
+            // line 68
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 68), "html", null, true);
             echo " </td>
-        <td>";
-            // line 31
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 31), "html", null, true);
-            echo " </td>
-        <td>";
-            // line 32
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 32), "html", null, true);
+                                    <td>";
+            // line 69
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 69), "html", null, true);
             echo "</td>
-        <td>";
-            // line 33
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 33), "html", null, true);
+                                    <td>";
+            // line 70
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 70), "html", null, true);
             echo "</td>
-        <td>";
-            // line 34
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 34), "html", null, true);
-            echo "</td>
-        <td><img class=\"img-profile \" src=\"";
-            // line 35
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 35))), "html", null, true);
+                                    <td><img class=\"img-profile \" src=\"";
+            // line 71
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 71))), "html", null, true);
             echo "\" style=\"max-height: 80px\"></td>
-        <td>";
-            // line 36
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 36), "html", null, true);
-            echo "</td>
-        <td>";
-            // line 37
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 37), "html", null, true);
-            echo "</td>
-        <td>
-            <button class=\"btn btn-primary\">
-            <a href=\"";
-            // line 40
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 40)]), "html", null, true);
-            echo "\"> update</a>
-            </button></td>
-        <td> <button class=\"btn btn-primary\">
-            <a href=\"";
-            // line 43
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 43)]), "html", null, true);
-            echo "\">Delete</a>
-            </button></td>
-        <td><button class=\"btn btn-primary\"><a href=\"";
-            // line 45
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 45)]), "html", null, true);
-            echo "\">show</a></button></td>
+                                    <td><a href=\"";
+            // line 72
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 72)]), "html", null, true);
+            echo "\">
+                                            <button type=\"button\" class=\"btn btn-outline-dark\">Detail</button>
+                                        </a></td>
 
 
 
-
-    </tr ";
+                                    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 50
-        echo ">
-</table>
-</body>
-</html>";
+        // line 79
+        echo "
+
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -151,63 +221,110 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
 
     public function getDebugInfo()
     {
-        return array (  133 => 50,  121 => 45,  116 => 43,  110 => 40,  104 => 37,  100 => 36,  96 => 35,  92 => 34,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  70 => 29,  40 => 1,);
+        return array (  186 => 79,  173 => 72,  169 => 71,  165 => 70,  161 => 69,  157 => 68,  146 => 62,  122 => 40,  112 => 36,  109 => 35,  105 => 34,  101 => 32,  91 => 28,  88 => 27,  84 => 26,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("<!doctype html>
-<html lang=\"en\">
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\"
-          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
-    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-    <title>Document</title>
-</head>
-<body>
-<script src=\"//code.tidio.co/zft12zp6goxohlo4ifr87gxm9bbrjyn3.js\" async></script>
-<table border=\"1\">
-    <tr>
-        <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
+        return new Source("{% extends 'base.html.twig' %}
+{% block body %}
 
-        <th>Update</th>
-        <th>Delete</th>
-        <th>show</th>
-
-
-    </tr>
-    <tr  {%  for v in voiture %} >
-        <td>{{v.id}} </td>
-        <td>{{v.matricule}} </td>
-        <td>{{ v.marque }}</td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.prixJours }}</td>
-        <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.etat }}</td>
-        <td>
-            <button class=\"btn btn-primary\">
-            <a href=\"{{ path('updateVoiture',{'id': v.id})}}\"> update</a>
-            </button></td>
-        <td> <button class=\"btn btn-primary\">
-            <a href=\"{{ path('app_DeleteVoiture',{'id':v.id}) }}\">Delete</a>
-            </button></td>
-        <td><button class=\"btn btn-primary\"><a href=\"{{ path('app_voiture_show', {'id': v.id}) }}\">show</a></button></td>
+    <main id=\"main\" class=\"main\">
 
 
 
+        <div class=\"pagetitle\">
+            <h1>Les Articles</h1>
+            <nav>
+                <ol class=\"breadcrumb\">
+                    <li class=\"breadcrumb-item\"><a href=\"index.html\">Home</a></li>
+                    <li class=\"breadcrumb-item\">Tables</li>
+                    <li class=\"breadcrumb-item active\">General</li>
+                </ol>
 
-    </tr {%  endfor %}>
-</table>
-</body>
-</html>", "voiture/Affiche.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\Affiche.html.twig");
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class=\"section\">
+            <div class=\"row\">
+                <div class=\"col-lg-12\">
+
+                    <div class=\"card\">
+
+                        {% for message in app.flashes('notice') %}
+                            <div class=\"alert alert-success bg-success text-light border-0 alert-dismissible fade show\" role=\"alert\">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+
+                        {% for message in app.flashes('noticedelete') %}
+                            <div class=\"alert alert-danger bg-danger text-light border-0 alert-dismissible fade show\" role=\"alert\">
+                                {{ message }}
+                            </div>
+
+                        {% endfor %}
+
+                        <div class=\"card-body\">
+
+                            <h5 class=\"card-title\">car list</h5>
+
+
+                            <!-- Default Table -->
+                            <table class=\"table\">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>registration number</th>
+                                    <th>brand</th>
+                                    <th>picture</th>
+                                    <th>show</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+
+                                <tr  {%  for v in voiture %} >
+
+
+
+                                    <tr>
+
+                                    <td>{{v.id}} </td>
+                                    <td>{{ v.matricule }}</td>
+                                    <td>{{ v.marque }}</td>
+                                    <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
+                                    <td><a href=\"{{ path('app_voiture_show',{id:v.id}) }}\">
+                                            <button type=\"button\" class=\"btn btn-outline-dark\">Detail</button>
+                                        </a></td>
+
+
+
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}
+", "voiture/Affiche.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\Affiche.html.twig");
     }
 }

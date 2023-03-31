@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Voiture;
+use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
@@ -24,10 +25,8 @@ class Reservation
 
     #[ORM\Column]
     private ?int $idClient=null;
-
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    #[ORM\JoinColumn(name: "id_voiture", referencedColumnName: "id")]
-    private ?Voiture $voiture = null;
+    #[ORM\Column]
+    private ?int $idVoiture=null;
 
     public function getId(): ?int
     {
@@ -69,15 +68,30 @@ class Reservation
 
         return $this;
     }
+    public function getIdVoiture(): ?int
+    {
+        return $this->idVoiture;
+    }
+
+    public function setIdVoiture(int $idVoiture): self
+    {
+        $this->idVoiture = $idVoiture;
+
+        return $this;
+    }
+/*
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?Voiture $voiture = null;
+*/
 
     public function getVoiture(): ?Voiture
     {
-        return $this->Voiture;
+        return $this->voiture;
     }
 
-    public function setVoiture(?Voiture $Voiture): self
+    public function setVoiture(?Voiture $voiture): self
     {
-        $this->Voiture = $Voiture;
+        $this->voiture = $voiture;
 
         return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Entity;
 use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Reservation;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
 {
@@ -34,10 +36,18 @@ class Voiture
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
 
+    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
+
     #[ORM\Column]
     private ?int $idLocateur = null;
-    #[ORM\OneToMany(targetEntity: 'App\Entity\Reservation', mappedBy: 'id')]
-    private $reservations;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +147,12 @@ class Voiture
         $this->idLocateur = $idLocateur;
 
         return $this;
+    }
+
+
+    public function toString(): string
+    {
+        return "VoitureRepository Object";
     }
 
 
