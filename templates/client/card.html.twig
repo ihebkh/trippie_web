@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <table class="table">
+        <thead>
+            <tr>
+            
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+               
+                <td><img src="{{ asset('uploads/' ~ client.img) }}" style="border-radius: 50%;" width="50" height="50" alt="Image du client"></td>
+                <td>{{ client.idRole.idUser.nom }}</td>
+                <td>{{ client.idRole.idUser.prenom }}</td>
+                <td>{{ client.email }}</td>
+                <td> <button><a href="{{ path('disable_client', {'id_ch': client.idCh}) }}" class="btn btn-danger btn-sm">Disable</a></button></td>
+
+                
+               
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
