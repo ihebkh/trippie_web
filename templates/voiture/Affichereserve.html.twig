@@ -17,8 +17,8 @@
                         <div class="portfolio-wrap">
                             <img src="{{ asset('uploads/' ~ v.picture) }}" class="img-fluid" alt="">
                             <div class="portfolio-info">
-                                <h4>App 1</h4>
-                                 <p>App</p>
+                                <h4>{{ v.marque }}</h4>
+
                                 <div class="portfolio-links">
                                     <a href="{{ path('app_locateurvoiture_show',{id:v.id}) }}" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>

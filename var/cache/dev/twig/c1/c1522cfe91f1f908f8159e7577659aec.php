@@ -93,8 +93,11 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 18))), "html", null, true);
             echo "\" class=\"img-fluid\" alt=\"\">
                             <div class=\"portfolio-info\">
-                                <h4>App 1</h4>
-                                 <p>App</p>
+                                <h4>";
+            // line 20
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 20), "html", null, true);
+            echo "</h4>
+
                                 <div class=\"portfolio-links\">
                                     <a href=\"";
             // line 23
@@ -154,7 +157,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
 
     public function getDebugInfo()
     {
-        return array (  130 => 33,  116 => 32,  111 => 29,  109 => 28,  101 => 23,  93 => 18,  89 => 16,  72 => 15,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  133 => 33,  119 => 32,  114 => 29,  112 => 28,  104 => 23,  98 => 20,  93 => 18,  89 => 16,  72 => 15,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -178,8 +181,8 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
                         <div class=\"portfolio-wrap\">
                             <img src=\"{{ asset('uploads/' ~ v.picture) }}\" class=\"img-fluid\" alt=\"\">
                             <div class=\"portfolio-info\">
-                                <h4>App 1</h4>
-                                 <p>App</p>
+                                <h4>{{ v.marque }}</h4>
+
                                 <div class=\"portfolio-links\">
                                     <a href=\"{{ path('app_locateurvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
                                 </div>
