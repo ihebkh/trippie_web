@@ -16,6 +16,6 @@ return [
     'updateVoiture' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::updateVoiture'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/updateVoiture']], [], [], []],
     'addVoiture' => [[], ['_controller' => 'App\\Controller\\VoitureController::addVoiture'], [], [['text', '/voiture/add']], [], [], []],
     'app_voiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show'], [], [['variable', '/', '[^/]++', 'id', true]], [], [], []],
-    'app_voiture_show1' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::add'], [], [['variable', '/', '[^/]++', 'id', true]], [], [], []],
+    'app_locateurvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show2'], [], [['variable', '/', '[^/]++', 'id', true]], [], [], []],
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
 ];

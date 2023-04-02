@@ -317,14 +317,20 @@ class __TwigTemplate_234701a8e056e5a8ac597ca6d12d81e9 extends Template
                 </a>
                 <ul id=\"forms-nav\" class=\"nav-content collapse show\" data-bs-parent=\"#sidebar-nav\">
                     <li>
-                        <a class=\"nav-link \" href=\"\">
+                        <a class=\"nav-link \" href=\"";
+        // line 144
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voitureaffiche");
+        echo "\">
                             <i class=\"bi bi-bookmark\"></i>
                             <i class=\"bi bi-circle\"></i><span>Car</span></i>
 
                         </a>
                     </li>
                     <li>
-                        <a class=\"nav-link \" href=\"\">
+                        <a class=\"nav-link \" href=\"";
+        // line 151
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationaffiche");
+        echo "\">
                             <i class=\"bi bi-bookmark\"></i>
 
                             <i class=\"bi bi-circle\"></i><span>Booking list</span>
@@ -403,7 +409,7 @@ class __TwigTemplate_234701a8e056e5a8ac597ca6d12d81e9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  386 => 190,  379 => 189,  367 => 186,  271 => 95,  264 => 94,  222 => 59,  215 => 54,  208 => 53,  199 => 47,  191 => 42,  187 => 41,  183 => 40,  179 => 39,  175 => 38,  171 => 37,  167 => 36,  163 => 35,  160 => 34,  153 => 33,  144 => 30,  138 => 27,  134 => 26,  130 => 25,  126 => 24,  122 => 23,  118 => 22,  114 => 21,  103 => 13,  100 => 12,  93 => 11,  85 => 198,  83 => 189,  80 => 188,  78 => 186,  75 => 185,  73 => 94,  71 => 53,  65 => 49,  63 => 33,  60 => 32,  58 => 11,  46 => 1,);
+        return array (  392 => 190,  385 => 189,  373 => 186,  332 => 151,  322 => 144,  271 => 95,  264 => 94,  222 => 59,  215 => 54,  208 => 53,  199 => 47,  191 => 42,  187 => 41,  183 => 40,  179 => 39,  175 => 38,  171 => 37,  167 => 36,  163 => 35,  160 => 34,  153 => 33,  144 => 30,  138 => 27,  134 => 26,  130 => 25,  126 => 24,  122 => 23,  118 => 22,  114 => 21,  103 => 13,  100 => 12,  93 => 11,  85 => 198,  83 => 189,  80 => 188,  78 => 186,  75 => 185,  73 => 94,  71 => 53,  65 => 49,  63 => 33,  60 => 32,  58 => 11,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -551,14 +557,14 @@ class __TwigTemplate_234701a8e056e5a8ac597ca6d12d81e9 extends Template
                 </a>
                 <ul id=\"forms-nav\" class=\"nav-content collapse show\" data-bs-parent=\"#sidebar-nav\">
                     <li>
-                        <a class=\"nav-link \" href=\"\">
+                        <a class=\"nav-link \" href=\"{{ path('app_voitureaffiche') }}\">
                             <i class=\"bi bi-bookmark\"></i>
                             <i class=\"bi bi-circle\"></i><span>Car</span></i>
 
                         </a>
                     </li>
                     <li>
-                        <a class=\"nav-link \" href=\"\">
+                        <a class=\"nav-link \" href=\"{{ path('app_reservationaffiche') }}\">
                             <i class=\"bi bi-bookmark\"></i>
 
                             <i class=\"bi bi-circle\"></i><span>Booking list</span>

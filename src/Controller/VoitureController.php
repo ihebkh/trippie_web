@@ -131,12 +131,15 @@ class VoitureController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_voiture_show1', methods: ['GET'])]
-    public function add(Voiture $voiture): Response
+
+    #[Route('/{id}', name: 'app_locateurvoiture_show', methods: ['GET'])]
+    public function show2(Voiture $voiture): Response
     {
-          $id = $voiture->getId();
-          return $this->redirectToRoute('app_reservation_add', ['id' => $id], Response::HTTP_SEE_OTHER);
-
-
+        return $this->render('voiture/show2.html.twig', [
+            'voiture' => $voiture,
+        ]);
     }
+
+
+
 }

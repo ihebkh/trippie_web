@@ -6,6 +6,7 @@ use App\Entity\Voiture;
 use App\Form\ReservationFormType;
 use App\Repository\ReservationRepository;
 use App\Repository\VoitureRepository;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,6 +29,7 @@ public function index(): JsonResponse
     #[Route('/reservation/Affichelist', name: 'app_reservationaffiche')]
     public function Affiche(ReservationRepository $repository)
     {
+
         $reservation = $repository->findAll();
         return $this->render('reservation/Affiche.html.twig', ['reservation' => $reservation]);
     }

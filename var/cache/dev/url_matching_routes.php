@@ -41,7 +41,7 @@ return [
         159 => [[['_route' => 'updateVoiture', '_controller' => 'App\\Controller\\VoitureController::updateVoiture'], ['id'], null, null, false, true, null]],
         180 => [
             [['_route' => 'app_voiture_show', '_controller' => 'App\\Controller\\VoitureController::show'], ['id'], ['GET' => 0], null, false, true, null],
-            [['_route' => 'app_voiture_show1', '_controller' => 'App\\Controller\\VoitureController::add'], ['id'], ['GET' => 0], null, false, true, null],
+            [['_route' => 'app_locateurvoiture_show', '_controller' => 'App\\Controller\\VoitureController::show2'], ['id'], ['POST' => 0], null, false, true, null],
         ],
         217 => [
             [['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null],

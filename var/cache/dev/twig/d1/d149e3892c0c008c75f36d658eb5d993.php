@@ -61,17 +61,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
 
 
-        <div class=\"pagetitle\">
-            <h1>Les Articles</h1>
-            <nav>
-                <ol class=\"breadcrumb\">
-                    <li class=\"breadcrumb-item\"><a href=\"index.html\">Home</a></li>
-                    <li class=\"breadcrumb-item\">Tables</li>
-                    <li class=\"breadcrumb-item active\">General</li>
-                </ol>
 
-            </nav>
-        </div><!-- End Page Title -->
 
         <section class=\"section\">
             <div class=\"row\">
@@ -80,14 +70,14 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
                     <div class=\"card\">
 
                         ";
-        // line 26
+        // line 16
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 26, $this->source); })()), "flashes", [0 => "notice"], "method", false, false, false, 26));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "flashes", [0 => "notice"], "method", false, false, false, 16));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 27
+            // line 17
             echo "                            <div class=\"alert alert-success bg-success text-light border-0 alert-dismissible fade show\" role=\"alert\">
                                 ";
-            // line 28
+            // line 18
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
                             </div>
@@ -97,18 +87,18 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 32
+        // line 22
         echo "
 
                         ";
-        // line 34
+        // line 24
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 34, $this->source); })()), "flashes", [0 => "noticedelete"], "method", false, false, false, 34));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 24, $this->source); })()), "flashes", [0 => "noticedelete"], "method", false, false, false, 24));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 35
+            // line 25
             echo "                            <div class=\"alert alert-danger bg-danger text-light border-0 alert-dismissible fade show\" role=\"alert\">
                                 ";
-            // line 36
+            // line 26
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
                             </div>
@@ -118,7 +108,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 40
+        // line 30
         echo "
                         <div class=\"card-body\">
 
@@ -138,64 +128,64 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
                                 <tr>
                                     <th>registration number</th>
                                     <td>";
-        // line 58
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 58, $this->source); })()), "matricule", [], "any", false, false, false, 58), "html", null, true);
+        // line 48
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "matricule", [], "any", false, false, false, 48), "html", null, true);
         echo "</td>
                                 </tr>
                                 <tr>
                                     <th>Brand</th>
                                     <td>";
-        // line 62
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 62, $this->source); })()), "marque", [], "any", false, false, false, 62), "html", null, true);
+        // line 52
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 52, $this->source); })()), "marque", [], "any", false, false, false, 52), "html", null, true);
         echo "</td>
                                 </tr>
                                 <tr>
                                     <th>power</th>
                                     <td>";
-        // line 66
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 66, $this->source); })()), "puissance", [], "any", false, false, false, 66), "html", null, true);
+        // line 56
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 56, $this->source); })()), "puissance", [], "any", false, false, false, 56), "html", null, true);
         echo "</td>
                                 </tr>
                                 <tr>
                                     <th>price per day</th>
                                     <td>";
-        // line 70
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 70, $this->source); })()), "prixJours", [], "any", false, false, false, 70), "html", null, true);
+        // line 60
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 60, $this->source); })()), "prixJours", [], "any", false, false, false, 60), "html", null, true);
         echo "</td>
                                 </tr>
 
                                 <tr>
                                     <th>Picture</th>
                                     <td><img src=\"";
-        // line 75
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 75, $this->source); })()), "picture", [], "any", false, false, false, 75))), "html", null, true);
+        // line 65
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 65, $this->source); })()), "picture", [], "any", false, false, false, 65))), "html", null, true);
         echo "\" style=\"max-height: 80px\"></td>
                                 </tr>
                                 <tr>
                                     <th>Energy</th>
                                     <td>";
-        // line 79
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 79, $this->source); })()), "energie", [], "any", false, false, false, 79), "html", null, true);
+        // line 69
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 69, $this->source); })()), "energie", [], "any", false, false, false, 69), "html", null, true);
         echo "</td>
                                 </tr>
                                 <tr>
                                     <th>Status</th>
                                     <td>";
-        // line 83
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 83, $this->source); })()), "etat", [], "any", false, false, false, 83), "html", null, true);
+        // line 73
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 73, $this->source); })()), "etat", [], "any", false, false, false, 73), "html", null, true);
         echo "</td>
                                 </tr>
                            <tr>
                                <th><center>      <a href=\"";
-        // line 86
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 86, $this->source); })()), "id", [], "any", false, false, false, 86)]), "html", null, true);
+        // line 76
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 76, $this->source); })()), "id", [], "any", false, false, false, 76)]), "html", null, true);
         echo "\">
                                            <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
                                <td><center>
 
                                        <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this car ?')){window.location='";
-        // line 90
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 90, $this->source); })()), "id", [], "any", false, false, false, 90)]), "html", null, true);
+        // line 80
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80)]), "html", null, true);
         echo "';}\">
 
                                            <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -204,6 +194,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
                                    </center></td>
                            </tr>
+
 
                                 </tbody>
                             </table>
@@ -241,7 +232,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
     public function getDebugInfo()
     {
-        return array (  198 => 90,  191 => 86,  185 => 83,  178 => 79,  171 => 75,  163 => 70,  156 => 66,  149 => 62,  142 => 58,  122 => 40,  112 => 36,  109 => 35,  105 => 34,  101 => 32,  91 => 28,  88 => 27,  84 => 26,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  188 => 80,  181 => 76,  175 => 73,  168 => 69,  161 => 65,  153 => 60,  146 => 56,  139 => 52,  132 => 48,  112 => 30,  102 => 26,  99 => 25,  95 => 24,  91 => 22,  81 => 18,  78 => 17,  74 => 16,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -253,17 +244,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
 
 
-        <div class=\"pagetitle\">
-            <h1>Les Articles</h1>
-            <nav>
-                <ol class=\"breadcrumb\">
-                    <li class=\"breadcrumb-item\"><a href=\"index.html\">Home</a></li>
-                    <li class=\"breadcrumb-item\">Tables</li>
-                    <li class=\"breadcrumb-item active\">General</li>
-                </ol>
 
-            </nav>
-        </div><!-- End Page Title -->
 
         <section class=\"section\">
             <div class=\"row\">
@@ -343,6 +324,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
                                    </center></td>
                            </tr>
+
 
                                 </tbody>
                             </table>

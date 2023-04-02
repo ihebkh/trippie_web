@@ -1,34 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'indexlocateur.html.twig' %}
+
 {% block body %}
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
-        <th>id_locateur</th>
 
+    <main id="main">
 
-    </tr>
-    <tr  {%  for v in voiture %} >
-        <td>{{v.id}} </td>
-        <td>{{v.matricule}} </td>
-        <td>{{ v.marque }}</td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.prixJours }}</td>
-        <td>{{ v.puissance }}</td>
-        <td><img class="img-profile " src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 80px"></td>
-        <td>{{ v.etat }}</td>
-        <td>{{ v.idLocateur }}</td>
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <br>
+                <br>
+                <br>
 
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+                    {% for v in voiture %}
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-wrap">
+                            <img src="{{ asset('uploads/' ~ v.picture) }}" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <h4>App 1</h4>
+                                 <p>App</p>
+                                <div class="portfolio-links">
+                                    <a href="{{ path('app_locateurvoiture_show',{id:v.id}) }}" title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                               </div>
+                        </div>
+                    </div>
+                    {% if loop.index % 3 == 0 %}
+                </div>
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+                    {% endif %}
+                    {% endfor %}
+                </div>
 
+            </div>
+        </section><!-- End Portfolio Section -->
 
+    </main><!-- End #main -->
 
+    <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    </tr {%  endfor %}>
-</table>
 {% endblock %}

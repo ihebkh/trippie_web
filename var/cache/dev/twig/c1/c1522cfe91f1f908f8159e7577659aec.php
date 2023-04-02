@@ -32,7 +32,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
     protected function doGetParent(array $context)
     {
         // line 1
-        return "base.html.twig";
+        return "indexlocateur.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -41,90 +41,101 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/Affichereserve.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "voiture/Affichereserve.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexlocateur.html.twig", "voiture/Affichereserve.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
     }
 
-    // line 2
+    // line 3
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 3
-        echo "<table border=\"1\">
-    <tr>
-        <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
-        <th>id_locateur</th>
+        // line 4
+        echo "
+    <main id=\"main\">
 
+        <!-- ======= Portfolio Section ======= -->
+        <section id=\"portfolio\" class=\"portfolio\">
+            <div class=\"container\">
+                <br>
+                <br>
+                <br>
 
-    </tr>
-    <tr  ";
-        // line 17
+                <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
+                    ";
+        // line 15
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 17, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 15, $this->source); })()));
+        $context['loop'] = [
+          'parent' => $context['_parent'],
+          'index0' => 0,
+          'index'  => 1,
+          'first'  => true,
+        ];
+        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+            $length = count($context['_seq']);
+            $context['loop']['revindex0'] = $length - 1;
+            $context['loop']['revindex'] = $length;
+            $context['loop']['length'] = $length;
+            $context['loop']['last'] = 1 === $length;
+        }
         foreach ($context['_seq'] as $context["_key"] => $context["v"]) {
-            echo " >
-        <td>";
+            // line 16
+            echo "                    <div class=\"col-lg-4 col-md-6 portfolio-item filter-app\">
+                        <div class=\"portfolio-wrap\">
+                            <img src=\"";
             // line 18
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 18), "html", null, true);
-            echo " </td>
-        <td>";
-            // line 19
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 19), "html", null, true);
-            echo " </td>
-        <td>";
-            // line 20
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 20), "html", null, true);
-            echo "</td>
-        <td>";
-            // line 21
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 21), "html", null, true);
-            echo "</td>
-        <td>";
-            // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 22), "html", null, true);
-            echo "</td>
-        <td>";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 18))), "html", null, true);
+            echo "\" class=\"img-fluid\" alt=\"\">
+                            <div class=\"portfolio-info\">
+                                <h4>App 1</h4>
+                                 <p>App</p>
+                                <div class=\"portfolio-links\">
+                                    <a href=\"";
             // line 23
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "puissance", [], "any", false, false, false, 23), "html", null, true);
-            echo "</td>
-        <td><img class=\"img-profile \" src=\"";
-            // line 24
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 24))), "html", null, true);
-            echo "\" style=\"max-height: 80px\"></td>
-        <td>";
-            // line 25
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "etat", [], "any", false, false, false, 25), "html", null, true);
-            echo "</td>
-        <td>";
-            // line 26
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "idLocateur", [], "any", false, false, false, 26), "html", null, true);
-            echo "</td>
-
-
-
-
-
-    </tr ";
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 23)]), "html", null, true);
+            echo "\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+                                </div>
+                               </div>
+                        </div>
+                    </div>
+                    ";
+            // line 28
+            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 28) % 3) == 0)) {
+                // line 29
+                echo "                </div>
+                <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
+                    ";
+            }
+            // line 32
+            echo "                    ";
+            ++$context['loop']['index0'];
+            ++$context['loop']['index'];
+            $context['loop']['first'] = false;
+            if (isset($context['loop']['length'])) {
+                --$context['loop']['revindex0'];
+                --$context['loop']['revindex'];
+                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+            }
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 32
-        echo ">
-</table>
+        // line 33
+        echo "                </div>
+
+            </div>
+        </section><!-- End Portfolio Section -->
+
+    </main><!-- End #main -->
+
+    <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -143,44 +154,53 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
 
     public function getDebugInfo()
     {
-        return array (  126 => 32,  113 => 26,  109 => 25,  105 => 24,  101 => 23,  97 => 22,  93 => 21,  89 => 20,  85 => 19,  81 => 18,  75 => 17,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  130 => 33,  116 => 32,  111 => 29,  109 => 28,  101 => 23,  93 => 18,  89 => 16,  72 => 15,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{% extends 'indexlocateur.html.twig' %}
+
 {% block body %}
-<table border=\"1\">
-    <tr>
-        <th>ID</th>
-        <th>Matricule</th>
-        <th>Marque</th>
-        <th>puissance</th>
-        <th>prix par jour </th>
-        <th>picture</th>
-        <th>energie</th>
-        <th>etat</th>
-        <th>id_locateur</th>
 
+    <main id=\"main\">
 
-    </tr>
-    <tr  {%  for v in voiture %} >
-        <td>{{v.id}} </td>
-        <td>{{v.matricule}} </td>
-        <td>{{ v.marque }}</td>
-        <td>{{ v.puissance }}</td>
-        <td>{{ v.prixJours }}</td>
-        <td>{{ v.puissance }}</td>
-        <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
-        <td>{{ v.etat }}</td>
-        <td>{{ v.idLocateur }}</td>
+        <!-- ======= Portfolio Section ======= -->
+        <section id=\"portfolio\" class=\"portfolio\">
+            <div class=\"container\">
+                <br>
+                <br>
+                <br>
 
+                <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
+                    {% for v in voiture %}
+                    <div class=\"col-lg-4 col-md-6 portfolio-item filter-app\">
+                        <div class=\"portfolio-wrap\">
+                            <img src=\"{{ asset('uploads/' ~ v.picture) }}\" class=\"img-fluid\" alt=\"\">
+                            <div class=\"portfolio-info\">
+                                <h4>App 1</h4>
+                                 <p>App</p>
+                                <div class=\"portfolio-links\">
+                                    <a href=\"{{ path('app_locateurvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+                                </div>
+                               </div>
+                        </div>
+                    </div>
+                    {% if loop.index % 3 == 0 %}
+                </div>
+                <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
+                    {% endif %}
+                    {% endfor %}
+                </div>
 
+            </div>
+        </section><!-- End Portfolio Section -->
 
+    </main><!-- End #main -->
 
+    <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
 
-    </tr {%  endfor %}>
-</table>
-{% endblock %}", "voiture/Affichereserve.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\Affichereserve.html.twig");
+{% endblock %}
+", "voiture/Affichereserve.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\Affichereserve.html.twig");
     }
 }

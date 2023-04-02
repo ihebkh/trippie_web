@@ -6,15 +6,7 @@
 
 
         <div class="pagetitle">
-            <h1>Les Articles</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">General</li>
-                </ol>
 
-            </nav>
         </div><!-- End Page Title -->
 
         <section class="section">
@@ -47,7 +39,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+
                                     <th>registration number</th>
                                     <th>brand</th>
                                     <th>picture</th>
@@ -59,13 +51,13 @@
 
 
 
-                                <tr  {%  for v in voiture %} >
+                                <tr>  {%  for v in voiture %} >
 
 
 
                                     <tr>
 
-                                    <td>{{v.id}} </td>
+
                                     <td>{{ v.matricule }}</td>
                                     <td>{{ v.marque }}</td>
                                     <td><img class="img-profile " src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 80px"></td>
