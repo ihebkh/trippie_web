@@ -123,10 +123,26 @@ class __TwigTemplate_700b1b8d29d179e59c11d28c20d14466 extends Template
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "etat", [], "any", false, false, false, 48), "html", null, true);
         echo "</li>
                           <center>    <table border=\"0\">
-                                   <tr>
-                                  <td>supprimer</td><td>modifier</td>
+                                  <tr>
+                                      <th><center>      <a href=\"";
+        // line 51
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture2", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 51, $this->source); })()), "id", [], "any", false, false, false, 51)]), "html", null, true);
+        echo "\">
+                                                  <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
+                                      <td><center>
 
-                            </ul>
+                                              <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this car ?')){window.location='";
+        // line 55
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture2", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 55, $this->source); })()), "id", [], "any", false, false, false, 55)]), "html", null, true);
+        echo "';}\">
+
+                                                  <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
+                                              </a>
+
+
+                                          </center></td>
+                                  </tr>
+
                             </center>
                         </div>
 
@@ -159,7 +175,7 @@ class __TwigTemplate_700b1b8d29d179e59c11d28c20d14466 extends Template
 
     public function getDebugInfo()
     {
-        return array (  123 => 48,  117 => 45,  111 => 42,  105 => 39,  99 => 36,  93 => 33,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  136 => 55,  129 => 51,  123 => 48,  117 => 45,  111 => 42,  105 => 39,  99 => 36,  93 => 33,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -213,10 +229,20 @@ class __TwigTemplate_700b1b8d29d179e59c11d28c20d14466 extends Template
                                 <br>
                                 <li><strong>Status</strong>: {{ voiture.etat }}</li>
                           <center>    <table border=\"0\">
-                                   <tr>
-                                  <td>supprimer</td><td>modifier</td>
+                                  <tr>
+                                      <th><center>      <a href=\"{{ path('updateVoiture2',{id:voiture.id}) }}\">
+                                                  <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
+                                      <td><center>
 
-                            </ul>
+                                              <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this car ?')){window.location='{{ path('app_DeleteVoiture2', {'id': voiture.id }) }}';}\">
+
+                                                  <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
+                                              </a>
+
+
+                                          </center></td>
+                                  </tr>
+
                             </center>
                         </div>
 

@@ -25,7 +25,7 @@ public function index(): JsonResponse
         'path' => 'src/Controller/ReservationController.php',
     ]);
 }
-
+//admin
     #[Route('/reservation/Affichelist', name: 'app_reservationaffiche')]
     public function Affiche(ReservationRepository $repository)
     {
@@ -33,7 +33,7 @@ public function index(): JsonResponse
         $reservation = $repository->findAll();
         return $this->render('reservation/Affiche.html.twig', ['reservation' => $reservation]);
     }
-
+//front
     #[Route('/reservation/Add/{id<\d+>}', name: 'app_reservation_add')]
     public function addReservation(Request $request, int $id, VoitureRepository $voitureRepository): Response
     {
@@ -45,14 +45,13 @@ public function index(): JsonResponse
         $form = $this->createForm(ReservationFormType::class, $reservation, [
             'data_class' => Reservation::class,
         ]);
-        $form->add('Ajouter', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $voiture->setEtat("reservé");
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
-            return $this->redirectToRoute('app_reservationaffiche');
+            return $this->redirectToRoute('app_reservationaffichefront');
         }
         return $this->render('reservation/AddR.html.twig', [
             'id' => $id,
@@ -63,7 +62,7 @@ public function index(): JsonResponse
 
 
 
-
+//delete back
 
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
     public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
@@ -76,23 +75,24 @@ public function index(): JsonResponse
 
 
     }
-    #[Route('/updateReservation/{id}', name: 'updateReservation')]
-
-    public function updateReservation(Request $request,ManagerRegistry $doctrine ,Reservation $reservation)
+    // client
+    #[Route('/reservation/client/Affichelist', name: 'app_reservationaffichefront')]
+    public function Affichefront(ReservationRepository $repository)
     {
-        $form = $this->createForm(ReservationFormType::class, $reservation);
-        $form->add('Update',SubmitType::class);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-
-            $entityManager = $doctrine->getManager();
-            $entityManager->flush();
-            return $this->redirectToRoute('app_reservationaffiche', ['id' => $reservation->getId()]);
-        }
-        return $this->render('reservation/updateR.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $reservation = $repository->findAll();
+        return $this->render('reservation/Afficheclient.html.twig', ['reservation' => $reservation]);
     }
+    //delete front
+    #[Route('voiture/client/deleteReservation/{id}', name: 'app_DeleteReservation2')]
+    public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
+    {
+        $reservation = $repo->find($id);
+        $em = $doctrine->getManager();
+        $em->remove($reservation);
+        $em->flush();
+        return $this->redirectToRoute("app_reservationaffichefront");
 
+
+    }
 }
