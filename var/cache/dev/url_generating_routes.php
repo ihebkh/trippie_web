@@ -11,11 +11,10 @@ return [
     'app_voiture' => [[], ['_controller' => 'App\\Controller\\VoitureController::index'], [], [['text', '/voiture']], [], [], []],
     'app_voitureaffiche' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affiche'], [], [['text', '/voiture/Affichelist']], [], [], []],
     'app_voitureaffichenonreserve' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affichernoneserve'], [], [['text', '/voiture/Affichelistnonreserve']], [], [], []],
-    'app_voitureaffichereserve' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affichereserve'], [], [['text', '/voiture/Affichelistreserve']], [], [], []],
     'app_DeleteVoiture' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::deleteStatique'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/deleteVoiture']], [], [], []],
     'updateVoiture' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::updateVoiture'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/updateVoiture']], [], [], []],
     'addVoiture' => [[], ['_controller' => 'App\\Controller\\VoitureController::addVoiture'], [], [['text', '/voiture/add']], [], [], []],
-    'app_voiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show'], [], [['variable', '/', '[^/]++', 'id', true]], [], [], []],
-    'app_locateurvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show2'], [], [['variable', '/', '[^/]++', 'id', true]], [], [], []],
+    'app_voiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/show']], [], [], []],
+    'app_locateurvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show2'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/locateurvoiture/show']], [], [], []],
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
 ];

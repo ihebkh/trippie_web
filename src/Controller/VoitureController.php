@@ -45,15 +45,6 @@ class VoitureController extends AbstractController
             ['voiture' => $voiture]);
     }
 
-    #[Route('/voiture/Affichelistreserve', name: 'app_voitureaffichereserve')]
-    public function Affichereserve(VoitureRepository $repository)
-    {
-
-        $voiture = $repository->findby(['etat' => 'non reservé']);
-        return $this->render('voiture/Affichereserve.html.twig',
-            ['voiture' => $voiture]);
-    }
-
     #[Route('voiture/deleteVoiture/{id}', name: 'app_DeleteVoiture')]
     public function deleteStatique($id, VoitureRepository $repo, ManagerRegistry $doctrine): Response
     {
@@ -122,7 +113,7 @@ class VoitureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/{id}', name: 'app_voiture_show', methods: ['GET'])]
+    #[Route('/voiture/show/{id}', name: 'app_voiture_show', methods: ['GET'])]
     public function show(Voiture $voiture): Response
     {
 
@@ -132,7 +123,7 @@ class VoitureController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_locateurvoiture_show', methods: ['GET'])]
+    #[Route('/voiture/locateurvoiture/show/{id}', name: 'app_locateurvoiture_show', methods: ['GET'])]
     public function show2(Voiture $voiture): Response
     {
         return $this->render('voiture/show2.html.twig', [
