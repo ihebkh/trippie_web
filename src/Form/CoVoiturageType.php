@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+
 
 class CoVoiturageType extends AbstractType
 {
@@ -33,9 +35,19 @@ class CoVoiturageType extends AbstractType
             ])
             ->add('cov_img', FileType::class, [
                 'label' => 'Image',
+                'mapped' => false,
                 'required' => false,
-            ])
-        ;
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1000024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid JPEG or PNG image',
+                    ])
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

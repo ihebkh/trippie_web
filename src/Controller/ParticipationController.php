@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Participation;
+use App\Entity\CoVoiturage;
+use App\Form\CoVoiturageType;
 use App\Form\ParticipationType;
 use App\Repository\ParticipationRepository;
+use App\Repository\CoVoiturageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +24,27 @@ class ParticipationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_participation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ParticipationRepository $participationRepository): Response
+    #[Route('/new2', name: 'app_participation_new2', methods: ['GET', 'POST'])]
+    public function new(Request $request, ParticipationRepository $participationRepository,CoVoiturageRepository $coVoiturageRepository): Response
+    {
+       
+        $participation = new Participation();
+        $form = $this->createForm(ParticipationType::class, $participation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $participationRepository->save($participation, true);
+
+            return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('participation/new.html.twig', [
+            'participation' => $participation,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/new', name: 'app_participation_new2', methods: ['GET', 'POST'])]
+    public function new2(Request $request, ParticipationRepository $participationRepository): Response
     {
         $participation = new Participation();
         $form = $this->createForm(ParticipationType::class, $participation);
@@ -39,7 +61,6 @@ class ParticipationController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/{id}', name: 'app_participation_show', methods: ['GET'])]
     public function show(Participation $participation): Response
     {

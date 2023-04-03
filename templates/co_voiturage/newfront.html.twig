@@ -1,0 +1,23 @@
+{% extends 'indexChauffeur.html.twig' %}
+
+{% block title %} New CoVoiturage
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+	<centre>
+
+		<div style="text-align: center;">
+
+
+		{{ include('co_voiturage/_form2.html.twig') }}
+
+		<a href="{{ path('app_co_voiturage_index_fornt') }}"> back to list</a>
+        </div>
+	</centre>
+{% endblock %}

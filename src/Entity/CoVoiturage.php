@@ -108,4 +108,11 @@ class CoVoiturage
 
         return $this;
     }
+    
+    public function toString(): string
+    {
+        return "VoitureRepository Object";
+    }
+
+
 }
