@@ -43,7 +43,7 @@ class ParticipationController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/new', name: 'app_participation_new2', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_participation_new', methods: ['GET', 'POST'])]
     public function new2(Request $request, ParticipationRepository $participationRepository): Response
     {
         $participation = new Participation();

@@ -60,7 +60,6 @@
 										<th>Date_dep</th>
 										<th>Nmbr_place</th>
 										<th>Cov_img</th>
-										<th>Edit</th>
 										<th>Details</th>
 
 									</tr>
@@ -75,11 +74,7 @@
 											<td>{{ co_voiturage.nmbrPlace }}</td>
 											<td><img class="img-profile " src="{{ asset('uploads/' ~ co_voiturage.covImg) }}" style="max-height: 80px"></td>
 
-											<td>
 
-												<a href="{{ path('app_co_voiturage_edit', {'id': co_voiturage.id}) }}"></a>
-												<button type="button" class="btn btn-outline-dark">edit</button>
-											</td>
 											<td>
 												<a href="{{ path('app_co_voiturage_show', {'id': co_voiturage.id}) }}">
 													<button type="button" class="btn btn-outline-dark">Detail</button>

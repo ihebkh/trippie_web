@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 
 class CoVoiturageType extends AbstractType
@@ -18,12 +20,38 @@ class CoVoiturageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('depart', TextType::class, [
-                'label' => 'Departure',
-            ])
-            ->add('destination', TextType::class, [
-                'label' => 'Destination',
-            ])
+
+            ->add(
+                'depart',
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'Ariena' => 'Ariena',
+                        'Bizerte' => 'Bizerte',
+                        'Beja' => 'Beja',
+                        'Tunis' => 'Tunis',
+                        'Ben aarouse' => 'Ben aarouse',
+                        'Jandouba' => 'Jandouba',
+                        'Gabes' => 'Gabes',
+                    )
+                )
+            )
+
+            ->add(
+                'destination',
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'Ariena' => 'Ariena',
+                        'Bizerte' => 'Bizerte',
+                        'Beja' => 'Beja',
+                        'Tunis' => 'Tunis',
+                        'Ben aarouse' => 'Ben aarouse',
+                        'Jandouba' => 'Jandouba',
+                        'Gabes' => 'Gabes',
+                    )
+                )
+            )
             ->add('date_dep', DateTimeType::class, [
                 'label' => 'Departure Date and Time',
                 'widget' => 'single_text',
