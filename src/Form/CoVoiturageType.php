@@ -12,6 +12,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+
 
 
 
@@ -52,15 +56,37 @@ class CoVoiturageType extends AbstractType
                     )
                 )
             )
+
             ->add('date_dep', DateTimeType::class, [
-                'label' => 'Departure Date and Time',
-                'widget' => 'single_text',
-                'html5' => false,
-                'format' => 'yyyy-MM-dd HH:mm:ss',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Date  non valide'
+                    ]),
+                    new GreaterThanOrEqual([
+                        'value' => 'today',
+                        'message' => 'La date  doit être dans le futur'
+                    ])
+                ],
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text'
             ])
-            ->add('nmbr_place', IntegerType::class, [
-                'label' => 'Number of seats',
-            ])
+
+            ->add(
+                'nmbr_place',
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4',
+                        '5' => '5',
+                        '6' => '6',
+                        '7' => '7',
+                    )
+                )
+            )
+
             ->add('cov_img', FileType::class, [
                 'label' => 'Image',
                 'mapped' => false,
