@@ -121,9 +121,9 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
                             <table class=\"table\">
                                 <thead>
                                 <tr>
-                                    <th>date debut reservation </th>
-                                    <th>date fin reservation</th>
-                                    <th>voiture reserve</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                    <th>Car number</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -152,13 +152,19 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
             // line 58
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 58), "html", null, true);
             echo "</td>
-                                    <td></td>
+                                    <td> <a href=\"";
+            // line 59
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 59)]), "html", null, true);
+            echo "\">
+                                            <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
+
+
 
 
                                     <td>
                                         <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this Reservation ?')){window.location='";
-            // line 63
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 63)]), "html", null, true);
+            // line 66
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 66)]), "html", null, true);
             echo "';}\">
 
                                             <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -169,7 +175,7 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['r'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 68
+        // line 71
         echo ">
 
                                 </tbody>
@@ -208,7 +214,7 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
 
     public function getDebugInfo()
     {
-        return array (  173 => 68,  161 => 63,  153 => 58,  149 => 57,  145 => 56,  138 => 54,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  179 => 71,  167 => 66,  157 => 59,  153 => 58,  149 => 57,  145 => 56,  138 => 54,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -254,9 +260,9 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
                             <table class=\"table\">
                                 <thead>
                                 <tr>
-                                    <th>date debut reservation </th>
-                                    <th>date fin reservation</th>
-                                    <th>voiture reserve</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                    <th>Car number</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -271,7 +277,10 @@ class __TwigTemplate_2008fd492f4820b5ee148b822ba02c0f extends Template
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
                                     <td>{{r.idVoiture }}</td>
-                                    <td></td>
+                                    <td> <a href=\"{{ path('modifC2',{id:r.id}) }}\">
+                                            <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
+
+
 
 
                                     <td>

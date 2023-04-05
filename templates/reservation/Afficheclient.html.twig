@@ -24,8 +24,8 @@
             <td>{{r.dateDebut |date('Y-m-d')}}</td>
             <td>{{r.dateFin |date('Y-m-d')}}</td>
             <td>{{r.idVoiture }}</td>
-            <td></td>
-
+            <td> <a href="{{ path('modifC',{id:r.id}) }}">
+                    <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
 
             <td>
                 <a href="javascript:void(0)" onclick="if(confirm('are you sure to delete this Reservation ?')){window.location='{{ path('app_DeleteReservation2', {'id': r.id }) }}';}">

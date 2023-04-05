@@ -48,7 +48,7 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
     <meta charset=\"utf-8\">
     <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">
 
-    <title>Vesperr Bootstrap Template - Index</title>
+    <title>Trippie</title>
     <meta content=\"\" name=\"description\">
     <meta content=\"\" name=\"keywords\">
 
@@ -75,10 +75,11 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
         $this->displayBlock('header', $context, $blocks);
         // line 89
         echo "
+
 ";
-        // line 90
+        // line 91
         $this->displayBlock('body', $context, $blocks);
-        // line 95
+        // line 96
         echo "
 </body>
 
@@ -237,14 +238,14 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 
     }
 
-    // line 90
+    // line 91
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 91
+        // line 92
         echo "
 
 
@@ -261,7 +262,7 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  248 => 91,  241 => 90,  189 => 43,  182 => 42,  173 => 37,  169 => 36,  165 => 35,  161 => 34,  157 => 33,  153 => 32,  149 => 31,  144 => 30,  137 => 29,  128 => 26,  124 => 25,  120 => 24,  116 => 23,  112 => 22,  108 => 21,  104 => 20,  99 => 19,  92 => 18,  82 => 95,  80 => 90,  77 => 89,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
+        return array (  249 => 92,  242 => 91,  190 => 43,  183 => 42,  174 => 37,  170 => 36,  166 => 35,  162 => 34,  158 => 33,  154 => 32,  150 => 31,  145 => 30,  138 => 29,  129 => 26,  125 => 25,  121 => 24,  117 => 23,  113 => 22,  109 => 21,  105 => 20,  100 => 19,  93 => 18,  83 => 96,  81 => 91,  77 => 89,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -273,7 +274,7 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
     <meta charset=\"utf-8\">
     <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">
 
-    <title>Vesperr Bootstrap Template - Index</title>
+    <title>Trippie</title>
     <meta content=\"\" name=\"description\">
     <meta content=\"\" name=\"keywords\">
 
@@ -354,6 +355,7 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 
 
 {% endblock %}
+
 
 {% block body %}
 

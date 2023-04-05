@@ -99,7 +99,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
                             <img src=\"";
             // line 23
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 23))), "html", null, true);
-            echo "\" class=\"img-fluid\" alt=\"\">
+            echo "\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>";
             // line 25
@@ -110,7 +110,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
                                     <a href=\"";
             // line 28
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 28)]), "html", null, true);
-            echo "\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+            echo "\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                                </div>
                         </div>
@@ -192,12 +192,12 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
                     {% for v in voiture %}
                     <div class=\"col-lg-4 col-md-6 portfolio-item filter-app\">
                         <div class=\"portfolio-wrap\">
-                            <img src=\"{{ asset('uploads/' ~ v.picture) }}\" class=\"img-fluid\" alt=\"\">
+                            <img src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>{{ v.marque }}</h4>
 
                                 <div class=\"portfolio-links\">
-                                    <a href=\"{{ path('app_locateurvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+                                    <a href=\"{{ path('app_locateurvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                                </div>
                         </div>

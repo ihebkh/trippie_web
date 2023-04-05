@@ -32,7 +32,7 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
     protected function doGetParent(array $context)
     {
         // line 1
-        return "indexlocateur.html.twig";
+        return "indexClient.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -41,7 +41,7 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/show3.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexlocateur.html.twig", "voiture/show3.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/show3.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -116,19 +116,13 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
         // line 45
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 45, $this->source); })()), "energie", [], "any", false, false, false, 45), "html", null, true);
         echo "</li>
-                                <br>
-                                <br>
-                                <li><strong>Status</strong>: ";
-        // line 48
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "etat", [], "any", false, false, false, 48), "html", null, true);
-        echo "</li>
                                 <center>    <table border=\"0\">
                                         <tr>
                                             <th>  <a href=\"";
-        // line 51
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 51, $this->source); })()), "id", [], "any", false, false, false, 51)]), "html", null, true);
+        // line 48
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "id", [], "any", false, false, false, 48)]), "html", null, true);
         echo "\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
+                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a>          </center></th>
 
                                         </tr>
 
@@ -164,12 +158,12 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
 
     public function getDebugInfo()
     {
-        return array (  129 => 51,  123 => 48,  117 => 45,  111 => 42,  105 => 39,  99 => 36,  93 => 33,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  123 => 48,  117 => 45,  111 => 42,  105 => 39,  99 => 36,  93 => 33,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'indexlocateur.html.twig' %}
+        return new Source("{% extends 'indexClient.html.twig' %}
 
 {% block body %}
     <br>
@@ -214,13 +208,10 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
                                 <br>
                                 <br>
                                 <li><strong>Energy</strong>: {{ voiture.energie }}</li>
-                                <br>
-                                <br>
-                                <li><strong>Status</strong>: {{ voiture.etat }}</li>
                                 <center>    <table border=\"0\">
                                         <tr>
                                             <th>  <a href=\"{{ path('app_reservation_add', {id: voiture.id}) }}\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
+                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a>          </center></th>
 
                                         </tr>
 

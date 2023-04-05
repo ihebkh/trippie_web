@@ -36,7 +36,7 @@ class VoitureController extends AbstractController
     }
 
 //locateur
-    #[Route('/voiture/Affichelistnonreserve', name: 'app_voitureaffichenonreserve')]
+    #[Route('/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
     public function Affichernoneserve(VoitureRepository $repository)
     {
         //$repo=$this->getDoctrine()->getRepository(Voiture::class);

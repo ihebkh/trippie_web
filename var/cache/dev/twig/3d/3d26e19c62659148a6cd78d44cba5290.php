@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* voiture/AfficheClient.html.twig */
+/* voiture/afficheclient.html.twig */
 class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
 {
     private $source;
@@ -39,9 +39,9 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/AfficheClient.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/afficheclient.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/AfficheClient.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/afficheclient.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -63,7 +63,7 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
         <section id=\"portfolio\" class=\"portfolio\">
             <div class=\"container\">
                 <br>
-             
+
 
 
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
@@ -91,7 +91,7 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
                             <img src=\"";
             // line 18
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 18))), "html", null, true);
-            echo "\" class=\"img-fluid\" alt=\"\">
+            echo "\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>";
             // line 20
@@ -102,7 +102,7 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
                                     <a href=\"";
             // line 23
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_Clientvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 23)]), "html", null, true);
-            echo "\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+            echo "\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
 
     public function getTemplateName()
     {
-        return "voiture/AfficheClient.html.twig";
+        return "voiture/afficheclient.html.twig";
     }
 
     public function isTraitable()
@@ -172,19 +172,19 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
         <section id=\"portfolio\" class=\"portfolio\">
             <div class=\"container\">
                 <br>
-             
+
 
 
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     {% for v in voiture %}
                     <div class=\"col-lg-4 col-md-6 portfolio-item filter-app\">
                         <div class=\"portfolio-wrap\">
-                            <img src=\"{{ asset('uploads/' ~ v.picture) }}\" class=\"img-fluid\" alt=\"\">
+                            <img src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>{{ v.marque }}</h4>
 
                                 <div class=\"portfolio-links\">
-                                    <a href=\"{{ path('app_Clientvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-link\"></i></a>
+                                    <a href=\"{{ path('app_Clientvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -204,6 +204,6 @@ class __TwigTemplate_56b988861f7fd4d36fba737a1bda8693 extends Template
     <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
 
 {% endblock %}
-", "voiture/AfficheClient.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\afficheclient.html.twig");
+", "voiture/afficheclient.html.twig", "C:\\Users\\khmir\\Desktop\\Allocationweb1\\templates\\voiture\\afficheclient.html.twig");
     }
 }

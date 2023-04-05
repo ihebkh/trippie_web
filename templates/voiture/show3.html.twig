@@ -1,4 +1,4 @@
-{% extends 'indexlocateur.html.twig' %}
+{% extends 'indexClient.html.twig' %}
 
 {% block body %}
     <br>
@@ -43,13 +43,10 @@
                                 <br>
                                 <br>
                                 <li><strong>Energy</strong>: {{ voiture.energie }}</li>
-                                <br>
-                                <br>
-                                <li><strong>Status</strong>: {{ voiture.etat }}</li>
                                 <center>    <table border="0">
                                         <tr>
                                             <th>  <a href="{{ path('app_reservation_add', {id: voiture.id}) }}">
-                                                        <button type="button" class="btn btn-outline-success">Update</button></a>          </center></th>
+                                                        <button type="button" class="btn btn-outline-success">book</button></a></center></th>
 
                                         </tr>
 
