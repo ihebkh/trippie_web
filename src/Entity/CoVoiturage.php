@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CoVoiturageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,14 @@ class CoVoiturage
 
     #[ORM\Column(nullable: true)]
     private ?int $id_chauff = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_co', targetEntity: Participation::class)]
+    private Collection $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,11 +118,44 @@ class CoVoiturage
 
         return $this;
     }
-    
+
     public function toString(): string
     {
         return "VoitureRepository Object";
     }
 
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
 
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+            $participation->setIdCo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdCo() === $this) {
+                $participation->setIdCo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->id;
+    }
 }

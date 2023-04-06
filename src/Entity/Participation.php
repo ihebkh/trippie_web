@@ -16,11 +16,11 @@ class Participation
     #[ORM\Column]
     private ?int $nmbr_place_part = null;
 
-    #[ORM\Column]
-    private ?int $id_co = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $id_user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    private ?CoVoiturage $id_co = null;
 
     public function getId(): ?int
     {
@@ -39,17 +39,6 @@ class Participation
         return $this;
     }
 
-    public function getIdCo(): ?int
-    {
-        return $this->id_co;
-    }
-
-    public function setIdCo(int $id_co): self
-    {
-        $this->id_co = $id_co;
-
-        return $this;
-    }
 
     public function getIdUser(): ?int
     {
@@ -59,6 +48,18 @@ class Participation
     public function setIdUser(?int $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getIdCo(): ?CoVoiturage
+    {
+        return $this->id_co;
+    }
+
+    public function setIdCo(?CoVoiturage $id_co): self
+    {
+        $this->id_co = $id_co;
 
         return $this;
     }
