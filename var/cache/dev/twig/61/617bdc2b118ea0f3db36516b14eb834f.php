@@ -73,13 +73,13 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 ";
         // line 42
         $this->displayBlock('header', $context, $blocks);
-        // line 89
+        // line 79
         echo "
 
 ";
-        // line 91
+        // line 81
         $this->displayBlock('body', $context, $blocks);
-        // line 96
+        // line 86
         echo "
 </body>
 
@@ -205,21 +205,17 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
                     <li><a class=\"nav-link scrollto \" href=\"#portfolio\">Portfolio</a></li>
                     <li><a class=\"nav-link scrollto\" href=\"#team\">Team</a></li>
                     <li><a class=\"nav-link scrollto\" href=\"#pricing\">Pricing</a></li>
-                    <li class=\"dropdown\"><a href=\"#\"><span>Drop Down</span> <i class=\"bi bi-chevron-down\"></i></a>
+                    <li class=\"dropdown\"><a href=\"#\"><span>car mangement</span> <i class=\"bi bi-chevron-down\"></i></a>
                         <ul>
-                            <li><a href=\"#\">Drop Down 1</a></li>
-                            <li class=\"dropdown\"><a href=\"#\"><span>Deep Drop Down</span> <i class=\"bi bi-chevron-right\"></i></a>
-                                <ul>
-                                    <li><a href=\"#\">Deep Drop Down 1</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 2</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 3</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 4</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href=\"#\">Drop Down 2</a></li>
-                            <li><a href=\"#\">Drop Down 3</a></li>
-                            <li><a href=\"#\">Drop Down 4</a></li>
+                            <li><a href=\"";
+        // line 63
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voitureaffichClient");
+        echo "\">cars list</a></li>
+                            <li><a href=\"";
+        // line 64
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationaffichefront");
+        echo "\">Reservation list</a></li>
+
                         </ul>
                     </li>
                     <li><a class=\"nav-link scrollto\" href=\"#contact\">Contact</a></li>
@@ -238,14 +234,14 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 
     }
 
-    // line 91
+    // line 81
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 92
+        // line 82
         echo "
 
 
@@ -262,7 +258,7 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  249 => 92,  242 => 91,  190 => 43,  183 => 42,  174 => 37,  170 => 36,  166 => 35,  162 => 34,  158 => 33,  154 => 32,  150 => 31,  145 => 30,  138 => 29,  129 => 26,  125 => 25,  121 => 24,  117 => 23,  113 => 22,  109 => 21,  105 => 20,  100 => 19,  93 => 18,  83 => 96,  81 => 91,  77 => 89,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
+        return array (  245 => 82,  238 => 81,  216 => 64,  212 => 63,  190 => 43,  183 => 42,  174 => 37,  170 => 36,  166 => 35,  162 => 34,  158 => 33,  154 => 32,  150 => 31,  145 => 30,  138 => 29,  129 => 26,  125 => 25,  121 => 24,  117 => 23,  113 => 22,  109 => 21,  105 => 20,  100 => 19,  93 => 18,  83 => 86,  81 => 81,  77 => 79,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -327,21 +323,11 @@ class __TwigTemplate_c99a4ed1df8c301544132aec3a16b3e1 extends Template
                     <li><a class=\"nav-link scrollto \" href=\"#portfolio\">Portfolio</a></li>
                     <li><a class=\"nav-link scrollto\" href=\"#team\">Team</a></li>
                     <li><a class=\"nav-link scrollto\" href=\"#pricing\">Pricing</a></li>
-                    <li class=\"dropdown\"><a href=\"#\"><span>Drop Down</span> <i class=\"bi bi-chevron-down\"></i></a>
+                    <li class=\"dropdown\"><a href=\"#\"><span>car mangement</span> <i class=\"bi bi-chevron-down\"></i></a>
                         <ul>
-                            <li><a href=\"#\">Drop Down 1</a></li>
-                            <li class=\"dropdown\"><a href=\"#\"><span>Deep Drop Down</span> <i class=\"bi bi-chevron-right\"></i></a>
-                                <ul>
-                                    <li><a href=\"#\">Deep Drop Down 1</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 2</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 3</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 4</a></li>
-                                    <li><a href=\"#\">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href=\"#\">Drop Down 2</a></li>
-                            <li><a href=\"#\">Drop Down 3</a></li>
-                            <li><a href=\"#\">Drop Down 4</a></li>
+                            <li><a href=\"{{ path('app_voitureaffichClient') }}\">cars list</a></li>
+                            <li><a href=\"{{ path('app_reservationaffichefront') }}\">Reservation list</a></li>
+
                         </ul>
                     </li>
                     <li><a class=\"nav-link scrollto\" href=\"#contact\">Contact</a></li>

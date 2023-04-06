@@ -32,7 +32,7 @@ class __TwigTemplate_9c631e721d7cc846548d85fe2b7f9248 extends Template
     protected function doGetParent(array $context)
     {
         // line 1
-        return "indexlocateur.html.twig";
+        return "indexClient.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -41,7 +41,7 @@ class __TwigTemplate_9c631e721d7cc846548d85fe2b7f9248 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reservation/Afficheclient.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexlocateur.html.twig", "reservation/Afficheclient.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "reservation/Afficheclient.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -142,7 +142,7 @@ class __TwigTemplate_9c631e721d7cc846548d85fe2b7f9248 extends Template
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'indexlocateur.html.twig' %}
+        return new Source("{% extends 'indexClient.html.twig' %}
 {% block body %}
     <br>
     <br>

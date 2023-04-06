@@ -142,7 +142,7 @@ class __TwigTemplate_0d9e441555a86d93ec2a45df4185de7c extends Template
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "dateFin", [], "any", false, false, false, 73), 'errors', ["attr" => ["class" => "text-danger"]]);
         echo "
                                 </div>
-                               
+
                                 <br>
                                 <center>
 
@@ -283,7 +283,7 @@ class __TwigTemplate_0d9e441555a86d93ec2a45df4185de7c extends Template
                                     {{ form_widget(form.dateFin,{'attr':{'class':'form-control'}}) }}
                                     {{ form_errors(form.dateFin,{'attr':{'class':'text-danger'}}) }}
                                 </div>
-                               
+
                                 <br>
                                 <center>
 

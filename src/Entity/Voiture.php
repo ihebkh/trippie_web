@@ -30,7 +30,7 @@ class Voiture
     #[Assert\NotBlank(message: "price Number is empty")]
     #[ORM\Column(length: 255)]
     private ?string $prixJours = null;
-    #[Assert\NotBlank(message: "picture is empty")]
+
     #[ORM\Column(length: 255)]
     private ?string $picture= null;
     #[Assert\NotBlank(message: "Energy is empty")]

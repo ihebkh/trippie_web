@@ -122,7 +122,7 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
         // line 48
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "id", [], "any", false, false, false, 48)]), "html", null, true);
         echo "\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a>          </center></th>
+                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a></center></th>
 
                                         </tr>
 
@@ -211,7 +211,7 @@ class __TwigTemplate_6aa8f3dbbb804320fe628636b8a6c1ee extends Template
                                 <center>    <table border=\"0\">
                                         <tr>
                                             <th>  <a href=\"{{ path('app_reservation_add', {id: voiture.id}) }}\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a>          </center></th>
+                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a></center></th>
 
                                         </tr>
 

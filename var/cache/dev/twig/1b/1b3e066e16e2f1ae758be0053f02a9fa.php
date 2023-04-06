@@ -155,7 +155,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
             echo "</td>
                                     <td><img class=\"img-profile \" src=\"";
             // line 63
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("C://xampp//htdocs//image_trippie_cov//" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 63))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 63))), "html", null, true);
             echo "\" style=\"max-height: 80px\"></td>
                                     <td><a href=\"";
             // line 64
@@ -277,7 +277,7 @@ class __TwigTemplate_6280f88fdaabc0a49057460c3458979d extends Template
 
                                     <td>{{ v.matricule }}</td>
                                     <td>{{ v.marque }}</td>
-                                    <td><img class=\"img-profile \" src=\"{{ asset('C://xampp//htdocs//image_trippie_cov//' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
+                                    <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 80px\"></td>
                                     <td><a href=\"{{ path('app_voiture_show',{id:v.id}) }}\">
                                             <button type=\"button\" class=\"btn btn-outline-dark\">Detail</button>
                                         </a></td>

@@ -130,16 +130,17 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
         // line 68
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 68, $this->source); })()), "dateDebut", [], "any", false, false, false, 68), 'errors', ["attr" => ["class" => "text-danger"]]);
         echo "
+
                                     </div>
                                     <label>end date :</label>
                                     <div class=\"form-group\">
                                         ";
-        // line 72
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "dateFin", [], "any", false, false, false, 72), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 73
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "dateFin", [], "any", false, false, false, 73), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                                         ";
-        // line 73
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "dateFin", [], "any", false, false, false, 73), 'errors', ["attr" => ["class" => "text-danger"]]);
+        // line 74
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), "dateFin", [], "any", false, false, false, 74), 'errors', ["attr" => ["class" => "text-danger"]]);
         echo "
                                     </div>
 
@@ -155,8 +156,8 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
                                         </div>
                                     </center>
                                     ";
-        // line 87
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 87, $this->source); })()), 'form_end');
+        // line 88
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 88, $this->source); })()), 'form_end');
         echo "
 
                                 </div>
@@ -205,7 +206,7 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
 
     public function getDebugInfo()
     {
-        return array (  159 => 87,  142 => 73,  138 => 72,  131 => 68,  127 => 67,  120 => 63,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  160 => 88,  143 => 74,  139 => 73,  131 => 68,  127 => 67,  120 => 63,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -278,6 +279,7 @@ class __TwigTemplate_b54dd6d9da55fef7370567d1f829ccbd extends Template
                                     <div class=\"form-group\">
                                         {{ form_widget(form.dateDebut,{'attr':{'class':'form-control'}}) }}
                                         {{ form_errors(form.dateDebut,{'attr':{'class':'text-danger'}}) }}
+
                                     </div>
                                     <label>end date :</label>
                                     <div class=\"form-group\">

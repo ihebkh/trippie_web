@@ -72,13 +72,14 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
 
                 </a>
                 <br>
-
+<br>
+                <br>
 
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     ";
-        // line 20
+        // line 21
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 20, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 21, $this->source); })()));
         $context['loop'] = [
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -93,37 +94,37 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["v"]) {
-            // line 21
+            // line 22
             echo "                    <div class=\"col-lg-4 col-md-6 portfolio-item filter-app\">
                         <div class=\"portfolio-wrap\">
                             <img src=\"";
-            // line 23
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 23))), "html", null, true);
+            // line 24
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 24))), "html", null, true);
             echo "\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>";
-            // line 25
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 25), "html", null, true);
+            // line 26
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 26), "html", null, true);
             echo "</h4>
 
                                 <div class=\"portfolio-links\">
                                     <a href=\"";
-            // line 28
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 28)]), "html", null, true);
+            // line 29
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 29)]), "html", null, true);
             echo "\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                                </div>
                         </div>
                     </div>
                     ";
-            // line 33
-            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 33) % 3) == 0)) {
-                // line 34
+            // line 34
+            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 34) % 3) == 0)) {
+                // line 35
                 echo "                </div>
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     ";
             }
-            // line 37
+            // line 38
             echo "                    ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -137,7 +138,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 38
+        // line 39
         echo "                </div>
 
             </div>
@@ -165,7 +166,7 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
 
     public function getDebugInfo()
     {
-        return array (  141 => 38,  127 => 37,  122 => 34,  120 => 33,  112 => 28,  106 => 25,  101 => 23,  97 => 21,  80 => 20,  69 => 12,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  142 => 39,  128 => 38,  123 => 35,  121 => 34,  113 => 29,  107 => 26,  102 => 24,  98 => 22,  81 => 21,  69 => 12,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -186,7 +187,8 @@ class __TwigTemplate_72608ef2448ad5f626736b616dc6d316 extends Template
 
                 </a>
                 <br>
-
+<br>
+                <br>
 
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     {% for v in voiture %}
