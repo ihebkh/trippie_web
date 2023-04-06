@@ -62,35 +62,47 @@
                             <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
                                 {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
 
-                                <label>Registration number :</label>
+                            <label>Registration number :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.matricule,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.matricule,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="text-danger">{{ form_errors(form.matricule) }}</div>
+
+
                                 </div>
                                 <label>Brand :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.marque,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.marque,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.marque) }}</div>
+
+
                                 </div>
                                 <label>Power :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.puissance,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.puissance,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.puissance, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.puissance) }}</div>
+
+
                                 </div>
                                 <label>Price per day :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.prixJours,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.prixJours,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.prixJours, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.prixJours) }}</div>
+
+
                                 </div>
                                 <label>Picture :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.picture,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.picture,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.picture, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.picture) }}</div>
+
+
                                 </div>
                                 <label>Energy :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.energie,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.energie,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.energie, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.energie) }}</div>
+
+
                                 </div>
                                 <br>
                                 <center>

@@ -48,6 +48,13 @@ class ReservationFormType extends AbstractType
                 'mapped' => false,
 
             ]);
+        /*
+          ->add('voiture',EntityType::class,[
+                'class'=>Voiture::class,
+                'choice_label'=>'name'
+                //'multiple'=>True
+            ])
+         */
 
 
 

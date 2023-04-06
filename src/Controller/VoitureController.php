@@ -25,11 +25,11 @@ class VoitureController extends AbstractController
             'controller_name' => 'VoitureController',
         ]);
     }
+
 //admin
     #[Route('/voiture/Affichelist', name: 'app_voitureaffiche')]
     public function Affiche(VoitureRepository $repository)
     {
-        //$repo=$this->getDoctrine()->getRepository(Voiture::class);
         $voiture = $repository->findAll();
         return $this->render('voiture/Affiche.html.twig',
             ['voiture' => $voiture]);
@@ -39,12 +39,13 @@ class VoitureController extends AbstractController
     #[Route('/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
     public function Affichernoneserve(VoitureRepository $repository)
     {
-        //$repo=$this->getDoctrine()->getRepository(Voiture::class);
+
         $voiture = $repository->findall();
         //$voiture = $repository->findBy(idLocateur=);
         return $this->render('voiture/Affichereserve.html.twig',
             ['voiture' => $voiture]);
     }
+
 //admin
     #[Route('voiture/deleteVoiture/{id}', name: 'app_DeleteVoiture')]
     public function deleteStatique($id, VoitureRepository $repo, ManagerRegistry $doctrine): Response
@@ -57,6 +58,7 @@ class VoitureController extends AbstractController
 
 
     }
+
     //locateur
     #[Route('/voiture/locateurvoiture/deleteVoiture/{id}', name: 'app_DeleteVoiture2')]
     public function deleteStatique2($id, VoitureRepository $repo, ManagerRegistry $doctrine): Response
@@ -69,13 +71,13 @@ class VoitureController extends AbstractController
 
 
     }
+
     //admin
     #[Route('/updateVoiture/{id}', name: 'updateVoiture')]
-
-    public function updateVoiture(Request $request,ManagerRegistry $doctrine ,Voiture $voiture)
+    public function updateVoiture(Request $request, ManagerRegistry $doctrine, Voiture $voiture)
     {
         $form = $this->createForm(VoitureFormType::class, $voiture);
-       // $form->add('Update',SubmitType::class);
+        // $form->add('Update',SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -95,9 +97,10 @@ class VoitureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     //locateur
     #[Route('/updateVoiture//locateurvoiture/{id}', name: 'updateVoiture2')]
-    public function updateVoiture2(Request $request,ManagerRegistry $doctrine ,Voiture $voiture)
+    public function updateVoiture2(Request $request, ManagerRegistry $doctrine, Voiture $voiture)
     {
         $form = $this->createForm(VoitureFormType::class, $voiture);
         // $form->add('Update',SubmitType::class);
@@ -120,6 +123,7 @@ class VoitureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     //locateur
     #[Route('/voiture/add', name: 'addVoiture')]
     public function addVoiture(ManagerRegistry $doctrine, Request $request): Response
@@ -132,6 +136,7 @@ class VoitureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('picture')->getData();
 
+
             if ($file) {
                 $uploadsDirectory = $this->getParameter('uploads_directory');
                 $imgFilename = $file->getClientOriginalName();
@@ -139,11 +144,11 @@ class VoitureController extends AbstractController
                 $voiture->setPicture($imgFilename);
             }
 
+
             $voiture->setEtat("non réservé");
             $em = $doctrine->getManager();
             $em->persist($voiture);
             $em->flush();
-
 
 
             return $this->redirectToRoute('app_voitureaffichenonreserve');
@@ -153,6 +158,7 @@ class VoitureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 //admin
     #[Route('/voiture/show/{id}', name: 'app_voiture_show', methods: ['GET'])]
     public function show(Voiture $voiture): Response
@@ -171,6 +177,7 @@ class VoitureController extends AbstractController
             'voiture' => $voiture,
         ]);
     }
+
     //client
     #[Route('/voiture/AffichelistClient', name: 'app_voitureaffichClient')]
     public function AfficherClient(VoitureRepository $repository)
@@ -181,6 +188,7 @@ class VoitureController extends AbstractController
         return $this->render('voiture/AfficheClient.html.twig',
             ['voiture' => $voiture]);
     }
+
     #[Route('/voiture/Clientvoiture/show/{id}', name: 'app_Clientvoiture_show', methods: ['GET'])]
     public function show3(Voiture $voiture): Response
     {

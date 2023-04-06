@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Reservation;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
 {
@@ -14,28 +15,31 @@ class Voiture
     #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
+
     #[ORM\Column(length: 255)]
+  #[Assert\NotBlank(message: "Registration Number is empty")]
+
     private ?string $matricule = null;
 
-
+    #[Assert\NotBlank(message: "Brand Number is empty")]
     #[ORM\Column(length: 255)]
     private ?string $marque = null;
-
+    #[Assert\NotBlank(message: "power Number is empty")]
     #[ORM\Column(length: 255)]
     private ?string $puissance = null;
-
+    #[Assert\NotBlank(message: "price Number is empty")]
     #[ORM\Column(length: 255)]
     private ?string $prixJours = null;
-
+    #[Assert\NotBlank(message: "picture is empty")]
     #[ORM\Column(length: 255)]
     private ?string $picture= null;
-
+    #[Assert\NotBlank(message: "Energy is empty")]
     #[ORM\Column(length: 255)]
     private ?string $energie = null;
 
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
-
+/*
     #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Reservation::class)]
     private Collection $reservations;
 
@@ -43,7 +47,7 @@ class Voiture
     {
         $this->reservations = new ArrayCollection();
     }
-
+*/
 
     #[ORM\Column]
     private ?int $idLocateur = null;
@@ -150,10 +154,38 @@ class Voiture
     }
 
 
-    public function toString(): string
+   /*
+       /**
+     * @return Collection<int, Reservation>
+
+    public function getReservations(): Collection
     {
-        return "VoitureRepository Object";
+        return $this->reservations;
     }
 
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $student->setReservation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getReservation() === $this) {
+                $reservation->setReservation(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+*/
 
 }

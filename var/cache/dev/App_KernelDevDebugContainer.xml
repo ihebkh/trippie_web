@@ -44,7 +44,7 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
-    <parameter key="uploads_directory">C:\Users\khmir\Desktop\Allocationweb1/public/uploads</parameter>
+    <parameter key="uploads_directory">C:\Users\khmir\Desktop\Allocationweb1/xampp/htdocs/image_trippie_cov</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>

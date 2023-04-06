@@ -70,7 +70,10 @@
                                 </tr>
                                 <tr>
                                     <th>Status</th>
-                                    <td>{{ voiture.etat }}</td>
+
+                                    <td {% if voiture.etat == 'reserve' %}style="color: red"{% else %}style="color: green"{% endif %}>
+                                        {{ voiture.etat }}
+                                    </td>
                                 </tr>
                            <tr>
                                <th><center>      <a href="{{ path('updateVoiture',{id:voiture.id}) }}">

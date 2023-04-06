@@ -170,22 +170,32 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
                                 </tr>
                                 <tr>
                                     <th>Status</th>
-                                    <td>";
-        // line 73
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 73, $this->source); })()), "etat", [], "any", false, false, false, 73), "html", null, true);
-        echo "</td>
+
+                                    <td ";
+        // line 74
+        if ((twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 74, $this->source); })()), "etat", [], "any", false, false, false, 74) == "reserve")) {
+            echo "style=\"color: red\"";
+        } else {
+            echo "style=\"color: green\"";
+        }
+        echo ">
+                                        ";
+        // line 75
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 75, $this->source); })()), "etat", [], "any", false, false, false, 75), "html", null, true);
+        echo "
+                                    </td>
                                 </tr>
                            <tr>
                                <th><center>      <a href=\"";
-        // line 76
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 76, $this->source); })()), "id", [], "any", false, false, false, 76)]), "html", null, true);
+        // line 79
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 79, $this->source); })()), "id", [], "any", false, false, false, 79)]), "html", null, true);
         echo "\">
                                            <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
                                <td><center>
 
                                        <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this car ?')){window.location='";
-        // line 80
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80)]), "html", null, true);
+        // line 83
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 83, $this->source); })()), "id", [], "any", false, false, false, 83)]), "html", null, true);
         echo "';}\">
 
                                            <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -232,7 +242,7 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
 
     public function getDebugInfo()
     {
-        return array (  188 => 80,  181 => 76,  175 => 73,  168 => 69,  161 => 65,  153 => 60,  146 => 56,  139 => 52,  132 => 48,  112 => 30,  102 => 26,  99 => 25,  95 => 24,  91 => 22,  81 => 18,  78 => 17,  74 => 16,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  198 => 83,  191 => 79,  184 => 75,  176 => 74,  168 => 69,  161 => 65,  153 => 60,  146 => 56,  139 => 52,  132 => 48,  112 => 30,  102 => 26,  99 => 25,  95 => 24,  91 => 22,  81 => 18,  78 => 17,  74 => 16,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -309,7 +319,10 @@ class __TwigTemplate_81657fd2e80896c45778a99ea156cec8 extends Template
                                 </tr>
                                 <tr>
                                     <th>Status</th>
-                                    <td>{{ voiture.etat }}</td>
+
+                                    <td {% if voiture.etat == 'reserve' %}style=\"color: red\"{% else %}style=\"color: green\"{% endif %}>
+                                        {{ voiture.etat }}
+                                    </td>
                                 </tr>
                            <tr>
                                <th><center>      <a href=\"{{ path('updateVoiture',{id:voiture.id}) }}\">
