@@ -24,15 +24,19 @@ class Locateur
 
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?string $nom_agence = null;
 
 
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?int $gsm = null;
 
 
    #[ORM\Column(length: 150)]
+   #[Assert\NotBlank(message: "You must complete all empty fields")]
+   #[Assert\Email(message: "Missing @ or .")]
     private ?string $email = null;
 
 
@@ -137,6 +141,59 @@ class Locateur
 
         return $this;
     }
+
+
+    public function getNom(): ?string
+    {
+        if ($this->id_role && $this->id_role->getIdUser()) {
+            return $this->id_role->getIdUser()->getNom();
+        }
+
+        return null;
+    }
+    public function setNom(?string $nom): self
+{
+    if ($this->id_role && $this->id_role->getIdUser()) {
+        $this->id_role->getIdUser()->setNom($nom);
+    }
+
+    return $this;
+}
+
+    public function getPrenom(): ?string
+    {
+        if ($this->id_role && $this->id_role->getIdUser()) {
+            return $this->id_role->getIdUser()->getPrenom();
+        }
+
+        return null;
+    }
+    public function setPrenom(?string $prenom): self
+{
+    if ($this->id_role && $this->id_role->getIdUser()) {
+        $this->id_role->getIdUser()->setPrenom($prenom);
+    }
+
+    return $this;
+}
+
+    public function getCin(): ?string
+    {
+        if ($this->id_role && $this->id_role->getIdUser()) {
+            return $this->id_role->getIdUser()->getCin();
+        }
+
+        return null;
+    }
+
+    public function setCin(?string $cin): self
+{
+    if ($this->id_role && $this->id_role->getIdUser()) {
+        $this->id_role->getIdUser()->setCin($cin);
+    }
+
+    return $this;
+}
 
    
 }

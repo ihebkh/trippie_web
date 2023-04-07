@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\Role;
 use App\Form\ClientType;
+use App\Form\EditCliType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class ClientController extends AbstractController
     #[Route('/', name: 'app_client_index', methods: ['GET'])]
     public function index(ClientRepository $clientRepository): Response
     {
-        return $this->render('client/index.html.twig', [
+        return $this->render('client/card.html.twig', [
             'clients' => $clientRepository->findAll(),
         ]);
     }
@@ -69,20 +70,32 @@ class ClientController extends AbstractController
     }
 
     #[Route('/{id_client}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Client $client, ClientRepository $clientRepository): Response
+    public function edit(Request $request, Client $client, ClientRepository $repo): Response
     {
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(EditCliType::class, $client);
         $form->handleRequest($request);
-        $client->setEtat(Etat::ENABLED);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $clientRepository->save($client, true);
 
-            return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repo->update($client);
+            $file = $form->get('img')->getData();
+           
+            
+            if ($file) {
+                $uploadsDirectory = $this->getParameter('uploads_directory');
+                $imgFilename = $file->getClientOriginalName();
+                $file->move($uploadsDirectory, $imgFilename);
+                $client->setImg($imgFilename);
+            }
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->render('client/profil.html.twig', [
+                'client' => $client
+            ]);
         }
 
-        return $this->renderForm('client/edit.html.twig', [
+        return $this->render('client/edit.html.twig', [
             'client' => $client,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -95,4 +108,24 @@ class ClientController extends AbstractController
 
         return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/clients/{id_client}/disable', name: 'disable_client', methods: ['PATCH','POST','GET'])]
+public function disableClient(Request $request, Client $client): Response
+{
+    $client->setEtat(Etat::DISABLED);
+    $this->getDoctrine()->getManager()->flush();
+    
+    return $this->redirectToRoute('app_client_index');
+}
+#[Route('/{id_client}/profilcl', name: 'profilcl')]
+public function profil(Client $client): Response
+{
+    return $this->render('client/profil.html.twig', [
+        'client' => $client,
+        'controller_name' => 'ClientController',
+    ]);
+
+    
+}
+
 }

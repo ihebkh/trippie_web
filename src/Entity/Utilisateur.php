@@ -3,6 +3,7 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
@@ -16,15 +17,21 @@ class Utilisateur
 
   
     #[ORM\Column(length:8)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\Regex(pattern: "/^\d+$/", message: "The Cin must contains only numbers")]
     private ?string $cin=null;
 
 
 
     #[ORM\Column(length:100)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\Regex(pattern: "/^[A-Z][a-zA-Z]*$/", message: "The firstname must start with a capital letter")]
     private ?string $nom=null;
 
     
     #[ORM\Column(length:100)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\Regex(pattern: "/^[A-Z][a-zA-Z]*$/", message: "The lastname must start with a capital letter")]
     private ?string $prenom=null;
 
 
@@ -80,7 +87,10 @@ class Utilisateur
         return $this;
     }
 
-    
+    public function __toString(): string
+{
+    return $this->getIdUser();
+}
 
 
 }

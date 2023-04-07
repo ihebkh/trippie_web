@@ -1,13 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Client{% endblock %}
+
 
 {% block body %}
-    <h1>Edit Client</h1>
+ <div class="d-lg-flex half">
+   
+    <div class="contents order-2 order-md-1">
+      <div class="container" style="position: absolute; right: 80px; top: 80px;">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-7">
+            
+            <br>
+          
+         
+             {{ form_start(form) }}
+                {{ form_widget(form.img, {'attr': {'class': 'form-control',id: 'img'}}) }}
 
-    {{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
+              <br>
+              <div class="form-group last mb-3">
+                {{ form_label(form.cin) }}
+                {{ form_widget(form.cin, {'attr': {'class': 'form-control', 'placeholder': 'Driving liscence'}}) }}
+              </div>
+              <div class="form-group last mb-3">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Driving liscence'}}) }}
+              </div>
+              <div class="form-group last mb-3">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Driving liscence'}}) }}
+              </div>
+             
+              <div class="form-group last mb-3">
+                {{ form_label(form.gsm) }}
+                {{ form_widget(form.gsm, {'attr': {'class': 'form-control', 'placeholder': 'GSM'}}) }}
+              </div>
+              <div class="form-group last mb-3">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email' , id: 'email'}}) }}
+              </div>
+        
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+             
+              <input type="submit" value="Confirm" class="btn btn-block btn-primary" style="background-color: #3498db; border-color: #3498db;border-radius: 50px">
+             
+             
+      
+           {{ form_end(form) }}
 
-    {{ include('client/_delete_form.html.twig') }}
-{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

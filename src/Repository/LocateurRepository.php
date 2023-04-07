@@ -38,4 +38,32 @@ class LocateurRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function update(Locateur $locateur): int
+    {
+        $entityManager = $this->getEntityManager();
+    
+        $query = $entityManager->createQuery('
+            UPDATE App\Entity\Utilisateur u 
+            SET u.cin = :cin, u.nom = :nom, u.prenom = :prenom
+            WHERE u.id_user IN (
+                SELECT u2.id_user 
+                FROM App\Entity\Utilisateur u2 
+                JOIN u.roles r 
+                JOIN r.locateurs ch
+                WHERE ch.id_ch = :id_ch AND r.id_role = :id_role AND u.id_user = :id_user
+            )
+            
+        ');
+        $query->setParameters([
+            'cin' => $locateur->getIdRole()->getIdUser()->getCin(),
+            'nom' => $locateur->getIdRole()->getIdUser()->getNom(),
+            'prenom' => $locateur->getIdRole()->getIdUser()->getPrenom(),
+            'id_ch' => $locateur->getIdCh(),
+            'id_role' => $locateur->getIdRole()->getIdRole(),
+            'id_user' => $locateur->getIdRole()->getIdUser()->getIdUser()
+        ]);
+    
+        return $query->execute();
+    }
 }

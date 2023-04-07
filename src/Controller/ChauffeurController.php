@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Chauffeur;
 use App\Entity\Role;
+use App\Entity\Utilisateur;
 use App\Form\ChauffeurType;
 use App\Repository\ChauffeurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\RoleRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Enum\Etat;
+use App\Form\EditChType;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Common\Annotations\Annotation\Enum;
 
 
@@ -83,22 +87,82 @@ class ChauffeurController extends AbstractController
     }
 
     #[Route('/{id_ch}/edit', name: 'app_chauffeur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Chauffeur $chauffeur, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Chauffeur $chauffeur, ChauffeurRepository $chauffeurRepository): Response
     {
-        $form = $this->createForm(ChauffeurType::class, $chauffeur);
+        $form = $this->createForm(EditChType::class, $chauffeur);
         $form->handleRequest($request);
-        $chauffeur->setEtat(Etat::ENABLED);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $chauffeurRepository->update($chauffeur);
+            $file = $form->get('img')->getData();
+        
+            if ($file) {
+                $uploadsDirectory = $this->getParameter('uploads_directory');
+                $imgFilename = $file->getClientOriginalName();
+                $file->move($uploadsDirectory, $imgFilename);
+                $chauffeur->setImg($imgFilename);
+            }
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->render('chauffeur/profil.html.twig', [
+                'chauffeur' => $chauffeur
+            ]);
+        }
+
+        return $this->render('chauffeur/edit.html.twig', [
+            'chauffeur' => $chauffeur,
+            'form' => $form->createView(),
+        ]);
+    }
+   /* public function edit(Request $request, Chauffeur $chauffeur, ManagerRegistry $doctrine): Response
+    {
+        $cin=$chauffeur->getIdRole()->getIdUser()->getCin();
+        $nom=$chauffeur->getIdRole()->getIdUser()->getNom();
+        $prenom=$chauffeur->getIdRole()->getIdUser()->getPrenom();
+       
+        $form = $this->createForm(EditChType::class, $chauffeur,[
+            'cin' => $cin,
+            'nom' => $nom,
+            'prenom' => $prenom,
+
+        ]);
+        $form->handleRequest($request);
+        
+       
+      
+     
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chauffeur = $form->getData();
+            
+            
+            $file = $form->get('img')->getData();
+           
+            
+            if ($file) {
+                $uploadsDirectory = $this->getParameter('uploads_directory');
+                $imgFilename = $file->getClientOriginalName();
+                $file->move($uploadsDirectory, $imgFilename);
+                $chauffeur->setImg($imgFilename);
+            }
+            $chauffeur->getIdRole()->getIdUser()->setCin($cin);
+            $chauffeur->getIdRole()->getIdUser()->setNom($nom);
+            $chauffeur->getIdRole()->getIdUser()->setPrenom($prenom);
+            $entityManager = $doctrine->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chauffeur_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('chauffeur/profil.html.twig', [
+                'chauffeur' => $chauffeur
+            ]);
         }
 
         return $this->renderForm('chauffeur/edit.html.twig', [
+            'cin' => $cin,
+            'nom' => $nom,
+            'prenom' => $prenom,
             'chauffeur' => $chauffeur,
             'form' => $form,
         ]);
-    }
+    }*/
 
     #[Route('/{id_ch}', name: 'app_chauffeur_delete', methods: ['POST'])]
     public function delete(Request $request, Chauffeur $chauffeur, EntityManagerInterface $entityManager): Response
@@ -120,4 +184,17 @@ public function disableChauffeur(Request $request, Chauffeur $chauffeur): Respon
     
     return $this->redirectToRoute('app_chauffeur_index');
 }
+
+
+#[Route('/{id_ch}/profilch', name: 'profilch')]
+public function profil(Chauffeur $chauffeur): Response
+{
+    return $this->render('chauffeur/profil.html.twig', [
+        'chauffeur' => $chauffeur,
+        'controller_name' => 'ChauffeurController',
+    ]);
+
+    
+}
+
 }

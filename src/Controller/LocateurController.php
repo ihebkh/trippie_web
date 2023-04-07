@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Locateur;
 use App\Entity\Role;
 use App\Form\LocateurType;
+use App\Form\EditLocType;
 use App\Repository\LocateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class LocateurController extends AbstractController
     #[Route('/', name: 'app_locateur_index', methods: ['GET'])]
     public function index(LocateurRepository $locateurRepository): Response
     {
-        return $this->render('locateur/index.html.twig', [
+        return $this->render('locateur/card.html.twig', [
             'locateurs' => $locateurRepository->findAll(),
         ]);
     }
@@ -69,22 +70,35 @@ class LocateurController extends AbstractController
     }
 
     #[Route('/{id_loc}/edit', name: 'app_locateur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Locateur $locateur, LocateurRepository $locateurRepository): Response
+    public function edit(Request $request, Locateur $locateur, LocateurRepository $repo): Response
     {
-        $form = $this->createForm(LocateurType::class, $locateur);
+        $form = $this->createForm(EditLocType::class, $locateur);
         $form->handleRequest($request);
-        $chauffeur->setEtat(Etat::ENABLED);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $locateurRepository->save($locateur, true);
 
-            return $this->redirectToRoute('app_locateur_index', [], Response::HTTP_SEE_OTHER);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repo->update($locateur);
+            $file = $form->get('img')->getData();
+           
+            
+            if ($file) {
+                $uploadsDirectory = $this->getParameter('uploads_directory');
+                $imgFilename = $file->getClientOriginalName();
+                $file->move($uploadsDirectory, $imgFilename);
+                $client->setImg($imgFilename);
+            }
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->render('locateur/profil.html.twig', [
+                'locateur' => $locateur
+            ]);
         }
 
-        return $this->renderForm('locateur/edit.html.twig', [
+        return $this->render('locateur/edit.html.twig', [
             'locateur' => $locateur,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
+
 
     #[Route('/{id_loc}', name: 'app_locateur_delete', methods: ['POST'])]
     public function delete(Request $request, Locateur $locateur, LocateurRepository $locateurRepository): Response
@@ -95,4 +109,23 @@ class LocateurController extends AbstractController
 
         return $this->redirectToRoute('app_locateur_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/locateurs/{id_loc}/disable', name: 'disable_locateur', methods: ['PATCH','POST','GET'])]
+public function disableLocateur(Request $request, Locateur $locateur): Response
+{
+    $locateur->setEtat(Etat::DISABLED);
+    $this->getDoctrine()->getManager()->flush();
+    
+    return $this->redirectToRoute('app_locateur_index');
+}
+#[Route('/{id_loc}/profilloc', name: 'profilloc')]
+public function profil(locateur $locateur): Response
+{
+    return $this->render('locateur/profil.html.twig', [
+        'locateur' => $locateur,
+        'controller_name' => 'LocateurController',
+    ]);
+
+    
+}
 }

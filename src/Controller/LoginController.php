@@ -62,7 +62,7 @@ class LoginController extends AbstractController
                 $session->set('user_role', 'Client');
                 $session->set('id_client', $user->getIdClient());
                 $id_client=$user->getIdClient();
-                return new RedirectResponse($urlGenerator->generate('app_client_show',['id_client' => $id_client]), Response::HTTP_SEE_OTHER);
+                return new RedirectResponse($urlGenerator->generate('profilcl',['id_client' => $id_client]), Response::HTTP_SEE_OTHER);
             }
         } elseif ($role === 'Chauffeur') {
             $user = $entityManager->getRepository(Chauffeur::class)->findOneBy(['email' => $email]);
@@ -84,7 +84,7 @@ class LoginController extends AbstractController
                 $session->set('user_role', 'Chauffeur');
                 $session->set('id_ch', $user->getIdCh());
                 $id_ch=$user->getIdCh();
-                return new RedirectResponse($urlGenerator->generate('app_chauffeur_show',['id_ch' => $id_ch]), Response::HTTP_SEE_OTHER);
+                return new RedirectResponse($urlGenerator->generate('profilch',['id_ch' => $id_ch]), Response::HTTP_SEE_OTHER);
             }
         } elseif ($role === 'Locateur') {
             $user = $entityManager->getRepository(Locateur::class)->findOneBy(['email' => $email]);
@@ -103,7 +103,7 @@ class LoginController extends AbstractController
                 $session->set('user_role', 'Locateur');
                 $session->set('id_loc', $user->getIdLoc());
                 $id_loc=$user->getIdLoc();
-                return new RedirectResponse($urlGenerator->generate('app_locateur_show',['id_loc' => $id_loc]), Response::HTTP_SEE_OTHER);
+                return new RedirectResponse($urlGenerator->generate('profilloc',['id_loc' => $id_loc]), Response::HTTP_SEE_OTHER);
             }
         }   
         elseif ($role === 'Admin') {

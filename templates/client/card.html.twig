@@ -1,36 +1,81 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block body %}
-   <table class="table">
-        <thead>
-            <tr>
-            
-                <th>Image</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-               
-                <td><img src="{{ asset('uploads/' ~ client.img) }}" style="border-radius: 50%;" width="50" height="50" alt="Image du client"></td>
-                <td>{{ client.idRole.idUser.nom }}</td>
-                <td>{{ client.idRole.idUser.prenom }}</td>
-                <td>{{ client.email }}</td>
-                <td> <button><a href="{{ path('disable_client', {'id_ch': client.idCh}) }}" class="btn btn-danger btn-sm">Disable</a></button></td>
 
-                
-               
-               
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <main id="main" class="main">
+
+
+
+        <div class="pagetitle">
+
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">Customers list</h5>
+
+
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th>Picture</th>
+                                    <th>Cin</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+
+                                  {%  for client in clients %} 
+
+
+
+                                    <tr>
+
+                                    <td><img class="img-profile " src="{{ asset('uploads/' ~ client.img) }}" style="border-radius: 50%;width: 100px; height: 100px;"></td>
+                                    <td>{{ client.idRole.idUser.cin }}</td>
+                                    <td>{{ client.idRole.idUser.nom }}</td>
+                                    <td>{{ client.idRole.idUser.prenom }}</td>
+                                    <td>{{ client.email }}</td>
+                                    <td style="color:{% if client.etat == 'enabled' %}green{% else %}red{% endif %};font-weight:bold;">{{ client.etat }}</td>
+                                    <td>
+                                    <button><a href="{{ path('disable_client', {'id_client': client.idClient}) }}" class="btn btn-danger btn-sm">Disable</a></button></a>
+                                    </td>
+
+                                    </tr>
+
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
 {% endblock %}
