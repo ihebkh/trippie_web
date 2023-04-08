@@ -24,25 +24,40 @@ class ParticipationController extends AbstractController
         ]);
     }
 
-    #[Route('/new2', name: 'app_participation_new2', methods: ['GET', 'POST'])]
-    public function new(Request $request, ParticipationRepository $participationRepository,CoVoiturageRepository $coVoiturageRepository): Response
+    #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
+    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id): Response
     {
-       
-        $participation = new Participation();
-        $form = $this->createForm(ParticipationType::class, $participation);
-        $form->handleRequest($request);
+        $cov = $coVoiturageRepository->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $participationRepository->save($participation, true);
-
-            return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+        if (!$cov) {
+            throw $this->createNotFoundException('The CoVoiturage does not exist');
         }
 
-        return $this->renderForm('participation/newfront.html.twig', [
-            'participation' => $participation,
-            'form' => $form,
+        $id_co = $cov->getId();
+
+        $participation = new Participation();
+        $form = $this->createForm(ParticipationType::class, null, [
+            'data_class' => null,
+            'data' => [
+                'id_co' => $cov->getId(),
+            ]
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $participation->setIdCo($id_co);
+            $participationRepository->save($participation);
+
+            return $this->redirectToRoute('app_participation_index');
+        }
+
+        return $this->render('participation/newfront.html.twig', [
+            'cov' => $cov,
+            'form' => $form->createView(),
         ]);
     }
+
+
     #[Route('/new', name: 'app_participation_new', methods: ['GET', 'POST'])]
     public function new2(Request $request, ParticipationRepository $participationRepository): Response
     {
@@ -90,7 +105,7 @@ class ParticipationController extends AbstractController
     #[Route('/{id}', name: 'app_participation_delete', methods: ['POST'])]
     public function delete(Request $request, Participation $participation, ParticipationRepository $participationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$participation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $participation->getId(), $request->request->get('_token'))) {
             $participationRepository->remove($participation, true);
         }
 

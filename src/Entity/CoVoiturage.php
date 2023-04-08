@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CoVoiturageRepository::class)]
 class CoVoiturage
@@ -17,15 +18,21 @@ class CoVoiturage
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?string $depart = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+
     private ?string $destination = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\GreaterThanOrEqual("today")]
     private ?\DateTimeInterface $date_dep = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?int $nmbr_place = null;
 
     #[ORM\Column(length: 255, nullable: true)]

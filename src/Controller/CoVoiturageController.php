@@ -129,6 +129,23 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
+    #[Route('index/client/{id}/edit', name: 'app_co_voiturage_edit_front', methods: ['GET', 'POST'])]
+    public function editfront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
+    {
+        $form = $this->createForm(CoVoiturageType::class, $coVoiturage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $coVoiturageRepository->save($coVoiturage, true);
+
+            return $this->redirectToRoute('app_co_voiturage_index_fornt', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('co_voiturage/editfront.html.twig', [
+            'co_voiturage' => $coVoiturage,
+            'form' => $form,
+        ]);
+    }
     #[Route('/{id}', name: 'app_co_voiturage_delete', methods: ['POST'])]
     public function delete(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
     {

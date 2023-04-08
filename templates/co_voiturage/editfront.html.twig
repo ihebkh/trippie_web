@@ -1,4 +1,4 @@
-{% extends 'indexClient.html.twig' %}
+{% extends 'indexChauffeur.html.twig' %}
 
 {% block body %}
 
@@ -66,9 +66,9 @@
 							<div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
 
 
-								{{ include('participation/_form2.html.twig') }}
+								{{ include('co_voiturage/_form2.html.twig', {'button_label': 'Update'}) }}
 
-								<a href="{{ path('app_co_voiturage_index_client') }}">
+								<a href="{{ path('app_co_voiturage_index_fornt') }}">
 									back to list</a>
 							</div>
 						</div>

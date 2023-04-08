@@ -30,6 +30,7 @@ class CoVoiturageType extends AbstractType
                 ChoiceType::class,
                 array(
                     'choices' => array(
+                        '' => '',
                         'Ariena' => 'Ariena',
                         'Bizerte' => 'Bizerte',
                         'Beja' => 'Beja',
@@ -46,6 +47,7 @@ class CoVoiturageType extends AbstractType
                 ChoiceType::class,
                 array(
                     'choices' => array(
+                        '' => '',
                         'Ariena' => 'Ariena',
                         'Bizerte' => 'Bizerte',
                         'Beja' => 'Beja',
