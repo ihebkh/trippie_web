@@ -19,50 +19,50 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-                .'|/reservation(?'
-                    .'|/Add/(\\d+)(*:32)'
-                    .'|s/(\\d+)/edit(*:51)'
-                .')'
+                .'|/reservation/Add/(\\d+)(*:29)'
                 .'|/voiture/(?'
                     .'|delete(?'
-                        .'|Reservation/([^/]++)(*:100)'
-                        .'|Voiture/([^/]++)(*:124)'
+                        .'|Reservation/([^/]++)(*:77)'
+                        .'|Voiture/([^/]++)(*:100)'
                     .')'
-                    .'|client/deleteReservation/([^/]++)(*:166)'
+                    .'|client/deleteReservation/([^/]++)(*:142)'
                     .'|locateurvoiture/(?'
-                        .'|deleteVoiture/([^/]++)(*:215)'
-                        .'|show/([^/]++)(*:236)'
+                        .'|deleteVoiture/([^/]++)(*:191)'
+                        .'|show/([^/]++)(*:212)'
                     .')'
-                    .'|show/([^/]++)(*:258)'
-                    .'|Clientvoiture/show/([^/]++)(*:293)'
+                    .'|show/([^/]++)(*:234)'
+                    .'|Clientvoiture/show/([^/]++)(*:269)'
                 .')'
                 .'|/modifC/(?'
-                    .'|([^/]++)(*:321)'
-                    .'|back/([^/]++)(*:342)'
+                    .'|([^/]++)(*:297)'
+                    .'|back/([^/]++)(*:318)'
                 .')'
                 .'|/updateVoiture/(?'
-                    .'|([^/]++)(*:377)'
-                    .'|/locateurvoiture/([^/]++)(*:410)'
+                    .'|([^/]++)(*:353)'
+                    .'|/locateurvoiture/([^/]++)(*:386)'
                 .')'
-                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:447)'
+                .'|/([^/]++)/print(*:410)'
+                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:446)'
+                .'|/reservations/(\\d+)/edit(*:478)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        32 => [[['_route' => 'app_reservation_add', '_controller' => 'App\\Controller\\ReservationController::addReservation'], ['id'], null, null, false, true, null]],
-        51 => [[['_route' => 'app_reservation_update', '_controller' => 'App\\Controller\\ReservationController::update'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        100 => [[['_route' => 'app_DeleteReservation', '_controller' => 'App\\Controller\\ReservationController::deleteStatique'], ['id'], null, null, false, true, null]],
-        124 => [[['_route' => 'app_DeleteVoiture', '_controller' => 'App\\Controller\\VoitureController::deleteStatique'], ['id'], null, null, false, true, null]],
-        166 => [[['_route' => 'app_DeleteReservation2', '_controller' => 'App\\Controller\\ReservationController::deleteStatique2'], ['id'], null, null, false, true, null]],
-        215 => [[['_route' => 'app_DeleteVoiture2', '_controller' => 'App\\Controller\\VoitureController::deleteStatique2'], ['id'], null, null, false, true, null]],
-        236 => [[['_route' => 'app_locateurvoiture_show', '_controller' => 'App\\Controller\\VoitureController::show2'], ['id'], ['GET' => 0], null, false, true, null]],
-        258 => [[['_route' => 'app_voiture_show', '_controller' => 'App\\Controller\\VoitureController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        293 => [[['_route' => 'app_Clientvoiture_show', '_controller' => 'App\\Controller\\VoitureController::show3'], ['id'], ['GET' => 0], null, false, true, null]],
-        321 => [[['_route' => 'modifC', '_controller' => 'App\\Controller\\ReservationController::modifC'], ['id'], null, null, false, true, null]],
-        342 => [[['_route' => 'modifC2', '_controller' => 'App\\Controller\\ReservationController::modifC2'], ['id'], null, null, false, true, null]],
-        377 => [[['_route' => 'updateVoiture', '_controller' => 'App\\Controller\\VoitureController::updateVoiture'], ['id'], null, null, false, true, null]],
-        410 => [[['_route' => 'updateVoiture2', '_controller' => 'App\\Controller\\VoitureController::updateVoiture2'], ['id'], null, null, false, true, null]],
-        447 => [
-            [['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null],
+        29 => [[['_route' => 'app_reservation_add', '_controller' => 'App\\Controller\\ReservationController::addReservation'], ['id'], null, null, false, true, null]],
+        77 => [[['_route' => 'app_DeleteReservation', '_controller' => 'App\\Controller\\ReservationController::deleteStatique'], ['id'], null, null, false, true, null]],
+        100 => [[['_route' => 'app_DeleteVoiture', '_controller' => 'App\\Controller\\VoitureController::deleteStatique'], ['id'], null, null, false, true, null]],
+        142 => [[['_route' => 'app_DeleteReservation2', '_controller' => 'App\\Controller\\ReservationController::deleteStatique2'], ['id'], null, null, false, true, null]],
+        191 => [[['_route' => 'app_DeleteVoiture2', '_controller' => 'App\\Controller\\VoitureController::deleteStatique2'], ['id'], null, null, false, true, null]],
+        212 => [[['_route' => 'app_locateurvoiture_show', '_controller' => 'App\\Controller\\VoitureController::show2'], ['id'], ['GET' => 0], null, false, true, null]],
+        234 => [[['_route' => 'app_voiture_show', '_controller' => 'App\\Controller\\VoitureController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        269 => [[['_route' => 'app_Clientvoiture_show', '_controller' => 'App\\Controller\\VoitureController::show3'], ['id'], ['GET' => 0], null, false, true, null]],
+        297 => [[['_route' => 'modifC', '_controller' => 'App\\Controller\\ReservationController::modifC'], ['id'], null, null, false, true, null]],
+        318 => [[['_route' => 'modifC2', '_controller' => 'App\\Controller\\ReservationController::modifC2'], ['id'], null, null, false, true, null]],
+        353 => [[['_route' => 'updateVoiture', '_controller' => 'App\\Controller\\VoitureController::updateVoiture'], ['id'], null, null, false, true, null]],
+        386 => [[['_route' => 'updateVoiture2', '_controller' => 'App\\Controller\\VoitureController::updateVoiture2'], ['id'], null, null, false, true, null]],
+        410 => [[['_route' => 'pdf', '_controller' => 'App\\Controller\\VoitureController::printReclamation'], ['id'], null, null, false, false, null]],
+        446 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        478 => [
+            [['_route' => 'app_reservation_update', '_controller' => 'App\\Controller\\ReservationController::update'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

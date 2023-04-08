@@ -23,6 +23,7 @@ return [
     'app_locateurvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show2'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/locateurvoiture/show']], [], [], []],
     'app_voitureaffichClient' => [[], ['_controller' => 'App\\Controller\\VoitureController::AfficherClient'], [], [['text', '/voiture/AffichelistClient']], [], [], []],
     'app_Clientvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show3'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/Clientvoiture/show']], [], [], []],
+    'pdf' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::printReclamation'], [], [['text', '/print'], ['variable', '/', '[^/]++', 'id', true]], [], [], []],
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
     'app_reservation_update' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::update'], ['id' => '\\d+'], [['text', '/edit'], ['variable', '/', '\\d+', 'id', true], ['text', '/reservations']], [], [], []],
 ];

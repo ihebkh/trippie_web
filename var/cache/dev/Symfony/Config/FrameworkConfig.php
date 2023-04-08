@@ -464,19 +464,9 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->request;
     }
 
-    /**
-     * @return \Symfony\Config\Framework\AssetsConfig|$this
-     */
-    public function assets($value = [])
+    public function assets(array $value = []): \Symfony\Config\Framework\AssetsConfig
     {
-        if (!\is_array($value)) {
-            $this->_usedProperties['assets'] = true;
-            $this->assets = $value;
-
-            return $this;
-        }
-
-        if (!$this->assets instanceof \Symfony\Config\Framework\AssetsConfig) {
+        if (null === $this->assets) {
             $this->_usedProperties['assets'] = true;
             $this->assets = new \Symfony\Config\Framework\AssetsConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -486,19 +476,9 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->assets;
     }
 
-    /**
-     * @return \Symfony\Config\Framework\TranslatorConfig|$this
-     */
-    public function translator($value = [])
+    public function translator(array $value = []): \Symfony\Config\Framework\TranslatorConfig
     {
-        if (!\is_array($value)) {
-            $this->_usedProperties['translator'] = true;
-            $this->translator = $value;
-
-            return $this;
-        }
-
-        if (!$this->translator instanceof \Symfony\Config\Framework\TranslatorConfig) {
+        if (null === $this->translator) {
             $this->_usedProperties['translator'] = true;
             $this->translator = new \Symfony\Config\Framework\TranslatorConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -726,19 +706,9 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->httpClient;
     }
 
-    /**
-     * @return \Symfony\Config\Framework\MailerConfig|$this
-     */
-    public function mailer($value = [])
+    public function mailer(array $value = []): \Symfony\Config\Framework\MailerConfig
     {
-        if (!\is_array($value)) {
-            $this->_usedProperties['mailer'] = true;
-            $this->mailer = $value;
-
-            return $this;
-        }
-
-        if (!$this->mailer instanceof \Symfony\Config\Framework\MailerConfig) {
+        if (null === $this->mailer) {
             $this->_usedProperties['mailer'] = true;
             $this->mailer = new \Symfony\Config\Framework\MailerConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -973,13 +943,13 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('assets', $value)) {
             $this->_usedProperties['assets'] = true;
-            $this->assets = \is_array($value['assets']) ? new \Symfony\Config\Framework\AssetsConfig($value['assets']) : $value['assets'];
+            $this->assets = new \Symfony\Config\Framework\AssetsConfig($value['assets']);
             unset($value['assets']);
         }
 
         if (array_key_exists('translator', $value)) {
             $this->_usedProperties['translator'] = true;
-            $this->translator = \is_array($value['translator']) ? new \Symfony\Config\Framework\TranslatorConfig($value['translator']) : $value['translator'];
+            $this->translator = new \Symfony\Config\Framework\TranslatorConfig($value['translator']);
             unset($value['translator']);
         }
 
@@ -1063,7 +1033,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('mailer', $value)) {
             $this->_usedProperties['mailer'] = true;
-            $this->mailer = \is_array($value['mailer']) ? new \Symfony\Config\Framework\MailerConfig($value['mailer']) : $value['mailer'];
+            $this->mailer = new \Symfony\Config\Framework\MailerConfig($value['mailer']);
             unset($value['mailer']);
         }
 
@@ -1169,10 +1139,10 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['request'] = $this->request instanceof \Symfony\Config\Framework\RequestConfig ? $this->request->toArray() : $this->request;
         }
         if (isset($this->_usedProperties['assets'])) {
-            $output['assets'] = $this->assets instanceof \Symfony\Config\Framework\AssetsConfig ? $this->assets->toArray() : $this->assets;
+            $output['assets'] = $this->assets->toArray();
         }
         if (isset($this->_usedProperties['translator'])) {
-            $output['translator'] = $this->translator instanceof \Symfony\Config\Framework\TranslatorConfig ? $this->translator->toArray() : $this->translator;
+            $output['translator'] = $this->translator->toArray();
         }
         if (isset($this->_usedProperties['validation'])) {
             $output['validation'] = $this->validation->toArray();
@@ -1214,7 +1184,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['http_client'] = $this->httpClient instanceof \Symfony\Config\Framework\HttpClientConfig ? $this->httpClient->toArray() : $this->httpClient;
         }
         if (isset($this->_usedProperties['mailer'])) {
-            $output['mailer'] = $this->mailer instanceof \Symfony\Config\Framework\MailerConfig ? $this->mailer->toArray() : $this->mailer;
+            $output['mailer'] = $this->mailer->toArray();
         }
         if (isset($this->_usedProperties['secrets'])) {
             $output['secrets'] = $this->secrets->toArray();

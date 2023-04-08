@@ -21,7 +21,7 @@
                     <div class="container">
 
                         <div class="section-title" data-aos="fade-up">
-                            <h2>Add new Car</h2>
+                            <h2>Update Reservation</h2>
                         </div>
 
                         <div class="row">
@@ -64,13 +64,17 @@
 
                                 <label>start date :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.dateDebut,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.dateDebut,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.dateDebut) }}</div>
+
+
                                 </div>
                                 <label>end date :</label>
                                 <div class="form-group">
-                                    {{ form_widget(form.dateFin,{'attr':{'class':'form-control'}}) }}
-                                    {{ form_errors(form.dateFin,{'attr':{'class':'text-danger'}}) }}
+                                    {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.dateFin) }}</div>
+
+
                                 </div>
 
                                 <br>

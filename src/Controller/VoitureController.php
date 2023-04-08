@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\UploadedFile ;
 use Doctrine\Common\Collections\ArrayCollection;
+use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 
 
@@ -28,16 +31,22 @@ class VoitureController extends AbstractController
 
 //admin
     #[Route('/voiture/Affichelist', name: 'app_voitureaffiche')]
-    public function Affiche(VoitureRepository $repository)
+    public function Affiche(VoitureRepository $repository,PaginatorInterface $paginator,Request $request)
     {
-        $voiture = $repository->findAll();
-        return $this->render('voiture/Affiche.html.twig',
-            ['voiture' => $voiture]);
+        $voiture = $repository->findall();
+        $voiture = $paginator->paginate(
+            $voiture, /* query NOT result */
+            $request->query->getInt('page', 1),
+            5
+        );
+        return $this->render('voiture/Affiche.html.twig', [
+            'voiture' => $voiture,
+        ]);
     }
 
 //locateur
     #[Route('/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
-    public function Affichernoneserve(VoitureRepository $repository)
+    public function Affichernoneserve(VoitureRepository $repository,PaginatorInterface $paginator,Request $request)
     {
 
         $voiture = $repository->findall();

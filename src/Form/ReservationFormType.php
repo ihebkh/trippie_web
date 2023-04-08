@@ -19,11 +19,11 @@ class ReservationFormType extends AbstractType
             ->add('dateDebut', DateTimeType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Date non valide'
+                        'message' => 'Date is not validated'
                     ]),
                     new GreaterThanOrEqual([
                         'value' => 'today',
-                        'message' => 'La date doit être dans le futur'
+                        'message' => 'the start date must be greater than the system date'
                     ])
                 ],
                 'date_widget' => 'single_text',
@@ -32,11 +32,11 @@ class ReservationFormType extends AbstractType
             ->add('dateFin', DateTimeType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Date non valide'
+                        'message' => 'Date is not validated'
                     ]),
                     new GreaterThanOrEqual([
                         'value' => 'today',
-                        'message' => 'La date doit être dans le futur'
+                        'message' => 'the end date must be greater than the system date'
                     ])
                 ],
                 'date_widget' => 'single_text',
