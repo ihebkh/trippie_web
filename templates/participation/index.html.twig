@@ -68,10 +68,12 @@
 											<td>{{ participation.nmbrPlacePart }}</td>
 											<td>{{ participation.idCo }}</td>
 											<td>{{ participation.idUser }}</td>
-											<td>
-												<a href="{{ path('app_participation_show', {'id': participation.id}) }}">show</a>
-												<a href="{{ path('app_participation_edit', {'id': participation.id}) }}">edit</a>
+																				<td>
+												<a href="{{ path('app_participation_show', {'id': participation.id}) }}"></a>
+													<button type="button" class="btn btn-outline-dark">Detail</button>
+												</a>
 											</td>
+
 										</tr>
 									{% else %}
 										<tr>
