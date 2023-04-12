@@ -5,6 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Role;
 use App\Repository\ChauffeurRepository;
 use App\Enum\Etat;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: ChauffeurRepository::class)]
@@ -16,7 +18,7 @@ class Chauffeur
     private ?int $id_ch = null;
 
    
-    #[ORM\Column(length: 200)]
+    #[ORM\Column(length: 200, nullable: true)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?string $img = null;
 
@@ -191,7 +193,7 @@ class Chauffeur
 
     return $this;
 }
-    
+
 
 }
 

@@ -30,28 +30,32 @@
             <h3>Login to <strong>Tripee</strong></h3>
             <br>
            <br>
-            <form action="#" method="post">
+       {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
               <div class="form-group last mb-3">
                 {{ form_label(form.Email) }}
                 {{ form_widget(form.Email, {'attr': {'class': 'form-control', 'placeholder': 'your-email@gmail.com', 'id': 'username'}}) }}
+                {{ form_errors(form.Email)}}
               </div>
               <br>
               <div class="form-group last mb-3">
                 {{ form_label(form.Password) }}
                 {{ form_widget(form.Password, {'attr': {'class': 'form-control', 'placeholder': 'Your Password', 'id': 'password'}}) }}
+                {{ form_errors(form.Password)}}
               </div>
                <div class="d-flex mb-5 align-items-center">
-                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                <span class="ml-auto"><a href="" class="forgot-pass">Forgot Password</a></span> 
               </div>
               <p class="mb-4">Select your role</p>
                <div class="d-flex mb-5 align-items-center" >
                  {{ form_widget(form.Role, {'attr': {'type': 'checkbox','id': 'role'}})}}
+                 {{ form_errors(form.Role)}}
               </div>
               {{ form_widget(form._token) }}
               <input type="submit" value="Log In" class="btn btn-block btn-primary" style="background-color: #3498db; border-color: #3498db;border-radius: 50px">
              
               <span ><a style="color: #3498db;position: absolute;right: 43.65%" href="{{ path('app_utilisateur_new') }}">Sign up</a></span>
-            </form>
+            {{ form_end(form) }}
            
           </div>
         </div>

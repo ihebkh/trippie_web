@@ -14,6 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Enum\Etat;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mailer\Bridge\Google\Transport;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use App\Repository\ChauffeurRepository;
+use Swift_Mailer;
+use Swift_Message;
+use Swift_SmtpTransport;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 
 class LoginController extends AbstractController
@@ -88,6 +102,7 @@ class LoginController extends AbstractController
             }
         } elseif ($role === 'Locateur') {
             $user = $entityManager->getRepository(Locateur::class)->findOneBy(['email' => $email]);
+            $email= $user->getEmail();
             $pass = $user->getPassword();
             $etat = $user->getEtat();
             if (!$email) {
@@ -124,7 +139,7 @@ class LoginController extends AbstractController
     ]);
     }
 
-
+   
     
       
 }

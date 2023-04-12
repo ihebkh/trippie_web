@@ -172,7 +172,7 @@ class ChauffeurController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_chauffeur_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('login', [], Response::HTTP_SEE_OTHER);
     }
 
    

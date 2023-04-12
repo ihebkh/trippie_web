@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Role;
 use App\Repository\ClientRepository;
 use App\Enum\Etat;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -16,14 +17,14 @@ class Client
     private ?int $id_client = null;
 
 
-    #[ORM\Column(length: 200)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $img = null;
 
 
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
-    private ?int $gsm;
+    private ?int $gsm = null;
 
 
     #[ORM\Column(length: 200)]

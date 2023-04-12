@@ -8,6 +8,7 @@ use App\Entity\Role;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Enum\Etat;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocateurRepository::class)]
 class Locateur 
@@ -18,7 +19,7 @@ class Locateur
     private ?int $id_loc = null;
 
 
-    #[ORM\Column(length: 200)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $img = null;
 
 

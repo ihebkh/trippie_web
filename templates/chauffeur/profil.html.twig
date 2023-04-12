@@ -16,6 +16,17 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li class="dropdown">
+      <a class="nav-link scrollto active" href="">  <i class="bi bi-gear" style="font-size: 1.9em;"></i></a>
+      <ul>
+       <li>
+       <a href="{{ path('app_chauffeur_delete', {'id_ch': chauffeur.idCh})}}"></a>
+       {{ include('chauffeur/_delete_form.html.twig') }}
+       </li>
+       <li><a href="#">Disable account</a></li>
+      </ul>
+      </li>
+      
           <li class="scrollto" style="margin-left: 20px" >
       
   
@@ -31,7 +42,7 @@
         </li>
     
       
-      
+       
      
       <li>
       <a class="nav-link scrollto active" href="{{ path('login') }}">  <i class="bi bi-box-arrow-right" style="font-size: 1.9em;"></i></a>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RoleRepository;
 use App\Entity\Utilisateur;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
@@ -19,6 +20,7 @@ class Role
 
    
     #[ORM\Column(length:255)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?string $libelle=null;
 
   
