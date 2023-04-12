@@ -19,7 +19,6 @@ class Chauffeur
 
    
     #[ORM\Column(length: 200, nullable: true)]
-    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?string $img = null;
 
 
@@ -29,8 +28,9 @@ class Chauffeur
     private ?string $num_permis = null;
 
   
-    #[ORM\Column]
+    #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\Regex(pattern: "/^\d{8}$/", message: "Gsm must be 8 nubmers")]
     private ?int $gsm = null;
 
 

@@ -52,7 +52,7 @@
                                     <td>{{ client.email }}</td>
                                     <td style="color:{% if client.etat == 'enabled' %}green{% else %}red{% endif %};font-weight:bold;">{{ client.etat }}</td>
                                     <td>
-                                    <button><a href="{{ path('disable_client', {'id_client': client.idClient}) }}" class="btn btn-danger btn-sm">Disable</a></button></a>
+                                    <button><a href="{{ path('disable_client', {'id_client': client.idClient}) }}" class="btn-danger" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a></button></a>
                                     </td>
 
                                     </tr>

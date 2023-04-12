@@ -30,8 +30,8 @@ class EditChType extends AbstractType
             ->add('img',FileType::class, [
                 'label' => 'Importer une image',
                 'required' => false,
-                'data_class' => null,
-                    ])        
+                'mapped' => false,
+                ])        
             ->add('cin', TextType::class)
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)        

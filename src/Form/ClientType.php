@@ -19,6 +19,7 @@ class ClientType extends AbstractType
             ->add('img',FileType::class, [
             'label' => 'Importer une image',
             'required' => false,
+            'mapped' => false,
             ])
             ->add('gsm')
             ->add('email')

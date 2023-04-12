@@ -19,7 +19,7 @@ class LocateurType extends AbstractType
             ->add('img',FileType::class, [
             'label' => 'Importer une image',
             'required' => false,
-            'attr' => ['class' => 'form-control', 'id' => 'img']
+            'mapped' => false,
             ])
             ->add('nom_agence')
             ->add('gsm')

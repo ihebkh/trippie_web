@@ -18,7 +18,7 @@ class Utilisateur
   
     #[ORM\Column(length:8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
-    #[Assert\Regex(pattern: "/^\d+$/", message: "The Cin must contains only numbers")]
+    #[Assert\Regex(pattern: "/^\d{8}$/", message: "Cin must be 8 numbers")]
     private ?string $cin=null;
 
 

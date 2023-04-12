@@ -22,8 +22,9 @@ class Client
 
 
 
-    #[ORM\Column]
+    #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\Regex(pattern: "/^\d{8}$/", message: "Gsm must be 8 nubmers")]
     private ?int $gsm = null;
 
 

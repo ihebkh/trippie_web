@@ -102,6 +102,7 @@ class ChauffeurController extends AbstractController
                 $file->move($uploadsDirectory, $imgFilename);
                 $chauffeur->setImg($imgFilename);
             }
+           
             $this->getDoctrine()->getManager()->flush();
 
             return $this->render('chauffeur/profil.html.twig', [
