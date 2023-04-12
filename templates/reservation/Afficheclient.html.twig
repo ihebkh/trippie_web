@@ -1,0 +1,40 @@
+{% extends 'indexClient.html.twig' %}
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  <center><h1>Reservation list</h1></center>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Voiture id</th>
+            <th>update</th>
+            <th>delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  {%  for r in reservation %} >
+
+            <td>{{r.dateDebut |date('Y-m-d')}}</td>
+            <td>{{r.dateFin |date('Y-m-d')}}</td>
+            <td>{{r.idVoiture }}</td>
+            <td> <a href="{{ path('modifC',{id:r.id}) }}">
+                    <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
+
+            <td>
+                <a href="javascript:void(0)" onclick="if(confirm('are you sure to delete this Reservation ?')){window.location='{{ path('app_DeleteReservation2', {'id': r.id }) }}';}">
+
+                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                </a>
+            </td>
+        </tr {%  endfor %}>
+
+        </tbody>
+    </table>
+{% endblock %}
