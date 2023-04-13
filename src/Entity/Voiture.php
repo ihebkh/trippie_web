@@ -52,6 +52,14 @@ class Voiture
     #[ORM\Column]
     private ?int $idLocateur = null;
 
+    #[ORM\OneToMany(mappedBy: 'idVoiture', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,38 +162,33 @@ class Voiture
     }
 
 
-   /*
-       /**
-     * @return Collection<int, Reservation>
 
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
+   public function getReservations(): Collection
+   {
+       return $this->reservations;
+   }
 
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations->add($reservation);
-            $student->setReservation($this);
-        }
+   public function addReservation(Reservation $reservation): self
+   {
+       if (!$this->reservations->contains($reservation)) {
+           $this->reservations->add($reservation);
+           $reservation->setIdVoiture($this);
+       }
 
-        return $this;
-    }
+       return $this;
+   }
 
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getReservation() === $this) {
-                $reservation->setReservation(null);
-            }
-        }
+   public function removeReservation(Reservation $reservation): self
+   {
+       if ($this->reservations->removeElement($reservation)) {
+           // set the owning side to null (unless already changed)
+           if ($reservation->getIdVoiture() === $this) {
+               $reservation->setIdVoiture(null);
+           }
+       }
 
-        return $this;
-    }
+       return $this;
+   }
 
-
-*/
 
 }

@@ -55,7 +55,7 @@
 
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
-                                    <td>{{r.idVoiture }}</td>
+                                    <td>{{r.idVoiture.id }}</td>
                                     <td> <a href="{{ path('modifC2',{id:r.id}) }}">
                                             <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
 

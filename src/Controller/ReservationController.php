@@ -44,7 +44,6 @@ class ReservationController extends AbstractController
         $voiture = $voitureRepository->find($id);
 
         $reservation = new Reservation();
-        $reservation->setIdVoiture($voiture->getId());
 
         $form = $this->createForm(ReservationFormType::class, $reservation, [
             'data_class' => Reservation::class,
@@ -91,6 +90,7 @@ Trippie');
     {
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();
+
         $em->remove($reservation);
         $em->flush();
         return $this->redirectToRoute("app_reservationaffiche");

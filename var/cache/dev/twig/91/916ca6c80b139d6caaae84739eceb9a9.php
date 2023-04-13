@@ -90,10 +90,7 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
             // line 25
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 25), "Y-m-d"), "html", null, true);
             echo "</td>
-            <td>";
-            // line 26
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 26), "html", null, true);
-            echo "</td>
+          <td></td>
             <td> <a href=\"";
             // line 27
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 27)]), "html", null, true);
@@ -137,7 +134,7 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
 
     public function getDebugInfo()
     {
-        return array (  118 => 36,  106 => 31,  99 => 27,  95 => 26,  91 => 25,  87 => 24,  80 => 22,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  115 => 36,  103 => 31,  96 => 27,  91 => 25,  87 => 24,  80 => 22,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -167,7 +164,7 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
 
             <td>{{r.dateDebut |date('Y-m-d')}}</td>
             <td>{{r.dateFin |date('Y-m-d')}}</td>
-            <td>{{r.idVoiture }}</td>
+          <td></td>
             <td> <a href=\"{{ path('modifC',{id:r.id}) }}\">
                     <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 
