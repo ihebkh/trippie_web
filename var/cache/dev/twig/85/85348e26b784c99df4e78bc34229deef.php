@@ -185,26 +185,20 @@ class __TwigTemplate_494008e0141e2453808e6cd17c9b0a8c extends Template
         echo "
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Scan this code if you like</th>
-                                    <th>
-                                        <img src=\"";
-        // line 81
-        echo twig_escape_filter($this->env, (isset($context["qr"]) || array_key_exists("qr", $context) ? $context["qr"] : (function () { throw new RuntimeError('Variable "qr" does not exist.', 81, $this->source); })()), "html", null, true);
-        echo "\" alt=\"QR code\" style=\"height:20%;width:15%\"/>
-                                    </th>
-                                </tr>
+                                ";
+        // line 85
+        echo "
                                 <tr>
                                     <th><center>      <a href=\"";
-        // line 85
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 85, $this->source); })()), "id", [], "any", false, false, false, 85)]), "html", null, true);
+        // line 87
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updateVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 87, $this->source); })()), "id", [], "any", false, false, false, 87)]), "html", null, true);
         echo "\">
                                                 <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>
                                     <td><center>
 
                                             <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this car ?')){window.location='";
-        // line 89
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 89, $this->source); })()), "id", [], "any", false, false, false, 89)]), "html", null, true);
+        // line 91
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteVoiture", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 91, $this->source); })()), "id", [], "any", false, false, false, 91)]), "html", null, true);
         echo "';}\">
 
                                                 <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -251,7 +245,7 @@ class __TwigTemplate_494008e0141e2453808e6cd17c9b0a8c extends Template
 
     public function getDebugInfo()
     {
-        return array (  207 => 89,  200 => 85,  193 => 81,  184 => 75,  176 => 74,  168 => 69,  161 => 65,  153 => 60,  146 => 56,  139 => 52,  132 => 48,  112 => 30,  102 => 26,  99 => 25,  95 => 24,  91 => 22,  81 => 18,  78 => 17,  74 => 16,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  201 => 91,  194 => 87,  190 => 85,  184 => 75,  176 => 74,  168 => 69,  161 => 65,  153 => 60,  146 => 56,  139 => 52,  132 => 48,  112 => 30,  102 => 26,  99 => 25,  95 => 24,  91 => 22,  81 => 18,  78 => 17,  74 => 16,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -333,12 +327,14 @@ class __TwigTemplate_494008e0141e2453808e6cd17c9b0a8c extends Template
                                         {{ voiture.etat }}
                                     </td>
                                 </tr>
+                                {#
                                 <tr>
-                                    <th>Scan this code if you like</th>
-                                    <th>
-                                        <img src=\"{{ qr }}\" alt=\"QR code\" style=\"height:20%;width:15%\"/>
-                                    </th>
-                                </tr>
+                                   <th>Scan this code if you like</th>
+                                 <th>
+                                       <img src=\"{{ qr }}\" alt=\"QR code\" style=\"height:20%;width:15%\"/>
+                                   </th>
+                               </tr>#}
+
                                 <tr>
                                     <th><center>      <a href=\"{{ path('updateVoiture',{id:voiture.id}) }}\">
                                                 <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>          </center></th>

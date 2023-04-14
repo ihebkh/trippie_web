@@ -148,10 +148,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
             // line 57
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 57), "Y-m-d"), "html", null, true);
             echo "</td>
-                                    <td>";
-            // line 58
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 58), "html", null, true);
-            echo "</td>
+                               <td></td>
                                     <td> <a href=\"";
             // line 59
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 59)]), "html", null, true);
@@ -218,7 +215,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
     public function getDebugInfo()
     {
-        return array (  185 => 75,  179 => 71,  167 => 66,  157 => 59,  153 => 58,  149 => 57,  145 => 56,  138 => 54,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  182 => 75,  176 => 71,  164 => 66,  154 => 59,  149 => 57,  145 => 56,  138 => 54,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -280,7 +277,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
-                                    <td>{{r.idVoiture }}</td>
+                               <td></td>
                                     <td> <a href=\"{{ path('modifC2',{id:r.id}) }}\">
                                             <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 

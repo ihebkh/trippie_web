@@ -28,6 +28,12 @@ class Voiture
     #[ORM\Column(length: 255)]
     private ?string $puissance = null;
     #[Assert\NotBlank(message: "price Number is empty")]
+    #[Assert\NotBlank(message: "prix doit etre non vide")]
+    #[Assert\Range(
+        min: 1,
+        max: 9999999999,
+        notInRangeMessage: "price per day must be positve"
+    )]
     #[ORM\Column(length: 255)]
     private ?string $prixJours = null;
 
@@ -39,15 +45,6 @@ class Voiture
 
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
-/*
-    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Reservation::class)]
-    private Collection $reservations;
-
-    public function __construct()
-    {
-        $this->reservations = new ArrayCollection();
-    }
-*/
 
     #[ORM\Column]
     private ?int $idLocateur = null;

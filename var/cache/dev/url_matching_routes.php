@@ -16,6 +16,7 @@ return [
         '/voiture/Affichelocateur' => [[['_route' => 'app_voitureaffichenonreserve', '_controller' => 'App\\Controller\\VoitureController::Affichernoneserve'], null, null, null, false, false, null]],
         '/voiture/add' => [[['_route' => 'addVoiture', '_controller' => 'App\\Controller\\VoitureController::addVoiture'], null, null, null, false, false, null]],
         '/voiture/AffichelistClient' => [[['_route' => 'app_voitureaffichClient', '_controller' => 'App\\Controller\\VoitureController::AfficherClient'], null, null, null, false, false, null]],
+        '/voiture/recherche' => [[['_route' => 'recherche', '_controller' => 'App\\Controller\\VoitureController::Recherche'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

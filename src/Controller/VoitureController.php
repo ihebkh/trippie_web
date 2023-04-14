@@ -241,4 +241,12 @@ class VoitureController extends AbstractController
             'voiture' => $voiture,
         ]);
     }
+    #[Route('/voiture/recherche', name: 'recherche')]
+    function Recherche(VoitureRepository $repository,Request $request)
+    {
+        $data = $request->get('search');
+        $voiture = $repository->findBy(['nsc' => $data]);
+        return $this->render('voiture/Affiche.html.twig',
+            ['voiture' => $voiture]);
+    }
 }

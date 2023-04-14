@@ -63,10 +63,12 @@
                                 {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
 
                                     <label>Registration number :</label>
-                                    <div class="form-group">
-                                        {{ form_widget(form.matricule,{'attr':{'class':'form-control'}}) }}
-                                        {{ form_errors(form.matricule,{'attr':{'class':'text-danger'}}) }}
-                                    </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">{{ form_errors(form.matricule) }}</div>
+
+
+                                </div>
                                     <label>Brand :</label>
                                     <div class="form-group">
                                         {{ form_widget(form.marque,{'attr':{'class':'form-control'}}) }}

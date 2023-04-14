@@ -90,7 +90,6 @@ Trippie');
     {
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();
-
         $em->remove($reservation);
         $em->flush();
         return $this->redirectToRoute("app_reservationaffiche");
@@ -98,7 +97,7 @@ Trippie');
 
     }
 
-    // client
+    // clientsymfo
     #[Route('/reservation/client/Affichelist', name: 'app_reservationaffichefront')]
     public function Affichefront(ReservationRepository $repository)
     {
@@ -168,4 +167,5 @@ Trippie');
             array("form" => $form)
         );
     }
+
 }

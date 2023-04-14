@@ -10,6 +10,8 @@ use App\Controller\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 
 class VoitureFormType extends AbstractType
@@ -52,6 +54,9 @@ class VoitureFormType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please upload an image',
+                    ]),
                     new File([
                         'maxSize' => '1000024k',
                         'mimeTypes' => [
@@ -62,6 +67,7 @@ class VoitureFormType extends AbstractType
                     ])
                 ],
             ])
+
             ->add('energie', ChoiceType::class,
                 array(
                     'choices' => array(

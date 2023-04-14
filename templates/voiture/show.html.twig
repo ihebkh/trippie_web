@@ -75,12 +75,14 @@
                                         {{ voiture.etat }}
                                     </td>
                                 </tr>
+                                {#
                                 <tr>
-                                    <th>Scan this code if you like</th>
-                                    <th>
-                                        <img src="{{ qr }}" alt="QR code" style="height:20%;width:15%"/>
-                                    </th>
-                                </tr>
+                                   <th>Scan this code if you like</th>
+                                 <th>
+                                       <img src="{{ qr }}" alt="QR code" style="height:20%;width:15%"/>
+                                   </th>
+                               </tr>#}
+
                                 <tr>
                                     <th><center>      <a href="{{ path('updateVoiture',{id:voiture.id}) }}">
                                                 <button type="button" class="btn btn-outline-success">Update</button></a>          </center></th>
