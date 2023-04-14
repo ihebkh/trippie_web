@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CouponRepository::class)]
 class Coupon
@@ -23,8 +24,9 @@ class Coupon
     public ?\DateTimeInterface $date_experatio = null;
 
     #[ORM\Column]
+    
     private ?int $taux = null;
-
+    #[Assert\NotBlank(message: "The code coupon should not be blank.")]
     #[ORM\Column(length: 200)]
     public ?string $code_coupon = null;
 

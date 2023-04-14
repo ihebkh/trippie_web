@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CadeauRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CadeauRepository::class)]
 class Cadeau
 {
@@ -12,10 +13,10 @@ class Cadeau
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idcadeau = null;
-
+    #[Assert\NotBlank(message: "Nom du cadeau est vide")]
     #[ORM\Column(length: 200)]
     public ?string $nom_cadeay = null;
-
+    #[Assert\NotNull(message: "La récurrence ne doit pas être vide")]
     #[ORM\Column]
     private ?int $reccurence = null;
 

@@ -6,6 +6,9 @@ use App\Entity\Cadeau;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Coupon;
+use App\Repository\CouponRepository;
 
 class Cadeau1Type extends AbstractType
 {
@@ -16,7 +19,14 @@ class Cadeau1Type extends AbstractType
             ->add('reccurence')
             ->add('description')
             ->add('valeur')
-            ->add('coupon')
+            ->add('coupon', EntityType::class, [
+                'class' => coupon::class,
+                'query_builder' => function (CouponRepository $repository) {
+                    return $repository->createQueryBuilder('c')
+                        ->andWhere('c.type = :type')
+                        ->setParameter('type', 'vip');
+                },
+            ])
         ;
     }
 
