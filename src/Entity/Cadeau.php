@@ -19,10 +19,10 @@ class Cadeau
     #[Assert\NotNull(message: "La récurrence ne doit pas être vide")]
     #[ORM\Column]
     private ?int $reccurence = null;
-
+    #[Assert\NotNull(message: "La description ne doit pas être vide")]
     #[ORM\Column(length: 200)]
     private ?string $description = null;
-
+    #[Assert\NotNull(message: "valeur ne doit pas être vide")]
     #[ORM\Column]
     private ?int $valeur = null;
 
