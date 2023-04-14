@@ -12,7 +12,11 @@
         <tr>
             <th scope="col">Start date</th>
             <th scope="col">End date</th>
-            <th scope="col"></th>
+            <th scope="col">Registration number</th>
+            <th scope="col">Brand</th>
+            <th scope="col">power</th>
+            <th scope="col">Energy</th>
+            <th scope="col">picture</th>
             <th>update</th>
             <th>delete</th>
 
@@ -23,8 +27,12 @@
 
             <td>{{r.dateDebut |date('Y-m-d')}}</td>
             <td>{{r.dateFin |date('Y-m-d')}}</td>
+          <td>{{ r.idVoiture.matricule }}</td>
+            <td>{{ r.idVoiture.marque }}</td>
+            <td>{{ r.idVoiture.puissance }}</td>
+            <td>{{ r.idVoiture.energie }}</td>
 
-          <td></td>
+            <td><img class="img-profile " src="{{ asset('uploads/' ~ r.idVoiture.picture) }}" style="max-height: 80px"></td>
             <td> <a href="{{ path('modifC',{id:r.id}) }}">
                     <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
 

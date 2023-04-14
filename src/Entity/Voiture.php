@@ -48,8 +48,7 @@ class Voiture
 
     #[ORM\Column]
     private ?int $idLocateur = null;
-
-    #[ORM\OneToMany(mappedBy: 'idVoiture', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'idVoiture', targetEntity: Reservation::class, cascade: ['remove'])]
     private Collection $reservations;
 
     public function __construct()

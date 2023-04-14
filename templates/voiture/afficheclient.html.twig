@@ -18,6 +18,7 @@
                             <img src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 200px ; width: 100%;  object-fit: cover;">
                             <div class="portfolio-info">
                                 <h4>{{ v.marque }}</h4>
+                                <h4>{{ v.prixJours }}</h4>
 
                                 <div class="portfolio-links">
                                     <a href="{{ path('app_Clientvoiture_show',{id:v.id}) }}" title="More Details"><i class="bx bx-plus"></i></a>

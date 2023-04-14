@@ -64,7 +64,7 @@ class VoitureController extends AbstractController
             ['voiture' => $voiture]);
     }
 
-//admin
+//admin                                                                                                                                                                                   
     #[Route('voiture/deleteVoiture/{id}', name: 'app_DeleteVoiture')]
     public function deleteStatique($id, VoitureRepository $repo, ManagerRegistry $doctrine): Response
     {

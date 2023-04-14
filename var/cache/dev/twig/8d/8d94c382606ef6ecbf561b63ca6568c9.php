@@ -192,11 +192,14 @@ class __TwigTemplate_9196858ed063f079d54fae4108298deb extends Template
     <header id=\"header\" class=\"fixed-top d-flex align-items-center\" >
         <div class=\"container d-flex align-items-center justify-content-between\">
 
-            <div class=\"logo\">
-                <h1><a href=\"index.html\">Tripee</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href=\"index.html\"><img src=\"assets/img/logo.png\" alt=\"\" class=\"img-fluid\"></a>-->
-            </div>
+            <div class=\"d-flex align-items-center justify-content-between\">
+                <a href=\"\" class=\"logo d-flex align-items-center\">
+                    <img src=\"";
+        // line 50
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("Back/assets/img/bg.png"), "html", null, true);
+        echo "\" >
+                </a>
+            </div><!-- End Logo -->
 
             <nav id=\"navbar\" class=\"navbar\">
                 <ul>
@@ -259,7 +262,7 @@ class __TwigTemplate_9196858ed063f079d54fae4108298deb extends Template
 
     public function getDebugInfo()
     {
-        return array (  246 => 83,  239 => 82,  217 => 65,  213 => 64,  190 => 43,  183 => 42,  174 => 37,  170 => 36,  166 => 35,  162 => 34,  158 => 33,  154 => 32,  150 => 31,  145 => 30,  138 => 29,  129 => 26,  125 => 25,  121 => 24,  117 => 23,  113 => 22,  109 => 21,  105 => 20,  100 => 19,  93 => 18,  83 => 87,  81 => 82,  77 => 80,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
+        return array (  249 => 83,  242 => 82,  220 => 65,  216 => 64,  199 => 50,  190 => 43,  183 => 42,  174 => 37,  170 => 36,  166 => 35,  162 => 34,  158 => 33,  154 => 32,  150 => 31,  145 => 30,  138 => 29,  129 => 26,  125 => 25,  121 => 24,  117 => 23,  113 => 22,  109 => 21,  105 => 20,  100 => 19,  93 => 18,  83 => 87,  81 => 82,  77 => 80,  75 => 42,  70 => 39,  68 => 29,  65 => 28,  63 => 18,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -311,11 +314,11 @@ class __TwigTemplate_9196858ed063f079d54fae4108298deb extends Template
     <header id=\"header\" class=\"fixed-top d-flex align-items-center\" >
         <div class=\"container d-flex align-items-center justify-content-between\">
 
-            <div class=\"logo\">
-                <h1><a href=\"index.html\">Tripee</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href=\"index.html\"><img src=\"assets/img/logo.png\" alt=\"\" class=\"img-fluid\"></a>-->
-            </div>
+            <div class=\"d-flex align-items-center justify-content-between\">
+                <a href=\"\" class=\"logo d-flex align-items-center\">
+                    <img src=\"{{ asset('Back/assets/img/bg.png') }}\" >
+                </a>
+            </div><!-- End Logo -->
 
             <nav id=\"navbar\" class=\"navbar\">
                 <ul>

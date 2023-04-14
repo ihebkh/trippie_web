@@ -41,7 +41,13 @@
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th>voiture</th>
+                                    <th>bumber registration</th>
+                                    <th>brand</th>
+                                    <th>power</th>
+                                    <th>energy</th>
+                                    <th>picture</th>
+
+
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -55,8 +61,11 @@
 
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
-                                  <td></td>
-                               <td></td>
+                                    <td>{{ r.idVoiture.matricule }}</td>
+                                    <td>{{ r.idVoiture.marque }}</td>
+                                    <td>{{ r.idVoiture.puissance }}</td>
+                                    <td>{{ r.idVoiture.energie }}</td>
+                                    <td><img class="img-profile " src="{{ asset('uploads/' ~ r.idVoiture.picture) }}" style="max-height: 80px"></td>
                                     <td> <a href="{{ path('modifC2',{id:r.id}) }}">
                                             <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
 

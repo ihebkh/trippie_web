@@ -106,25 +106,29 @@ class __TwigTemplate_7def99e315d85fb4bbe1eabde8c68e2a extends Template
             // line 26
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 26), "html", null, true);
             echo "</h4>
+                                <h4>";
+            // line 27
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 27), "html", null, true);
+            echo "</h4>
 
                                 <div class=\"portfolio-links\">
                                     <a href=\"";
-            // line 29
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 29)]), "html", null, true);
+            // line 30
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_locateurvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 30)]), "html", null, true);
             echo "\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                                </div>
                         </div>
                     </div>
                     ";
-            // line 34
-            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 34) % 3) == 0)) {
-                // line 35
+            // line 35
+            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 35) % 3) == 0)) {
+                // line 36
                 echo "                </div>
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     ";
             }
-            // line 38
+            // line 39
             echo "                    ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -138,7 +142,7 @@ class __TwigTemplate_7def99e315d85fb4bbe1eabde8c68e2a extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
+        // line 40
         echo "                </div>
 
             </div>
@@ -166,7 +170,7 @@ class __TwigTemplate_7def99e315d85fb4bbe1eabde8c68e2a extends Template
 
     public function getDebugInfo()
     {
-        return array (  142 => 39,  128 => 38,  123 => 35,  121 => 34,  113 => 29,  107 => 26,  102 => 24,  98 => 22,  81 => 21,  69 => 12,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  146 => 40,  132 => 39,  127 => 36,  125 => 35,  117 => 30,  111 => 27,  107 => 26,  102 => 24,  98 => 22,  81 => 21,  69 => 12,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -197,6 +201,7 @@ class __TwigTemplate_7def99e315d85fb4bbe1eabde8c68e2a extends Template
                             <img src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>{{ v.marque }}</h4>
+                                <h4>{{ v.prixJours }}</h4>
 
                                 <div class=\"portfolio-links\">
                                     <a href=\"{{ path('app_locateurvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>

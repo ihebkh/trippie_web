@@ -123,7 +123,13 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th></th>
+                                    <th>bumber registration</th>
+                                    <th>brand</th>
+                                    <th>power</th>
+                                    <th>energy</th>
+                                    <th>picture</th>
+
+
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -134,24 +140,43 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
 
                                 <tr  ";
-        // line 54
+        // line 60
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 54, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 60, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
             echo " >
 
                                     <td>";
-            // line 56
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 56), "Y-m-d"), "html", null, true);
+            // line 62
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 62), "Y-m-d"), "html", null, true);
             echo "</td>
                                     <td>";
-            // line 57
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 57), "Y-m-d"), "html", null, true);
+            // line 63
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 63), "Y-m-d"), "html", null, true);
             echo "</td>
-                               <td></td>
+                                    <td>";
+            // line 64
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 64), "matricule", [], "any", false, false, false, 64), "html", null, true);
+            echo "</td>
+                                    <td>";
+            // line 65
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 65), "marque", [], "any", false, false, false, 65), "html", null, true);
+            echo "</td>
+                                    <td>";
+            // line 66
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 66), "puissance", [], "any", false, false, false, 66), "html", null, true);
+            echo "</td>
+                                    <td>";
+            // line 67
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 67), "energie", [], "any", false, false, false, 67), "html", null, true);
+            echo "</td>
+                                    <td><img class=\"img-profile \" src=\"";
+            // line 68
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 68), "picture", [], "any", false, false, false, 68))), "html", null, true);
+            echo "\" style=\"max-height: 80px\"></td>
                                     <td> <a href=\"";
-            // line 59
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 59)]), "html", null, true);
+            // line 69
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 69)]), "html", null, true);
             echo "\">
                                             <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 
@@ -160,8 +185,8 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
                                     <td>
                                         <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this Reservation ?')){window.location='";
-            // line 66
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 66)]), "html", null, true);
+            // line 76
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 76)]), "html", null, true);
             echo "';}\">
 
                                             <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -172,14 +197,14 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['r'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 71
+        // line 81
         echo ">
 
                                 </tbody>
                             </table>
                             ";
-        // line 75
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 75, $this->source); })()));
+        // line 85
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 85, $this->source); })()));
         echo "
                             <!-- End Default Table Example -->
 
@@ -215,7 +240,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
     public function getDebugInfo()
     {
-        return array (  182 => 75,  176 => 71,  164 => 66,  154 => 59,  149 => 57,  145 => 56,  138 => 54,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  207 => 85,  201 => 81,  189 => 76,  179 => 69,  175 => 68,  171 => 67,  167 => 66,  163 => 65,  159 => 64,  155 => 63,  151 => 62,  144 => 60,  114 => 32,  104 => 28,  101 => 27,  97 => 26,  93 => 24,  83 => 20,  80 => 19,  76 => 18,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -263,7 +288,13 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th></th>
+                                    <th>bumber registration</th>
+                                    <th>brand</th>
+                                    <th>power</th>
+                                    <th>energy</th>
+                                    <th>picture</th>
+
+
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -277,7 +308,11 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
 
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
-                               <td></td>
+                                    <td>{{ r.idVoiture.matricule }}</td>
+                                    <td>{{ r.idVoiture.marque }}</td>
+                                    <td>{{ r.idVoiture.puissance }}</td>
+                                    <td>{{ r.idVoiture.energie }}</td>
+                                    <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ r.idVoiture.picture) }}\" style=\"max-height: 80px\"></td>
                                     <td> <a href=\"{{ path('modifC2',{id:r.id}) }}\">
                                             <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 

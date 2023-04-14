@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* voiture/afficheclient.html.twig */
+/* voiture/AfficheClient.html.twig */
 class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 {
     private $source;
@@ -39,9 +39,9 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/afficheclient.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/AfficheClient.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/afficheclient.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/AfficheClient.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -97,25 +97,29 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
             // line 20
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 20), "html", null, true);
             echo "</h4>
+                                <h4>";
+            // line 21
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "prixJours", [], "any", false, false, false, 21), "html", null, true);
+            echo "</h4>
 
                                 <div class=\"portfolio-links\">
                                     <a href=\"";
-            // line 23
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_Clientvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 23)]), "html", null, true);
+            // line 24
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_Clientvoiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 24)]), "html", null, true);
             echo "\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     ";
-            // line 28
-            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 28) % 3) == 0)) {
-                // line 29
+            // line 29
+            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 29) % 3) == 0)) {
+                // line 30
                 echo "                </div>
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     ";
             }
-            // line 32
+            // line 33
             echo "                    ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -129,7 +133,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 34
         echo "                </div>
 
 
@@ -150,7 +154,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 
     public function getTemplateName()
     {
-        return "voiture/afficheclient.html.twig";
+        return "voiture/AfficheClient.html.twig";
     }
 
     public function isTraitable()
@@ -160,7 +164,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  133 => 33,  119 => 32,  114 => 29,  112 => 28,  104 => 23,  98 => 20,  93 => 18,  89 => 16,  72 => 15,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  137 => 34,  123 => 33,  118 => 30,  116 => 29,  108 => 24,  102 => 21,  98 => 20,  93 => 18,  89 => 16,  72 => 15,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -185,6 +189,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
                             <img src=\"{{ asset('uploads/' ~ v.picture) }}\" style=\"max-height: 200px ; width: 100%;  object-fit: cover;\">
                             <div class=\"portfolio-info\">
                                 <h4>{{ v.marque }}</h4>
+                                <h4>{{ v.prixJours }}</h4>
 
                                 <div class=\"portfolio-links\">
                                     <a href=\"{{ path('app_Clientvoiture_show',{id:v.id}) }}\" title=\"More Details\"><i class=\"bx bx-plus\"></i></a>
@@ -210,6 +215,6 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
     <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
 
 {% endblock %}
-", "voiture/afficheclient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
+", "voiture/AfficheClient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
     }
 }
