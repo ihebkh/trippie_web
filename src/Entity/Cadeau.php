@@ -23,6 +23,8 @@ class Cadeau
     #[ORM\Column(length: 200)]
     private ?string $description = null;
     #[Assert\NotNull(message: "valeur ne doit pas être vide")]
+    #[Assert\Range(min: 0, max: 100, notInRangeMessage: "La valeur doit être entre {{ min }} et {{ max }}.")]
+   
     #[ORM\Column]
     private ?int $valeur = null;
 
