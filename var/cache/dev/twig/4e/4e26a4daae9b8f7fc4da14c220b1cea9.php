@@ -123,7 +123,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th>Car number</th>
+                                    <th></th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -263,7 +263,7 @@ class __TwigTemplate_2fb660325782890f3160366f68aaad2b extends Template
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th>Car number</th>
+                                    <th></th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>

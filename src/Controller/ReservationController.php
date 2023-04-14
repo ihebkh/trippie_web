@@ -5,8 +5,8 @@ use App\Entity\Reservation;
 use App\Entity\Voiture;
 use App\Form\ReservationFormType;
 use App\Form\VoitureFormType;
-use App\Repository\ReservationRepository;
 use App\Repository\VoitureRepository;
+use App\Repository\ReservationRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +44,7 @@ class ReservationController extends AbstractController
         $voiture = $voitureRepository->find($id);
 
         $reservation = new Reservation();
+        $reservation->setIdVoiture($voiture);
 
         $form = $this->createForm(ReservationFormType::class, $reservation, [
             'data_class' => Reservation::class,
@@ -88,6 +89,7 @@ Trippie');
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
     public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
     {
+
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();
         $em->remove($reservation);
@@ -108,7 +110,7 @@ Trippie');
 
     //delete front
     #[Route('voiture/client/deleteReservation/{id}', name: 'app_DeleteReservation2')]
-    public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
+    public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine,VoitureRepository $voitureRepository): Response
     {
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();

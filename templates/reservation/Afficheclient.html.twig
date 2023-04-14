@@ -12,7 +12,7 @@
         <tr>
             <th scope="col">Start date</th>
             <th scope="col">End date</th>
-            <th scope="col">Voiture id</th>
+            <th scope="col"></th>
             <th>update</th>
             <th>delete</th>
 
@@ -23,6 +23,7 @@
 
             <td>{{r.dateDebut |date('Y-m-d')}}</td>
             <td>{{r.dateFin |date('Y-m-d')}}</td>
+
           <td></td>
             <td> <a href="{{ path('modifC',{id:r.id}) }}">
                     <button type="button" class="btn btn-outline-success">Update</button></a>    </td>

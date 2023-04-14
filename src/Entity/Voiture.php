@@ -28,7 +28,7 @@ class Voiture
     #[ORM\Column(length: 255)]
     private ?string $puissance = null;
     #[Assert\NotBlank(message: "price Number is empty")]
-    #[Assert\NotBlank(message: "prix doit etre non vide")]
+    #[Assert\NotBlank(message: "price Number must be positve")]
     #[Assert\Range(
         min: 1,
         max: 9999999999,

@@ -41,7 +41,7 @@
                                 <tr>
                                     <th>Start date</th>
                                     <th>End date</th>
-                                    <th>Car number</th>
+                                    <th>voiture</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -55,6 +55,7 @@
 
                                     <td>{{r.dateDebut |date('Y-m-d')}}</td>
                                     <td>{{r.dateFin |date('Y-m-d')}}</td>
+                                  <td></td>
                                <td></td>
                                     <td> <a href="{{ path('modifC2',{id:r.id}) }}">
                                             <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
