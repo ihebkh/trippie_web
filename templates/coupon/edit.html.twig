@@ -17,7 +17,8 @@
 <div class="example-wrapper">
     <h1>Edit Coupon</h1>
 
-    {{ include('coupon/_form.html.twig', {'button_label': 'Update'}) }}
+  {{ include('coupon/_form.html.twig', {'button_label': 'Update', 'attr': {'class': 'btn btn-outline-dark'}}) }}
+
 
     <a href="{{ path('app_coupon_index') }}">back to list</a>
 

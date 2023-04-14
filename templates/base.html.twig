@@ -106,30 +106,23 @@
 
             <li class="nav-item">
                 <a class="nav-link" >
-                    <i class="fa-light fa-user"></i><span>User management</span>
+                    <i class="fa-light fa-user"></i><span>Promotion</span>
                 </a>
                 <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a class="nav-link " href="">
-                            <i class="bi bi-bookmark"></i>
-
-                            <i class="bi bi-circle"></i><span>Customers</span></i>
-
-                        </a>
+                       <a class="nav-link" href="{{ path('app_coupon_index') }}">
+    <i class="bi bi-bookmark"></i>
+    <i class="bi bi-circle"></i><span>Coupon</span>
+</a>
                     </li>
                     <li>
-                        <a class="nav-link " href="">
-                            <i class="bi bi-bookmark"></i>
-
-                            <i class="bi bi-circle"></i><span>Landlords</span>
-                        </a>
+                                      <a class="nav-link" href="{{ path('app_cadeau_index') }}">
+    <i class="bi bi-bookmark"></i>
+    <i class="bi bi-circle"></i><span>Cadeau</span>
+</a>
                     </li>
                     <li>
-                        <a class="nav-link " href="">
-                            <i class="bi bi-bookmark"></i>
-
-                            <i class="bi bi-circle"></i><span>Drivers</span>
-                        </a>
+                       
                     </li>
                 </ul>
             </li><!-- End Forms Nav ---------------------------------------------------------->
