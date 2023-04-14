@@ -13,7 +13,10 @@ class Coupon1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date_debut')
+        ->add('date_debut', null, [
+            
+            'data' => new \DateTime()
+        ])
             ->add('date_experatio')
             ->add('taux')
             ->add('code_coupon')

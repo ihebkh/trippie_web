@@ -69,7 +69,7 @@ class CouponController extends AbstractController
     #[Route('/{id}', name: 'app_coupon_delete', methods: ['POST'])]
     public function delete(Request $request, Coupon $coupon, CouponRepository $couponRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$coupon->getIdcoupon(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$coupon->getid(), $request->request->get('_token'))) {
             $couponRepository->remove($coupon, true);
         }
 

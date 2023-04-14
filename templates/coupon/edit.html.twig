@@ -23,18 +23,3 @@
 
     {{ include('coupon/_delete_form.html.twig') }}
 {% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        function generateCode() {
-            var codeCoupon = document.getElementById("coupon1_code_coupon");
-            var length = 8;
-            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var code = "";
-            for (var i = 0, n = charset.length; i < length; ++i) {
-                code += charset.charAt(Math.floor(Math.random() * n));
-            }
-            codeCoupon.value = code;
-        }
-    </script>
-{% endblock %}

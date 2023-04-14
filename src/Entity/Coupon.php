@@ -18,22 +18,31 @@ class Coupon
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\GreaterThanOrEqual("today")]
     public ?\DateTimeInterface $date_debut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Assert\GreaterThan(propertyPath: "date_debut", message: "The expiration date should be greater than the start date")]
     public ?\DateTimeInterface $date_experatio = null;
 
     #[ORM\Column]
-    
+    #[Assert\NotBlank(message: "The reduction rate should not be blank.")]
+    #[Assert\Range(min: 0, max: 100, notInRangeMessage: "The reduction rate should be between {{ min }} and {{ max }}.")]
     private ?int $taux = null;
-    #[Assert\NotBlank(message: "The code coupon should not be blank.")]
+  
     #[ORM\Column(length: 200)]
     public ?string $code_coupon = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
+#[Assert\Type(type: 'integer', message: "The value {{ value }} is not a valid {{ type }}.")]
+#[Assert\GreaterThan(0, message: "The number of uses must be greater than 0.")]
     public ?int $nbr_utilisation = null;
 
     #[ORM\Column(length: 200)]
+    #[Assert\Choice(choices: ['vip', 'simple'], message: 'The type must be either "vip" or "simple".')]
     private ?string $type = null;
 
     #[ORM\OneToMany(mappedBy: 'coupon', targetEntity: Cadeau::class)]

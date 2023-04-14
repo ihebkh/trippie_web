@@ -26,7 +26,9 @@ class Cadeau
     #[ORM\Column]
     private ?int $valeur = null;
 
+ 
     #[ORM\ManyToOne(inversedBy: 'cadeau')]
+    #[ORM\JoinColumn(name: "coupon_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?Coupon $coupon = null;
 
     public function getId(): ?int
