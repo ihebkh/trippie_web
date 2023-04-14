@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
 class Participation
@@ -14,6 +16,7 @@ class Participation
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "You must complete all empty fields")]
     private ?int $nmbr_place_part = null;
 
     #[ORM\Column(nullable: true)]

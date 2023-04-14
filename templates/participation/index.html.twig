@@ -68,35 +68,32 @@
 											<td>{{ participation.nmbrPlacePart }}</td>
 											<td>{{ participation.idCo }}</td>
 											<td>{{ participation.idUser }}</td>
-																				<td>
-												<a href="{{ path('app_participation_show', {'id': participation.id}) }}"></a>
-													<button type="button" class="btn btn-outline-dark">Detail</button>
+											<td>
+												<a href="{{ path('app_participation_show', {'id': participation.id}) }}">
+												<button type="button" class="btn btn-outline-dark">Detail</button>
 												</a>
 											</td>
-
 										</tr>
-									{% else %}
-										<tr>
-											<td colspan="5">no records found</td>
-										</tr>
-									{% endfor %}
+									</a>
 								</tbody>
-							</table>
+							</td>
 
-							<a href="{{ path('app_participation_new') }}">Create new</a>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 
-							<!-- End Default Table Example -->
+			<a href="{{ path('app_participation_new') }}">Create new</a>
 
-						</div>
+			<!-- End Default Table Example -->
 
-					</div>
+		</div>
+
+	</div>
 
 
-				</div>
-
-
-			</div>
-		</section>
-
-	</main>
-{% endblock %}
+</div></div></section></main>{% endblock %}

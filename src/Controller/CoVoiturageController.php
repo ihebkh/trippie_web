@@ -9,6 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\WeatherService;
+
+
+
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+
 
 #[Route('/co/voiturage')]
 class CoVoiturageController extends AbstractController
@@ -98,9 +105,12 @@ class CoVoiturageController extends AbstractController
 
     #[Route('/index/{id}', name: 'app_co_voiturage_show_front', methods: ['GET'])]
     public function showFront(CoVoiturage $coVoiturage): Response
+
     {
+
         return $this->render('co_voiturage/showFront.html.twig', [
             'co_voiturage' => $coVoiturage,
+
         ]);
     }
     #[Route('/index/client/{id}', name: 'app_co_voiturage_show_frontclient', methods: ['GET'])]
@@ -110,6 +120,8 @@ class CoVoiturageController extends AbstractController
             'co_voiturage' => $coVoiturage,
         ]);
     }
+    
+
 
     #[Route('/{id}/edit', name: 'app_co_voiturage_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
@@ -149,7 +161,7 @@ class CoVoiturageController extends AbstractController
     #[Route('/{id}', name: 'app_co_voiturage_delete', methods: ['POST'])]
     public function delete(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$coVoiturage->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $coVoiturage->getId(), $request->request->get('_token'))) {
             $coVoiturageRepository->remove($coVoiturage, true);
         }
 
@@ -159,14 +171,10 @@ class CoVoiturageController extends AbstractController
     #[Route('/chauffeur/{id}', name: 'app_co_voiturage_delete2', methods: ['POST'])]
     public function deleteFront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$coVoiturage->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $coVoiturage->getId(), $request->request->get('_token'))) {
             $coVoiturageRepository->remove($coVoiturage, true);
         }
 
         return $this->redirectToRoute('app_co_voiturage_index_fornt', [], Response::HTTP_SEE_OTHER);
     }
-
-
-
-
 }
