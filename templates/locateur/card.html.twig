@@ -25,13 +25,6 @@
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
-    {{ form_start(form1) }}
-{{ form_widget(form1.sort) }}
-<button type="submit" class="btn btn-primary">
-    Tri {{ form1.vars.value.sort == 'asc' ? 'croissant' : 'décroissant' }}
-    <i class="fas {{ form1.vars.value.sort == 'asc' ? 'fa-sort-up' : 'fa-sort-down' }}"></i>
-</button>
-{{ form_end(form1) }}
   </div><!-- End Page Title -->
 
 
