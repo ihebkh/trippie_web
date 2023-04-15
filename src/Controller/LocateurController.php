@@ -128,4 +128,31 @@ public function profil(locateur $locateur): Response
 
     
 }
+#[Route('/locateur/search', name: 'search', methods: ['GET','POST'])]
+public function search(Request $request)
+{
+    $query = $request->get('query');
+    $cin = $request->get('cin');
+    $nom = $request->get('nom');
+    $prenom = $request->get('prenom');
+    $email = $request->get('email');
+    $etat = $request->get('etat');
+
+    $locateurs = $this->getDoctrine()
+        ->getRepository(Locateur::class)
+        ->advancedSearch($query, $cin, $nom, $prenom, $email, $etat);
+
+    return $this->render('locateur/card.html.twig', [
+        'locateurs' => $locateurs,
+    ]);
+}
+
+
+
+
+
+
+
+
+
 }

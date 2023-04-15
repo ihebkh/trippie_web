@@ -8,8 +8,8 @@
 
         <div class="pagetitle">
 
-        </div><!-- End Page Title -->
-
+      
+    
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
@@ -19,6 +19,20 @@
                         <div class="card-body">
 
                             <h5 class="card-title">Landlords list</h5>
+        <div class="search-bar" style ="position: absolute;margin-top: -4.6%;right: 4.5%">
+        <form class="search-form d-flex align-items-center" method="POST" action="{{ path ('search') }}">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+    {{ form_start(form1) }}
+{{ form_widget(form1.sort) }}
+<button type="submit" class="btn btn-primary">
+    Tri {{ form1.vars.value.sort == 'asc' ? 'croissant' : 'décroissant' }}
+    <i class="fas {{ form1.vars.value.sort == 'asc' ? 'fa-sort-up' : 'fa-sort-down' }}"></i>
+</button>
+{{ form_end(form1) }}
+  </div><!-- End Page Title -->
 
 
                             <!-- Default Table -->

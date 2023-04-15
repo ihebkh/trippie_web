@@ -72,4 +72,50 @@ class ChauffeurRepository extends ServiceEntityRepository
     return $query->execute();
 }
 
+
+public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
+{
+    $qb = $this->createQueryBuilder('client')
+        ->join('client.id_role', 'r')
+        ->join('r.id_user', 'u');
+
+    if (!empty($query)) {
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.cin', ':query'),
+            $qb->expr()->like('u.nom', ':query'),
+            $qb->expr()->like('u.prenom', ':query'),
+            $qb->expr()->like('client.email', ':query'),
+            $qb->expr()->like('client.etat', ':query')
+        ))
+        ->setParameter('query', '%' . $query . '%');
+    }
+
+    if (!empty($cin)) {
+        $qb->andWhere('u.cin LIKE :cin')
+            ->setParameter('cin', '%' . $cin . '%');
+    }
+
+    if (!empty($nom)) {
+        $qb->andWhere('u.nom LIKE :nom')
+            ->setParameter('nom', '%' . $nom . '%');
+    }
+
+    if (!empty($prenom)) {
+        $qb->andWhere('u.prenom LIKE :prenom')
+            ->setParameter('prenom', '%' . $prenom . '%');
+    }
+
+    if (!empty($email)) {
+        $qb->andWhere('client.email LIKE :email')
+            ->setParameter('email', '%' . $email . '%');
+    }
+
+    if (!empty($etat)) {
+        $qb->andWhere('client.etat LIKE :etat')
+            ->setParameter('etat', '%' . $etat . '%');
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
 }

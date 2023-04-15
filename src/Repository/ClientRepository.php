@@ -52,7 +52,7 @@ class ClientRepository extends ServiceEntityRepository
                 FROM App\Entity\Utilisateur u2 
                 JOIN u.roles r 
                 JOIN r.clients ch
-                WHERE ch.id_ch = :id_ch AND r.id_role = :id_role AND u.id_user = :id_user
+                WHERE ch.id_client = :id_client AND r.id_role = :id_role AND u.id_user = :id_user
             )
             
         ');
@@ -60,11 +60,56 @@ class ClientRepository extends ServiceEntityRepository
             'cin' => $client->getIdRole()->getIdUser()->getCin(),
             'nom' => $client->getIdRole()->getIdUser()->getNom(),
             'prenom' => $client->getIdRole()->getIdUser()->getPrenom(),
-            'id_ch' => $client->getIdCh(),
+            'id_client' => $client->getIdClient(),
             'id_role' => $client->getIdRole()->getIdRole(),
             'id_user' => $client->getIdRole()->getIdUser()->getIdUser()
         ]);
     
         return $query->execute();
     }
+
+    public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
+{
+    $qb = $this->createQueryBuilder('client')
+        ->join('client.id_role', 'r')
+        ->join('r.id_user', 'u');
+
+    if (!empty($query)) {
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.cin', ':query'),
+            $qb->expr()->like('u.nom', ':query'),
+            $qb->expr()->like('u.prenom', ':query'),
+            $qb->expr()->like('client.email', ':query'),
+            $qb->expr()->like('client.etat', ':query')
+        ))
+        ->setParameter('query', '%' . $query . '%');
+    }
+
+    if (!empty($cin)) {
+        $qb->andWhere('u.cin LIKE :cin')
+            ->setParameter('cin', '%' . $cin . '%');
+    }
+
+    if (!empty($nom)) {
+        $qb->andWhere('u.nom LIKE :nom')
+            ->setParameter('nom', '%' . $nom . '%');
+    }
+
+    if (!empty($prenom)) {
+        $qb->andWhere('u.prenom LIKE :prenom')
+            ->setParameter('prenom', '%' . $prenom . '%');
+    }
+
+    if (!empty($email)) {
+        $qb->andWhere('client.email LIKE :email')
+            ->setParameter('email', '%' . $email . '%');
+    }
+
+    if (!empty($etat)) {
+        $qb->andWhere('client.etat LIKE :etat')
+            ->setParameter('etat', '%' . $etat . '%');
+    }
+
+    return $qb->getQuery()->getResult();
+}
 }

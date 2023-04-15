@@ -51,7 +51,7 @@ class LocateurRepository extends ServiceEntityRepository
                 FROM App\Entity\Utilisateur u2 
                 JOIN u.roles r 
                 JOIN r.locateurs ch
-                WHERE ch.id_ch = :id_ch AND r.id_role = :id_role AND u.id_user = :id_user
+                WHERE ch.id_loc = :id_ch AND r.id_role = :id_role AND u.id_user = :id_user
             )
             
         ');
@@ -59,11 +59,71 @@ class LocateurRepository extends ServiceEntityRepository
             'cin' => $locateur->getIdRole()->getIdUser()->getCin(),
             'nom' => $locateur->getIdRole()->getIdUser()->getNom(),
             'prenom' => $locateur->getIdRole()->getIdUser()->getPrenom(),
-            'id_ch' => $locateur->getIdCh(),
+            'id_loc' => $locateur->getIdLoc(),
             'id_role' => $locateur->getIdRole()->getIdRole(),
             'id_user' => $locateur->getIdRole()->getIdUser()->getIdUser()
         ]);
     
         return $query->execute();
     }
+
+
+    public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
+{
+    $qb = $this->createQueryBuilder('l')
+        ->join('l.id_role', 'r')
+        ->join('r.id_user', 'u');
+
+    if (!empty($query)) {
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.cin', ':query'),
+            $qb->expr()->like('u.nom', ':query'),
+            $qb->expr()->like('u.prenom', ':query'),
+            $qb->expr()->like('l.email', ':query'),
+            $qb->expr()->like('l.etat', ':query')
+        ))
+        ->setParameter('query', '%' . $query . '%');
+    }
+
+    if (!empty($cin)) {
+        $qb->andWhere('u.cin LIKE :cin')
+            ->setParameter('cin', '%' . $cin . '%');
+    }
+
+    if (!empty($nom)) {
+        $qb->andWhere('u.nom LIKE :nom')
+            ->setParameter('nom', '%' . $nom . '%');
+    }
+
+    if (!empty($prenom)) {
+        $qb->andWhere('u.prenom LIKE :prenom')
+            ->setParameter('prenom', '%' . $prenom . '%');
+    }
+
+    if (!empty($email)) {
+        $qb->andWhere('l.email LIKE :email')
+            ->setParameter('email', '%' . $email . '%');
+    }
+
+    if (!empty($etat)) {
+        $qb->andWhere('l.etat LIKE :etat')
+            ->setParameter('etat', '%' . $etat . '%');
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
+public function findAllSorted($sort = 'asc')
+{
+    $queryBuilder = $this->createQueryBuilder('l');
+
+    if ($sort === 'asc') {
+        $queryBuilder->orderBy('l.nom', 'ASC');
+    } else {
+        $queryBuilder->orderBy('l.nom', 'DESC');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
 }

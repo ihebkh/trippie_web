@@ -128,4 +128,23 @@ public function profil(Client $client): Response
     
 }
 
+#[Route('/client/search', name: 'search2', methods: ['GET','POST'])]
+public function search2(Request $request)
+{
+    $query = $request->get('query');
+    $cin = $request->get('cin');
+    $nom = $request->get('nom');
+    $prenom = $request->get('prenom');
+    $email = $request->get('email');
+    $etat = $request->get('etat');
+
+    $clients = $this->getDoctrine()
+        ->getRepository(Client::class)
+        ->advancedSearch($query, $cin, $nom, $prenom, $email, $etat);
+
+    return $this->render('client/card.html.twig', [
+        'clients' => $clients,
+    ]);
+}
+
 }

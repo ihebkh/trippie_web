@@ -198,4 +198,23 @@ public function profil(Chauffeur $chauffeur): Response
     
 }
 
+#[Route('/chauffeur/search', name: 'search3', methods: ['GET','POST'])]
+public function search3(Request $request)
+{
+    $query = $request->get('query');
+    $cin = $request->get('cin');
+    $nom = $request->get('nom');
+    $prenom = $request->get('prenom');
+    $email = $request->get('email');
+    $etat = $request->get('etat');
+
+    $chauffeurs = $this->getDoctrine()
+        ->getRepository(Chauffeur::class)
+        ->advancedSearch($query, $cin, $nom, $prenom, $email, $etat);
+
+    return $this->render('chauffeur/card.html.twig', [
+        'chauffeurs' => $chauffeurs,
+    ]);
+}
+
 }
