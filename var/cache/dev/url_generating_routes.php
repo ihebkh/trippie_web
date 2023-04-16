@@ -12,6 +12,7 @@ return [
     'app_reservationaffiche' => [[], ['_controller' => 'App\\Controller\\ReservationController::Affiche'], [], [['text', '/reservation/Affichelist']], [], [], []],
     'modifC' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::modifC'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/modifC']], [], [], []],
     'modifC2' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::modifC2'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/modifC/back']], [], [], []],
+    'exportpdf' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportToPdf'], [], [['text', '/exportpdf']], [], [], []],
     'app_voiture' => [[], ['_controller' => 'App\\Controller\\VoitureController::index'], [], [['text', '/voiture']], [], [], []],
     'app_voitureaffiche' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affiche'], [], [['text', '/voiture/Affichelist']], [], [], []],
     'app_voitureaffichenonreserve' => [[], ['_controller' => 'App\\Controller\\VoitureController::Affichernoneserve'], [], [['text', '/voiture/Affichelocateur']], [], [], []],

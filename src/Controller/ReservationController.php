@@ -23,7 +23,7 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
-use Dompdf\Options;
+
 
 
 class ReservationController extends AbstractController
@@ -227,5 +227,44 @@ Trippie');
         );
     }
 
+
+    #[Route('/exportpdf', name:'exportpdf')]
+    public function exportToPdf(ReservationRepository $repository): Response
+    {
+        // Récupérer les données de réservation depuis votre base de données
+        $reservations = $repository->findAll();
+
+        // Créer le tableau de données pour le PDF
+        $tableData = [];
+        foreach ($reservations as $reservation) {
+            $tableData[] = [
+                'id' => $reservation->getId(),
+                'Registration_number' => $reservation->getIdVoiture()->getMatricule(),
+                'brand' => $reservation->getIdVoiture()->getMarque(),
+                'price' => $reservation->getIdVoiture()->getPrixJours(),
+                'etat' => $reservation->getIdVoiture()->getEtat(),
+                'power' => $reservation->getIdVoiture()->getPuissance(),
+                'energie' => $reservation->getIdVoiture()->getEnergie(),
+                'date' => $reservation->getDateDebut()->format('Y-m-d H:i:s'),
+                'date1' => $reservation->getDateFin()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        // Créer le PDF avec Dompdf
+        $dompdf = new Dompdf();
+        $html = $this->renderView('reservation/export-pdf.html.twig', [
+            'tableData' => $tableData,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        // Envoyer le PDF au navigateur
+        $response = new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="reservations.pdf"',
+        ]);
+        return $response;
+    }
 
 }

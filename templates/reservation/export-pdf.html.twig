@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste de réservations</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Reservation list</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Registration number</th>
+        <th>brand</th>
+        <th>price per day</th>
+        <th>status</th>
+        <th>Energy</th>
+        <th>power</th>
+        <th>Start date</th>
+        <th>end date</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in tableData %}
+        <tr>
+<td>{{ row.Registration_number }}</td>
+            <td>{{ row.brand }}</td>
+            <td>{{ row.price }}</td>
+            <td>{{ row.etat }}</td>
+            <td>{{ row.energie }}</td>
+            <td>{{ row.power }}</td>
+            <td>{{ row.date }}</td>
+            <td>{{ row.date1 }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

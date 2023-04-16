@@ -12,6 +12,7 @@ return [
         '/reservation/client/Affichelist' => [[['_route' => 'app_reservationaffichefront', '_controller' => 'App\\Controller\\ReservationController::Affichefront'], null, null, null, false, false, null]],
         '/exportexcel' => [[['_route' => 'exportexcel', '_controller' => 'App\\Controller\\ReservationController::exportacademieToExcelAction'], null, null, null, false, false, null]],
         '/reservation/Affichelist' => [[['_route' => 'app_reservationaffiche', '_controller' => 'App\\Controller\\ReservationController::Affiche'], null, null, null, false, false, null]],
+        '/exportpdf' => [[['_route' => 'exportpdf', '_controller' => 'App\\Controller\\ReservationController::exportToPdf'], null, null, null, false, false, null]],
         '/voiture' => [[['_route' => 'app_voiture', '_controller' => 'App\\Controller\\VoitureController::index'], null, null, null, false, false, null]],
         '/voiture/Affichelist' => [[['_route' => 'app_voitureaffiche', '_controller' => 'App\\Controller\\VoitureController::Affiche'], null, null, null, false, false, null]],
         '/voiture/Affichelocateur' => [[['_route' => 'app_voitureaffichenonreserve', '_controller' => 'App\\Controller\\VoitureController::Affichernoneserve'], null, null, null, false, false, null]],
