@@ -8,7 +8,11 @@ security:
     encoders:
         App\Entity\Chauffeur:
             algorithm: bcrypt
-        
+        App\Entity\Client:
+            algorithm: bcrypt   
+        App\Entity\Locateur:
+            algorithm: bcrypt        
+
             
             
     firewalls:

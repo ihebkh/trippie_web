@@ -6,6 +6,8 @@ use App\Entity\Client;
 use App\Entity\Role;
 use App\Form\ClientType;
 use App\Form\EditCliType;
+use App\Form\ChangePasswordFormType;
+use App\Form\ResetPasswordRequestFormType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\RoleRepository;
 use App\Enum\Etat;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mime\Header\Headers;
+use Symfony\Component\Mailer\Mailer;
+
 
 #[Route('/client')]
 class ClientController extends AbstractController
@@ -41,6 +53,10 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $client->setPassword($passwordEncoder->encodePassword(
+                $client,
+                $form->get('password')->getData()
+            ));
             $file = $form->get('img')->getData();
 
             if ($file) {
@@ -146,5 +162,98 @@ public function search2(Request $request)
         'clients' => $clients,
     ]);
 }
+
+#[Route('/login/role/reset', name: 'app_forgot_password_request_client', methods: ['GET','POST'])]
+public function request(Request $request, ClientRepository $userRepository, TokenGeneratorInterface $tokenGenerator, \Swift_Mailer $mailer): Response
+    {
+        $form = $this->createForm(ResetPasswordRequestFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
+            $user = $userRepository->findOneBy(['email' => $email]);
+
+            if (!$user) {
+                $this->addFlash('danger', 'Adresse e-mail inconnue.');
+
+                return $this->redirectToRoute('app_forgot_password_request_client');
+            }
+
+            $token = $tokenGenerator->generateToken();
+
+            try {
+                $user->setResetToken($token);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+
+                return $this->redirectToRoute('app_forgot_password_request_client');
+            }
+           
+   
+
+// Create the mailer using the transport
+                $transport = new GmailSmtpTransport('aymen58zouari@gmail.com', 'qupoztnbdlklxbhj'); 
+                $mailer = new Mailer($transport);
+                $emailBody = $this->renderView('login/email.html.twig', [
+                    'token' => $token,
+                ]);
+            $message = (new TemplatedEmail())
+                ->from('aymen58zouari@gmail.com')
+                ->to($user->getEmail())
+                ->subject('Réinitialisation de mot de passe')
+                ->html($emailBody);
+                
+                
+                $mailer->send($message);
+
+            $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('login/request.html.twig', [
+            'requestForm' => $form->createView(),
+        ]);
+    }
+
+   
+    #[Route('/login/role/reset/{token}', name: 'app_reset_password', methods: ['GET','POST'])]
+    public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this->getDoctrine()->getRepository(Client::class)->findOneBy(['resetToken' => $token]);
+
+        if (!$user) {
+            $this->addFlash('danger', 'Token de réinitialisation de mot de passe inconnu.');
+
+            return $this->redirectToRoute('login');
+        }
+
+        $form = $this->createForm(ChangePasswordFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setResetToken(null);
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            ));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Mot de passe mis à jour avec succès !');
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('login/reset.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+    }
 
 }

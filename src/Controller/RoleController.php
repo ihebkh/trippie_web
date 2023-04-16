@@ -6,6 +6,7 @@ use App\Entity\Role;
 use App\Entity\Utilisateur;
 use App\Form\RoleType;
 use App\Repository\RoleRepository;
+use App\Form\RoleResetType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,5 +95,30 @@ class RoleController extends AbstractController
         }
 
         return $this->redirectToRoute('app_role_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/login/role', name: 'app_role_reset', methods: ['POST','GET'])]
+    public function choice(Request $request): Response
+    {
+        $form = $this->createForm(RoleResetType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+           
+            $libelle = $form->get('role')->getData();
+            if ($libelle === 'client') {
+                return $this->redirectToRoute('app_forgot_password_request_client', [] ,Response::HTTP_SEE_OTHER);
+            } else if ($libelle === 'locateur') {
+                return $this->redirectToRoute('app_forgot_password_request_locateur', [], Response::HTTP_SEE_OTHER);
+            }
+            else if ($libelle === 'chauffeur'){
+            return $this->redirectToRoute('app_forgot_password_request_chauffeur',[], Response::HTTP_SEE_OTHER);
+        }
+        }
+    
+        return $this->renderForm('login/rolereset.html.twig', [
+            'form' => $form,
+        ]);
     }
 }

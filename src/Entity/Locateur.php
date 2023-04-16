@@ -11,7 +11,7 @@ use App\Enum\Etat;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocateurRepository::class)]
-class Locateur 
+class Locateur implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -53,6 +53,9 @@ class Locateur
 
     #[ORM\Column(options: ['default' => 'enabled'], columnDefinition: "ENUM('enabled', 'disabled')")]
     private ?string $etat = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $resetToken = null;
 
     public function getIdLoc(): ?int
     {
@@ -195,6 +198,38 @@ class Locateur
     }
 
     return $this;
+}
+
+public function getResetToken(): ?string
+{
+    return $this->resetToken;
+}
+
+public function setResetToken(?string $resetToken): self
+{
+    $this->resetToken = $resetToken;
+
+    return $this;
+}
+
+public function getRoles()
+{
+    // implement this method to return an array of roles
+}
+
+public function getUsername()
+{
+    return $this->email;
+}
+
+public function getSalt()
+{
+    // you can leave this method empty
+}
+
+public function eraseCredentials()
+{
+    // you can leave this method empty
 }
 
    

@@ -52,7 +52,7 @@ class ChauffeurController extends AbstractController
 
 
     #[Route('/new/{idRole<\d+>}', name: 'app_chauffeur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,ChauffeurRepository $chauffeurRepository,  RoleRepository $roleRepository, int $idRole): Response
+    public function new(Request $request,ChauffeurRepository $chauffeurRepository,  RoleRepository $roleRepository, int $idRole, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $roleRepository = $this->getDoctrine()->getRepository(Role::class);
         $role = $roleRepository->find($idRole);
@@ -67,8 +67,13 @@ class ChauffeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('img')->getData();
+            $chauffeur->setPassword($passwordEncoder->encodePassword(
+                $chauffeur,
+                $form->get('password')->getData()
+            ));
 
+            $file = $form->get('img')->getData();
+           
             if ($file) {
                 $uploadsDirectory = $this->getParameter('uploads_directory');
                 $imgFilename = $file->getClientOriginalName();
@@ -228,7 +233,7 @@ public function search3(Request $request)
     ]);
 }
 
-#[Route('/login/reset', name: 'app_forgot_password_request', methods: ['GET','POST'])]
+#[Route('/login/role/reset', name: 'app_forgot_password_request_chauffeur', methods: ['GET','POST'])]
 public function request(Request $request, ChauffeurRepository $userRepository, TokenGeneratorInterface $tokenGenerator, \Swift_Mailer $mailer): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
@@ -242,7 +247,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
             if (!$user) {
                 $this->addFlash('danger', 'Adresse e-mail inconnue.');
 
-                return $this->redirectToRoute('app_forgot_password_request');
+                return $this->redirectToRoute('app_forgot_password_request_chauffeur');
             }
 
             $token = $tokenGenerator->generateToken();
@@ -255,7 +260,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
 
-                return $this->redirectToRoute('app_forgot_password_request');
+                return $this->redirectToRoute('app_forgot_password_request_chauffeur_chauffeur');
             }
            
    
@@ -286,7 +291,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
     }
 
    
-    #[Route('/reset/{token}', name: 'app_reset_password', methods: ['GET','POST'])]
+    #[Route('/login/role/reset/{token}', name: 'app_reset_password', methods: ['GET','POST'])]
     public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getDoctrine()->getRepository(Chauffeur::class)->findOneBy(['resetToken' => $token]);
