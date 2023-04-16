@@ -19,7 +19,11 @@ use Symfony\Component\Mailer\Bridge\Google\Transport;
 use Symfony\Component\Form\FormTypeInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-interface TransportExceptionInterface extends \Throwable {}
+use SebastianBergmann\Environment\Console;
+
+interface TransportExceptionInterface extends \Throwable
+{
+}
 #[Route('/participation')]
 class ParticipationController extends AbstractController
 {
@@ -30,7 +34,8 @@ class ParticipationController extends AbstractController
             'participations' => $participationRepository->findAll(),
         ]);
     }
-
+    /*
+    
     #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
     public function participate(
         Request $request, 
@@ -77,8 +82,7 @@ class ParticipationController extends AbstractController
             } catch (TransportExceptionInterface $e) {
                 // Handle any errors that occur during email sending
                 $this->addFlash('error', 'An error occurred while sending the email');
-                return $this->redirectToRoute('app_participate', ['id' => $id]);
-            }
+                return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);            }
     
             // Set the CoVoiturage id and save the Participation entity
             $participation->setIdCo($cov);
@@ -92,6 +96,40 @@ class ParticipationController extends AbstractController
         return $this->render('participation/newfront.html.twig', [
             'form' => $form->createView(),
             'cov' => $cov,
+        ]);
+    }
+*/
+
+    #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
+    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id): Response
+    {
+        $cov = $coVoiturageRepository->find($id);
+
+        if (!$cov) {
+            throw $this->createNotFoundException('The CoVoiturage does not exist');
+        }
+
+        $participation = new Participation();
+
+        $form = $this->createForm(ParticipationType::class, $participation);
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid() && $cov->getNmbrPlace() >= $participation->getNmbrPlacePart()) {
+            $participation->setIdCo($cov);
+            $participationRepository->save($participation, true);
+            $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($participation);
+            $em->flush();
+
+
+            return $this->redirectToRoute('app_co_voiturage_index_client');
+        }
+
+        return $this->render('participation/newfront.html.twig', [
+            'cov' => $cov,
+            'form' => $form->createView(),
         ]);
     }
 
