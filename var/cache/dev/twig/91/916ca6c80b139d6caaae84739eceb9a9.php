@@ -66,13 +66,14 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
     <table class=\"table\">
         <thead>
         <tr>
-            <th scope=\"col\">Start date</th>
-            <th scope=\"col\">End date</th>
+
             <th scope=\"col\">Registration number</th>
             <th scope=\"col\">Brand</th>
             <th scope=\"col\">power</th>
             <th scope=\"col\">Energy</th>
             <th scope=\"col\">picture</th>
+            <th scope=\"col\">Start date</th>
+            <th scope=\"col\">End date</th>
             <th>update</th>
             <th>delete</th>
 
@@ -80,21 +81,14 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
         </thead>
         <tbody>
         <tr  ";
-        // line 26
+        // line 27
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 26, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 27, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
             echo " >
 
+
             <td>";
-            // line 28
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 28), "Y-m-d"), "html", null, true);
-            echo "</td>
-            <td>";
-            // line 29
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 29), "Y-m-d"), "html", null, true);
-            echo "</td>
-          <td>";
             // line 30
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 30), "matricule", [], "any", false, false, false, 30), "html", null, true);
             echo "</td>
@@ -110,21 +104,30 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
             // line 33
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 33), "energie", [], "any", false, false, false, 33), "html", null, true);
             echo "</td>
-
             <td><img class=\"img-profile \" src=\"";
-            // line 35
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 35), "picture", [], "any", false, false, false, 35))), "html", null, true);
+            // line 34
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 34), "picture", [], "any", false, false, false, 34))), "html", null, true);
             echo "\" style=\"max-height: 80px\"></td>
-            <td> <a href=\"";
+            <td>";
+            // line 35
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 35), "Y-m-d"), "html", null, true);
+            echo "</td>
+            <td>";
             // line 36
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 36)]), "html", null, true);
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 36), "Y-m-d"), "html", null, true);
+            echo "</td>
+
+
+            <td> <a href=\"";
+            // line 39
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 39)]), "html", null, true);
             echo "\">
                     <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 
             <td>
                 <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this Reservation ?')){window.location='";
-            // line 40
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 40)]), "html", null, true);
+            // line 43
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 43)]), "html", null, true);
             echo "';}\">
 
                     <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -135,7 +138,7 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['r'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 45
+        // line 48
         echo ">
 
         </tbody>
@@ -158,7 +161,7 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
 
     public function getDebugInfo()
     {
-        return array (  139 => 45,  127 => 40,  120 => 36,  116 => 35,  111 => 33,  107 => 32,  103 => 31,  99 => 30,  95 => 29,  91 => 28,  84 => 26,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  142 => 48,  130 => 43,  123 => 39,  117 => 36,  113 => 35,  109 => 34,  105 => 33,  101 => 32,  97 => 31,  93 => 30,  85 => 27,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -175,13 +178,14 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
     <table class=\"table\">
         <thead>
         <tr>
-            <th scope=\"col\">Start date</th>
-            <th scope=\"col\">End date</th>
+
             <th scope=\"col\">Registration number</th>
             <th scope=\"col\">Brand</th>
             <th scope=\"col\">power</th>
             <th scope=\"col\">Energy</th>
             <th scope=\"col\">picture</th>
+            <th scope=\"col\">Start date</th>
+            <th scope=\"col\">End date</th>
             <th>update</th>
             <th>delete</th>
 
@@ -190,14 +194,16 @@ class __TwigTemplate_d1b644c52ded5dbba5a6b3aaf23495e7 extends Template
         <tbody>
         <tr  {%  for r in reservation %} >
 
-            <td>{{r.dateDebut |date('Y-m-d')}}</td>
-            <td>{{r.dateFin |date('Y-m-d')}}</td>
-          <td>{{ r.idVoiture.matricule }}</td>
+
+            <td>{{ r.idVoiture.matricule }}</td>
             <td>{{ r.idVoiture.marque }}</td>
             <td>{{ r.idVoiture.puissance }}</td>
             <td>{{ r.idVoiture.energie }}</td>
-
             <td><img class=\"img-profile \" src=\"{{ asset('uploads/' ~ r.idVoiture.picture) }}\" style=\"max-height: 80px\"></td>
+            <td>{{r.dateDebut |date('Y-m-d')}}</td>
+            <td>{{r.dateFin |date('Y-m-d')}}</td>
+
+
             <td> <a href=\"{{ path('modifC',{id:r.id}) }}\">
                     <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 

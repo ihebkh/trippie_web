@@ -79,7 +79,6 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
                                 </div>
 
 
-
                             </div>
                         </div>
                     </div>
@@ -89,42 +88,46 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
                             <h3>Car information</h3>
                             <ul>
                                 <li><strong>Registration number</strong>: ";
-        // line 33
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 33, $this->source); })()), "matricule", [], "any", false, false, false, 33), "html", null, true);
+        // line 32
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 32, $this->source); })()), "matricule", [], "any", false, false, false, 32), "html", null, true);
         echo "</li>
                                 <br>
                                 <br>
                                 <li><strong>Brand</strong>: ";
-        // line 36
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 36, $this->source); })()), "marque", [], "any", false, false, false, 36), "html", null, true);
+        // line 35
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 35, $this->source); })()), "marque", [], "any", false, false, false, 35), "html", null, true);
         echo "</li>
                                 <br>
                                 <br>
                                 <li><strong>Power</strong>: ";
-        // line 39
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 39, $this->source); })()), "puissance", [], "any", false, false, false, 39), "html", null, true);
+        // line 38
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 38, $this->source); })()), "puissance", [], "any", false, false, false, 38), "html", null, true);
         echo "</li>
                                 <br>
                                 <br>
                                 <li><strong>Price per day</strong>: ";
-        // line 42
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 42, $this->source); })()), "prixJours", [], "any", false, false, false, 42), "html", null, true);
+        // line 41
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 41, $this->source); })()), "prixJours", [], "any", false, false, false, 41), "html", null, true);
         echo "</li>
                                 <br>
                                 <br>
                                 <li><strong>Energy</strong>: ";
-        // line 45
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 45, $this->source); })()), "energie", [], "any", false, false, false, 45), "html", null, true);
+        // line 44
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 44, $this->source); })()), "energie", [], "any", false, false, false, 44), "html", null, true);
         echo "</li>
-                                <center>    <table border=\"0\">
+                                <center>
+                                    <table border=\"0\">
                                         <tr>
-                                            <th>  <a href=\"";
+                                            <th><a href=\"";
         // line 48
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservation_add", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 48, $this->source); })()), "id", [], "any", false, false, false, 48)]), "html", null, true);
         echo "\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a></center></th>
+                                                    <button type=\"button\" class=\"btn btn-outline-success\">book</button>
+                                                </a>
+                                </center>
+                                </th>
 
-                                        </tr>
+                                </tr>
 
                                 </center>
                         </div>
@@ -139,7 +142,8 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
     </main><!-- End #main -->
 
 
-    <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
+    <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i
+                class=\"bi bi-arrow-up-short\"></i></a>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -158,7 +162,7 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
 
     public function getDebugInfo()
     {
-        return array (  123 => 48,  117 => 45,  111 => 42,  105 => 39,  99 => 36,  93 => 33,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  123 => 48,  116 => 44,  110 => 41,  104 => 38,  98 => 35,  92 => 32,  77 => 20,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -186,7 +190,6 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
                                 </div>
 
 
-
                             </div>
                         </div>
                     </div>
@@ -208,12 +211,16 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
                                 <br>
                                 <br>
                                 <li><strong>Energy</strong>: {{ voiture.energie }}</li>
-                                <center>    <table border=\"0\">
+                                <center>
+                                    <table border=\"0\">
                                         <tr>
-                                            <th>  <a href=\"{{ path('app_reservation_add', {id: voiture.id}) }}\">
-                                                        <button type=\"button\" class=\"btn btn-outline-success\">book</button></a></center></th>
+                                            <th><a href=\"{{ path('app_reservation_add', {id: voiture.id}) }}\">
+                                                    <button type=\"button\" class=\"btn btn-outline-success\">book</button>
+                                                </a>
+                                </center>
+                                </th>
 
-                                        </tr>
+                                </tr>
 
                                 </center>
                         </div>
@@ -228,7 +235,8 @@ class __TwigTemplate_6e81d4d2a6a0bee6ce81506485b2e175 extends Template
     </main><!-- End #main -->
 
 
-    <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
+    <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i
+                class=\"bi bi-arrow-up-short\"></i></a>
 {% endblock %}", "voiture/show3.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\show3.html.twig");
     }
 }

@@ -555,7 +555,6 @@ class ComposerStaticInitfb564497d551c76dc2dbe1b33d6c9ea5
         'App\\Repository\\ReservationRepository' => __DIR__ . '/../..' . '/src/Repository/ReservationRepository.php',
         'App\\Repository\\VoitureRepository' => __DIR__ . '/../..' . '/src/Repository/VoitureRepository.php',
         'App\\Service\\FileUploader' => __DIR__ . '/../..' . '/src/Service/FileUploader.php',
-        'App\\Service\\MailerService' => __DIR__ . '/../..' . '/src/Service/MailerService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitArray.php',
         'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitMatrix.php',

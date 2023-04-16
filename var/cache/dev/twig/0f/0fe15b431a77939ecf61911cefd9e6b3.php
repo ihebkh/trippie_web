@@ -70,29 +70,42 @@ class __TwigTemplate_bc96a7933b7e8b0bb38911e1aa0e35ba extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+        echo "    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class=\"example-wrapper\">
-    <h1>Hello ";
-        // line 12
-        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 12, $this->source); })()), "html", null, true);
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class=\"example-wrapper\">
+        <h1>Hello ";
+        // line 21
+        echo twig_escape_filter($this->env, (isset($context["controller_name"]) || array_key_exists("controller_name", $context) ? $context["controller_name"] : (function () { throw new RuntimeError('Variable "controller_name" does not exist.', 21, $this->source); })()), "html", null, true);
         echo "! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href=\"";
-        // line 16
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a
+                            href=\"";
+        // line 26
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\CodeExtension']->getFileLink("C:/Users/khmir/Desktop/Allocationweb1/src/Controller/VoitureController.php", 0), "html", null, true);
-        echo "\">src/Controller/VoitureController.php</a></code></li>
-        <li>Your template at <code><a href=\"";
-        // line 17
+        echo "\">src/Controller/VoitureController.php</a></code>
+            </li>
+            <li>Your template at <code><a
+                            href=\"";
+        // line 29
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\CodeExtension']->getFileLink("C:/Users/khmir/Desktop/Allocationweb1/templates/voiture/index.html.twig", 0), "html", null, true);
-        echo "\">templates/voiture/index.html.twig</a></code></li>
-    </ul>
-</div>
+        echo "\">templates/voiture/index.html.twig</a></code>
+            </li>
+        </ul>
+    </div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -111,7 +124,7 @@ class __TwigTemplate_bc96a7933b7e8b0bb38911e1aa0e35ba extends Template
 
     public function getDebugInfo()
     {
-        return array (  92 => 17,  88 => 16,  81 => 12,  73 => 6,  66 => 5,  53 => 3,  36 => 1,);
+        return array (  104 => 29,  98 => 26,  90 => 21,  73 => 6,  66 => 5,  53 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -121,20 +134,33 @@ class __TwigTemplate_bc96a7933b7e8b0bb38911e1aa0e35ba extends Template
 {% block title %}Hello VoitureController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class=\"example-wrapper\">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href=\"{{ 'C:/Users/khmir/Desktop/Allocationweb1/src/Controller/VoitureController.php'|file_link(0) }}\">src/Controller/VoitureController.php</a></code></li>
-        <li>Your template at <code><a href=\"{{ 'C:/Users/khmir/Desktop/Allocationweb1/templates/voiture/index.html.twig'|file_link(0) }}\">templates/voiture/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class=\"example-wrapper\">
+        <h1>Hello {{ controller_name }}! ✅</h1>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a
+                            href=\"{{ 'C:/Users/khmir/Desktop/Allocationweb1/src/Controller/VoitureController.php'|file_link(0) }}\">src/Controller/VoitureController.php</a></code>
+            </li>
+            <li>Your template at <code><a
+                            href=\"{{ 'C:/Users/khmir/Desktop/Allocationweb1/templates/voiture/index.html.twig'|file_link(0) }}\">templates/voiture/index.html.twig</a></code>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
 ", "voiture/index.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\index.html.twig");
     }

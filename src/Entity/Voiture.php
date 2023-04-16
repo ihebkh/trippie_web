@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Entity;
+
 use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Reservation;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
 {
@@ -17,8 +19,7 @@ class Voiture
 
 
     #[ORM\Column(length: 255)]
-  #[Assert\NotBlank(message: "Registration Number is empty")]
-
+    #[Assert\NotBlank(message: "Registration Number is empty")]
     private ?string $matricule = null;
 
     #[Assert\NotBlank(message: "Brand Number is empty")]
@@ -38,7 +39,7 @@ class Voiture
     private ?string $prixJours = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $picture= null;
+    private ?string $picture = null;
     #[Assert\NotBlank(message: "Energy is empty")]
     #[ORM\Column(length: 255)]
     private ?string $energie = null;
@@ -158,33 +159,32 @@ class Voiture
     }
 
 
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
 
-   public function getReservations(): Collection
-   {
-       return $this->reservations;
-   }
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setIdVoiture($this);
+        }
 
-   public function addReservation(Reservation $reservation): self
-   {
-       if (!$this->reservations->contains($reservation)) {
-           $this->reservations->add($reservation);
-           $reservation->setIdVoiture($this);
-       }
+        return $this;
+    }
 
-       return $this;
-   }
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getIdVoiture() === $this) {
+                $reservation->setIdVoiture(null);
+            }
+        }
 
-   public function removeReservation(Reservation $reservation): self
-   {
-       if ($this->reservations->removeElement($reservation)) {
-           // set the owning side to null (unless already changed)
-           if ($reservation->getIdVoiture() === $this) {
-               $reservation->setIdVoiture(null);
-           }
-       }
-
-       return $this;
-   }
+        return $this;
+    }
 
 
 }

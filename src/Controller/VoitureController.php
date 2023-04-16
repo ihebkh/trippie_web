@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Voiture;
 use App\Form\VoitureFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,23 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\VoitureRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Service\FileUploader;
-use Symfony\Component\HttpFoundation\File\UploadedFile ;
-use Doctrine\Common\Collections\ArrayCollection;
-use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Knp\Component\Pager\PaginatorInterface;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Writer\PngWriter;
-
 
 
 class VoitureController extends AbstractController
@@ -40,7 +32,7 @@ class VoitureController extends AbstractController
 
 //admin
     #[Route('/voiture/Affichelist', name: 'app_voitureaffiche')]
-    public function Affiche(VoitureRepository $repository,PaginatorInterface $paginator,Request $request)
+    public function Affiche(VoitureRepository $repository, PaginatorInterface $paginator, Request $request)
     {
         $voiture = $repository->findall();
         $voiture = $paginator->paginate(
@@ -55,7 +47,7 @@ class VoitureController extends AbstractController
 
 //locateur
     #[Route('/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
-    public function Affichernoneserve(VoitureRepository $repository,PaginatorInterface $paginator,Request $request)
+    public function Affichernoneserve(VoitureRepository $repository, PaginatorInterface $paginator, Request $request)
     {
 
         $voiture = $repository->findall();
@@ -241,8 +233,9 @@ class VoitureController extends AbstractController
             'voiture' => $voiture,
         ]);
     }
+
     #[Route('/voiture/recherche', name: 'recherche')]
-    function Recherche(VoitureRepository $repository,Request $request)
+    function Recherche(VoitureRepository $repository, Request $request)
     {
         $data = $request->get('search');
         $voiture = $repository->findBy(['nsc' => $data]);

@@ -7,6 +7,7 @@ return [
     'app_reservation_add' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::addReservation'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id', true], ['text', '/reservation/Add']], [], [], []],
     'app_DeleteReservation' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::deleteStatique'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/deleteReservation']], [], [], []],
     'app_reservationaffichefront' => [[], ['_controller' => 'App\\Controller\\ReservationController::Affichefront'], [], [['text', '/reservation/client/Affichelist']], [], [], []],
+    'exportexcel' => [[], ['_controller' => 'App\\Controller\\ReservationController::exportacademieToExcelAction'], [], [['text', '/exportexcel']], [], [], []],
     'app_DeleteReservation2' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::deleteStatique2'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/client/deleteReservation']], [], [], []],
     'app_reservationaffiche' => [[], ['_controller' => 'App\\Controller\\ReservationController::Affiche'], [], [['text', '/reservation/Affichelist']], [], [], []],
     'modifC' => [['id'], ['_controller' => 'App\\Controller\\ReservationController::modifC'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/modifC']], [], [], []],

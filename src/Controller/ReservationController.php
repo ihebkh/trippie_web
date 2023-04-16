@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Reservation;
-use App\Entity\Voiture;
 use App\Form\ReservationFormType;
-use App\Form\VoitureFormType;
 use App\Repository\VoitureRepository;
 use App\Repository\ReservationRepository;
+use Symfony\Component\Routing\RouterInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,14 +17,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\FormTypeInterface;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
-use Symfony\Component\Mailer\Bridge\Google\Transport;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class ReservationController extends AbstractController
@@ -34,7 +36,6 @@ class ReservationController extends AbstractController
             'path' => 'src/Controller/ReservationController.php',
         ]);
     }
-
 
 
 //front
@@ -51,21 +52,25 @@ class ReservationController extends AbstractController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $email =(new Email())
+            $startDate = $reservation->getDateDebut()->format('Y-m-d H:i:s');
+            $endDate = $reservation->getDateFin()->format('Y-m-d H:i:s');
+            $marque = $reservation->getIdVoiture()->getMarque();
+            $email = (new Email())
                 ->from('symfonycopte822@gmail.com')
-                ->to ('khmiri.iheb@esprit.tn')
+                ->to('khmiri.iheb@esprit.tn')
                 ->subject('Car Rental Reservation Confirmation')
                 ->text('Dear user,
 
-Thank you for choosing to rent a car from Trippie. We are pleased to confirm your reservation  for car 
+Thank you for choosing to rent ' . $marque . ' from Trippie. We are pleased to confirm your reservation for the ' . $startDate . ' to ' . $endDate . '.
+
 As a reminder, please bring a valid driver\'s license and a credit card in your name when you come to pick up the car. If you have any additional questions or special requests, please do not hesitate to contact us.
 
 We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
 
 Best regards,
 Trippie');
-            $transport= new GmailSmtpTransport('symfonycopte822@gmail.com','cdwgdrevbdoupxhn');
-            $mailer= new Mailer($transport);
+            $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+            $mailer = new Mailer($transport);
             $mailer->send($email);
 
             $voiture->setEtat("reservé");
@@ -80,8 +85,6 @@ Trippie');
         ]);
 
     }
-
-
 
 
 //delete back
@@ -108,9 +111,62 @@ Trippie');
         return $this->render('reservation/Afficheclient.html.twig', ['reservation' => $reservation]);
     }
 
+    #[Route('/exportexcel', name:'exportexcel')]
+    public function exportacademieToExcelAction(ReservationRepository $repository, RouterInterface $router): Response
+    {
+
+        // Récupérer la liste des academies depuis votre source de données
+        $reservation = $repository->findAll();
+
+        // Créer un nouveau document Excel
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('academie');
+
+        // Écrire les en-têtes de colonnes
+        $sheet->setCellValue('A1', 'Registration number ');
+        $sheet->setCellValue('C1', 'Brand ');
+        $sheet->setCellValue('E1', 'Power ');
+        $sheet->setCellValue('G1', 'price per day ');
+        $sheet->setCellValue('I1', 'Energy ');
+        $sheet->setCellValue('K1', 'Staus ');
+        $sheet->setCellValue('M1', 'Start date ');
+        $sheet->setCellValue('O1', 'End date ');
+
+        // Écrire les données des academies
+        $row = 2;
+        foreach ($reservation as $academie) {
+            $sheet->setCellValue('A'.$row, $academie->getIdVoiture()->getMatricule());
+            $sheet->setCellValue('C'.$row, $academie->getIdVoiture()->getMarque());
+            $sheet->setCellValue('E'.$row, $academie->getIdVoiture()->getPuissance());
+            $sheet->setCellValue('G'.$row, $academie->getIdVoiture()->getPrixJours());
+            $sheet->setCellValue('I'.$row, $academie->getIdVoiture()->getEnergie());
+            $sheet->setCellValue('K'.$row, $academie->getIdVoiture()->getEtat());
+            $sheet->setCellValue('M'.$row, $academie->getDateDebut());
+            $sheet->setCellValue('O'.$row, $academie->getDateFin());
+
+
+            $row++;
+        }
+
+        // Créer une réponse HTTP pour le document Excel
+        $response = new Response();
+
+        // Écrire le document Excel dans la réponse HTTP
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('listeReservations.xlsx');
+
+        // Rediriger vers la page d'affichage des réservations
+        $url = $router->generate('app_reservationaffiche');
+        return $this->redirect($url);
+    }
+
+
+
+
     //delete front
     #[Route('voiture/client/deleteReservation/{id}', name: 'app_DeleteReservation2')]
-    public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine,VoitureRepository $voitureRepository): Response
+    public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine, VoitureRepository $voitureRepository): Response
     {
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();
@@ -119,9 +175,10 @@ Trippie');
         return $this->redirectToRoute("app_reservationaffichefront");
     }
 
+
 //back
     #[Route('/reservation/Affichelist', name: 'app_reservationaffiche')]
-    public function Affiche(ReservationRepository $repository,PaginatorInterface $paginator,Request $request)
+    public function Affiche(ReservationRepository $repository, PaginatorInterface $paginator, Request $request)
     {
 
         $reservation = $repository->findAll();
@@ -132,9 +189,9 @@ Trippie');
         );
 
 
-
         return $this->render('reservation/Affiche.html.twig', ['reservation' => $reservation]);
     }
+
 
 //front
     #[Route('/modifC/{id}', name: 'modifC')]
@@ -169,5 +226,6 @@ Trippie');
             array("form" => $form)
         );
     }
+
 
 }

@@ -4,7 +4,6 @@
     <main id="main" class="main">
 
 
-
         <div class="pagetitle">
 
         </div><!-- End Page Title -->
@@ -16,7 +15,8 @@
                     <div class="card">
 
                         {% for message in app.flashes('notice') %}
-                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show"
+                                 role="alert">
                                 {{ message }}
                             </div>
 
@@ -24,7 +24,8 @@
 
 
                         {% for message in app.flashes('noticedelete') %}
-                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show"
+                                 role="alert">
                                 {{ message }}
                             </div>
 
@@ -33,19 +34,28 @@
                         <div class="card-body">
 
                             <h5 class="card-title">car list</h5>
+                            <a href="{{ path('exportexcel') }}">
+                                <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">Export to excel
+                                </button>
+                                <a href="{{ path('exportexcel') }}">
+                                    <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Export to PDF
+                                    </button>
+
+
 
 
                             <!-- Default Table -->
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Start date</th>
-                                    <th>End date</th>
+
                                     <th>bumber registration</th>
                                     <th>brand</th>
                                     <th>power</th>
                                     <th>energy</th>
                                     <th>picture</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
 
 
                                     <th>Update</th>
@@ -55,30 +65,28 @@
                                 <tbody>
 
 
+                                <tr {% for r in reservation %} >
 
 
-                                <tr  {%  for r in reservation %} >
-
-                                    <td>{{r.dateDebut |date('Y-m-d')}}</td>
-                                    <td>{{r.dateFin |date('Y-m-d')}}</td>
                                     <td>{{ r.idVoiture.matricule }}</td>
                                     <td>{{ r.idVoiture.marque }}</td>
                                     <td>{{ r.idVoiture.puissance }}</td>
                                     <td>{{ r.idVoiture.energie }}</td>
-                                    <td><img class="img-profile " src="{{ asset('uploads/' ~ r.idVoiture.picture) }}" style="max-height: 80px"></td>
-                                    <td> <a href="{{ path('modifC2',{id:r.id}) }}">
-                                            <button type="button" class="btn btn-outline-success">Update</button></a>    </td>
-
-
-
-
+                                    <td><img class="img-profile " src="{{ asset('uploads/' ~ r.idVoiture.picture) }}"
+                                             style="max-height: 80px"></td>
+                                    <td>{{ r.dateDebut |date('Y-m-d') }}</td>
+                                    <td>{{ r.dateFin |date('Y-m-d') }}</td>
+                                    <td><a href="{{ path('modifC2',{id:r.id}) }}">
+                                            <button type="button" class="btn btn-outline-success">Update</button>
+                                        </a></td>
                                     <td>
-                                        <a href="javascript:void(0)" onclick="if(confirm('are you sure to delete this Reservation ?')){window.location='{{ path('app_DeleteReservation', {'id': r.id }) }}';}">
+                                        <a href="javascript:void(0)"
+                                           onclick="if(confirm('are you sure to delete this Reservation ?')){window.location='{{ path('app_DeleteReservation', {'id': r.id }) }}';}">
 
                                             <button type="button" class="btn btn-outline-danger">Delete</button>
                                         </a>
                                     </td>
-                                </tr {%  endfor %}>
+                                </tr {% endfor %}>
 
                                 </tbody>
                             </table>
@@ -88,7 +96,6 @@
                         </div>
 
                     </div>
-
 
 
                 </div>

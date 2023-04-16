@@ -6,7 +6,7 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank ;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -42,13 +42,11 @@ class ReservationFormType extends AbstractType
                 'date_widget' => 'single_text',
                 'date_format' => 'yyyy-MM-dd'
             ])
-
             ->add('Voiture', HiddenType::class, [
                 'data' => $options['id'],
                 'mapped' => false,
 
             ]);
-
 
 
     }

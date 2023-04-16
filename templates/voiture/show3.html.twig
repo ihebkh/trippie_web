@@ -21,7 +21,6 @@
                                 </div>
 
 
-
                             </div>
                         </div>
                     </div>
@@ -43,12 +42,16 @@
                                 <br>
                                 <br>
                                 <li><strong>Energy</strong>: {{ voiture.energie }}</li>
-                                <center>    <table border="0">
+                                <center>
+                                    <table border="0">
                                         <tr>
-                                            <th>  <a href="{{ path('app_reservation_add', {id: voiture.id}) }}">
-                                                        <button type="button" class="btn btn-outline-success">book</button></a></center></th>
+                                            <th><a href="{{ path('app_reservation_add', {id: voiture.id}) }}">
+                                                    <button type="button" class="btn btn-outline-success">book</button>
+                                                </a>
+                                </center>
+                                </th>
 
-                                        </tr>
+                                </tr>
 
                                 </center>
                         </div>
@@ -63,5 +66,6 @@
     </main><!-- End #main -->
 
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
 {% endblock %}

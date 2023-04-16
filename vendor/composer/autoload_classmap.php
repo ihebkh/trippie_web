@@ -16,7 +16,6 @@ return array(
     'App\\Repository\\ReservationRepository' => $baseDir . '/src/Repository/ReservationRepository.php',
     'App\\Repository\\VoitureRepository' => $baseDir . '/src/Repository/VoitureRepository.php',
     'App\\Service\\FileUploader' => $baseDir . '/src/Service/FileUploader.php',
-    'App\\Service\\MailerService' => $baseDir . '/src/Service/MailerService.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'BaconQrCode\\Common\\BitArray' => $vendorDir . '/bacon/bacon-qr-code/src/Common/BitArray.php',
     'BaconQrCode\\Common\\BitMatrix' => $vendorDir . '/bacon/bacon-qr-code/src/Common/BitMatrix.php',

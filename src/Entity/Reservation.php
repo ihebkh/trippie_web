@@ -18,14 +18,13 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: "datetime")]
-
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: "datetime")]
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column]
-    private ?int $idClient=null;
+    private ?int $idClient = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Voiture $idVoiture = null;
@@ -83,12 +82,6 @@ class Reservation
 
         return $this;
     }
-
-
-
-
-
-
 
 
 }

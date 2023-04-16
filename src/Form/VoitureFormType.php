@@ -13,13 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
-
 class VoitureFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('matricule')
             ->add('marque', ChoiceType::class,
                 array(
@@ -67,7 +65,6 @@ class VoitureFormType extends AbstractType
                     ])
                 ],
             ])
-
             ->add('energie', ChoiceType::class,
                 array(
                     'choices' => array(
@@ -76,8 +73,7 @@ class VoitureFormType extends AbstractType
                         'gpl' => 'gpl',
 
                     )
-                ))
-        ;
+                ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

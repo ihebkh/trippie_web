@@ -10,26 +10,29 @@
                 <br>
                 <br>
                 <a href="{{ path('addVoiture') }}">
-                    <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Add new car</button>
+                    <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Add new car
+                    </button>
 
                 </a>
                 <br>
-<br>
+                <br>
                 <br>
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
                     {% for v in voiture %}
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('uploads/' ~ v.picture) }}" style="max-height: 200px ; width: 100%;  object-fit: cover;">
+                            <img src="{{ asset('uploads/' ~ v.picture) }}"
+                                 style="max-height: 200px ; width: 100%;  object-fit: cover;">
                             <div class="portfolio-info">
                                 <h4>{{ v.marque }}</h4>
                                 <h4>{{ v.prixJours }}</h4>
 
                                 <div class="portfolio-links">
-                                    <a href="{{ path('app_locateurvoiture_show',{id:v.id}) }}" title="More Details"><i class="bx bx-plus"></i></a>
+                                    <a href="{{ path('app_locateurvoiture_show',{id:v.id}) }}" title="More Details"><i
+                                                class="bx bx-plus"></i></a>
                                 </div>
-                               </div>
+                            </div>
                         </div>
                     </div>
                     {% if loop.index % 3 == 0 %}
