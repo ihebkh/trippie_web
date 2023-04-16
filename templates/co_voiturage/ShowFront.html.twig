@@ -1,5 +1,6 @@
 {% extends 'indexChauffeur.html.twig' %}
 
+
 {% block body %}
 	<br>
 	<br>
@@ -37,13 +38,13 @@
 								<br>
 								<li>
 									<strong>departure</strong>:
-									{{  co_voiturage.depart }}</li>
+									{{  co_voiturage.depart }} &nbsp&nbsp Temperature:   {{ co_voiturage.weather_temp(co_voiturage.depart)  }}</li>
 
 								<br>
 								<br>
 								<li>
 									<strong>Destination</strong>:
-									{{  co_voiturage.destination }}</li>
+									{{  co_voiturage.destination }} &nbsp&nbsp Temperature:   {{ co_voiturage.weather_temp(co_voiturage.destination)  }}</li>
 								<br>
 								<br>
 								<li>

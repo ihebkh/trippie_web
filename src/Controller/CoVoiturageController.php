@@ -120,7 +120,7 @@ class CoVoiturageController extends AbstractController
             'co_voiturage' => $coVoiturage,
         ]);
     }
-    
+
 
 
     #[Route('/{id}/edit', name: 'app_co_voiturage_edit', methods: ['GET', 'POST'])]
@@ -177,4 +177,7 @@ class CoVoiturageController extends AbstractController
 
         return $this->redirectToRoute('app_co_voiturage_index_fornt', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 }

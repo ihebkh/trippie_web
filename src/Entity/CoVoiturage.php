@@ -165,4 +165,33 @@ class CoVoiturage
     {
         return $this->id;
     }
+
+
+    function weather_temp(string $ville): float
+    {
+        // Url de l'API
+        $url = "http://api.openweathermap.org/data/2.5/weather?q={$ville}&lang=fr&units=metric&appid=c254001f0f2a23d71745d80d4fd561bc";
+
+        // On get les resultat
+        $raw = file_get_contents($url);
+        // Décode la chaine JSON
+        $json = json_decode($raw);
+
+        // Nom de la ville
+        $name = $json->name;
+
+        // Météo
+        $weather = $json->weather[0]->main;
+        $desc = $json->weather[0]->description;
+
+        // Températures
+        $temp = $json->main->temp;
+        $feel_like = $json->main->feels_like;
+
+        // Vent
+        $speed = $json->wind->speed;
+        $deg = $json->wind->deg;
+
+        return $temp;
+    }
 }
