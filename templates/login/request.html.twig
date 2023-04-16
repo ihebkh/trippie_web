@@ -1,0 +1,21 @@
+{% extends 'login/login.html.twig' %}
+
+{% block body %}
+    <h1 class="mb-4">Réinitialisation de mot de passe</h1>
+
+    {% if app.session.flashbag.peek('success') is not empty %}
+        <div class="alert alert-success">
+            {{ app.session.flashbag.get('success')[0] }}
+        </div>
+    {% endif %}
+
+    <p>Entrez votre adresse e-mail et nous vous enverrons un e-mail avec un lien pour réinitialiser votre mot de passe :</p>
+
+    {{ form_start(requestForm) }}
+        {{ form_row(requestForm.email) }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+    {{ form_end(requestForm) }}
+{% endblock %}

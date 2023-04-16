@@ -4,22 +4,11 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
-    providers:
-        app_chauffeur_provider:
-            entity:
-                class: App\Entity\Chauffeur
-                property: email
-        app_client_provider:
-            entity:
-                class: App\Entity\Client
-                property: email
-        app_locateur_provider:
-            entity:
-                class: App\Entity\Locateur
-                property: email
-        chain_provider:
-            chain:
-                providers: [app_chauffeur_provider, app_client_provider, app_locateur_provider]
+    
+    encoders:
+        App\Entity\Chauffeur:
+            algorithm: bcrypt
+        
             
             
     firewalls:
@@ -28,7 +17,7 @@ security:
             security: false
         main:
             lazy: true
-            provider: chain_provider # fixed scalar value here
+            
             
             
             logout:

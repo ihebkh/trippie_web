@@ -83,6 +83,8 @@ class LoginController extends AbstractController
             $email= $user->getEmail();
             $pass = $user->getPassword();
             $etat = $user->getEtat();
+            $hash = $user->getPassword();
+           
             if (!$email) {
                 $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
                 
@@ -90,8 +92,8 @@ class LoginController extends AbstractController
             else if ($etat != 'enabled') {
                 $this->addFlash('error', 'Le mot de passe est incorrect.');
             }
-            else if ($password != $pass) {
-                $this->addFlash('error', 'Le mot de passe est incorrect.');
+            else if (!password_verify($password, $hash)) {
+                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
             }
             else{
                 $session = $request->getSession();

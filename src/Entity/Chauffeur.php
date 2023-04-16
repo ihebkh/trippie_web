@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: ChauffeurRepository::class)]
-class Chauffeur 
+class Chauffeur implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -52,6 +52,10 @@ class Chauffeur
 
     #[ORM\Column(options: ['default' => 'enabled'], columnDefinition: "ENUM('enabled', 'disabled')")]
     private ?string $etat = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $resetToken = null;
+
 
     public function getIdCh(): ?int
     {
@@ -192,6 +196,38 @@ class Chauffeur
     }
 
     return $this;
+}
+
+public function getResetToken(): ?string
+{
+    return $this->resetToken;
+}
+
+public function setResetToken(?string $resetToken): self
+{
+    $this->resetToken = $resetToken;
+
+    return $this;
+}
+
+public function getRoles()
+{
+    // implement this method to return an array of roles
+}
+
+public function getUsername()
+{
+    return $this->email;
+}
+
+public function getSalt()
+{
+    // you can leave this method empty
+}
+
+public function eraseCredentials()
+{
+    // you can leave this method empty
 }
 
 
