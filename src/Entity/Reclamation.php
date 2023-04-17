@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use App\Repository\ReclamationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,22 +16,27 @@ class Reclamation
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Type cannot be empty')]
+    #[Assert\Regex(pattern: '/^[^0-9]*$/', message: 'Type cannot contain any numbers')]
     private ?string $type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Commentaire cannot be empty')]
+    #[Assert\Length(min: 16, minMessage: 'Commentaire must be at least {{ limit }} characters long')]
     private ?string $commentaire = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $etat = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotNull(message: 'ID user cannot be empty')]
     private ?int $id_user = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotNull(message: 'Date creation cannot be empty')]
+    #[Assert\EqualTo(value: 'today', message: 'Date creation must be the same as the PC date')]
     private ?\DateTimeInterface $date_creation = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
@@ -151,6 +157,6 @@ class Reclamation
 
     public function __toString()
     {
-        return $this->id;
+        return $this->type;
     }
 }

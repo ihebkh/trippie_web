@@ -40,6 +40,14 @@ class ReponseController extends AbstractController
         ]);
     }
 
+    #[Route('/front', name: 'app_reponse_front', methods: ['GET'])]
+    public function front(ReponseRepository $reponseRepository): Response
+    {
+        return $this->render('reponse/showAll.html.twig', [
+            'reponses' => $reponseRepository->findAll(),
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_reponse_show', methods: ['GET'])]
     public function show(Reponse $reponse): Response
     {

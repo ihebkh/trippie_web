@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\Reclamation;
 use App\Form\Reclamation1Type;
 use App\Repository\ReclamationRepository;
@@ -29,6 +30,23 @@ class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $file = $form->get('image')->getData();
+
+            if ($file) {
+                $fileName = uniqid().'.'.$file->guessExtension();
+    
+                try {
+                    $file->move(
+                        $this->getParameter('reclamation_images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // Handle the exception
+                }
+                $reclamation->setImage($fileName);
+            }
+
             $reclamationRepository->save($reclamation, true);
 
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
@@ -37,6 +55,17 @@ class ReclamationController extends AbstractController
         return $this->renderForm('reclamation/new.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form,
+        ]);
+    }
+
+
+    
+
+     #[Route('/front', name: 'app_reclamation_front', methods: ['GET'])]
+    public function front(ReclamationRepository $reclamationRepository): Response
+    {
+        return $this->render('reclamation/showAll.html.twig', [
+            'reclamations' => $reclamationRepository->findAll(),
         ]);
     }
 
@@ -53,8 +82,36 @@ class ReclamationController extends AbstractController
     {
         $form = $this->createForm(Reclamation1Type::class, $reclamation);
         $form->handleRequest($request);
+        $originalImage = $reclamation->getImage();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData(); // get the uploaded file
+
+            if ($imageFile) {
+                // generate a unique filename
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+    
+                // move the file to the images directory
+                $imageFile->move(
+                    $this->getParameter('reclamation_images_directory'),
+                    $newFilename
+                );
+    
+                // update the entity with the new filename
+                $reclamation->setImage($newFilename);
+    
+                // delete the original image file, if it exists
+                if ($originalImage) {
+                    $originalImagePath = $this->getParameter('reclamation_images_directory').'/'.$originalImage;
+                    if (file_exists($originalImagePath)) {
+                        unlink($originalImagePath);
+                    }
+                }
+            } else {
+                // use the original image filename
+                $reclamation->setImage($originalImage);
+            }
+            
             $reclamationRepository->save($reclamation, true);
 
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);

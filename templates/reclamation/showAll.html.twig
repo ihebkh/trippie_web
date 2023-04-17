@@ -1,50 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends "frontbase.html.twig" %}
 
-{% block title %}Reclamation index{% endblock %}
+{% block title %}Equipement index{% endblock %}
 
-{% block content %}
-    <h1>Reclamation index</h1>
+{% block body %}
+    <h1>Equipement List</h1>
 
-    <table class="table">
+    <table class="table table-hover " style="background-color: white">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
+        <tr>
+            <th>Type</th>
                 <th>Commentaire</th>
                 <th>Etats</th>
                 <th>Id_user</th>
                 <th>Date_creation</th>
                 <th>Image</th>
-                <th>actions</th>
-            </tr>
+                
+        </tr>
         </thead>
         <tbody>
         {% for reclamation in reclamations %}
             <tr>
-                <td>{{ reclamation.id }}</td>
-                <td>{{ reclamation.type }}</td>
+               <td>{{ reclamation.type }}</td>
                 <td>{{ reclamation.commentaire }}</td>
                 <td>{{ reclamation.etat }}</td>
                 <td>{{ reclamation.idUser }}</td>
                 <td>{{ reclamation.dateCreation ? reclamation.dateCreation|date('Y-m-d') : '' }}</td>
-               {% if reclamation.image %}
+
+
+     {% if reclamation.image %}
     <td><img src="{{ asset('images/' ~ reclamation.image) }}" style="width:100px;height:100px;"></td>
 {% else %}
     <td>No image available</td>
 {% endif %}
 
-                <td>
-                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
-                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
-                </td>
+
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+
 {% endblock %}

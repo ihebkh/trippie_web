@@ -33,7 +33,11 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ reclamation.image }}</td>
+                <td>{% if reclamation.image %}
+                    <img src="{{ asset('images/' ~ reclamation.image) }}" style="width:100px;height:100px;">
+                {% else %}
+                    No image available
+                {% endif %}</td>
             </tr>
         </tbody>
     </table>

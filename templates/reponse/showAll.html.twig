@@ -1,0 +1,35 @@
+{% extends "frontbase.html.twig" %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block content %}
+    <h1>Reponse List</h1>
+
+    <table class="table table-hover " style="background-color: white">
+        <thead>
+        <tr>
+            
+            <th>Reponse</th>
+                <th>Etat</th>
+                <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                
+                <td>{{ reponse.reponse }}</td>
+                <td>{{ reponse.etat }}</td>
+                <td>{{ reponse.getIdrec() }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

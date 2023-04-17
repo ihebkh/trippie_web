@@ -15,6 +15,8 @@ class Reponse
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Reponse cannot be empty')]
+    #[Assert\Length(min: 16, minMessage: 'Reponse must be at least {{ limit }} characters long')]
     private ?string $reponse = null;
 
     #[ORM\Column(length: 255, nullable: true)]
