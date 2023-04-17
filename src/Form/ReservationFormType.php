@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+
 class ReservationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -46,7 +47,8 @@ class ReservationFormType extends AbstractType
                 'data' => $options['id'],
                 'mapped' => false,
 
-            ]);
+            ])
+      ;
 
 
     }

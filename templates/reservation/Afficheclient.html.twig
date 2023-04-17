@@ -7,6 +7,7 @@
     <br>
 
   <center><h1>Reservation list</h1></center>
+
     <table class="table">
         <thead>
         <tr>
@@ -49,4 +50,9 @@
 
         </tbody>
     </table>
+    <center>
+<a href="{{ path('exportpdf') }}">
+        <button type="button" style="padding: 10px;" class="btn btn-outline-info">Export to PDF
+        </button>
+    </center>
 {% endblock %}

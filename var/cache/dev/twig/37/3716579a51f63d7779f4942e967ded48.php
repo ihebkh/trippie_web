@@ -43,22 +43,42 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
     <meta charset=\"UTF-8\">
     <title>Liste de réservations</title>
     <style>
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
+
         th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
         }
+
         th {
             background-color: #ddd;
         }
+        img {
+            filter: grayscale(100%);
+            width: 1px;
+            transition: .5s ease;
+            height : 1px;
+        }
+
     </style>
 </head>
 <body>
-<h1>Reservation list</h1>
+<img src=\"";
+        // line 32
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("Back/assets/img/bg.png"), "html", null, true);
+        echo "\" alt=\"Our team\" width=\"500\" height=\"300\">
+<h6>cité ghazela - Esprit</h6>
+<h6>+216 25 104 011</h6>
+<h2>Dear [Customer's Name],</h2>
+<h5>I would like to thank you for your request to reserve a set of cars with Trippie. We are thrilled to provide you with multiple </h5>
+<h5>safe and reliable means of transportation for your group trip.</h5>
+<h5>We have received your reservation request for the following cars:</h5>
+
 <table>
     <thead>
     <tr>
@@ -75,43 +95,43 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
     </thead>
     <tbody>
     ";
-        // line 38
+        // line 55
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["tableData"]) || array_key_exists("tableData", $context) ? $context["tableData"] : (function () { throw new RuntimeError('Variable "tableData" does not exist.', 38, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["tableData"]) || array_key_exists("tableData", $context) ? $context["tableData"] : (function () { throw new RuntimeError('Variable "tableData" does not exist.', 55, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["row"]) {
-            // line 39
+            // line 56
             echo "        <tr>
-<td>";
-            // line 40
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "Registration_number", [], "any", false, false, false, 40), "html", null, true);
+            <td>";
+            // line 57
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "Registration_number", [], "any", false, false, false, 57), "html", null, true);
             echo "</td>
             <td>";
-            // line 41
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "brand", [], "any", false, false, false, 41), "html", null, true);
+            // line 58
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "brand", [], "any", false, false, false, 58), "html", null, true);
             echo "</td>
             <td>";
-            // line 42
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "price", [], "any", false, false, false, 42), "html", null, true);
+            // line 59
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "price", [], "any", false, false, false, 59), "html", null, true);
             echo "</td>
             <td>";
-            // line 43
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "etat", [], "any", false, false, false, 43), "html", null, true);
+            // line 60
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "etat", [], "any", false, false, false, 60), "html", null, true);
             echo "</td>
             <td>";
-            // line 44
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "energie", [], "any", false, false, false, 44), "html", null, true);
+            // line 61
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "energie", [], "any", false, false, false, 61), "html", null, true);
             echo "</td>
             <td>";
-            // line 45
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "power", [], "any", false, false, false, 45), "html", null, true);
+            // line 62
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "power", [], "any", false, false, false, 62), "html", null, true);
             echo "</td>
             <td>";
-            // line 46
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date", [], "any", false, false, false, 46), "html", null, true);
+            // line 63
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date", [], "any", false, false, false, 63), "html", null, true);
             echo "</td>
             <td>";
-            // line 47
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date1", [], "any", false, false, false, 47), "html", null, true);
+            // line 64
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date1", [], "any", false, false, false, 64), "html", null, true);
             echo "</td>
 
         </tr>
@@ -120,9 +140,13 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['row'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 51
+        // line 68
         echo "    </tbody>
 </table>
+
+<h5>If you have any questions or concerns regarding your reservation or the rental process, please do not hesitate to contact us. We are always here to help and make your car rental experience as smooth and enjoyable as possible.</h5>
+<h4>Best regards,</h4>
+<h3>Trippie</h3>
 </body>
 </html>
 ";
@@ -143,7 +167,7 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
 
     public function getDebugInfo()
     {
-        return array (  124 => 51,  114 => 47,  110 => 46,  106 => 45,  102 => 44,  98 => 43,  94 => 42,  90 => 41,  86 => 40,  83 => 39,  79 => 38,  40 => 1,);
+        return array (  144 => 68,  134 => 64,  130 => 63,  126 => 62,  122 => 61,  118 => 60,  114 => 59,  110 => 58,  106 => 57,  103 => 56,  99 => 55,  73 => 32,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -154,22 +178,39 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
     <meta charset=\"UTF-8\">
     <title>Liste de réservations</title>
     <style>
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
+
         th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
         }
+
         th {
             background-color: #ddd;
         }
+        img {
+            filter: grayscale(100%);
+            width: 1px;
+            transition: .5s ease;
+            height : 1px;
+        }
+
     </style>
 </head>
 <body>
-<h1>Reservation list</h1>
+<img src=\"{{ asset('Back/assets/img/bg.png') }}\" alt=\"Our team\" width=\"500\" height=\"300\">
+<h6>cité ghazela - Esprit</h6>
+<h6>+216 25 104 011</h6>
+<h2>Dear [Customer's Name],</h2>
+<h5>I would like to thank you for your request to reserve a set of cars with Trippie. We are thrilled to provide you with multiple </h5>
+<h5>safe and reliable means of transportation for your group trip.</h5>
+<h5>We have received your reservation request for the following cars:</h5>
+
 <table>
     <thead>
     <tr>
@@ -187,7 +228,7 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
     <tbody>
     {% for row in tableData %}
         <tr>
-<td>{{ row.Registration_number }}</td>
+            <td>{{ row.Registration_number }}</td>
             <td>{{ row.brand }}</td>
             <td>{{ row.price }}</td>
             <td>{{ row.etat }}</td>
@@ -200,6 +241,10 @@ class __TwigTemplate_f6dbf1b88eae366dcf6746b9d6b1a55b extends Template
     {% endfor %}
     </tbody>
 </table>
+
+<h5>If you have any questions or concerns regarding your reservation or the rental process, please do not hesitate to contact us. We are always here to help and make your car rental experience as smooth and enjoyable as possible.</h5>
+<h4>Best regards,</h4>
+<h3>Trippie</h3>
 </body>
 </html>
 ", "reservation/export-pdf.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\export-pdf.html.twig");

@@ -2,11 +2,7 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Voiture;
-use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]

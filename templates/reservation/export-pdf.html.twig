@@ -1,25 +1,43 @@
+{% set imagePath = asset('images/example.png') %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Liste de réservations</title>
     <style>
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
+
         th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: center;
         }
+
         th {
             background-color: #ddd;
         }
+        img {
+            filter: grayscale(100%);
+            width: 1px;
+            transition: .5s ease;
+            height : 1px;
+        }
+
     </style>
 </head>
 <body>
-<h1>Reservation list</h1>
+
+<h6>cité ghazela - Esprit</h6>
+<h6>+216 25 104 011</h6>
+<h2>Dear [Customer's Name],</h2>
+<h5>I would like to thank you for your request to reserve a set of cars with Trippie. We are thrilled to provide you with multiple </h5>
+<h5>safe and reliable means of transportation for your group trip.</h5>
+<h5>We have received your reservation request for the following cars:</h5>
+
 <table>
     <thead>
     <tr>
@@ -37,7 +55,7 @@
     <tbody>
     {% for row in tableData %}
         <tr>
-<td>{{ row.Registration_number }}</td>
+            <td>{{ row.Registration_number }}</td>
             <td>{{ row.brand }}</td>
             <td>{{ row.price }}</td>
             <td>{{ row.etat }}</td>
@@ -50,5 +68,9 @@
     {% endfor %}
     </tbody>
 </table>
+
+<h5>If you have any questions or concerns regarding your reservation or the rental process, please do not hesitate to contact us. We are always here to help and make your car rental experience as smooth and enjoyable as possible.</h5>
+<h4>Best regards,</h4>
+<h3>Trippie</h3>
 </body>
 </html>

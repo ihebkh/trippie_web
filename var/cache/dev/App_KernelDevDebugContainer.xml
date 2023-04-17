@@ -55,6 +55,7 @@
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="uploads_directory">C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation/public/uploads</parameter>
+    <parameter key="google_recaptcha_site_key">%env(GOOGLE_RECAPTCHA_SITE_KEY)%</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -195,6 +196,12 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="ReCaptcha\ReCaptcha" class="ReCaptcha\ReCaptcha">
+      <argument>%env(GOOGLE_RECAPTCHA_SECRET)%</argument>
+      <argument type="service" id="ReCaptcha\RequestMethod\CurlPost"/>
+    </service>
+    <service id="ReCaptcha\RequestMethod\CurlPost" class="ReCaptcha\RequestMethod\CurlPost"/>
+    <service id="ReCaptcha\RequestMethod\Curl" class="ReCaptcha\RequestMethod\Curl"/>
     <service id="App\Controller\ReservationController" class="App\Controller\ReservationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -5278,6 +5285,7 @@
     <service id="Symfony\Component\DependencyInjection\ContainerInterface" alias="service_container">
       <deprecated package="symfony/dependency-injection" version="5.1">The "%alias_id%" autowiring alias is deprecated. Define it explicitly in your app if you want to keep using it.</deprecated>
     </service>
+    <service id="ReCaptcha\RequestMethod" alias="ReCaptcha\RequestMethod\CurlPost"/>
     <service id="App\Kernel" alias="kernel" public="true"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface" alias="parameter_bag"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface" alias="parameter_bag"/>

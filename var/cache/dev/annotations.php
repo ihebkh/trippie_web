@@ -72,6 +72,8 @@ return [[
 '[C]App%5CController%5CReservationController%23deleteStatique' => 1,
 'App%5CController%5CReservationController%23Affichefront' => 0,
 '[C]App%5CController%5CReservationController%23Affichefront' => 1,
+'App%5CController%5CReservationController%23exportacademieToExcelAction' => 0,
+'[C]App%5CController%5CReservationController%23exportacademieToExcelAction' => 1,
 'App%5CController%5CReservationController%23deleteStatique2' => 0,
 '[C]App%5CController%5CReservationController%23deleteStatique2' => 1,
 'App%5CController%5CReservationController%23Affiche' => 0,
@@ -80,6 +82,8 @@ return [[
 '[C]App%5CController%5CReservationController%23modifC' => 1,
 'App%5CController%5CReservationController%23modifC2' => 0,
 '[C]App%5CController%5CReservationController%23modifC2' => 1,
+'App%5CController%5CReservationController%23exportToPdf' => 0,
+'[C]App%5CController%5CReservationController%23exportToPdf' => 1,
 'App%5CController%5CVoitureController' => 0,
 '[C]App%5CController%5CVoitureController' => 1,
 'App%5CController%5CVoitureController%23index' => 0,
@@ -676,6 +680,6 @@ return [[
 ], [
 
 0 => [],
-1 => 1681598208,
+1 => 1681647521,
 
 ]];

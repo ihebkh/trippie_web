@@ -7,9 +7,6 @@ use App\Form\ReservationFormType;
 use App\Repository\VoitureRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Component\Routing\RouterInterface;
-use Doctrine\ORM\EntityManagerInterface;
-
-
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +20,6 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
-
 
 
 class ReservationController extends AbstractController
@@ -94,6 +90,7 @@ Trippie');
     {
 
         $reservation = $repo->find($id);
+        $reservation->getIdVoiture()->setEtat("non reservé");
         $em = $doctrine->getManager();
         $em->remove($reservation);
         $em->flush();
@@ -111,7 +108,7 @@ Trippie');
         return $this->render('reservation/Afficheclient.html.twig', ['reservation' => $reservation]);
     }
 
-    #[Route('/exportexcel', name:'exportexcel')]
+    #[Route('/exportexcel', name: 'exportexcel')]
     public function exportacademieToExcelAction(ReservationRepository $repository, RouterInterface $router): Response
     {
 
@@ -136,14 +133,14 @@ Trippie');
         // Écrire les données des academies
         $row = 2;
         foreach ($reservation as $academie) {
-            $sheet->setCellValue('A'.$row, $academie->getIdVoiture()->getMatricule());
-            $sheet->setCellValue('C'.$row, $academie->getIdVoiture()->getMarque());
-            $sheet->setCellValue('E'.$row, $academie->getIdVoiture()->getPuissance());
-            $sheet->setCellValue('G'.$row, $academie->getIdVoiture()->getPrixJours());
-            $sheet->setCellValue('I'.$row, $academie->getIdVoiture()->getEnergie());
-            $sheet->setCellValue('K'.$row, $academie->getIdVoiture()->getEtat());
-            $sheet->setCellValue('M'.$row, $academie->getDateDebut());
-            $sheet->setCellValue('O'.$row, $academie->getDateFin());
+            $sheet->setCellValue('A' . $row, $academie->getIdVoiture()->getMatricule());
+            $sheet->setCellValue('C' . $row, $academie->getIdVoiture()->getMarque());
+            $sheet->setCellValue('E' . $row, $academie->getIdVoiture()->getPuissance());
+            $sheet->setCellValue('G' . $row, $academie->getIdVoiture()->getPrixJours());
+            $sheet->setCellValue('I' . $row, $academie->getIdVoiture()->getEnergie());
+            $sheet->setCellValue('K' . $row, $academie->getIdVoiture()->getEtat());
+            $sheet->setCellValue('M' . $row, $academie->getDateDebut());
+            $sheet->setCellValue('O' . $row, $academie->getDateFin());
 
 
             $row++;
@@ -162,14 +159,13 @@ Trippie');
     }
 
 
-
-
     //delete front
     #[Route('voiture/client/deleteReservation/{id}', name: 'app_DeleteReservation2')]
     public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine, VoitureRepository $voitureRepository): Response
     {
         $reservation = $repo->find($id);
         $em = $doctrine->getManager();
+        $reservation->getIdVoiture()->setEtat("non reservé");
         $em->remove($reservation);
         $em->flush();
         return $this->redirectToRoute("app_reservationaffichefront");
@@ -228,7 +224,7 @@ Trippie');
     }
 
 
-    #[Route('/exportpdf', name:'exportpdf')]
+    #[Route('/exportpdf', name: 'exportpdf')]
     public function exportToPdf(ReservationRepository $repository): Response
     {
         // Récupérer les données de réservation depuis votre base de données
