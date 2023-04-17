@@ -5,6 +5,7 @@ namespace App\Form;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\File as AssertFile;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Reclamation;
 use Symfony\Component\Form\AbstractType;
@@ -16,10 +17,14 @@ class Reclamation1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type')
+            ->add('type', ChoiceType::class,
+            array(
+                'choices' => array(
+                    'Technique' => 'Technique',
+                    'Other' => 'Other',
+
+                )))
             ->add('commentaire')
-            ->add('etat')
-            ->add('id_user')
             ->add('date_creation')
 
             ->add('image', FileType::class, [
