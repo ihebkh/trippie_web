@@ -31,13 +31,18 @@ class CoVoiturageType extends AbstractType
                 array(
                     'choices' => array(
                         '' => '',
-                        'Ariena' => 'Ariena',
+                        'Aryanah' => 'Aryanah',
                         'Bizerte' => 'Bizerte',
                         'Beja' => 'Beja',
                         'Tunis' => 'Tunis',
-                        'Ben aarouse' => 'Ben aarouse',
+                        'Sfax' => 'Sfax',
+                        'Kairouan' => 'Kairouan',
                         'Jandouba' => 'Jandouba',
-                        'Gabes' => 'Gabes',
+                        'Ben Arous' => 'Ben Arous',
+                        'Manouba' => 'Manouba',
+                        'Nabeul' => 'Nabeul',
+                        'Zaghouan' => 'Zaghouan',
+
                     )
                 )
             )
@@ -48,13 +53,17 @@ class CoVoiturageType extends AbstractType
                 array(
                     'choices' => array(
                         '' => '',
-                        'Ariena' => 'Ariena',
+                        'Aryanah' => 'Aryanah',
                         'Bizerte' => 'Bizerte',
                         'Beja' => 'Beja',
                         'Tunis' => 'Tunis',
-                        'Ben aarouse' => 'Ben aarouse',
+                        'Sfax' => 'Sfax',
+                        'Kairouan' => 'Kairouan',
                         'Jandouba' => 'Jandouba',
-                        'Gabes' => 'Gabes',
+                        'Ben Arous' => 'Ben Arous',
+                        'Manouba' => 'Manouba',
+                        'Nabeul' => 'Nabeul',
+                        'Zaghouan' => 'Zaghouan',
                     )
                 )
             )

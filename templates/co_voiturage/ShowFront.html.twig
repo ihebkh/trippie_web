@@ -38,13 +38,17 @@
 								<br>
 								<li>
 									<strong>departure</strong>:
-									{{  co_voiturage.depart }} &nbsp&nbsp Temperature:   {{ co_voiturage.weather_temp(co_voiturage.depart)  }}</li>
+									{{  co_voiturage.depart }}
+									&nbsp&nbsp Temperature:
+									{{ co_voiturage.weather_temp(co_voiturage.depart)  }}</li>
 
 								<br>
 								<br>
 								<li>
 									<strong>Destination</strong>:
-									{{  co_voiturage.destination }} &nbsp&nbsp Temperature:   {{ co_voiturage.weather_temp(co_voiturage.destination)  }}</li>
+									{{  co_voiturage.destination }}
+									&nbsp&nbsp Temperature:
+									{{ co_voiturage.weather_temp(co_voiturage.destination)  }}</li>
 								<br>
 								<br>
 								<li>
@@ -59,7 +63,6 @@
 									{{ co_voiturage.nmbrPlace }}</li>
 								<br>
 								<br>
-	
 
 
 								<center>
@@ -73,13 +76,12 @@
 												</center>
 											</th>
 
-
 											<td>
 												<center>
 
 													<form method="post" action="{{ path('app_co_voiturage_delete2', {'id': co_voiturage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
 														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ co_voiturage.id) }}">
-														<button type="submit" class="btn btn-outline-success">Delete</button>
+														<button type="submit" class="btn btn-outline-danger">Delete</button>
 													</form>
 
 

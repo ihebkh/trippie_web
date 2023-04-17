@@ -6,6 +6,9 @@ use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Twilio\Rest\Client;
+
+
 #[ORM\Entity(repositoryClass: ParticipationRepository::class)]
 class Participation
 {
@@ -67,5 +70,20 @@ class Participation
         $this->id_co = $id_co;
 
         return $this;
+    }
+
+    public function send_msg(String $num): void
+    {
+
+        $accountSid ='AC1ed373981440ff3b6ccefc4eb68223b7';
+        $authToken = '0d8dc3f99ee3ae809e32d57b9b4ef3b7';
+        $client = new Client($accountSid, $authToken);
+        $message = $client->messages->create(
+            $num, // recipient's phone number
+            array(
+                'from' => '+12766226509', // your Twilio phone number
+                'body' => 'Participation added !'
+            )
+        );
     }
 }
