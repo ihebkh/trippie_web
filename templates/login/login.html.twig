@@ -15,12 +15,13 @@
     
     <!-- Style -->
     <link rel="stylesheet" href={{asset('Login/css/style.css')}}>
+    
     {% endblock %}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
-
+ 
 
 {% block body %}
   <div class="d-lg-flex half">
@@ -58,6 +59,7 @@
               <input type="submit" value="Log In" class="btn btn-block btn-primary" style="background-color: #3498db; border-color: #3498db;border-radius: 50px">
              
               <span ><a style="color: #3498db;position: absolute;right: 43.65%" href="{{ path('app_utilisateur_new') }}">Sign up</a></span>
+             
             {{ form_end(form) }}
            
           </div>

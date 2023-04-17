@@ -121,4 +121,29 @@ class RoleController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/dashboard/stat', name: 'stat', methods: ['POST','GET'])]
+public function roleStatistics(RoleRepository $roleRepository): Response
+{
+    $total = $roleRepository->countByLibelle('client') +
+             $roleRepository->countByLibelle('locateur') +
+             $roleRepository->countByLibelle('chauffeur');
+
+             $clientCount = $roleRepository->countByLibelle('client');
+             $locateurCount = $roleRepository->countByLibelle('locateur');
+             $chauffeurCount = $roleRepository->countByLibelle('chauffeur');          
+
+   $clientPercentage = round(($clientCount / $total) * 100);
+    $locateurPercentage = round(($locateurCount / $total) * 100);
+    $chauffeurPercentage = round(($chauffeurCount / $total) * 100);
+
+    return $this->render('role/statistics.html.twig', [
+        'clientPercentage' => $clientPercentage,
+        'locateurPercentage' => $locateurPercentage,
+        'chauffeurPercentage' => $chauffeurPercentage,
+    ]);
+}
+
+
 }

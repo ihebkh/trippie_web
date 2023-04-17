@@ -38,4 +38,14 @@ class RoleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function countByLibelle($libelle)
+{
+    return $this->createQueryBuilder('r')
+        ->select('COUNT(r.id_role)')
+        ->where('r.libelle = :libelle')
+        ->setParameter('libelle', $libelle)
+        ->getQuery()
+        ->getSingleScalarResult();
+}
 }
