@@ -199,7 +199,7 @@ public function request(Request $request, LocateurRepository $userRepository, To
 // Create the mailer using the transport
                 $transport = new GmailSmtpTransport('aymen58zouari@gmail.com', 'qupoztnbdlklxbhj'); 
                 $mailer = new Mailer($transport);
-                $emailBody = $this->renderView('login/email.html.twig', [
+                $emailBody = $this->renderView('login/emailLoc.html.twig', [
                     'token' => $token,
                 ]);
             $message = (new TemplatedEmail())
@@ -222,7 +222,7 @@ public function request(Request $request, LocateurRepository $userRepository, To
     }
 
    
-    #[Route('/login/role/reset/{token}', name: 'app_reset_password', methods: ['GET','POST'])]
+    #[Route('/login/role/reset/{token}', name: 'app_reset_password_locateur', methods: ['GET','POST'])]
     public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getDoctrine()->getRepository(Locateur::class)->findOneBy(['resetToken' => $token]);

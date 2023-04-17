@@ -17,6 +17,10 @@
     <link rel="stylesheet" href={{asset('Login/css/style.css')}}>
     {% endblock %}
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+
 
 {% block body %}
   <div class="d-lg-flex half">
@@ -31,7 +35,6 @@
             <br>
            <br>
        {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
-
               <div class="form-group last mb-3">
                 {{ form_label(form.Email) }}
                 {{ form_widget(form.Email, {'attr': {'class': 'form-control', 'placeholder': 'your-email@gmail.com', 'id': 'username'}}) }}
@@ -63,3 +66,17 @@
     </div>
   </div>
 {% endblock %}
+{% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        {% if type == 'error' %}
+            <script>
+            Swal.fire({
+              icon: 'error',
+              title: 'Erreur',
+              text: '{{ message|raw }}'
+            });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+

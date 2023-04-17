@@ -260,7 +260,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
 
-                return $this->redirectToRoute('app_forgot_password_request_chauffeur_chauffeur');
+                return $this->redirectToRoute('app_forgot_password_request_chauffeur');
             }
            
    
@@ -268,7 +268,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
 // Create the mailer using the transport
                 $transport = new GmailSmtpTransport('aymen58zouari@gmail.com', 'qupoztnbdlklxbhj'); 
                 $mailer = new Mailer($transport);
-                $emailBody = $this->renderView('login/email.html.twig', [
+                $emailBody = $this->renderView('login/emailCh.html.twig', [
                     'token' => $token,
                 ]);
             $message = (new TemplatedEmail())
@@ -291,7 +291,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
     }
 
    
-    #[Route('/login/role/reset/{token}', name: 'app_reset_password', methods: ['GET','POST'])]
+    #[Route('/login/role/reset/{token}', name: 'app_reset_password_chauffeur', methods: ['GET','POST'])]
     public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = $this->getDoctrine()->getRepository(Chauffeur::class)->findOneBy(['resetToken' => $token]);

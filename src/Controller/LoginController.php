@@ -22,10 +22,12 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use App\Repository\ChauffeurRepository;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+
+
+
 
 
 
@@ -41,7 +43,7 @@ class LoginController extends AbstractController
     }
 
     #[Route('/login', name: 'login', methods: ['GET','POST'])]
-    public function login(Request $request, UrlGeneratorInterface $urlGenerator): Response
+    public function login(Request $request, UrlGeneratorInterface $urlGenerator, FlashBagInterface $flashBag): Response
     {
        
         $form = $this->createForm(LoginFormType::class);
@@ -65,13 +67,13 @@ class LoginController extends AbstractController
             
           
             if (!$email) {
-                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
+                $flashBag->add('error', 'The email is wrong.');  
             } 
             else if ($etat != 'enabled') {
-                $this->addFlash('error', 'Le mot de passe est incorrect.');
+                $flashBag->add('error', 'Your account is disabled.');
             }
             else if (!password_verify($password, $hash)) {
-                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
+                $flashBag->add('error', 'The password is wrong.');
             }
             else {
                 $session = $request->getSession();
@@ -88,14 +90,13 @@ class LoginController extends AbstractController
             $hash = $user->getPassword();
            
             if (!$email) {
-                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
-                
+                $flashBag->add('error', 'The email is wrong.');  
             } 
             else if ($etat != 'enabled') {
-                $this->addFlash('error', 'Le mot de passe est incorrect.');
+                $flashBag->add('error', 'Your account is disabled.');
             }
             else if (!password_verify($password, $hash)) {
-                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
+                $flashBag->add('error', 'The password is wrong.');
             }
             else{
                 $session = $request->getSession();
@@ -109,15 +110,17 @@ class LoginController extends AbstractController
             $email= $user->getEmail();
             $pass = $user->getPassword();
             $etat = $user->getEtat();
+            $hash = $user->getPassword();
             if (!$email) {
-                $this->addFlash('error', 'Les informations d\'identification sont incorrectes.');
+                $flashBag->add('error', 'The email is wrong.');  
             } 
             else if ($etat != 'enabled') {
-                $this->addFlash('error', 'Le mot de passe est incorrect.');
+                $flashBag->add('error', 'Your account is disabled.');
             }
-            else if ($password != $pass) {
-                $this->addFlash('error', 'Le mot de passe est incorrect.');
-            } else {
+            else if (!password_verify($password, $hash)) {
+                $flashBag->add('error', 'The password is wrong.');
+            }
+             else {
                 $session = $request->getSession();
                 $session->set('user_role', 'Locateur');
                 $session->set('id_loc', $user->getIdLoc());
@@ -133,17 +136,18 @@ class LoginController extends AbstractController
                 return new RedirectResponse($urlGenerator->generate('app_dashboard'), Response::HTTP_SEE_OTHER);
            
             }
-        }   
+        }
+          
     }
 
-
+    
 
     return $this->render('login/login.html.twig', [
         'form' => $form->createView(),
+        
     ]);
     }
 
-   
     
       
 }

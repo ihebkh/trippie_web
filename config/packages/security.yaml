@@ -11,7 +11,21 @@ security:
         App\Entity\Client:
             algorithm: bcrypt   
         App\Entity\Locateur:
-            algorithm: bcrypt        
+            algorithm: bcrypt     
+
+    providers:
+        chauffeur_provider:
+            entity:
+                class: App\Entity\Chauffeur
+                property: email
+        client_provider:
+            entity:
+                class: App\Entity\Client
+                property: email
+        locateur_provider:
+            entity:
+                class: App\Entity\Locateur
+                property: email           
 
             
             
