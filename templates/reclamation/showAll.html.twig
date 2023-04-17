@@ -1,45 +1,59 @@
 {% extends "frontbase.html.twig" %}
 
-{% block title %}Equipement index{% endblock %}
+{% block title %}Reclamation{% endblock %}
 
 {% block body %}
-    <h1>Equipement List</h1>
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <table class="table table-hover " style="background-color: white">
+  <center><h1>Reservation list</h1></center>
+  <br>
+
+    <table class="table table-hover">
         <thead>
-        <tr>
-            <th>Type</th>
+        
+            <tr class="table-info">
+                <th></th>
+                <th></th>
+                <th scope="col">#</th>
+                <th>Type</th>
                 <th>Commentaire</th>
                 <th>Etats</th>
-                <th>Id_user</th>
                 <th>Date_creation</th>
                 <th>Image</th>
-                
-        </tr>
+                <th style="text-align: center;padding-right: 140px;">Actions</th>
+            </tr>
         </thead>
         <tbody>
-        {% for reclamation in reclamations %}
+            {% for reclamation in reclamations %}
             <tr>
-               <td>{{ reclamation.type }}</td>
+                <td></td>
+                <td></td>
+                <td>{{ loop.index }}</td>
+                <td>{{ reclamation.type }}</td>
                 <td>{{ reclamation.commentaire }}</td>
                 <td>{{ reclamation.etat }}</td>
-                <td>{{ reclamation.idUser }}</td>
                 <td>{{ reclamation.dateCreation ? reclamation.dateCreation|date('Y-m-d') : '' }}</td>
 
 
-     {% if reclamation.image %}
-    <td><img src="{{ asset('images/' ~ reclamation.image) }}" style="width:100px;height:100px;"></td>
-{% else %}
-    <td>No image available</td>
-{% endif %}
+                {% if reclamation.image %}
+                <td><img src="{{ asset('images/' ~ reclamation.image) }}" style="width:100px;height:100px;"></td>
+                {% else %}
+                <td>No image available</td>
+                {% endif %}
+                <td><a href="{{ path('app_reponse_front', {'id': reclamation.id}) }}"<button type="button" class="btn btn-secondary">Show Responses</button></a>
+                <button type="button" class="btn btn-danger">Delete Reclamation</button></td>
 
 
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
+                </tr>
+                 {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+                {% endfor %}
         </tbody>
     </table>
 
