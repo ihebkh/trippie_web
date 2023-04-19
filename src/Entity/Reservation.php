@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
@@ -11,15 +12,19 @@ class Reservation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reservations")]
     private ?int $id = null;
 
     #[ORM\Column(type: "datetime")]
+    #[Groups("reservations")]
     private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: "datetime")]
+    #[Groups("reservations")]
     private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column]
+    #[Groups("reservations")]
     private ?int $idClient = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]

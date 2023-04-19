@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* voiture/afficheclient.html.twig */
+/* voiture/AfficheClient.html.twig */
 class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 {
     private $source;
@@ -39,9 +39,9 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/afficheclient.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/AfficheClient.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/afficheclient.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/AfficheClient.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -146,7 +146,6 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 
 
     <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
-
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -155,7 +154,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 
     public function getTemplateName()
     {
-        return "voiture/afficheclient.html.twig";
+        return "voiture/AfficheClient.html.twig";
     }
 
     public function isTraitable()
@@ -215,8 +214,7 @@ class __TwigTemplate_e203471b982bf98792244709df3604d1 extends Template
 
 
     <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
-
 {% endblock %}
-", "voiture/afficheclient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
+", "voiture/AfficheClient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
     }
 }

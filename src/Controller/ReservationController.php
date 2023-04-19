@@ -20,6 +20,7 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 
 class ReservationController extends AbstractController
@@ -86,12 +87,21 @@ Trippie');
 //delete back
 
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
-    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
+    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine,FlashBagInterface $flashBag): Response
     {
 
         $reservation = $repo->find($id);
         $reservation->getIdVoiture()->setEtat("non reservé");
         $em = $doctrine->getManager();
+        $codedebut = $reservation->getDateDebut();
+        $datesysteme = new \DateTime();
+// Calcul de la différence en jours entre codedebut et datesysteme
+        $diff = $codedebut->diff($datesysteme);
+// Affichage de la différence en jours
+
+        $flashBag->add('error', 'Reservation cannot be deleted as it is less than 3 days from the start date.');
+
+
         $em->remove($reservation);
         $em->flush();
         return $this->redirectToRoute("app_reservationaffiche");

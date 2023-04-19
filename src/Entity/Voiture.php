@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
@@ -14,21 +15,25 @@ class Voiture
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(type: "integer")]
+    #[Groups("voitures")]
     private ?int $id = null;
-
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Registration Number is empty")]
+    #[Groups("voitures")]
     private ?string $matricule = null;
 
     #[Assert\NotBlank(message: "Brand Number is empty")]
     #[ORM\Column(length: 255)]
+    #[Groups("voitures")]
     private ?string $marque = null;
     #[Assert\NotBlank(message: "power Number is empty")]
+    #[Groups("voitures")]
     #[ORM\Column(length: 255)]
     private ?string $puissance = null;
     #[Assert\NotBlank(message: "price Number is empty")]
     #[Assert\NotBlank(message: "price Number must be positve")]
+    #[Groups("voitures")]
     #[Assert\Range(
         min: 1,
         max: 9999999999,
@@ -38,15 +43,19 @@ class Voiture
     private ?string $prixJours = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("voitures")]
     private ?string $picture = null;
     #[Assert\NotBlank(message: "Energy is empty")]
+    #[Groups("voitures")]
     #[ORM\Column(length: 255)]
     private ?string $energie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("voitures")]
     private ?string $etat = null;
 
     #[ORM\Column]
+    #[Groups("voitures")]
     private ?int $idLocateur = null;
     #[ORM\OneToMany(mappedBy: 'idVoiture', targetEntity: Reservation::class, cascade: ['remove'])]
     private Collection $reservations;

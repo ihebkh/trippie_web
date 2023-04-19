@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+
     <main id="main" class="main">
 
 
@@ -34,7 +35,7 @@
                         <div class="card-body">
 
                             <h5 class="card-title">car list</h5>
-                          <a href="{{ path('exportexcel') }}">
+                    <a href="{{ path('exportexcel') }}">
                                 <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">Export to excel
                                 </button>
 
@@ -105,4 +106,19 @@
 
     </main>
 
+{% endblock %}
+{% block flashbag %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            {% if type == 'error' %}
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: '{{ message|raw }}'
+                    });
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
