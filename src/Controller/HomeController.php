@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Coupon;
 use App\Repository\CouponRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,15 +16,18 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-#[Route('/home/roue', name: 'app_roue')]
-public function index2(CouponRepository $couponRepository): Response
-{
-    $taux = $couponRepository->getTaux();
-    
-    return $this->render('home/indexroue.html.twig', [
-        'taux' => $taux,
-    ]);
-}
+    #[Route('/home/roue', name: 'app_roue')]
+    public function index2(CouponRepository $couponRepository): Response
+    {
+        // Get the taux values from the database
+        $taux = $couponRepository->getTaux();
+
+        // Pass the taux values to the Twig template
+        return $this->render('home/indexroue.html.twig', [
+            'taux' => $taux,
+        ]);
+    }
+
     
     
 }

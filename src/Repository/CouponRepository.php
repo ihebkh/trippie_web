@@ -48,12 +48,14 @@ class CouponRepository extends ServiceEntityRepository
 }
 public function getTaux(): array
 {
-    return $this->createQueryBuilder('c')
-        ->select('c.taux')
-        ->getQuery()
-        ->getScalarResult();
+    $taux = [];
+    $coupons = $this->findAll();
+    foreach ($coupons as $coupon) {
+        $taux[] = $coupon->getTaux();
+    }
+    shuffle($taux); // shuffle the array to randomize the order
+    return $taux;
 }
-
 public function findByCodeCouponOrType(string $query): array
 {
     return $this->createQueryBuilder('c')

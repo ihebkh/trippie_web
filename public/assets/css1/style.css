@@ -5,14 +5,12 @@
     outline: none;
 }
 body{
-
-
     display:flex ;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    background-color: brown;
+    background-color: rgb(233, 95, 95);
     background-size: cover;
     background-position: center;
 }
@@ -21,7 +19,7 @@ body{
     width: 500px;
     height: 500px
     ;
-    margin-top: 200px;
+    margin-top: 50px;
 
 }
 .mainbox::after{
@@ -72,7 +70,7 @@ span{
     background-color: #ff8300        ;
 }
 .box2 .span3{
-        background-color: #00ff04;
+        background-color: #d1ddd1;
 }
 .box2{
 width: 100%;
@@ -80,11 +78,7 @@ height: 100%;
 transform: rotate(180deg);
 
 }
-.box2 .span1 h5{
 
-    background:#333;
-
-}
 .font{
     color: #fff
     ;
@@ -92,24 +86,26 @@ transform: rotate(180deg);
 }
 .box1 .span1 h5{
 position: absolute;
-top: 40%;
-right: 63%;
+top: 41%;
+right: 69%;
 transform: rotate(200deg)
 ;
 text-align: center;
 }
 .box1 .span2 h5{
     position: absolute;
-    top: 30%;
-    right: 57%;
+    top: 33%;
+    right: 64%;
+   
     transform : rotate(-130deg)
     ;
     text-align: center;
     }
     .box1 .span3 h5{
         position: absolute;
-        top: 22%;
-        right: 38%;
+        top: 20%;
+        right: 52%;
+       
         transform: rotate(-90deg)
         ;
         text-align: center;
@@ -117,23 +113,23 @@ text-align: center;
         .box1 .span4 h5{
             position: absolute;
             top: 25%;
-            right: 16%;
+            right: 23%;
             transform: rotate(-45deg)
             ;
             text-align: center;
             }
             .box1 .span5 h5{
                 position: absolute;
-                top: 40%;
-                right: 6%;
+                top: 30%;
+                right: 10%;
                 transform: rotate(-15deg)
                 ;
                 text-align: center;
                 }
                 .box2 .span1 h5{
-                    font-size: 50px;
+                   
                     position: absolute;
-                    top: 34%;
+                    top: 40%;
                     right: 70%;
                     transform: rotate(200deg)
                     ;
@@ -142,8 +138,8 @@ text-align: center;
                     .box2 .span2 h5{
                        
                         position: absolute;
-                        top: 28%;
-                        right: 54%;
+                        top: 30%;
+                        right: 60%;
                         transform: rotate(-130deg)
                         ;
                         text-align: center;
@@ -151,8 +147,8 @@ text-align: center;
                         .box2 .span3 h5{
                        
                             position: absolute;
-                            top: 15%;
-                            right: 40%;
+                            top: 10%;
+                            right: 50%;
                             transform: rotate(270deg)
                             ;
                             text-align: center;
@@ -160,8 +156,8 @@ text-align: center;
                             .box2 .span4 h5{
                        
                                 position: absolute;
-                                top: 25%;
-                                right: 15%;
+                                top: 20%;
+                                right:30%;
                                 transform: rotate(310deg)
                                 ;
                                 text-align: center;
@@ -169,8 +165,8 @@ text-align: center;
                                 .box2 .span5 h5{
                        
                                     position: absolute;
-                                    top: 38%;
-                                    right: 6%;
+                                    top: 40%;
+                                    right: 20%;
                                     transform: rotate(-20deg)
                                     ;
                                     text-align: center;
@@ -213,3 +209,4 @@ font-size: 20px;
                                              right: -50px;
                                          }
                                      }
+                                     

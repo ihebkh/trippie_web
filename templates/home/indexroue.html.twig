@@ -1,24 +1,26 @@
 {% extends 'indexPromotion.html.twig' %}
+
 {% block body %}
 <div class="mainbox" id="mainbox">
-<div class="box" id="box">
-<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-<div class="box1">
-<span class="font span1"></span>
-<span class="font span2"></span>
-<span class="font span3"></span>
-<span class="font span4"></span>
-<span class="font span5"></span>
-</div>
-<div class="box2">
-<span class="font span1"></span>
-<span class="font span2"></span>
-<span class="font span3"></span>
-<span class="font span4"></span>
-<span class="font span5"></span>
-</div>
-</div>
-<button class="spin" onclick="spin()">spin </button>
+    <div class="box" id="box">
+        <link rel="stylesheet" href="{{ asset('assets/css1/style.css') }}">
+         <div class="box1">
+            <span class="font span1"><h5>{{ taux[0] }}</h5></span>
+            <span class="font span2"><h5>{{ taux[1] }}</h5></span>
+            <span class="font span3"><h5>{{ taux[2] }}</h5></span>
+            <span class="font span4"><h5>{{ taux[3] }}</h5></span>
+            <span class="font span5"><h5>{{ taux[4] }}</h5></span>
+        </div>
+        <div class="box2">
+            <span class="font span1"><h5>{{ taux[5] }}</h5></span>
+            <span class="font span2"><h5>{{ taux[6] }}</h5></span>
+            <span class="font span3"><h5>{{ taux[7] }}</h5></span>
+            <span class="font span4"><h5>{{ taux[8] }}</h5></span>
+            <span class="font span5"><h5>{{ taux[9] }}</h5></span>
+        </div>
+    </div>
+   
+    <button class="spin" onclick="spin()">spin </button>
 </div>
 <audio controls="controls" id="applause" src={{ asset('assets/audio/applause.mp3') }} type="audio/mp3"></audio>
 <audio controls="controls" id="wheel" src={{ asset('assets/audio/wheel.mp3') }} type="audio/mp3"></audio>

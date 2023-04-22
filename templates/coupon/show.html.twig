@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
+  {{ include('coupon/_delete_form.html.twig') }}
     <main id="main" class="main">
 
 
@@ -87,14 +87,20 @@
                                <th><center>      <a href="{{ path('app_coupon_show',{id:coupon.id}) }}">
                                           <th><center>      <a href="{{ path('app_coupon_edit',{id:coupon.id}) }}">
                                            <button type="button" class="btn btn-outline-success ">Update</button></a>          </center></th>
+                                          
                                
-                               <td><center>
+                             <tr>
+    <th>
+        <center>
+            <a href="{{ path('app_coupon_delete',{id:coupon.id}) }}">
+                <button type="button" class="btn btn-outline-danger">Delete</button>
+            </a>
+        </center>
+    </th>
+</tr>
 
-                                    
-
-
-                                   </center></td>
                            </tr>
+                           
 
                                 </tbody>
                             </table>
