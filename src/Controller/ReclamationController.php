@@ -75,7 +75,29 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_reclamation_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
+    public function add(Reclamation $reclamation, Request $request, ReponseRepository $reponseRepository): Response
+    {
+        $reponse = new Reponse();
+        $form = $this->createForm(ReponseType::class, $reponse);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reponseRepository->save($reponse, true);
+
+            return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('reclamation/add.html.twig', [
+            'reponse' => $reponse,
+            'form' => $form,
+            'reclamation' => $reclamation,
+        ]);
+        
+    }
+
+    #[Route('/{id}/rec', name: 'app_reclamation_show', methods: ['GET'])]
     public function show(Reclamation $reclamation): Response
     {
         return $this->render('reclamation/show.html.twig', [
@@ -198,26 +220,6 @@ class ReclamationController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
-    public function add(Reclamation $reclamation, Request $request, ReponseRepository $reponseRepository): Response
-    {
-        $reponse = new Reponse();
-        $form = $this->createForm(ReponseType::class, $reponse);
-        $form->handleRequest($request);
 
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reponseRepository->save($reponse, true);
-
-            return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('reclamation/add.html.twig', [
-            'reponse' => $reponse,
-            'form' => $form,
-            'reclamation' => $reclamation,
-        ]);
-        
-    }
 
 }
