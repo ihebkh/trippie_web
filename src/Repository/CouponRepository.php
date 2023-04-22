@@ -38,6 +38,31 @@ class CouponRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+        public function findTaux()
+{
+    $query = $this->createQueryBuilder('c')
+        ->select('c.taux')
+        ->getQuery();
+
+    return $query->getScalarResult();
+}
+public function getTaux(): array
+{
+    return $this->createQueryBuilder('c')
+        ->select('c.taux')
+        ->getQuery()
+        ->getScalarResult();
+}
+
+public function findByCodeCouponOrType(string $query): array
+{
+    return $this->createQueryBuilder('c')
+        ->andWhere('c.code_coupon LIKE :query OR c.type LIKE :query')
+        ->setParameter('query', '%'.$query.'%')
+        ->orderBy('c.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
 
 //    /**
 //     * @return Coupon[] Returns an array of Coupon objects

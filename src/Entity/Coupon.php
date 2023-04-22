@@ -46,6 +46,8 @@ class Coupon
     private ?string $type = null;
 
     #[ORM\OneToMany(mappedBy: 'coupon', targetEntity: Cadeau::class)]
+    #[ORM\JoinColumn(name: "coupon_id", referencedColumnName: "id", onDelete: "CASCADE")]
+
     private Collection $cadeau;
 
     public function __construct()

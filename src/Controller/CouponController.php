@@ -10,16 +10,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/coupon')]
 class CouponController extends AbstractController
 {
     #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
-    public function index(CouponRepository $couponRepository): Response
+    public function index(Request $request, CouponRepository $couponRepository): Response
     {
+        $searchQuery = $request->query->get('q');
+    
+        if ($searchQuery) {
+            $coupons = $couponRepository->findByCodeCouponOrType($searchQuery);
+        } else {
+            $coupons = $couponRepository->findAll();
+        }
+    
         return $this->render('coupon/index.html.twig', [
-            'coupons' => $couponRepository->findAll(),
+            'coupons' => $coupons,
         ]);
     }
+
+    
 
     #[Route('/new', name: 'app_coupon_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CouponRepository $couponRepository): Response
@@ -75,4 +86,5 @@ class CouponController extends AbstractController
 
         return $this->redirectToRoute('app_coupon_index', [], Response::HTTP_SEE_OTHER);
     }
+  
 }
