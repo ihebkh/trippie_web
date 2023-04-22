@@ -45,7 +45,7 @@
                 <td>No image available</td>
                 {% endif %}
                 <td><a href="{{ path('app_reponse_front', {'id': reclamation.id}) }}"<button type="button" class="btn btn-secondary">Show Responses</button></a>
-                <button type="button" class="btn btn-danger">Delete Reclamation</button></td>
+                {{ include('reclamation/_delete_form_front.html.twig') }}</td>
 
 
                 </tr>

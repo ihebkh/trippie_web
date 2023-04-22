@@ -13,8 +13,6 @@ class ReponseType extends AbstractType
     {
         $builder
             ->add('reponse')
-            ->add('etat')
-            ->add('id_rec')
         ;
     }
 

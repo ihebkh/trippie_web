@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Reponse;
+use App\Form\ReponseType;
+use App\Repository\ReponseRepository;
+
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
@@ -46,6 +50,8 @@ class ReclamationController extends AbstractController
                 }
                 $reclamation->setImage($fileName);
             }
+
+            $reclamation->setEtat("non traité");
 
             $reclamationRepository->save($reclamation, true);
 
@@ -132,4 +138,86 @@ class ReclamationController extends AbstractController
 
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}', name: 'app_reclamation_Fdelete', methods: ['POST'])]
+    public function deleteF(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reclamation->getId(), $request->request->get('_token'))) {
+            $reclamationRepository->remove($reclamation, true);
+        }
+
+        return $this->redirectToRoute('app_reclamation_front', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/treat', name: 'app_reclamation_treat', methods: ['GET', 'POST'])]
+    public function treat(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
+    {
+        $form = $this->createForm(Reclamation1Type::class, $reclamation);
+        $form->handleRequest($request);
+        $originalImage = $reclamation->getImage();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData(); // get the uploaded file
+
+            if ($imageFile) {
+                // generate a unique filename
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+    
+                // move the file to the images directory
+                $imageFile->move(
+                    $this->getParameter('reclamation_images_directory'),
+                    $newFilename
+                );
+    
+                // update the entity with the new filename
+                $reclamation->setImage($newFilename);
+    
+                // delete the original image file, if it exists
+                if ($originalImage) {
+                    $originalImagePath = $this->getParameter('reclamation_images_directory').'/'.$originalImage;
+                    if (file_exists($originalImagePath)) {
+                        unlink($originalImagePath);
+                    }
+                }
+            } else {
+                // use the original image filename
+                $reclamation->setImage($originalImage);
+            }
+            
+            $reclamation->setEtat("Traité");
+
+            $reclamationRepository->save($reclamation, true);
+
+            return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->render('reclamation/show.html.twig', [
+            'reclamation' => $reclamation,
+        ]);
+    }
+
+
+
+    #[Route('/{id}', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
+    public function add(Reclamation $reclamation, Request $request, ReponseRepository $reponseRepository): Response
+    {
+        $reponse = new Reponse();
+        $form = $this->createForm(ReponseType::class, $reponse);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reponseRepository->save($reponse, true);
+
+            return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('reclamation/add.html.twig', [
+            'reponse' => $reponse,
+            'form' => $form,
+            'reclamation' => $reclamation,
+        ]);
+        
+    }
+
 }

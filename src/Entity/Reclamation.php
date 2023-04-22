@@ -29,8 +29,7 @@ class Reclamation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $etat = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\NotNull(message: 'ID user cannot be empty')]
+    #[ORM\Column(nullable: false)]
     private ?int $id_user = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
