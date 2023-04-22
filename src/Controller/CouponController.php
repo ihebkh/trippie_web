@@ -18,17 +18,33 @@ class CouponController extends AbstractController
     public function index(Request $request, CouponRepository $couponRepository): Response
     {
         $searchQuery = $request->query->get('q');
-    
+        $sort = $request->query->get('sort');
+        $order = $request->query->get('order', 'asc');
+        
         if ($searchQuery) {
             $coupons = $couponRepository->findByCodeCouponOrType($searchQuery);
+        } elseif ($sort === 'taux' && $order === 'asc') {
+            $coupons = $couponRepository->findAllSortedByTauxReduction('ASC');
+        } elseif ($sort === 'taux' && $order === 'desc') {
+            $coupons = $couponRepository->findAllSortedByTauxReduction('DESC');
         } else {
             $coupons = $couponRepository->findAll();
         }
+        
     
         return $this->render('coupon/index.html.twig', [
             'coupons' => $coupons,
+            'sort' => $sort,
+            'order' => $order,
         ]);
     }
+    
+    
+    
+    
+    
+    
+    
 
     
 

@@ -63,6 +63,13 @@ public function findByCodeCouponOrType(string $query): array
         ->getQuery()
         ->getResult();
 }
+public function findAllSortedByTauxReduction($order = 'ASC')
+{
+    $queryBuilder = $this->createQueryBuilder('c')
+        ->orderBy('c.taux', $order);
+
+    return $queryBuilder->getQuery()->getResult();
+}
 
 //    /**
 //     * @return Coupon[] Returns an array of Coupon objects

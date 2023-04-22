@@ -21,7 +21,18 @@
 
         <section class="section">
             <div class="row">
-             
+             <th>
+    <a href="{{ path('app_coupon_index', {'sort': 'taux', 'order': order == 'asc' ? 'desc' : 'asc'}) }}">
+        Taux de réduction
+        {% if sort == 'taux' %}
+            {% if order == 'asc' %}
+                <i class="bi bi-caret-down-fill"></i>
+            {% else %}
+                <i class="bi bi-caret-up-fill"></i>
+            {% endif %}
+        {% endif %}
+    </a>
+</th>
                 <div class="col-lg-12">
 
                     <div class="card">
