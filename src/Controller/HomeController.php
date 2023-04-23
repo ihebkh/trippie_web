@@ -28,6 +28,14 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/home/about', name: 'app_discount')]
+    public function discount(CouponRepository $couponRepository): Response
+    {
+        $codeCoupon = $couponRepository->getCodeCoupon();
     
+        return $this->render('home/discount.html.twig', [
+            'code_coupon' => $codeCoupon,
+        ]);
+    }
     
 }

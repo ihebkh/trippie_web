@@ -4,6 +4,7 @@
 <div class="mainbox" id="mainbox">
     <div class="box" id="box">
         <link rel="stylesheet" href="{{ asset('assets/css1/style.css') }}">
+
          <div class="box1">
             <span class="font span1"><h5>{{ taux[0] }}</h5></span>
             <span class="font span2"><h5>{{ taux[1] }}</h5></span>
@@ -21,9 +22,10 @@
     </div>
    
     <button class="spin" onclick="spin()">spin </button>
+    <div id="result"></div>
 </div>
 <audio controls="controls" id="applause" src={{ asset('assets/audio/applause.mp3') }} type="audio/mp3"></audio>
 <audio controls="controls" id="wheel" src={{ asset('assets/audio/wheel.mp3') }} type="audio/mp3"></audio>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src={{ asset('assets/js1/main.js') }}></script>
+<script src={{ asset('assets/js3/main.js') }}></script>
 {% endblock %}

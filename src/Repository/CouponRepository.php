@@ -72,6 +72,15 @@ public function findAllSortedByTauxReduction($order = 'ASC')
 
     return $queryBuilder->getQuery()->getResult();
 }
+public function getCodeCoupon()
+{
+    $qb = $this->createQueryBuilder('c')
+        ->select('c.code_coupon')
+        ->setMaxResults(1)
+        ->getQuery();
+
+    return $qb->getSingleScalarResult();
+}
 
 //    /**
 //     * @return Coupon[] Returns an array of Coupon objects

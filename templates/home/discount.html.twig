@@ -1,0 +1,14 @@
+{% extends 'indexPromotion.html.twig' %}
+
+{% block body %}
+<br><br><br><br><br><br><br><br><br><br>
+  <form method="post" action="{{ path('app_discount') }}">
+    <label for="inputPrice">Price:</label>
+    <input type="text" id="inputPrice" name="price">
+    <br>
+    <label for="inputCoupon">Coupon:</label>
+    <input type="text" id="inputCoupon" name="code_coupon">
+    <br>
+    <button type="submit">Get Discount</button>
+  </form>
+{% endblock %}
