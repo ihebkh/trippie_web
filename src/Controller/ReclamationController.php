@@ -15,6 +15,8 @@ use App\Entity\Reponse;
 use App\Form\ReponseType;
 use App\Repository\ReponseRepository;
 
+use Twilio\Rest\Client;
+
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
@@ -54,6 +56,18 @@ class ReclamationController extends AbstractController
             $reclamation->setEtat("non traité");
 
             $reclamationRepository->save($reclamation, true);
+
+            $sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
+            $token  = "e0f542fecc731d9f8e9d87a4709aae32";
+            $twilio = new Client($sid, $token);
+
+            $message = $twilio->messages
+                ->create("+21654833493", // to
+                    array(
+                            "from" => "+12766226225",
+                            "body" => "Votre réclamation est recu !!!"
+                        )
+                    );
 
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
         }
