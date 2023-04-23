@@ -156,6 +156,6 @@ class Reclamation
 
     public function __toString()
     {
-        return $this->type;
+        return $this->id;
     }
 }

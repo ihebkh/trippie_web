@@ -1,31 +1,36 @@
 {% extends "frontbase.html.twig" %}
 
-{% block title %}Reponse index{% endblock %}
+{% block title %}Reponse{% endblock %}
 
 {% block body %}
-    <h1>Reponse List</h1>
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <table class="table table-hover " style="background-color: white">
+  <center><h1>Reponses list</h1></center>
+  <br>
+
+    <table class="table table-hover">
         <thead>
-        <tr>
-            
-            <th>Reponse</th>
-                <th>actions</th>
-        </tr>
+        
+            <tr class="table-info">
+                <th></th>
+                <th></th>
+                <th scope="col">#</th>
+                <th>Réponse</th>
+            </tr>
         </thead>
         <tbody>
-        {% for reponses in reponses %}
+            {% for reponses in reponses %}
             <tr>
-                
+                <td></td>
+                <td></td>
+                <td>{{ loop.index }}</td>
                 <td>{{ reponses.reponse }}</td>
-                <td>{{ reponses.getIdrec() }}</td>
 
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
+                {% endfor %}
         </tbody>
     </table>
 
