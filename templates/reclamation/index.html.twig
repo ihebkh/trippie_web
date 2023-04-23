@@ -12,7 +12,6 @@
                 <th>Type</th>
                 <th>Commentaire</th>
                 <th>Etats</th>
-                <th>Id_user</th>
                 <th>Date_creation</th>
                 <th>Image</th>
                 <th>Actions</th>
@@ -25,7 +24,6 @@
                 <td>{{ reclamation.type }}</td>
                 <td>{{ reclamation.commentaire }}</td>
                 <td>{{ reclamation.etat }}</td>
-                <td>{{ reclamation.idUser }}</td>
                 <td>{{ reclamation.dateCreation ? reclamation.dateCreation|date('Y-m-d') : '' }}</td>
                {% if reclamation.image %}
     <td><img src="{{ asset('images/' ~ reclamation.image) }}" style="width:100px;height:100px;"></td>

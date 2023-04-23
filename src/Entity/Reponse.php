@@ -19,9 +19,6 @@ class Reponse
     #[Assert\Length(min: 16, minMessage: 'Reponse must be at least {{ limit }} characters long')]
     private ?string $reponse = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $etat = null;
-
     #[ORM\ManyToOne(inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Reclamation $id_rec = null;
@@ -39,18 +36,6 @@ class Reponse
     public function setReponse(?string $reponse): self
     {
         $this->reponse = $reponse;
-
-        return $this;
-    }
-
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(?string $etat): self
-    {
-        $this->etat = $etat;
 
         return $this;
     }

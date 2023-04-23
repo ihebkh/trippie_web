@@ -10,17 +10,15 @@
         <tr>
             
             <th>Reponse</th>
-                <th>Etat</th>
                 <th>actions</th>
         </tr>
         </thead>
         <tbody>
-        {% for reponse in reponses %}
+        {% for reponses in reponses %}
             <tr>
                 
-                <td>{{ reponse.reponse }}</td>
-                <td>{{ reponse.etat }}</td>
-                <td>{{ reponse.getIdrec() }}</td>
+                <td>{{ reponses.reponse }}</td>
+                <td>{{ reponses.getIdrec() }}</td>
 
             </tr>
         {% else %}

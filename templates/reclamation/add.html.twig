@@ -6,6 +6,7 @@
     <h1>Reclamation</h1>
 
     <table class="table">
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
         <tbody>
             <tr>
                 <th>Id</th>
@@ -24,10 +25,6 @@
                 <td>{{ reclamation.etat }}</td>
             </tr>
             <tr>
-                <th>Id_user</th>
-                <td>{{ reclamation.idUser }}</td>
-            </tr>
-            <tr>
                 <th>Date_creation</th>
                 <td>{{ reclamation.dateCreation ? reclamation.dateCreation|date('Y-m-d') : '' }}</td>
             </tr>
@@ -44,25 +41,19 @@
             <td>
             {{ form_widget(form.reponse) }}
             </td>
-            </tr>           
+            </tr>
+            <td>
+                <div class="col-sm-10"><button type="submit" class="btn btn-info">Save</button></div>
+            </td>           
         </tbody>
     </table>
     
-
-    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}"><button type="button" class="btn btn-info">Edit</button></a>
     <br><br>
-    {{ include('reclamation/_delete_form.html.twig') }}
-<br><br>
+
     <a href="{{ path('app_reclamation_index') }}"><button type="button" class="btn btn-secondary">Back to list</button></a>
-
-    <table class="table">
-        <tbody>
-
-     
-
-        <a href="{{ path('app_reponse_index') }}">back to list</a>
-        </tbody>
-    </table>
+    <a href="{{ path('app_reclamation_traite', {'id': reclamation.id}) }}"><button type="button" class="btn btn-info">Treat</button></a>
 
 
+
+{{ form_end(form) }}
 {% endblock %}

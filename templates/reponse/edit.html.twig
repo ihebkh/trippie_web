@@ -5,9 +5,24 @@
 {% block content %}
     <h1>Edit Reponse</h1>
 
+    <table class="table">
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+        <tbody>
+            <tr>
+                <th>Reponse</th>
+                <td>{{ form_widget(form.reponse) }}</td>
+            </tr>
+            
+            
+        </tbody>
+
+    </table>
+
     {{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_reponse_index') }}">back to list</a>
+    <a href="{{ path('app_reponse_index') }}"><button type="button" class="btn btn-info">Back to list</a>
 
     {{ include('reponse/_delete_form.html.twig') }}
+
+    {{ form_end(form) }}
 {% endblock %}

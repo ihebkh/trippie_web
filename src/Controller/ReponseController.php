@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Reclamation;
+use App\Form\Reclamation1Type;
+use App\Repository\ReclamationRepository;
+
 #[Route('/reponse')]
 class ReponseController extends AbstractController
 {
@@ -40,15 +44,19 @@ class ReponseController extends AbstractController
         ]);
     }
 
-    #[Route('/front', name: 'app_reponse_front', methods: ['GET'])]
-    public function front(ReponseRepository $reponseRepository): Response
+    #[Route('/{id}', name: 'app_reponse_front', methods: ['GET'])]
+    public function front(int $id, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository): Response
     {
-        return $this->render('reponse/showAll.html.twig', [
-            'reponses' => $reponseRepository->findAll(),
-        ]);
+        $reclamation = $reclamationRepository->find($id);
+        $reponses = $reclamation->getReponses();
+
+    return $this->render('reponse/showAll.html.twig', [
+        'reclamation' => $reclamation,
+        'reponses' => $reponses,
+    ]);
     }
 
-    #[Route('/{id}', name: 'app_reponse_show', methods: ['GET'])]
+    #[Route('/{id}/rep', name: 'app_reponse_show', methods: ['GET'])]
     public function show(Reponse $reponse): Response
     {
         return $this->render('reponse/show.html.twig', [
