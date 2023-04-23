@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use  Flasher\Prime\FlasherInterface;
 use App\Form\ReservationFormType;
 use App\Repository\VoitureRepository;
 use App\Repository\ReservationRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
+use Twilio\Rest\Client;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 
@@ -69,7 +71,18 @@ Trippie');
             $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
             $mailer = new Mailer($transport);
             $mailer->send($email);
+/*
+            $sid    = "AC3e1c75ab2cb5f960a3753710b8aeeadc";
+            $token  = "2b0f2e38776c980a3aa931921c3ea03a";
+            $twilio = new Client($sid, $token);
+            $call = $twilio->calls
+                ->create("+21625104011", // to
+                    "+16812069861", // from
+                    ["url" => "http://demo.twilio.com/docs/voice.xml"]
+                );
 
+            print($call->sid);
+*/
             $voiture->setEtat("reservé");
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
@@ -87,19 +100,22 @@ Trippie');
 //delete back
 
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
-    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine,FlashBagInterface $flashBag): Response
+    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine,FlasherInterface $flasher): Response
     {
 
         $reservation = $repo->find($id);
         $reservation->getIdVoiture()->setEtat("non reservé");
         $em = $doctrine->getManager();
-        $codedebut = $reservation->getDateDebut();
-        $datesysteme = new \DateTime();
+     //   $codedebut = $reservation->getDateDebut();
+      //  $datesysteme = new \DateTime();
 // Calcul de la différence en jours entre codedebut et datesysteme
-        $diff = $codedebut->diff($datesysteme);
+       // $diff = $codedebut->diff($datesysteme);
 // Affichage de la différence en jours
+        $flasher->addSuccess('Your message here.');
 
-        $flashBag->add('error', 'Reservation cannot be deleted as it is less than 3 days from the start date.');
+
+
+        $this->addFlash('error', 'Reservation cannot be deleted as it is less than 3 days from the start date.');
 
 
         $em->remove($reservation);

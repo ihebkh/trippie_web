@@ -17,6 +17,8 @@
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="EndroidQrCodeBundle">Endroid\QrCodeBundle\EndroidQrCodeBundle</parameter>
+      <parameter key="FlasherSymfonyBundle">Flasher\Symfony\FlasherSymfonyBundle</parameter>
+      <parameter key="FlasherSweetAlertSymfonyBundle">Flasher\SweetAlert\Symfony\FlasherSweetAlertSymfonyBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -50,6 +52,14 @@
       <parameter key="EndroidQrCodeBundle" type="collection">
         <parameter key="path">C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\endroid\qr-code-bundle\src</parameter>
         <parameter key="namespace">Endroid\QrCodeBundle</parameter>
+      </parameter>
+      <parameter key="FlasherSymfonyBundle" type="collection">
+        <parameter key="path">C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony</parameter>
+        <parameter key="namespace">Flasher\Symfony</parameter>
+      </parameter>
+      <parameter key="FlasherSweetAlertSymfonyBundle" type="collection">
+        <parameter key="path">C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-sweet-alert-symfony</parameter>
+        <parameter key="namespace">Flasher\SweetAlert\Symfony</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -189,7 +199,9 @@
     <parameter key="knp_paginator.template.sortable">@KnpPaginator/Pagination/sortable_link.html.twig</parameter>
     <parameter key="knp_paginator.page_range">5</parameter>
     <parameter key="knp_paginator.page_limit">null</parameter>
-    <parameter key="console.command.ids" type="collection"/>
+    <parameter key="console.command.ids" type="collection">
+      <parameter>console.command.public_alias.flasher.install_command</parameter>
+    </parameter>
   </parameters>
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
@@ -1333,6 +1345,7 @@
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ar.xliff</argument>
+            <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony/Resources/translations\flasher.ar.php</argument>
           </argument>
           <argument key="az" type="collection">
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
@@ -1382,6 +1395,7 @@
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
+            <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony/Resources/translations\flasher.en.php</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
@@ -1411,6 +1425,7 @@
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
+            <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony/Resources/translations\flasher.fr.php</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
@@ -1586,6 +1601,7 @@
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\knplabs\knp-paginator-bundle/translations</argument>
+          <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony/Resources/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\framework-bundle/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\doctrine\doctrine-bundle/translations</argument>
@@ -1594,12 +1610,14 @@
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\twig-bundle/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\sensio\framework-extra-bundle\src/translations</argument>
           <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\endroid\qr-code-bundle\src/translations</argument>
+          <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-sweet-alert-symfony/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\validator/Resources/translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\knplabs\knp-paginator-bundle/translations</argument>
+            <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-symfony/Resources/translations</argument>
             <argument>translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\framework-bundle/translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\doctrine\doctrine-bundle/translations</argument>
@@ -1608,6 +1626,7 @@
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\symfony\twig-bundle/translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\sensio\framework-extra-bundle\src/translations</argument>
             <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\endroid\qr-code-bundle\src/translations</argument>
+            <argument>C:\Users\khmir\Downloads\trippie_web-Allocation\trippie_web-Allocation\vendor\php-flasher\flasher-sweet-alert-symfony/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -1860,6 +1879,22 @@
           <argument>onKernelRequest</argument>
         </argument>
         <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="flasher.session_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="flasher.flasher_listener"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>-256</argument>
       </call>
       <call method="addListener">
         <argument>kernel.response</argument>
@@ -3691,6 +3726,9 @@
       <call method="addExtension">
         <argument type="service" id="Endroid\QrCodeBundle\Twig\QrCodeExtension"/>
       </call>
+      <call method="addExtension">
+        <argument type="service" id="flasher.twig.extension"/>
+      </call>
       <call method="addGlobal">
         <argument>app</argument>
         <argument type="service" id="twig.app_variable"/>
@@ -4098,6 +4136,204 @@
         <argument>false</argument>
       </call>
     </service>
+    <service id="flasher.config" class="Flasher\Prime\Config\Config">
+      <argument type="collection">
+        <argument key="presets" type="collection">
+          <argument key="created" type="collection">
+            <argument key="type">success</argument>
+            <argument key="message">The resource was created</argument>
+            <argument key="options" type="collection"/>
+          </argument>
+          <argument key="updated" type="collection">
+            <argument key="type">success</argument>
+            <argument key="message">The resource was updated</argument>
+            <argument key="options" type="collection"/>
+          </argument>
+          <argument key="saved" type="collection">
+            <argument key="type">success</argument>
+            <argument key="message">The resource was saved</argument>
+            <argument key="options" type="collection"/>
+          </argument>
+          <argument key="deleted" type="collection">
+            <argument key="type">success</argument>
+            <argument key="message">The resource was deleted</argument>
+            <argument key="options" type="collection"/>
+          </argument>
+        </argument>
+        <argument key="default">flasher</argument>
+        <argument key="root_script" type="collection">
+          <argument key="cdn">https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js</argument>
+          <argument key="local">/vendor/flasher/flasher.min.js</argument>
+        </argument>
+        <argument key="options" type="collection"/>
+        <argument key="use_cdn">true</argument>
+        <argument key="auto_translate">true</argument>
+        <argument key="auto_render">true</argument>
+        <argument key="filter_criteria" type="collection"/>
+        <argument key="themes" type="collection"/>
+        <argument key="flash_bag" type="collection">
+          <argument key="enabled">true</argument>
+          <argument key="mapping" type="collection">
+            <argument key="success" type="collection">
+              <argument>success</argument>
+            </argument>
+            <argument key="error" type="collection">
+              <argument>error</argument>
+              <argument>danger</argument>
+            </argument>
+            <argument key="warning" type="collection">
+              <argument>warning</argument>
+              <argument>alarm</argument>
+            </argument>
+            <argument key="info" type="collection">
+              <argument>info</argument>
+              <argument>notice</argument>
+              <argument>alert</argument>
+            </argument>
+          </argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="flasher.storage_bag" class="Flasher\Symfony\Storage\SessionBag">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="flasher.storage" class="Flasher\Prime\Storage\StorageBag">
+      <argument type="service" id="flasher.storage_bag"/>
+    </service>
+    <service id="flasher.event_dispatcher" class="Flasher\Prime\EventDispatcher\EventDispatcher">
+      <call method="addSubscriber">
+        <argument type="service" id="flasher.translation_listener"/>
+      </call>
+      <call method="addSubscriber">
+        <argument type="service" id="flasher.preset_listener"/>
+      </call>
+    </service>
+    <service id="flasher.storage_manager" class="Flasher\Prime\Storage\StorageManager">
+      <argument type="service" id="flasher.storage"/>
+      <argument type="service" id="flasher.event_dispatcher"/>
+      <argument type="collection"/>
+    </service>
+    <service id="flasher.twig.extension" class="Flasher\Symfony\Twig\FlasherTwigExtension">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="flasher.template_engine" class="Flasher\Symfony\Template\TwigTemplateEngine">
+      <argument type="service" id="twig"/>
+    </service>
+    <service id="flasher.resource_manager" class="Flasher\Prime\Response\Resource\ResourceManager">
+      <argument type="service" id="flasher.config"/>
+      <argument type="service" id="flasher.template_engine"/>
+      <call method="addScripts">
+        <argument>sweetalert</argument>
+        <argument type="collection">
+          <argument key="cdn" type="collection">
+            <argument>https://cdn.jsdelivr.net/npm/@flasher/flasher-sweetalert@1.2.4/dist/flasher-sweetalert.min.js</argument>
+          </argument>
+          <argument key="local" type="collection">
+            <argument>/vendor/flasher/flasher-sweetalert.min.js</argument>
+          </argument>
+        </argument>
+      </call>
+      <call method="addStyles">
+        <argument>sweetalert</argument>
+        <argument type="collection"/>
+      </call>
+      <call method="addOptions">
+        <argument>sweetalert</argument>
+        <argument type="collection"/>
+      </call>
+    </service>
+    <service id="flasher.response_manager" class="Flasher\Prime\Response\ResponseManager">
+      <argument type="service" id="flasher.resource_manager"/>
+      <argument type="service" id="flasher.storage_manager"/>
+      <argument type="service" id="flasher.event_dispatcher"/>
+    </service>
+    <service id="flasher" class="Flasher\Prime\Flasher" public="true">
+      <argument>flasher</argument>
+      <argument type="service" id="flasher.response_manager"/>
+      <argument type="service" id="flasher.storage_manager"/>
+      <call method="addFactory">
+        <argument>sweetalert</argument>
+        <argument type="service" id="flasher.sweetalert"/>
+      </call>
+    </service>
+    <service id="flasher.notification_factory" class="Flasher\Prime\Factory\NotificationFactory">
+      <argument type="service" id="flasher.storage_manager"/>
+    </service>
+    <service id="flasher.translator" class="Flasher\Symfony\Translation\Translator">
+      <argument type="service" id="translator.default"/>
+    </service>
+    <service id="flasher.translation_listener" class="Flasher\Prime\EventDispatcher\EventListener\TranslationListener">
+      <tag name="flasher.event_subscriber"/>
+      <argument type="service" id="flasher.translator"/>
+      <argument>true</argument>
+    </service>
+    <service id="flasher.preset_listener" class="Flasher\Prime\EventDispatcher\EventListener\PresetListener">
+      <tag name="flasher.event_subscriber"/>
+      <argument type="collection">
+        <argument key="created" type="collection">
+          <argument key="type">success</argument>
+          <argument key="message">The resource was created</argument>
+          <argument key="options" type="collection"/>
+        </argument>
+        <argument key="updated" type="collection">
+          <argument key="type">success</argument>
+          <argument key="message">The resource was updated</argument>
+          <argument key="options" type="collection"/>
+        </argument>
+        <argument key="saved" type="collection">
+          <argument key="type">success</argument>
+          <argument key="message">The resource was saved</argument>
+          <argument key="options" type="collection"/>
+        </argument>
+        <argument key="deleted" type="collection">
+          <argument key="type">success</argument>
+          <argument key="message">The resource was deleted</argument>
+          <argument key="options" type="collection"/>
+        </argument>
+      </argument>
+    </service>
+    <service id="flasher.install_command" class="Flasher\Symfony\Command\InstallCommand">
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+    </service>
+    <service id="flasher.response_extension" class="Flasher\Prime\Http\ResponseExtension">
+      <argument type="service" id="flasher"/>
+    </service>
+    <service id="flasher.request_extension" class="Flasher\Prime\Http\RequestExtension">
+      <argument type="service" id="flasher"/>
+      <argument type="collection">
+        <argument key="success" type="collection">
+          <argument>success</argument>
+        </argument>
+        <argument key="error" type="collection">
+          <argument>error</argument>
+          <argument>danger</argument>
+        </argument>
+        <argument key="warning" type="collection">
+          <argument>warning</argument>
+          <argument>alarm</argument>
+        </argument>
+        <argument key="info" type="collection">
+          <argument>info</argument>
+          <argument>notice</argument>
+          <argument>alert</argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="flasher.session_listener" class="Flasher\Symfony\EventListener\SessionListener" public="true">
+      <tag name="kernel.event_listener" event="kernel.response"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="flasher.request_extension"/>
+    </service>
+    <service id="flasher.flasher_listener" class="Flasher\Symfony\EventListener\FlasherListener" public="true">
+      <tag name="kernel.event_listener" event="kernel.response" priority="-256"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="flasher.response_extension"/>
+    </service>
+    <service id="flasher.sweetalert" class="Flasher\SweetAlert\Prime\SweetAlertFactory" public="true">
+      <tag name="flasher.factory" alias="sweetalert"/>
+      <argument type="service" id="flasher.storage_manager"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ReservationController" class="App\Controller\ReservationController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4463,11 +4699,11 @@
         <argument key="voitureRepository" type="service_closure" id="App\Repository\VoitureRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.pnHNERz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.TNxTvee" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine" type="service_closure" id="doctrine"/>
-        <argument key="flashBag" type="service_closure" id="session.flash_bag"/>
+        <argument key="flasher" type="service_closure" id="flasher"/>
         <argument key="repo" type="service_closure" id="App\Repository\ReservationRepository"/>
       </argument>
     </service>
@@ -4581,13 +4817,13 @@
         <argument key="serializer" type="service_closure" id="serializer"/>
       </argument>
     </service>
-    <service id=".service_locator.VyZPusk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wLCzBDH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ReservationController::Affiche" type="service_closure" id=".service_locator.Zl91E0Y"/>
         <argument key="App\Controller\ReservationController::Affichefront" type="service_closure" id=".service_locator.Zl91E0Y"/>
         <argument key="App\Controller\ReservationController::addReservation" type="service_closure" id=".service_locator.oY4vFbW"/>
-        <argument key="App\Controller\ReservationController::deleteStatique" type="service_closure" id=".service_locator.pnHNERz"/>
+        <argument key="App\Controller\ReservationController::deleteStatique" type="service_closure" id=".service_locator.TNxTvee"/>
         <argument key="App\Controller\ReservationController::deleteStatique2" type="service_closure" id=".service_locator.zuQ73Ny"/>
         <argument key="App\Controller\ReservationController::exportToPdf" type="service_closure" id=".service_locator.vJKoCwu"/>
         <argument key="App\Controller\ReservationController::exportacademieToExcelAction" type="service_closure" id=".service_locator.wUTnKhX"/>
@@ -4622,7 +4858,7 @@
         <argument key="App\Controller\ReservationController:Affiche" type="service_closure" id=".service_locator.Zl91E0Y"/>
         <argument key="App\Controller\ReservationController:Affichefront" type="service_closure" id=".service_locator.Zl91E0Y"/>
         <argument key="App\Controller\ReservationController:addReservation" type="service_closure" id=".service_locator.oY4vFbW"/>
-        <argument key="App\Controller\ReservationController:deleteStatique" type="service_closure" id=".service_locator.pnHNERz"/>
+        <argument key="App\Controller\ReservationController:deleteStatique" type="service_closure" id=".service_locator.TNxTvee"/>
         <argument key="App\Controller\ReservationController:deleteStatique2" type="service_closure" id=".service_locator.zuQ73Ny"/>
         <argument key="App\Controller\ReservationController:exportToPdf" type="service_closure" id=".service_locator.vJKoCwu"/>
         <argument key="App\Controller\ReservationController:exportacademieToExcelAction" type="service_closure" id=".service_locator.wUTnKhX"/>
@@ -4918,12 +5154,12 @@
     <service id="debug.argument_resolver.request.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver"/>
     <service id="debug.argument_resolver.session.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver"/>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.VyZPusk"/>
+      <argument type="service" id=".service_locator.wLCzBDH"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.VyZPusk"/>
+      <argument type="service" id=".service_locator.wLCzBDH"/>
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
@@ -5649,9 +5885,12 @@
     <service id="Endroid\QrCode\Builder\BuilderInterface" alias="Endroid\QrCode\Builder\Builder"/>
     <service id="Endroid\QrCode\Builder\BuilderRegistryInterface" alias="Endroid\QrCode\Builder\BuilderRegistry"/>
     <service id="Endroid\QrCode\Builder\BuilderInterface $defaultQrCodeBuilder" alias="endroid_qr_code.default_builder"/>
+    <service id="Flasher\Prime\Flasher" alias="flasher"/>
+    <service id="Flasher\Prime\FlasherInterface" alias="flasher"/>
+    <service id="Flasher\SweetAlert\Prime\SweetAlertFactory" alias="flasher.sweetalert"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.VyZPusk"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.wLCzBDH"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -5659,7 +5898,7 @@
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.GhJtVJZ" alias=".service_locator.pnHNERz"/>
+    <service id=".service_locator.6WSjENe" alias=".service_locator.TNxTvee"/>
     <service id=".service_locator.D4.bSSV" alias=".service_locator.Zl91E0Y"/>
     <service id=".service_locator.I6yioBC" alias=".service_locator.zuQ73Ny"/>
     <service id=".service_locator.S81DJRR" alias=".service_locator.KMgm63B"/>
@@ -5667,7 +5906,7 @@
     <service id=".service_locator.pk_1doB" alias=".service_locator..V1sY5x"/>
     <service id=".service_locator.AxKbDB." alias=".service_locator.z6uZLW2"/>
     <service id=".service_locator.Uio8olY" alias=".service_locator.GzdkgTj"/>
-    <service id=".service_locator.22ICAJy" alias=".service_locator.VyZPusk"/>
+    <service id=".service_locator.MuqZHeQ" alias=".service_locator.wLCzBDH"/>
     <service id=".service_locator.bkUSUfi" alias=".service_locator.AHPGEE6"/>
     <service id=".service_locator.AE_YMkk" alias=".service_locator.RQpLuzo"/>
     <service id=".service_locator.4hi2aOY" alias=".service_locator.bBRwv06"/>
@@ -5688,7 +5927,7 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
     <service id=".service_locator.3EVwwtO" alias=".service_locator.oY4vFbW"/>
-    <service id=".service_locator.o1yjm6F" alias=".service_locator.pnHNERz"/>
+    <service id=".service_locator.z2EpREf" alias=".service_locator.TNxTvee"/>
     <service id=".service_locator.eNwel8O" alias=".service_locator.Zl91E0Y"/>
     <service id=".service_locator.ToS96AD" alias=".service_locator.wUTnKhX"/>
     <service id=".service_locator.HaMkwlu" alias=".service_locator.zuQ73Ny"/>
@@ -5707,5 +5946,6 @@
     <service id=".service_locator.yClvU3t" alias=".service_locator.bDcJfHQ"/>
     <service id=".service_locator.YmHES9E" alias=".service_locator.mx0UMmY"/>
     <service id=".service_locator.L0rFhJm" alias=".service_locator.GVyCdgr"/>
+    <service id="console.command.public_alias.flasher.install_command" alias="flasher.install_command" public="true"/>
   </services>
 </container>

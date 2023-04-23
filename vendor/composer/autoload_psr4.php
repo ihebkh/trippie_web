@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
     'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
+    'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Runtime\\Symfony\\Component\\' => array($vendorDir . '/symfony/runtime/Internal'),
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
@@ -76,6 +77,10 @@ return array(
     'Knp\\Component\\' => array($vendorDir . '/knplabs/knp-components/src/Knp/Component'),
     'Knp\\Bundle\\PaginatorBundle\\' => array($vendorDir . '/knplabs/knp-paginator-bundle/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
+    'Flasher\\Symfony\\' => array($vendorDir . '/php-flasher/flasher-symfony'),
+    'Flasher\\SweetAlert\\Symfony\\' => array($vendorDir . '/php-flasher/flasher-sweet-alert-symfony'),
+    'Flasher\\SweetAlert\\Prime\\' => array($vendorDir . '/php-flasher/flasher-sweetalert'),
+    'Flasher\\Prime\\' => array($vendorDir . '/php-flasher/flasher'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qr-code/src'),
     'Endroid\\QrCodeBundle\\' => array($vendorDir . '/endroid/qr-code-bundle/src'),
     'Endroid\\Installer\\' => array($vendorDir . '/endroid/installer/src'),
