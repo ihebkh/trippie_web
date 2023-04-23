@@ -68,8 +68,51 @@ class __TwigTemplate_c2d70c731734747a27e210887649ef9b extends Template
         }
 
     </style>
+    <style type=\"text/css\">
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        /* Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            background-color: #D3D3D3;
+            border-radius: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo img {
+            max-height: 60px;
+            font-size: 40px;
+
+        }
+    </style>
 </head>
 <body>
+<h3 style=\"font-size: 70px; color:#CFA0E9\"><strong style=\"font-size: 100px;color: #F6B26B\">T</strong>RIPEE</h3>
 
 <h6>cité ghazela - Esprit</h6>
 <h6>+216 25 104 011</h6>
@@ -94,43 +137,43 @@ class __TwigTemplate_c2d70c731734747a27e210887649ef9b extends Template
     </thead>
     <tbody>
     ";
-        // line 56
+        // line 99
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["tableData"]) || array_key_exists("tableData", $context) ? $context["tableData"] : (function () { throw new RuntimeError('Variable "tableData" does not exist.', 56, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["tableData"]) || array_key_exists("tableData", $context) ? $context["tableData"] : (function () { throw new RuntimeError('Variable "tableData" does not exist.', 99, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["row"]) {
-            // line 57
+            // line 100
             echo "        <tr>
             <td>";
-            // line 58
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "Registration_number", [], "any", false, false, false, 58), "html", null, true);
+            // line 101
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "Registration_number", [], "any", false, false, false, 101), "html", null, true);
             echo "</td>
             <td>";
-            // line 59
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "brand", [], "any", false, false, false, 59), "html", null, true);
+            // line 102
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "brand", [], "any", false, false, false, 102), "html", null, true);
             echo "</td>
             <td>";
-            // line 60
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "price", [], "any", false, false, false, 60), "html", null, true);
+            // line 103
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "price", [], "any", false, false, false, 103), "html", null, true);
             echo "</td>
             <td>";
-            // line 61
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "etat", [], "any", false, false, false, 61), "html", null, true);
+            // line 104
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "etat", [], "any", false, false, false, 104), "html", null, true);
             echo "</td>
             <td>";
-            // line 62
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "energie", [], "any", false, false, false, 62), "html", null, true);
+            // line 105
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "energie", [], "any", false, false, false, 105), "html", null, true);
             echo "</td>
             <td>";
-            // line 63
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "power", [], "any", false, false, false, 63), "html", null, true);
+            // line 106
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "power", [], "any", false, false, false, 106), "html", null, true);
             echo "</td>
             <td>";
-            // line 64
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date", [], "any", false, false, false, 64), "html", null, true);
+            // line 107
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date", [], "any", false, false, false, 107), "html", null, true);
             echo "</td>
             <td>";
-            // line 65
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date1", [], "any", false, false, false, 65), "html", null, true);
+            // line 108
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["row"], "date1", [], "any", false, false, false, 108), "html", null, true);
             echo "</td>
 
         </tr>
@@ -139,7 +182,7 @@ class __TwigTemplate_c2d70c731734747a27e210887649ef9b extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['row'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 69
+        // line 112
         echo "    </tbody>
 </table>
 
@@ -166,7 +209,7 @@ class __TwigTemplate_c2d70c731734747a27e210887649ef9b extends Template
 
     public function getDebugInfo()
     {
-        return array (  143 => 69,  133 => 65,  129 => 64,  125 => 63,  121 => 62,  117 => 61,  113 => 60,  109 => 59,  105 => 58,  102 => 57,  98 => 56,  42 => 2,  40 => 1,);
+        return array (  186 => 112,  176 => 108,  172 => 107,  168 => 106,  164 => 105,  160 => 104,  156 => 103,  152 => 102,  148 => 101,  145 => 100,  141 => 99,  42 => 2,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -201,8 +244,51 @@ class __TwigTemplate_c2d70c731734747a27e210887649ef9b extends Template
         }
 
     </style>
+    <style type=\"text/css\">
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+        /* Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            background-color: #D3D3D3;
+            border-radius: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo img {
+            max-height: 60px;
+            font-size: 40px;
+
+        }
+    </style>
 </head>
 <body>
+<h3 style=\"font-size: 70px; color:#CFA0E9\"><strong style=\"font-size: 100px;color: #F6B26B\">T</strong>RIPEE</h3>
 
 <h6>cité ghazela - Esprit</h6>
 <h6>+216 25 104 011</h6>
