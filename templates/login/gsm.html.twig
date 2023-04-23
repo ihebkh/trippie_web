@@ -19,13 +19,11 @@
 
     {{ form_start(requestForm) }}
       <div class="form-group last mb-3">
-        {{ form_row(requestForm.email) }}
+        {{ form_row(requestForm.gsm) }}
 
        </div>
             <button type="submit" class="btn btn-block btn-primary" style="background-color: #3498db; border-color: #3498db;border-radius: 50px">Send</button>
-        <div class="d-flex mb-5 align-items-center">
-                <span class="ml-auto"><a href="{{path('gsm')}}" class="forgot-pass">Gsm</a></span> 
-              </div>
+        
         {{ form_end(requestForm) }}
      </div>
         </div>

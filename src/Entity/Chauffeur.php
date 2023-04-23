@@ -7,6 +7,7 @@ use App\Repository\ChauffeurRepository;
 use App\Enum\Etat;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Twilio\Rest\Client;
 
 
 #[ORM\Entity(repositoryClass: ChauffeurRepository::class)]
@@ -229,6 +230,13 @@ public function eraseCredentials()
 {
     // you can leave this method empty
 }
+
+public function send_msg(String $num): void
+    {
+        $code = random_int(100000, 999999);
+        $this->setResetToken($code);
+        
+    }
 
 
 }

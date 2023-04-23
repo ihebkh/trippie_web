@@ -7,6 +7,8 @@ use App\Entity\Role;
 use App\Entity\Utilisateur;
 use App\Form\ChauffeurType;
 use App\Form\ChangePasswordFormType;
+use App\Form\GsmFormType;
+use App\Form\CodeFormType;
 use App\Form\ResetPasswordRequestFormType;
 use App\Repository\ChauffeurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +35,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mime\Header\Headers;
+use Symfony\Component\HttpFoundation\Cookie;
+use Twilio\Rest\Client;
 
 
 
@@ -290,6 +294,9 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
         ]);
     }
 
+    
+
+   
    
     #[Route('/login/role/reset/{token}', name: 'app_reset_password_chauffeur', methods: ['GET','POST'])]
     public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
@@ -325,4 +332,121 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
             'resetForm' => $form->createView(),
         ]);
     }
+
+
+    //////////////////////////////////////////////////////////////////GSM//////////////////////////////////////////////
+    #[Route('/login/role/gsm', name: 'gsm', methods: ['GET','POST'])]
+    public function gsm(): Response
+    {
+        return $this->redirectToRoute('app_forgot_password_request_chauffeur_gsm', [] ,Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/login/role/reset_gsm', name: 'app_forgot_password_request_chauffeur_gsm', methods: ['GET','POST'])]
+    public function requestgsm(Request $request, ChauffeurRepository $userRepository, TokenGeneratorInterface $tokenGenerator): Response
+        {
+            $form = $this->createForm(GsmFormType::class);
+    
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+                $gsm = $form->get('gsm')->getData();
+                //$gsm = '+216' . ltrim($gsm, '0');
+                $user = $userRepository->findOneBy(['gsm' => $gsm]);
+               // dd($user);
+                if (!$user) {
+                    $this->addFlash('danger', 'Adresse e-mail inconnue.');
+    
+                    return $this->redirectToRoute('app_forgot_password_request_chauffeur_gsm');
+                }
+    
+                $code = random_int(100000, 999999);   
+                try {
+                    $user->setResetToken($code);
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
+                } catch (\Exception $e) {
+                    $this->addFlash('warning', $e->getMessage());
+    
+                    return $this->redirectToRoute('app_forgot_password_request_chauffeur');
+                }    
+    
+                $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
+                $authToken = '03b8a816ed3a750f589badaf99628945';
+                $client = new Client($accountSid, $authToken);
+                $message = $client->messages->create(
+                    '+216' . $user->getGsm(), // recipient's phone number
+            array(
+                'from' => '+15673132411', // your Twilio phone number
+                'body' => $code
+            )
+        );
+    
+               
+                $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
+               
+                return $this->redirectToRoute('codeverif', ['token' => $code ]);
+            }
+    
+            return $this->render('login/gsm.html.twig', [
+                'requestForm' => $form->createView(),
+            ]);
+        }
+
+
+        #[Route('/login/role/reset_gsm/{token}', name: 'codeverif', methods: ['GET','POST'])]
+        public function VerifCode(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+        {
+            $user = $this->getDoctrine()->getRepository(Chauffeur::class)->findOneBy(['resetToken' => $token]);
+            $form = $this->createForm(CodeFormType::class);
+            $form->handleRequest($request);
+    
+            if ($form->isSubmitted() && $form->isValid()) {
+               $code = $form->get('code')->getData();
+               $token = $user->getResetToken();
+               if($code === $token) {
+    
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                
+    
+                return $this->redirectToRoute('app_reset_password_chauffeur',['token' => $token]);
+            }
+            else {
+                $this->addFlash('error', 'erreur !');
+            }
+            }
+    
+            return $this->render('login/code.html.twig', [
+                'resetForm' => $form->createView(),
+            ]);
+        }
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/chauffeur/tricroi', name: 'tricroissant', methods: ['GET','POST'])]
+    public function triCroissant(ChauffeurRepository $chauffeurRepository): Response
+{
+    $chauffeurs = $chauffeurRepository->findAllSorted();
+
+    return $this->render('chauffeur/card.html.twig', [
+        'chauffeurs' => $chauffeurs,
+    ]);
+}
+
+    #[Route('chauffeur/tridesc', name: 'tridesc', methods: ['GET','POST'])]
+    public function tridesc(ChauffeurRepository $chauffeurRepository): Response
+    {
+        $chauffeurs = $chauffeurRepository->findAllSorted2();
+
+        return $this->render('chauffeur/card.html.twig', [
+            'chauffeurs' => $chauffeurs,
+        ]);
+    }
+   
+   
+ 
 }

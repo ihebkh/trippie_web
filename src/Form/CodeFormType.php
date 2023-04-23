@@ -1,29 +1,31 @@
 <?php
-
 namespace App\Form;
 
-use App\Entity\Utilisateur;
+
+use App\Entity\Client;
+use App\Entity\Chauffeur;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Locateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class UtilisateurType extends AbstractType
+class CodeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cin')
-            ->add('nom')
-            ->add('prenom')
-            
+            ->add('code')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Utilisateur::class,
+            // Configure your form options here
         ]);
     }
 }

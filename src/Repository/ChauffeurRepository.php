@@ -75,8 +75,8 @@ class ChauffeurRepository extends ServiceEntityRepository
 
 public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
 {
-    $qb = $this->createQueryBuilder('client')
-        ->join('client.id_role', 'r')
+    $qb = $this->createQueryBuilder('ch')
+        ->join('ch.id_role', 'r')
         ->join('r.id_user', 'u');
 
     if (!empty($query)) {
@@ -84,8 +84,8 @@ public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
             $qb->expr()->like('u.cin', ':query'),
             $qb->expr()->like('u.nom', ':query'),
             $qb->expr()->like('u.prenom', ':query'),
-            $qb->expr()->like('client.email', ':query'),
-            $qb->expr()->like('client.etat', ':query')
+            $qb->expr()->like('ch.email', ':query'),
+            $qb->expr()->like('ch.etat', ':query')
         ))
         ->setParameter('query', '%' . $query . '%');
     }
@@ -106,16 +106,37 @@ public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
     }
 
     if (!empty($email)) {
-        $qb->andWhere('client.email LIKE :email')
+        $qb->andWhere('ch.email LIKE :email')
             ->setParameter('email', '%' . $email . '%');
     }
 
     if (!empty($etat)) {
-        $qb->andWhere('client.etat LIKE :etat')
+        $qb->andWhere('ch.etat LIKE :etat')
             ->setParameter('etat', '%' . $etat . '%');
     }
 
     return $qb->getQuery()->getResult();
 }
+
+    public function findAllSorted() : array
+    {
+        $queryBuilder = $this->createQueryBuilder('ch')
+        ->leftJoin('ch.id_role', 'r')
+        ->leftJoin('r.id_user', 'u')
+        ->orderBy('u.nom', 'ASC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findAllSorted2() : array
+    {
+        $queryBuilder = $this->createQueryBuilder('ch')
+        ->leftJoin('ch.id_role', 'r')
+        ->leftJoin('r.id_user', 'u')
+        ->orderBy('u.nom', 'DESC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 
 }

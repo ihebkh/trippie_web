@@ -19,6 +19,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
+    twilio.client:
+        class: Twilio\Rest\Client
+        arguments:
+            - '%env(ACb8ac250d94d237ea91634b8def26f57d)%'
+            - '%env(9cfa45bc2a1f868edf3c24319860ef1e)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
