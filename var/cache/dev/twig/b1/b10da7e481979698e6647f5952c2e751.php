@@ -64,6 +64,14 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
 
   <center><h1>Reservation list</h1></center>
 
+        <a href=\"";
+        // line 11
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("exportpdf");
+        echo "\">
+            <button type=\"button\" style=\"padding: 10px;\" class=\"btn btn-outline-info\">Export to PDF
+            </button>
+
+
     <table class=\"table\">
         <thead>
         <tr>
@@ -82,53 +90,53 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
         </thead>
         <tbody>
         <tr  ";
-        // line 28
+        // line 33
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 28, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 33, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["r"]) {
             echo " >
 
 
             <td>";
-            // line 31
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 31), "matricule", [], "any", false, false, false, 31), "html", null, true);
-            echo "</td>
-            <td>";
-            // line 32
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 32), "marque", [], "any", false, false, false, 32), "html", null, true);
-            echo "</td>
-            <td>";
-            // line 33
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 33), "puissance", [], "any", false, false, false, 33), "html", null, true);
-            echo "</td>
-            <td>";
-            // line 34
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 34), "energie", [], "any", false, false, false, 34), "html", null, true);
-            echo "</td>
-            <td><img class=\"img-profile \" src=\"";
-            // line 35
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 35), "picture", [], "any", false, false, false, 35))), "html", null, true);
-            echo "\" style=\"max-height: 80px\"></td>
-            <td>";
             // line 36
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 36), "Y-m-d"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 36), "matricule", [], "any", false, false, false, 36), "html", null, true);
             echo "</td>
             <td>";
             // line 37
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 37), "Y-m-d"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 37), "marque", [], "any", false, false, false, 37), "html", null, true);
+            echo "</td>
+            <td>";
+            // line 38
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 38), "puissance", [], "any", false, false, false, 38), "html", null, true);
+            echo "</td>
+            <td>";
+            // line 39
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 39), "energie", [], "any", false, false, false, 39), "html", null, true);
+            echo "</td>
+            <td><img class=\"img-profile \" src=\"";
+            // line 40
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["r"], "idVoiture", [], "any", false, false, false, 40), "picture", [], "any", false, false, false, 40))), "html", null, true);
+            echo "\" style=\"max-height: 80px\"></td>
+            <td>";
+            // line 41
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateDebut", [], "any", false, false, false, 41), "Y-m-d"), "html", null, true);
+            echo "</td>
+            <td>";
+            // line 42
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["r"], "dateFin", [], "any", false, false, false, 42), "Y-m-d"), "html", null, true);
             echo "</td>
 
 
             <td> <a href=\"";
-            // line 40
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 40)]), "html", null, true);
+            // line 45
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modifC", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 45)]), "html", null, true);
             echo "\">
                     <button type=\"button\" class=\"btn btn-outline-success\">Update</button></a>    </td>
 
             <td>
                 <a href=\"javascript:void(0)\" onclick=\"if(confirm('are you sure to delete this Reservation ?')){window.location='";
-            // line 44
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 44)]), "html", null, true);
+            // line 49
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_DeleteReservation2", ["id" => twig_get_attribute($this->env, $this->source, $context["r"], "id", [], "any", false, false, false, 49)]), "html", null, true);
             echo "';}\">
 
                     <button type=\"button\" class=\"btn btn-outline-danger\">Delete</button>
@@ -139,19 +147,16 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['r'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
+        // line 54
         echo ">
 
         </tbody>
     </table>
-    <center>
-<a href=\"";
-        // line 54
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("exportpdf");
-        echo "\">
-        <button type=\"button\" style=\"padding: 10px;\" class=\"btn btn-outline-info\">Export to PDF
-        </button>
-    </center>
+   ";
+        // line 58
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 58, $this->source); })()), "bootstrap_4_pagination.html.twig");
+        echo "
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -170,7 +175,7 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
 
     public function getDebugInfo()
     {
-        return array (  150 => 54,  143 => 49,  131 => 44,  124 => 40,  118 => 37,  114 => 36,  110 => 35,  106 => 34,  102 => 33,  98 => 32,  94 => 31,  86 => 28,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  157 => 58,  151 => 54,  139 => 49,  132 => 45,  126 => 42,  122 => 41,  118 => 40,  114 => 39,  110 => 38,  106 => 37,  102 => 36,  94 => 33,  69 => 11,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -184,6 +189,11 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
     <br>
 
   <center><h1>Reservation list</h1></center>
+
+        <a href=\"{{ path('exportpdf') }}\">
+            <button type=\"button\" style=\"padding: 10px;\" class=\"btn btn-outline-info\">Export to PDF
+            </button>
+
 
     <table class=\"table\">
         <thead>
@@ -227,11 +237,8 @@ class __TwigTemplate_fbf8a4db6dac6627f47ac1ad55cfcf64 extends Template
 
         </tbody>
     </table>
-    <center>
-<a href=\"{{ path('exportpdf') }}\">
-        <button type=\"button\" style=\"padding: 10px;\" class=\"btn btn-outline-info\">Export to PDF
-        </button>
-    </center>
+   {{ knp_pagination_render(reservation, 'bootstrap_4_pagination.html.twig') }}
+
 {% endblock %}", "reservation/Afficheclient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\Afficheclient.html.twig");
     }
 }

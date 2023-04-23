@@ -163,10 +163,11 @@ class __TwigTemplate_6b9b1c8f6e8291b4090e6d79742ac051 extends Template
                             </table>
 
 
-                            ";
-        // line 63
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 63, $this->source); })()));
-        echo "
+
+                 <center>  ";
+        // line 64
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 64, $this->source); })()), "bootstrap_4_pagination.html.twig");
+        echo "</center>
 
                             <!-- End Default Table Example -->
 
@@ -201,7 +202,7 @@ class __TwigTemplate_6b9b1c8f6e8291b4090e6d79742ac051 extends Template
 
     public function getDebugInfo()
     {
-        return array (  168 => 63,  160 => 57,  148 => 51,  143 => 49,  139 => 48,  135 => 47,  124 => 41,  103 => 22,  94 => 19,  90 => 17,  85 => 16,  76 => 13,  72 => 11,  68 => 10,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  169 => 64,  160 => 57,  148 => 51,  143 => 49,  139 => 48,  135 => 47,  124 => 41,  103 => 22,  94 => 19,  90 => 17,  85 => 16,  76 => 13,  72 => 11,  68 => 10,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -268,7 +269,8 @@ class __TwigTemplate_6b9b1c8f6e8291b4090e6d79742ac051 extends Template
                             </table>
 
 
-                            {{ knp_pagination_render(voiture) }}
+
+                 <center>  {{ knp_pagination_render(voiture, 'bootstrap_4_pagination.html.twig') }}</center>
 
                             <!-- End Default Table Example -->
 

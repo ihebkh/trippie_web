@@ -214,9 +214,10 @@ class __TwigTemplate_3c82631304f9296e2dd7cfba4b1c443d extends Template
 
                                 </tbody>
                             </table>
-                            ";
-        // line 93
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 93, $this->source); })()));
+
+                        ";
+        // line 94
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["reservation"]) || array_key_exists("reservation", $context) ? $context["reservation"] : (function () { throw new RuntimeError('Variable "reservation" does not exist.', 94, $this->source); })()), "bootstrap_4_pagination.html.twig");
         echo "
                             <!-- End Default Table Example -->
 
@@ -239,46 +240,46 @@ class __TwigTemplate_3c82631304f9296e2dd7cfba4b1c443d extends Template
 
     }
 
-    // line 110
+    // line 111
     public function block_flashbag($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "flashbag"));
 
-        // line 111
+        // line 112
         echo "    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 111, $this->source); })()), "session", [], "any", false, false, false, 111), "flashbag", [], "any", false, false, false, 111), "all", [], "method", false, false, false, 111));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 112, $this->source); })()), "session", [], "any", false, false, false, 112), "flashbag", [], "any", false, false, false, 112), "all", [], "method", false, false, false, 112));
         foreach ($context['_seq'] as $context["type"] => $context["messages"]) {
-            // line 112
+            // line 113
             echo "        ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["messages"]);
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 113
+                // line 114
                 echo "            ";
                 if (($context["type"] == "error")) {
-                    // line 114
+                    // line 115
                     echo "                <script>
                     Swal.fire({
                         icon: 'error',
                         title: 'Erreur',
                         text: '";
-                    // line 118
+                    // line 119
                     echo $context["message"];
                     echo "'
                     });
                 </script>
             ";
                 }
-                // line 122
+                // line 123
                 echo "        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 123
+            // line 124
             echo "    ";
         }
         $_parent = $context['_parent'];
@@ -301,7 +302,7 @@ class __TwigTemplate_3c82631304f9296e2dd7cfba4b1c443d extends Template
 
     public function getDebugInfo()
     {
-        return array (  282 => 123,  276 => 122,  269 => 118,  263 => 114,  260 => 113,  255 => 112,  250 => 111,  243 => 110,  219 => 93,  213 => 89,  201 => 84,  193 => 79,  189 => 78,  185 => 77,  180 => 75,  176 => 74,  172 => 73,  168 => 72,  164 => 71,  156 => 68,  123 => 38,  117 => 34,  107 => 30,  103 => 28,  99 => 27,  95 => 25,  85 => 21,  81 => 19,  77 => 18,  60 => 3,  53 => 2,  36 => 1,);
+        return array (  283 => 124,  277 => 123,  270 => 119,  264 => 115,  261 => 114,  256 => 113,  251 => 112,  244 => 111,  220 => 94,  213 => 89,  201 => 84,  193 => 79,  189 => 78,  185 => 77,  180 => 75,  176 => 74,  172 => 73,  168 => 72,  164 => 71,  156 => 68,  123 => 38,  117 => 34,  107 => 30,  103 => 28,  99 => 27,  95 => 25,  85 => 21,  81 => 19,  77 => 18,  60 => 3,  53 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -398,7 +399,8 @@ class __TwigTemplate_3c82631304f9296e2dd7cfba4b1c443d extends Template
 
                                 </tbody>
                             </table>
-                            {{ knp_pagination_render(reservation) }}
+
+                        {{ knp_pagination_render(reservation, 'bootstrap_4_pagination.html.twig') }}
                             <!-- End Default Table Example -->
 
                         </div>

@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* reservation/addR.html.twig */
+/* reservation/AddR.html.twig */
 class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 {
     private $source;
@@ -39,24 +39,26 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reservation/addR.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reservation/AddR.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "reservation/addR.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "reservation/AddR.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
     }
 
-    // line 3
+    // line 2
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 4
+        // line 3
         echo "
+
+
 
     <main id=\"main\">
 
@@ -113,19 +115,19 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
                             <div class=\"col-lg-5 col-md-12\" data-aos=\"fade-up\" data-aos-delay=\"300\">
                                 ";
-        // line 60
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 60, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate"]]);
+        // line 61
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 61, $this->source); })()), 'form_start', ["attr" => ["novalidate" => "novalidate"]]);
         echo "
 
                                 <label>Start date :</label>
                                 <div class=\"form-group\">
                                     ";
-        // line 64
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 64, $this->source); })()), "dateDebut", [], "any", false, false, false, 64), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 65
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "dateDebut", [], "any", false, false, false, 65), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                                     <div class=\"text-danger\">";
-        // line 65
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "dateDebut", [], "any", false, false, false, 65), 'errors');
+        // line 66
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), "dateDebut", [], "any", false, false, false, 66), 'errors');
         echo "</div>
 
 
@@ -133,12 +135,12 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
                                 <label>end date :</label>
                                 <div class=\"form-group\">
                                     ";
-        // line 71
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 71, $this->source); })()), "dateFin", [], "any", false, false, false, 71), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 72
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "dateFin", [], "any", false, false, false, 72), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                                     <div class=\"text-danger\">";
-        // line 72
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), "dateFin", [], "any", false, false, false, 72), 'errors');
+        // line 73
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "dateFin", [], "any", false, false, false, 73), 'errors');
         echo "</div>
 
 
@@ -150,14 +152,30 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
                                     <div class=\"row mb-3\">
                                         <div class=\"col-sm-10\">
-                                            <button type=\"submit\" class=\"btn btn-primary\">Save</button>
+                                            <div class=\"g-recaptcha\" data-sitekey=\"6LfxVIwlAAAAAGYsvc4M3oEYSoVkN4hcw35ZG7ad\"></div>
+                                            <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\" name=\"submit\">Save</button>
+                                            <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>
+                                           
+                                            <script>
+                                                \$(document).on(\"click\", '#submit', function() {
+                                                var response = grecaptcha.getResponse();
+                                                let error = document.getElementById('error');
+                                                if (response.length == 0) {
+                                                error.innerHTML = \"Verify you are not a robot\";
+                                                return false;
+                                            } else {
+                                                error.innerHTML = \"\";
+                                            }
+                                            });
+                                            </script>
 
-                                        </div>
+
+                                            <div id=\"error\"></div>
                                     </div>
                                 </center>
                                 ";
-        // line 88
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 88, $this->source); })()), 'form_end');
+        // line 105
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 105, $this->source); })()), 'form_end');
         echo "
 
                             </div>
@@ -197,7 +215,7 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
     public function getTemplateName()
     {
-        return "reservation/addR.html.twig";
+        return "reservation/AddR.html.twig";
     }
 
     public function isTraitable()
@@ -207,14 +225,15 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
     public function getDebugInfo()
     {
-        return array (  160 => 88,  141 => 72,  137 => 71,  128 => 65,  124 => 64,  117 => 60,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  178 => 105,  143 => 73,  139 => 72,  130 => 66,  126 => 65,  119 => 61,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'indexClient.html.twig' %}
-
 {% block body %}
+
+
 
 
     <main id=\"main\">
@@ -294,9 +313,25 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
                                     <div class=\"row mb-3\">
                                         <div class=\"col-sm-10\">
-                                            <button type=\"submit\" class=\"btn btn-primary\">Save</button>
+                                            <div class=\"g-recaptcha\" data-sitekey=\"6LfxVIwlAAAAAGYsvc4M3oEYSoVkN4hcw35ZG7ad\"></div>
+                                            <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\" name=\"submit\">Save</button>
+                                            <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>
+                                           
+                                            <script>
+                                                \$(document).on(\"click\", '#submit', function() {
+                                                var response = grecaptcha.getResponse();
+                                                let error = document.getElementById('error');
+                                                if (response.length == 0) {
+                                                error.innerHTML = \"Verify you are not a robot\";
+                                                return false;
+                                            } else {
+                                                error.innerHTML = \"\";
+                                            }
+                                            });
+                                            </script>
 
-                                        </div>
+
+                                            <div id=\"error\"></div>
                                     </div>
                                 </center>
                                 {{ form_end(form) }}
@@ -330,6 +365,7 @@ class __TwigTemplate_c593337939914d44ba57bc43bc01cb94 extends Template
 
 
 
-{% endblock %}", "reservation/addR.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\addR.html.twig");
+{% endblock %}
+", "reservation/AddR.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\addR.html.twig");
     }
 }

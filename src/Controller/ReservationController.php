@@ -111,10 +111,15 @@ Trippie');
 
     // clientsymfo
     #[Route('/reservation/client/Affichelist', name: 'app_reservationaffichefront')]
-    public function Affichefront(ReservationRepository $repository)
+    public function Affichefront(ReservationRepository $repository, PaginatorInterface $paginator, Request $request)
     {
         // $reservation = $repository->findBy(['idClient' => '30']);
         $reservation = $repository->findAll();
+        $reservation = $paginator->paginate(
+            $reservation, /* query NOT result */
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('reservation/Afficheclient.html.twig', ['reservation' => $reservation]);
     }
 

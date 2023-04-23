@@ -22,7 +22,7 @@ class VoituremobileController extends AbstractController
         ]);
     }
 //affichage
-    #[Route("/voituremobile/list", name: "list")]
+    #[Route("s", name: "list")]
     public function getVoiture(VoitureRepository $repo, SerializerInterface $serializer)
     {
         $voitures = $repo->findAll();

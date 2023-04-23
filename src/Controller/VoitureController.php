@@ -219,8 +219,10 @@ class VoitureController extends AbstractController
     #[Route('/voiture/AffichelistClient', name: 'app_voitureaffichClient')]
     public function AfficherClient(VoitureRepository $repository)
     {
+
         //$repo=$this->getDoctrine()->getRepository(Voiture::class);
         $voiture = $repository->findBy(['etat' => 'non réservé']);
+
 
         return $this->render('voiture/AfficheClient.html.twig',
             ['voiture' => $voiture]);

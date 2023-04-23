@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* voiture/afficheclient.html.twig */
+/* voiture/AfficheClient.html.twig */
 class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
 {
     private $source;
@@ -39,9 +39,9 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/afficheclient.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "voiture/AfficheClient.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/afficheclient.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "voiture/AfficheClient.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -112,15 +112,17 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
                             </div>
                         </div>
                     </div>
+
+
                     ";
-            // line 30
-            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 30) % 3) == 0)) {
-                // line 31
+            // line 32
+            if (((twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 32) % 3) == 0)) {
+                // line 33
                 echo "                </div>
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     ";
             }
-            // line 34
+            // line 36
             echo "                    ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -134,11 +136,10 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 37
         echo "                </div>
-
-
             </div>
+
         </section><!-- End Portfolio Section -->
 
 
@@ -155,7 +156,7 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
 
     public function getTemplateName()
     {
-        return "voiture/afficheclient.html.twig";
+        return "voiture/AfficheClient.html.twig";
     }
 
     public function isTraitable()
@@ -165,7 +166,7 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
 
     public function getDebugInfo()
     {
-        return array (  138 => 35,  124 => 34,  119 => 31,  117 => 30,  108 => 24,  102 => 21,  98 => 20,  92 => 17,  88 => 15,  71 => 14,  59 => 4,  52 => 3,  35 => 1,);
+        return array (  140 => 37,  126 => 36,  121 => 33,  119 => 32,  108 => 24,  102 => 21,  98 => 20,  92 => 17,  88 => 15,  71 => 14,  59 => 4,  52 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -199,15 +200,16 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
                             </div>
                         </div>
                     </div>
+
+
                     {% if loop.index % 3 == 0 %}
                 </div>
                 <div class=\"row portfolio-container\" data-aos=\"fade-up\" data-aos-delay=\"400\">
                     {% endif %}
                     {% endfor %}
                 </div>
-
-
             </div>
+
         </section><!-- End Portfolio Section -->
 
 
@@ -217,6 +219,6 @@ class __TwigTemplate_895bb4926a3d70fe054005b04a6318c0 extends Template
     <a href=\"\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
 
 {% endblock %}
-", "voiture/afficheclient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
+", "voiture/AfficheClient.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\voiture\\afficheclient.html.twig");
     }
 }

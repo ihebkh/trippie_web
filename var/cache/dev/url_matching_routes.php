@@ -22,7 +22,7 @@ return [
         '/voiture/AffichelistClient' => [[['_route' => 'app_voitureaffichClient', '_controller' => 'App\\Controller\\VoitureController::AfficherClient'], null, null, null, false, false, null]],
         '/voiture/recherche' => [[['_route' => 'recherche', '_controller' => 'App\\Controller\\VoitureController::Recherche'], null, null, null, false, false, null]],
         '/voituremobile' => [[['_route' => 'app_voituremobile', '_controller' => 'App\\Controller\\VoituremobileController::index'], null, null, null, false, false, null]],
-        '/voituremobile/list' => [[['_route' => 'list', '_controller' => 'App\\Controller\\VoituremobileController::getVoiture'], null, null, null, false, false, null]],
+        '/s' => [[['_route' => 'list', '_controller' => 'App\\Controller\\VoituremobileController::getVoiture'], null, null, null, false, false, null]],
         '/addVoitureJSON/new' => [[['_route' => 'addVoitureJSON', '_controller' => 'App\\Controller\\VoituremobileController::addVoitureJSON'], null, null, null, false, false, null]],
     ],
     [ // $regexpList

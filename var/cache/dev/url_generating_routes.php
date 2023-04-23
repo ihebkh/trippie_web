@@ -32,7 +32,7 @@ return [
     'app_Clientvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show3'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/Clientvoiture/show']], [], [], []],
     'recherche' => [[], ['_controller' => 'App\\Controller\\VoitureController::Recherche'], [], [['text', '/voiture/recherche']], [], [], []],
     'app_voituremobile' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::index'], [], [['text', '/voituremobile']], [], [], []],
-    'list' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::getVoiture'], [], [['text', '/voituremobile/list']], [], [], []],
+    'list' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::getVoiture'], [], [['text', '/s']], [], [], []],
     'voiture' => [['id'], ['_controller' => 'App\\Controller\\VoituremobileController::VoitureId'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voituremobile']], [], [], []],
     'addVoitureJSON' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::addVoitureJSON'], [], [['text', '/addVoitureJSON/new']], [], [], []],
     'updateVoitureJSON' => [['id'], ['_controller' => 'App\\Controller\\VoituremobileController::updateVoitureJSON'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/updateVoitureJSON']], [], [], []],
