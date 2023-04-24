@@ -56,6 +56,19 @@ public function getTaux(): array
     shuffle($taux); // shuffle the array to randomize the order
     return $taux;
 }
+public function getTauxWithType(): array
+{
+    $tauxWithType = [];
+    $coupons = $this->findAll();
+    foreach ($coupons as $coupon) {
+        $tauxWithType[] = [
+            'taux' => $coupon->getTaux(),
+            'type' => $coupon->getType(),
+        ];
+    }
+    shuffle($tauxWithType); // shuffle the array to randomize the order
+    return $tauxWithType;
+}
 public function findByCodeCouponOrType(string $query): array
 {
     return $this->createQueryBuilder('c')
@@ -81,6 +94,18 @@ public function getCodeCoupon()
 
     return $qb->getSingleScalarResult();
 }
+public function getCodeCouponByTaux($taux)
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->select('c.code_coupon')
+            ->andWhere('c.taux = :taux')
+            ->setParameter('taux', $taux)
+            ->setMaxResults(1);
+
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+
+        return $result ? $result['code_coupon'] : null;
+    }
 
 //    /**
 //     * @return Coupon[] Returns an array of Coupon objects
