@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Twilio\Rest\Client;
+
 
 #[ORM\Entity(repositoryClass: CoVoiturageRepository::class)]
 class CoVoiturage
@@ -193,5 +195,20 @@ class CoVoiturage
         $deg = $json->wind->deg;
 
         return $temp;
+    }
+
+    public function send_msg(String $num): void
+    {
+
+        $accountSid ='AC1ed373981440ff3b6ccefc4eb68223b7';
+        $authToken = '0d8dc3f99ee3ae809e32d57b9b4ef3b7';
+        $client = new Client($accountSid, $authToken);
+        $message = $client->messages->create(
+            $num, // recipient's phone number
+            array(
+                'from' => '+12766226509', // your Twilio phone number
+                'body' => 'Participation added !'
+            )
+        );
     }
 }

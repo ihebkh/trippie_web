@@ -57,6 +57,7 @@ class CoVoiturageController extends AbstractController
                 $imgFilename = $file->getClientOriginalName();
                 $file->move($uploadsDirectory, $imgFilename);
                 $coVoiturage->setCovImg($imgFilename);
+               // $coVoiturage->send_msg('+21692554097');
             }
             $coVoiturageRepository->save($coVoiturage, true);
 
@@ -83,6 +84,7 @@ class CoVoiturageController extends AbstractController
                 $imgFilename = $file->getClientOriginalName();
                 $file->move($uploadsDirectory, $imgFilename);
                 $coVoiturage->setCovImg($imgFilename);
+                $coVoiturage->send_msg('+21692554097');
             }
             $coVoiturageRepository->save($coVoiturage, true);
 
@@ -179,5 +181,63 @@ class CoVoiturageController extends AbstractController
     }
 
 
+    #[Route('/dashboard/stat', name: 'stat', methods: ['POST', 'GET'])]
+    public function VoitureStatistics(CoVoiturageRepository $repo): Response
+    {
+        $total = $repo->countByLibelle('Aryanah') +
+            $repo->countByLibelle('Bizerte') +
+            $repo->countByLibelle('Beja') +
+            $repo->countByLibelle('Tunis') +
+            $repo->countByLibelle('Sfax') +
+            $repo->countByLibelle('Kairouan') +
+            $repo->countByLibelle('Jandouba') +
+            $repo->countByLibelle('Ben Arous') +
+            $repo->countByLibelle('Manouba') +
+            $repo->countByLibelle('Gabes') +
+            $repo->countByLibelle('Nabeul') +
+            $repo->countByLibelle('Zaghouan');
+    
+        $AryanahCount = $repo->countByLibelle('Aryanah');
+        $BizerteCount = $repo->countByLibelle('Bizerte');
+        $BejaCount = $repo->countByLibelle('Beja');
+        $TunisCount = $repo->countByLibelle('Tunis');
+        $SfaxCount = $repo->countByLibelle('Sfax');
+        $KairouanCount = $repo->countByLibelle('Kairouan');
+        $JandoubaCount = $repo->countByLibelle('Jandouba');
+        $Ben_ArousCount = $repo->countByLibelle('Ben Arous');
+        $ManoubaCount = $repo->countByLibelle('Manouba');
+        $NabeulCount = $repo->countByLibelle('Nabeul');
+        $ZaghouanCount = $repo->countByLibelle('Zaghouan');
+        $GabesCount = $repo->countByLibelle('Gabes');
+    
+        $AryanahPercentage = round(($AryanahCount / $total) * 100);
+        $BizertePercentage = round(($BizerteCount / $total) * 100);
+        $BejaPercentage = round(($BejaCount / $total) * 100);
+        $TunisPercentage = round(($TunisCount / $total) * 100);
+        $SfaxPercentage = round(($SfaxCount / $total) * 100);
+        $KairouanPercentage = round(($KairouanCount / $total) * 100);
+        $JandoubaPercentage = round(($JandoubaCount / $total) * 100);
+        $Ben_ArousPercentage = round(($Ben_ArousCount / $total) * 100);
+        $ManoubaPercentage = round(($ManoubaCount / $total) * 100);
+        $NabeulPercentage = round(($NabeulCount / $total) * 100);
+        $ZaghouanPercentage = round(($ZaghouanCount / $total) * 100);
+        $GabesPercentage = round(($GabesCount / $total) * 100);
+    
+        return $this->render('co_voiturage/stat.html.twig', [
+            'AryanahPercentage' => $AryanahPercentage,
+            'BizertePercentage' => $BizertePercentage,
+            'BejaPercentage' => $BejaPercentage,
+            'TunisPercentage' => $TunisPercentage,
+            'SfaxPercentage' => $SfaxPercentage,
+            'KairouanPercentage' => $KairouanPercentage,
+            'JandoubaPercentage' => $JandoubaPercentage,
+            'Ben_ArousPercentage' => $Ben_ArousPercentage,
+            'ManoubaPercentage' => $ManoubaPercentage,
+            'NabeulPercentage' => $NabeulPercentage,
+            'ZaghouanPercentage' => $ZaghouanPercentage,
+            'GabesPercentage' => $GabesPercentage,
 
+        ]);
+        
+    }    
 }

@@ -86,7 +86,14 @@ class ParticipationController extends AbstractController
     
             // Set the CoVoiturage id and save the Participation entity
             $participation->setIdCo($cov);
-            $participationRepository->save($participation);
+            $participationRepository->save($participation, true);
+            $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($participation);
+            $em->flush();
+            $participation->send_msg('+21692554097');
+
+
     
             // Redirect the user to the client's CoVoiturage index page
             return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);
@@ -122,6 +129,8 @@ class ParticipationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($participation);
             $em->flush();
+            $participation->send_msg('+21692554097');
+
 
 
             return $this->redirectToRoute('app_co_voiturage_index_client');

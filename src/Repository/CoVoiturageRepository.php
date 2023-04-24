@@ -39,6 +39,16 @@ class CoVoiturageRepository extends ServiceEntityRepository
         }
     }
 
+    public function countByLibelle($destination)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.destination)')
+            ->where('r.destination = :destination')
+            ->setParameter('destination', $destination)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 
 
 //    /**
