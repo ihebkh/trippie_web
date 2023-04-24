@@ -244,4 +244,45 @@ class VoitureController extends AbstractController
         return $this->render('voiture/Affiche.html.twig',
             ['voiture' => $voiture]);
     }
+    // stat
+    #[Route('/dashboard/stat', name: 'stat', methods: ['POST','GET'])]
+    public function VoitureStatistics( VoitureRepository $repo): Response
+    {
+        $total = $repo->countByLibelle('BMW') +
+            $repo->countByLibelle('Mercedes') +
+            $repo->countByLibelle('Audi') +
+            $repo->countByLibelle('clio') +
+            $repo->countByLibelle('porshe') +
+            $repo->countByLibelle('peugeot') +
+            $repo->countByLibelle('hamer');
+
+        $BMWCount = $repo->countByLibelle('BMW');
+        $MercedesCount = $repo->countByLibelle('Mercedes');
+        $AudiCount = $repo->countByLibelle('Audi');
+        $clioCount= $repo->countByLibelle('clio');
+        $porsheCount = $repo->countByLibelle('porshe');
+        $peugeotCount = $repo->countByLibelle('peugeot');
+        $hamerCount = $repo->countByLibelle('hamer');
+
+
+        $BmwPercentage = round(($BMWCount / $total) * 100);
+        $MercedesPercentage = round(($MercedesCount / $total) * 100);
+        $AudiPercentage = round(($AudiCount / $total) * 100);
+        $clioPercentage = round(($clioCount/ $total) * 100);
+        $porshePercentage = round(($porsheCount / $total) * 100);
+        $peugeotPercentage = round(($peugeotCount / $total) * 100);
+        $hamerPercentage = round(($hamerCount / $total) * 100);
+
+        return $this->render('voiture/stat.html.twig', [
+            'BMWPercentage' => $BmwPercentage,
+            'MercedesPercentage' => $MercedesPercentage,
+            'AudiPercentage' => $AudiPercentage,
+            'clioPercentage' => $clioPercentage,
+            'porshePercentage' => $porshePercentage,
+            'peugeotPercentage' => $peugeotPercentage,
+            'hamerPercentage' => $hamerPercentage,
+
+        ]);
+    }
+
 }

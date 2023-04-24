@@ -31,6 +31,7 @@ return [
     'app_voitureaffichClient' => [[], ['_controller' => 'App\\Controller\\VoitureController::AfficherClient'], [], [['text', '/voiture/AffichelistClient']], [], [], []],
     'app_Clientvoiture_show' => [['id'], ['_controller' => 'App\\Controller\\VoitureController::show3'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voiture/Clientvoiture/show']], [], [], []],
     'recherche' => [[], ['_controller' => 'App\\Controller\\VoitureController::Recherche'], [], [['text', '/voiture/recherche']], [], [], []],
+    'stat' => [[], ['_controller' => 'App\\Controller\\VoitureController::VoitureStatistics'], [], [['text', '/dashboard/stat']], [], [], []],
     'app_voituremobile' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::index'], [], [['text', '/voituremobile']], [], [], []],
     'list' => [[], ['_controller' => 'App\\Controller\\VoituremobileController::getVoiture'], [], [['text', '/s']], [], [], []],
     'voiture' => [['id'], ['_controller' => 'App\\Controller\\VoituremobileController::VoitureId'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/voituremobile']], [], [], []],

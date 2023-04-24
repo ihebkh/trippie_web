@@ -103,7 +103,13 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
         echo "                        <div class=\"card-body\">
 
                             <h5 class=\"card-title\">car list</h5>
-
+<center>   <a href=\"";
+        // line 25
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stat");
+        echo "\">
+        <button type=\"button\" style=\"float: left;padding: 10px;\" class=\"btn btn-outline-info\">stat
+        </button>
+</center>
 
                             <!-- Default Table -->
                             <table class=\"table\">
@@ -120,9 +126,9 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
 
 
                                 <tr>  ";
-        // line 41
+        // line 44
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 41, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 44, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["v"]) {
             echo " >
 
@@ -131,21 +137,21 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
 
 
                                     <td>";
-            // line 47
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 47), "html", null, true);
+            // line 50
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "matricule", [], "any", false, false, false, 50), "html", null, true);
             echo "</td>
                                     <td>";
-            // line 48
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 48), "html", null, true);
+            // line 51
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["v"], "marque", [], "any", false, false, false, 51), "html", null, true);
             echo "</td>
                                     <td><img class=\"img-profile \" src=\"";
-            // line 49
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 49))), "html", null, true);
+            // line 52
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/" . twig_get_attribute($this->env, $this->source, $context["v"], "picture", [], "any", false, false, false, 52))), "html", null, true);
             echo "\"
                                              style=\"max-height: 80px\"></td>
                                     <td><a href=\"";
-            // line 51
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 51)]), "html", null, true);
+            // line 54
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_voiture_show", ["id" => twig_get_attribute($this->env, $this->source, $context["v"], "id", [], "any", false, false, false, 54)]), "html", null, true);
             echo "\">
                                             <button type=\"button\" class=\"btn btn-outline-dark\">More</button>
                                         </a></td>
@@ -156,7 +162,7 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['v'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 57
+        // line 60
         echo "
 
                                 </tbody>
@@ -165,8 +171,8 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
 
 
                  <center>  ";
-        // line 64
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 64, $this->source); })()), "bootstrap_4_pagination.html.twig");
+        // line 67
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["voiture"]) || array_key_exists("voiture", $context) ? $context["voiture"] : (function () { throw new RuntimeError('Variable "voiture" does not exist.', 67, $this->source); })()), "bootstrap_4_pagination.html.twig");
         echo "</center>
 
                             <!-- End Default Table Example -->
@@ -202,7 +208,7 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  169 => 64,  160 => 57,  148 => 51,  143 => 49,  139 => 48,  135 => 47,  124 => 41,  103 => 22,  94 => 19,  90 => 17,  85 => 16,  76 => 13,  72 => 11,  68 => 10,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  175 => 67,  166 => 60,  154 => 54,  149 => 52,  145 => 51,  141 => 50,  130 => 44,  108 => 25,  103 => 22,  94 => 19,  90 => 17,  85 => 16,  76 => 13,  72 => 11,  68 => 10,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -231,7 +237,10 @@ class __TwigTemplate_d403ef037a44555c1892a201e4193be1 extends Template
                         <div class=\"card-body\">
 
                             <h5 class=\"card-title\">car list</h5>
-
+<center>   <a href=\"{{ path('stat') }}\">
+        <button type=\"button\" style=\"float: left;padding: 10px;\" class=\"btn btn-outline-info\">stat
+        </button>
+</center>
 
                             <!-- Default Table -->
                             <table class=\"table\">

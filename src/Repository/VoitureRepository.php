@@ -63,4 +63,13 @@ class VoitureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function countByLibelle($marque)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.marque)')
+            ->where('r.marque = :marque')
+            ->setParameter('marque', $marque)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
