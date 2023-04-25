@@ -64,38 +64,50 @@ class CoVoiturageRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        if (!empty($query)) {
+        if ($query) {
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->like('c.id', ':query'),
                 $qb->expr()->like('c.depart', ':query'),
                 $qb->expr()->like('c.destination', ':query'),
-                $qb->expr()->like('c.nmbr_place', ':query')
+                $qb->expr()->like('c.nmbr_place', ':query'),
+
             ))
-                ->setParameter('query', '%' . $query . '%');
+            ->setParameter('query', '%' . $query . '%');
         }
 
-        if (!empty($id)) {
+        if ($id) {
             $qb->andWhere('c.id = :id')
                 ->setParameter('id', $id);
         }
 
-        if (!empty($depart)) {
+        if ($depart) {
             $qb->andWhere('c.depart = :depart')
                 ->setParameter('depart', $depart);
         }
 
-        if (!empty($destination)) {
+        if ($destination) {
             $qb->andWhere('c.destination = :destination')
                 ->setParameter('destination', $destination);
         }
 
-        if (!empty($nmbr_place)) {
+        if ($nmbr_place) {
             $qb->andWhere('c.nmbr_place = :nmbr_place')
                 ->setParameter('nmbr_place', $nmbr_place);
         }
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findByCoVoiturage(string $query): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.depart LIKE :query ')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
 

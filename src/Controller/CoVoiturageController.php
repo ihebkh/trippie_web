@@ -20,10 +20,19 @@ use Psr\Http\Message\RequestFactoryInterface;
 class CoVoiturageController extends AbstractController
 {
     #[Route('/', name: 'app_co_voiturage_index', methods: ['GET'])]
-    public function index(CoVoiturageRepository $coVoiturageRepository): Response
+    public function index(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
     {
+        $searchQuery = $request->query->get('q');
+        $sort = $request->query->get('sort');
+        $order = $request->query->get('order', 'asc');
+
+        if ($searchQuery) {
+            $coVoiturage = $coVoiturageRepository->findByCoVoiturage($searchQuery);
+        } else {
+            $coVoiturage = $coVoiturageRepository->findAll();
+        }
         return $this->render('co_voiturage/index.html.twig', [
-            'co_voiturages' => $coVoiturageRepository->findAll(),
+            'co_voiturages' => $coVoiturage,
         ]);
     }
 
@@ -293,8 +302,6 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
-
-
     #[Route('/co/voiturage/search', name: 'search2', methods: ['GET', 'POST'])]
     public function search2(Request $request, CoVoiturageRepository $repo): Response
     {
@@ -305,6 +312,29 @@ class CoVoiturageController extends AbstractController
         $nmbr_place = $request->query->get('nmbr_place');
 
         $coVoiturage = $repo->advancedSearch($query, $id, $depart, $destination, $nmbr_place);
+
+        return $this->render('co_voiturage/index.html.twig', [
+            'co_voiturages' => $coVoiturage,
+        ]);
+    }
+
+
+
+
+
+
+    #[Route('/co/voiturage/search2', name: 'app_search', methods: ['GET'])]
+    public function search(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
+    {
+        $searchQuery = $request->query->get('query');
+        $sort = $request->query->get('sort');
+        $order = $request->query->get('order', 'asc');
+
+        if ($searchQuery) {
+            $coVoiturage = $coVoiturageRepository->findByCoVoiturage($searchQuery);
+        } else {
+            $coVoiturage = $coVoiturageRepository->findAll();
+        }
 
         return $this->render('co_voiturage/index.html.twig', [
             'co_voiturages' => $coVoiturage,

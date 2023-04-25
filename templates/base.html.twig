@@ -61,11 +61,18 @@
         </div><!-- End Logo -->
 
         <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="{{ path ('search2') }}">
+            <form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search2') }}">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
         </div><!-- End Search Bar -->
+
+         <a href="{{  path ('app_co_voiturage_index') }}" class="">Retour</a>
+
+
+
+     
+</form>
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
