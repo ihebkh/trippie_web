@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RoleRepository;
 use App\Entity\Utilisateur;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
@@ -15,12 +17,14 @@ class Role
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(type: "integer")]
+    #[Groups("roles")]
     private ?int $id_role = null;
    
 
    
     #[ORM\Column(length:255)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("roles")]
     private ?string $libelle=null;
 
   

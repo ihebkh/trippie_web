@@ -8,6 +8,7 @@ use App\Enum\Etat;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Twilio\Rest\Client;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: ChauffeurRepository::class)]
@@ -16,33 +17,39 @@ class Chauffeur implements UserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("chauffeurs")]
     private ?int $id_ch = null;
 
    
     #[ORM\Column(length: 200, nullable: true)]
+    #[Groups("chauffeurs")]
     private ?string $img = null;
 
 
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("chauffeurs")]
     private ?string $num_permis = null;
 
   
     #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Gsm must be 8 numbers")]
+    #[Groups("chauffeurs")]
     private ?int $gsm = null;
 
 
     #[ORM\Column(length: 100)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\Email(message: "Missing @ or .")]
+    #[Groups("chauffeurs")]
     private ?string $email = null;
 
     
     #[ORM\Column(length: 150)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("chauffeurs")]
     private ?string $password = null;
 
  
@@ -233,7 +240,7 @@ public function eraseCredentials()
 
 public function send_msg(String $num): void
     {
-        $code = random_int(100000, 999999);
+       
         $this->setResetToken($code);
         
     }

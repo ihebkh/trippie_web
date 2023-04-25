@@ -7,6 +7,8 @@ use App\Repository\ClientRepository;
 use App\Enum\Etat;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 
@@ -16,10 +18,12 @@ class Client implements UserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("clients")]
     private ?int $id_client = null;
 
 
     #[ORM\Column(length: 200, nullable: true)]
+    #[Groups("clients")]
     private ?string $img = null;
 
 
@@ -27,17 +31,20 @@ class Client implements UserInterface
     #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Gsm must be 8 numbers")]
+    #[Groups("clients")]
     private ?int $gsm = null;
 
 
     #[ORM\Column(length: 200)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\Email(message: "Missing @ or .")]
+    #[Groups("clients")]
     private ?string $email = null;
 
 
    #[ORM\Column(length: 150)]
    #[Assert\NotBlank(message: "You must complete all empty fields")]
+   #[Groups("clients")]
     private ?string $password = null;
 
 

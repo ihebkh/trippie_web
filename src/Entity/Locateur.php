@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Enum\Etat;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: LocateurRepository::class)]
 class Locateur implements UserInterface
@@ -16,16 +18,19 @@ class Locateur implements UserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("locateurs")]
     private ?int $id_loc = null;
 
 
     #[ORM\Column(length: 200, nullable: true)]
+    #[Groups("locateurs")]
     private ?string $img = null;
 
 
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("locateurs")]
     private ?string $nom_agence = null;
 
 
@@ -33,16 +38,19 @@ class Locateur implements UserInterface
     #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Gsm must be 8 numbers")]
+    #[Groups("locateurs")]
     private ?int $gsm = null;
 
 
    #[ORM\Column(length: 150)]
    #[Assert\NotBlank(message: "You must complete all empty fields")]
    #[Assert\Email(message: "Missing @ or .")]
+   #[Groups("locateurs")]
     private ?string $email = null;
 
 
     #[ORM\Column(length: 100)]
+    #[Groups("locateurs")]
     private ?string $password = null;
 
 
