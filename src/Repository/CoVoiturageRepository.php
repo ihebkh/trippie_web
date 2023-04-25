@@ -72,7 +72,7 @@ class CoVoiturageRepository extends ServiceEntityRepository
                 $qb->expr()->like('c.nmbr_place', ':query'),
 
             ))
-            ->setParameter('query', '%' . $query . '%');
+                ->setParameter('query', '%' . $query . '%');
         }
 
         if ($id) {
@@ -106,6 +106,14 @@ class CoVoiturageRepository extends ServiceEntityRepository
             ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findAllSorted(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('cl')
+            ->orderBy('cl.depart', 'ASC');
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
 

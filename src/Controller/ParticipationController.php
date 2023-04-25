@@ -129,7 +129,7 @@ class ParticipationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($participation);
             $em->flush();
-            $participation->send_msg('+21692554097');
+            //$participation->send_msg('+21692554097');
 
 
 
@@ -153,7 +153,7 @@ class ParticipationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participationRepository->save($participation, true);
-            $participation->send_msg('+21692554097');
+            //$participation->send_msg('+21692554097');
 
             return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
         }

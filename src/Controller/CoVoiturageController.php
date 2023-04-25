@@ -92,7 +92,7 @@ class CoVoiturageController extends AbstractController
                 $imgFilename = $file->getClientOriginalName();
                 $file->move($uploadsDirectory, $imgFilename);
                 $coVoiturage->setCovImg($imgFilename);
-                $coVoiturage->send_msg('+21692554097');
+                //$coVoiturage->send_msg('+21692554097');
             }
             $coVoiturageRepository->save($coVoiturage, true);
 
@@ -340,4 +340,14 @@ class CoVoiturageController extends AbstractController
             'co_voiturages' => $coVoiturage,
         ]);
     }
+
+    #[Route('/co/voiturage/tricroi', name: 'tri', methods: ['GET','POST'])]
+    public function triCroissant(CoVoiturageRepository $CoVoiturageRepository): Response
+{
+    $coVoiturage = $CoVoiturageRepository->findAllSorted();
+
+    return $this->render('co_voiturage/index.html.twig', [
+        'co_voiturages' => $coVoiturage,
+    ]);
+}
 }
