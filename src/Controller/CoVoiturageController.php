@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\WeatherService;
 
 
 
@@ -57,7 +56,7 @@ class CoVoiturageController extends AbstractController
                 $imgFilename = $file->getClientOriginalName();
                 $file->move($uploadsDirectory, $imgFilename);
                 $coVoiturage->setCovImg($imgFilename);
-               // $coVoiturage->send_msg('+21692554097');
+                // $coVoiturage->send_msg('+21692554097');
             }
             $coVoiturageRepository->save($coVoiturage, true);
 
@@ -196,7 +195,7 @@ class CoVoiturageController extends AbstractController
             $repo->countByLibelle('Gabes') +
             $repo->countByLibelle('Nabeul') +
             $repo->countByLibelle('Zaghouan');
-    
+
         $AryanahCount = $repo->countByLibelle('Aryanah');
         $BizerteCount = $repo->countByLibelle('Bizerte');
         $BejaCount = $repo->countByLibelle('Beja');
@@ -209,7 +208,7 @@ class CoVoiturageController extends AbstractController
         $NabeulCount = $repo->countByLibelle('Nabeul');
         $ZaghouanCount = $repo->countByLibelle('Zaghouan');
         $GabesCount = $repo->countByLibelle('Gabes');
-    
+
         $AryanahPercentage = round(($AryanahCount / $total) * 100);
         $BizertePercentage = round(($BizerteCount / $total) * 100);
         $BejaPercentage = round(($BejaCount / $total) * 100);
@@ -222,7 +221,49 @@ class CoVoiturageController extends AbstractController
         $NabeulPercentage = round(($NabeulCount / $total) * 100);
         $ZaghouanPercentage = round(($ZaghouanCount / $total) * 100);
         $GabesPercentage = round(($GabesCount / $total) * 100);
-    
+
+
+
+
+        $total = $repo->countByLibelle2('Aryanah') +
+            $repo->countByLibelle2('Bizerte') +
+            $repo->countByLibelle2('Beja') +
+            $repo->countByLibelle2('Tunis') +
+            $repo->countByLibelle2('Sfax') +
+            $repo->countByLibelle2('Kairouan') +
+            $repo->countByLibelle2('Jandouba') +
+            $repo->countByLibelle2('Ben Arous') +
+            $repo->countByLibelle2('Manouba') +
+            $repo->countByLibelle2('Gabes') +
+            $repo->countByLibelle2('Nabeul') +
+            $repo->countByLibelle2('Zaghouan');
+
+        $AryanahCount2 = $repo->countByLibelle2('Aryanah');
+        $BizerteCount2 = $repo->countByLibelle2('Bizerte');
+        $BejaCount2 = $repo->countByLibelle2('Beja');
+        $TunisCount2 = $repo->countByLibelle2('Tunis');
+        $SfaxCount2 = $repo->countByLibelle2('Sfax');
+        $KairouanCount2 = $repo->countByLibelle2('Kairouan');
+        $JandoubaCount2 = $repo->countByLibelle2('Jandouba');
+        $Ben_ArousCount2 = $repo->countByLibelle2('Ben Arous');
+        $ManoubaCount2 = $repo->countByLibelle2('Manouba');
+        $NabeulCount2 = $repo->countByLibelle2('Nabeul');
+        $ZaghouanCount2 = $repo->countByLibelle2('Zaghouan');
+        $GabesCount2 = $repo->countByLibelle2('Gabes');
+
+        $AryanahPercentage2 = round(($AryanahCount2 / $total) * 100);
+        $BizertePercentage2 = round(($BizerteCount2 / $total) * 100);
+        $BejaPercentage2 = round(($BejaCount2 / $total) * 100);
+        $TunisPercentage2 = round(($TunisCount2 / $total) * 100);
+        $SfaxPercentage2 = round(($SfaxCount2 / $total) * 100);
+        $KairouanPercentage2 = round(($KairouanCount2 / $total) * 100);
+        $JandoubaPercentage2 = round(($JandoubaCount2 / $total) * 100);
+        $Ben_ArousPercentage2 = round(($Ben_ArousCount2 / $total) * 100);
+        $ManoubaPercentage2 = round(($ManoubaCount2 / $total) * 100);
+        $NabeulPercentage2 = round(($NabeulCount2 / $total) * 100);
+        $ZaghouanPercentage2 = round(($ZaghouanCount2 / $total) * 100);
+        $GabesPercentage2 = round(($GabesCount2 / $total) * 100);
+
         return $this->render('co_voiturage/stat.html.twig', [
             'AryanahPercentage' => $AryanahPercentage,
             'BizertePercentage' => $BizertePercentage,
@@ -236,8 +277,37 @@ class CoVoiturageController extends AbstractController
             'NabeulPercentage' => $NabeulPercentage,
             'ZaghouanPercentage' => $ZaghouanPercentage,
             'GabesPercentage' => $GabesPercentage,
+            'AryanahPercentage2' => $AryanahPercentage2,
+            'BizertePercentage2' => $BizertePercentage2,
+            'BejaPercentage2' => $BejaPercentage2,
+            'TunisPercentage2' => $TunisPercentage2,
+            'SfaxPercentage2' => $SfaxPercentage2,
+            'KairouanPercentage2' => $KairouanPercentage2,
+            'JandoubaPercentage2' => $JandoubaPercentage2,
+            'Ben_ArousPercentage2' => $Ben_ArousPercentage2,
+            'ManoubaPercentage2' => $ManoubaPercentage2,
+            'NabeulPercentage2' => $NabeulPercentage2,
+            'ZaghouanPercentage2' => $ZaghouanPercentage2,
+            'GabesPercentage2' => $GabesPercentage2,
 
         ]);
-        
-    }    
+    }
+
+
+
+    #[Route('/co/voiturage/search', name: 'search2', methods: ['GET', 'POST'])]
+    public function search2(Request $request, CoVoiturageRepository $repo): Response
+    {
+        $query = $request->query->get('query');
+        $id = $request->query->get('id');
+        $depart = $request->query->get('depart');
+        $destination = $request->query->get('destination');
+        $nmbr_place = $request->query->get('nmbr_place');
+
+        $coVoiturage = $repo->advancedSearch($query, $id, $depart, $destination, $nmbr_place);
+
+        return $this->render('co_voiturage/index.html.twig', [
+            'co_voiturages' => $coVoiturage,
+        ]);
+    }
 }

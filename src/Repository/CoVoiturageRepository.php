@@ -48,31 +48,79 @@ class CoVoiturageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+    public function countByLibelle2($depart)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.depart)')
+            ->where('r.depart = :depart')
+            ->setParameter('depart', $depart)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
 
 
-//    /**
-//     * @return CoVoiturage[] Returns an array of CoVoiturage objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function advancedSearch($query, $id, $depart, $destination, $nmbr_place)
+    {
+        $qb = $this->createQueryBuilder('c');
 
-//    public function findOneBySomeField($value): ?CoVoiturage
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if (!empty($query)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('c.id', ':query'),
+                $qb->expr()->like('c.depart', ':query'),
+                $qb->expr()->like('c.destination', ':query'),
+                $qb->expr()->like('c.nmbr_place', ':query')
+            ))
+                ->setParameter('query', '%' . $query . '%');
+        }
+
+        if (!empty($id)) {
+            $qb->andWhere('c.id = :id')
+                ->setParameter('id', $id);
+        }
+
+        if (!empty($depart)) {
+            $qb->andWhere('c.depart = :depart')
+                ->setParameter('depart', $depart);
+        }
+
+        if (!empty($destination)) {
+            $qb->andWhere('c.destination = :destination')
+                ->setParameter('destination', $destination);
+        }
+
+        if (!empty($nmbr_place)) {
+            $qb->andWhere('c.nmbr_place = :nmbr_place')
+                ->setParameter('nmbr_place', $nmbr_place);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+    //    /**
+    //     * @return CoVoiturage[] Returns an array of CoVoiturage objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?CoVoiturage
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
