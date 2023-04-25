@@ -24,6 +24,11 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mailer\Mailer;
+use App\Form\GsmFormType;
+use App\Form\CodeFormType;
+use App\Service\TwilioService;
+
+
 
 
 #[Route('/client')]
@@ -215,7 +220,7 @@ public function request(Request $request, ClientRepository $userRepository, Toke
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('login/request.html.twig', [
+        return $this->render('login/requestCl.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -255,5 +260,138 @@ public function request(Request $request, ClientRepository $userRepository, Toke
             'resetForm' => $form->createView(),
         ]);
     }
+
+     //////////////////////////////////////////////////////////////////GSM//////////////////////////////////////////////
+     #[Route('/login/role/gsm_client', name: 'gsm_client', methods: ['GET','POST'])]
+     public function gsm(): Response
+     {
+         return $this->redirectToRoute('app_forgot_password_request_client_gsm', [] ,Response::HTTP_SEE_OTHER);
+     }
+ 
+     #[Route('/login/role/reset_gsm', name: 'app_forgot_password_request_client_gsm', methods: ['GET','POST'])]
+     public function requestgsm(Request $request, ClientRepository $userRepository, TokenGeneratorInterface $tokenGenerator): Response
+         {
+             $form = $this->createForm(GsmFormType::class);
+     
+             $form->handleRequest($request);
+     
+             if ($form->isSubmitted() && $form->isValid()) {
+                 $gsm = $form->get('gsm')->getData();
+                 //$gsm = '+216' . ltrim($gsm, '0');
+                 $user = $userRepository->findOneBy(['gsm' => $gsm]);
+                // dd($user);
+                 if (!$user) {
+                     $this->addFlash('danger', 'Adresse e-mail inconnue.');
+     
+                     return $this->redirectToRoute('app_forgot_password_request_client_gsm');
+                 }
+     
+                 $code = random_int(100000, 999999);   
+                 try {
+                     $user->setResetToken($code);
+                     $entityManager = $this->getDoctrine()->getManager();
+                     $entityManager->persist($user);
+                     $entityManager->flush();
+                 } catch (\Exception $e) {
+                     $this->addFlash('warning', $e->getMessage());
+     
+                     return $this->redirectToRoute('app_forgot_password_request_client');
+                 }    
+     
+                 $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
+                 $authToken = '3c4688246ca0faa1da7d45b5a7f84319';
+                 $twilioService = new TwilioService($accountSid, $authToken);
+
+                $to = '+216' . $user->getGsm(); // recipient's phone number
+                $from = '+15673132411'; // your Twilio phone number
+                $body = $code;
+
+                $twilioService->sendSms($from, $to, $body);
+     
+                
+                 $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
+                
+                 return $this->redirectToRoute('codeverif', ['token' => $code ]);
+             }
+     
+             return $this->render('login/gsm.html.twig', [
+                 'requestForm' => $form->createView(),
+             ]);
+         }
+ 
+ 
+         #[Route('/login/role/reset_gsm/{token}', name: 'codeverif', methods: ['GET','POST'])]
+         public function VerifCode(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+         {
+             $user = $this->getDoctrine()->getRepository(Client::class)->findOneBy(['resetToken' => $token]);
+             $form = $this->createForm(CodeFormType::class);
+             $form->handleRequest($request);
+     
+             if ($form->isSubmitted() && $form->isValid()) {
+                $code = $form->get('code')->getData();
+                $token = $user->getResetToken();
+                if($code === $token) {
+     
+                 $entityManager = $this->getDoctrine()->getManager();
+                 $entityManager->persist($user);
+                 $entityManager->flush();
+                 
+     
+                 return $this->redirectToRoute('app_reset_password_client',['token' => $token]);
+             }
+             else {
+                 $this->addFlash('error', 'erreur !');
+             }
+             }
+     
+             return $this->render('login/code.html.twig', [
+                 'resetForm' => $form->createView(),
+             ]);
+         }
+     
+     
+     
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+     #[Route('/client/tricroi', name: 'tricroissant1', methods: ['GET','POST'])]
+     public function triCroissant(ClientRepository $clientRepository): Response
+ {
+     $clients = $clientRepository->findAllSorted();
+ 
+     return $this->render('client/card.html.twig', [
+         'clients' => $clients,
+     ]);
+ }
+ 
+     #[Route('/client/tridesc', name: 'tridesc2', methods: ['GET','POST'])]
+     public function tridesc(ClientRepository $clientRepository): Response
+     {
+        $clients = $clientRepository->findAllSorted2();
+ 
+         return $this->render('client/card.html.twig', [
+            'clients' => $clients,
+         ]);
+     }
+ 
+     #[Route('/client/tricroipre', name: 'tricroissantpre3', methods: ['GET','POST'])]
+     public function triCroissantpre(ClientRepository $clientRepository): Response
+ {
+    $clients = $clientRepository->findAllSorted3();
+ 
+    return $this->render('client/card.html.twig', [
+       'clients' => $clients,
+    ]);
+ }
+ 
+     #[Route('/client/tridescpre', name: 'tridescpre4', methods: ['GET','POST'])]
+     public function tridescpre(ClientRepository $clientRepository): Response
+     {
+        $clients = $clientRepository->findAllSorted4();
+ 
+        return $this->render('client/card.html.twig', [
+           'clients' => $clients,
+        ]);
+     }
+
 
 }

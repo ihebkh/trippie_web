@@ -112,4 +112,45 @@ class ClientRepository extends ServiceEntityRepository
 
     return $qb->getQuery()->getResult();
 }
+
+public function findAllSorted() : array
+{
+    $queryBuilder = $this->createQueryBuilder('cl')
+    ->leftJoin('cl.id_role', 'r')
+    ->leftJoin('r.id_user', 'u')
+    ->orderBy('u.nom', 'ASC');
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
+public function findAllSorted2() : array
+{
+    $queryBuilder = $this->createQueryBuilder('cl')
+    ->leftJoin('cl.id_role', 'r')
+    ->leftJoin('r.id_user', 'u')
+    ->orderBy('u.nom', 'DESC');
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
+public function findAllSorted3() : array
+{
+    $queryBuilder = $this->createQueryBuilder('cl')
+    ->leftJoin('cl.id_role', 'r')
+    ->leftJoin('r.id_user', 'u')
+    ->orderBy('u.prenom', 'ASC');
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
+public function findAllSorted4() : array
+{
+    $queryBuilder = $this->createQueryBuilder('cl')
+    ->leftJoin('cl.id_role', 'r')
+    ->leftJoin('r.id_user', 'u')
+    ->orderBy('u.prenom', 'DESC');
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
 }

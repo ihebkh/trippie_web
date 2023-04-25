@@ -24,6 +24,12 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mailer\Mailer;
+use App\Form\GsmFormType;
+use App\Form\CodeFormType;
+use App\Service\TwilioService;
+
+
+
 
 #[Route('/locateur')]
 class LocateurController extends AbstractController
@@ -216,7 +222,7 @@ public function request(Request $request, LocateurRepository $userRepository, To
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('login/request.html.twig', [
+        return $this->render('login/requestLoc.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -258,7 +264,137 @@ public function request(Request $request, LocateurRepository $userRepository, To
     }
 
 
+//////////////////////////////////////////////////////////////////GSM//////////////////////////////////////////////
+#[Route('/login/role/gsm_loc', name: 'gsm_loc', methods: ['GET','POST'])]
+public function gsm(): Response
+{
+    return $this->redirectToRoute('app_forgot_password_request_locateur_gsm', [] ,Response::HTTP_SEE_OTHER);
+}
 
+#[Route('/login/role/reset_gsm', name: 'app_forgot_password_request_locateur_gsm', methods: ['GET','POST'])]
+public function requestgsm(Request $request, LocateurRepository $userRepository, TokenGeneratorInterface $tokenGenerator): Response
+    {
+        $form = $this->createForm(GsmFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gsm = $form->get('gsm')->getData();
+            //$gsm = '+216' . ltrim($gsm, '0');
+            $user = $userRepository->findOneBy(['gsm' => $gsm]);
+           // dd($user);
+            if (!$user) {
+                $this->addFlash('danger', 'Adresse e-mail inconnue.');
+
+                return $this->redirectToRoute('app_forgot_password_request_locateur_gsm');
+            }
+
+            $code = random_int(100000, 999999);   
+            try {
+                $user->setResetToken($code);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+
+                return $this->redirectToRoute('app_forgot_password_request_locateur');
+            }    
+
+            $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
+            $authToken = '3c4688246ca0faa1da7d45b5a7f84319';
+            $twilioService = new TwilioService($accountSid, $authToken);
+
+           $to = '+216' . $user->getGsm(); // recipient's phone number
+           $from = '+15673132411'; // your Twilio phone number
+           $body = $code;
+
+           $twilioService->sendSms($from, $to, $body);
+
+           
+            $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
+           
+            return $this->redirectToRoute('codeverif', ['token' => $code ]);
+        }
+
+        return $this->render('login/gsm.html.twig', [
+            'requestForm' => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/login/role/reset_gsm/{token}', name: 'codeverif', methods: ['GET','POST'])]
+    public function VerifCode(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this->getDoctrine()->getRepository(Locateur::class)->findOneBy(['resetToken' => $token]);
+        $form = $this->createForm(CodeFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           $code = $form->get('code')->getData();
+           $token = $user->getResetToken();
+           if($code === $token) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+
+            return $this->redirectToRoute('app_reset_password_locateur',['token' => $token]);
+        }
+        else {
+            $this->addFlash('error', 'erreur !');
+        }
+        }
+
+        return $this->render('login/code.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+    }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#[Route('/locateur/tricroi', name: 'tricroissant5', methods: ['GET','POST'])]
+public function triCroissant(LocateurRepository $locateurRepository): Response
+{
+    $locateurs = $locateurRepository->findAllSorted();
+
+    return $this->render('locateur/card.html.twig', [
+       'locateurs' => $locateurs,
+    ]);
+}
+
+#[Route('/locateur/tridesc', name: 'tridesc6', methods: ['GET','POST'])]
+public function tridesc(LocateurRepository $locateurRepository): Response
+{
+    $locateurs = $locateurRepository->findAllSorted2();
+
+    return $this->render('locateur/card.html.twig', [
+       'locateurs' => $locateurs,
+    ]);
+}
+
+#[Route('/locateur/tricroipre', name: 'tricroissantpre7', methods: ['GET','POST'])]
+public function triCroissantpre(LocateurRepository $locateurRepository): Response
+{
+    $locateurs = $locateurRepository->findAllSorted3();
+
+    return $this->render('locateur/card.html.twig', [
+       'locateurs' => $locateurs,
+    ]);
+}
+
+#[Route('/locateur/tridescpre', name: 'tridescpre8', methods: ['GET','POST'])]
+public function tridescpre(LocateurRepository $locateurRepository): Response
+{
+   $locateurs = $locateurRepository->findAllSorted4();
+
+   return $this->render('locateur/card.html.twig', [
+      'locateurs' => $locateurs,
+   ]);
+}
 
 
 

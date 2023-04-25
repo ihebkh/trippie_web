@@ -238,7 +238,7 @@ public function search3(Request $request)
 }
 
 #[Route('/login/role/reset', name: 'app_forgot_password_request_chauffeur', methods: ['GET','POST'])]
-public function request(Request $request, ChauffeurRepository $userRepository, TokenGeneratorInterface $tokenGenerator, \Swift_Mailer $mailer): Response
+public function request(Request $request, ChauffeurRepository $userRepository, TokenGeneratorInterface $tokenGenerator): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
 
@@ -372,7 +372,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
                 }    
     
                 $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-                $authToken = '03b8a816ed3a750f589badaf99628945';
+                $authToken = '3c4688246ca0faa1da7d45b5a7f84319';
                 $client = new Client($accountSid, $authToken);
                 $message = $client->messages->create(
                     '+216' . $user->getGsm(), // recipient's phone number
@@ -437,10 +437,30 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
     ]);
 }
 
-    #[Route('chauffeur/tridesc', name: 'tridesc', methods: ['GET','POST'])]
+    #[Route('/chauffeur/tridesc', name: 'tridesc', methods: ['GET','POST'])]
     public function tridesc(ChauffeurRepository $chauffeurRepository): Response
     {
         $chauffeurs = $chauffeurRepository->findAllSorted2();
+
+        return $this->render('chauffeur/card.html.twig', [
+            'chauffeurs' => $chauffeurs,
+        ]);
+    }
+
+    #[Route('/chauffeur/tricroipre', name: 'tricroissantpre', methods: ['GET','POST'])]
+    public function triCroissantpre(ChauffeurRepository $chauffeurRepository): Response
+{
+    $chauffeurs = $chauffeurRepository->findAllSorted3();
+
+    return $this->render('chauffeur/card.html.twig', [
+        'chauffeurs' => $chauffeurs,
+    ]);
+}
+
+    #[Route('/chauffeur/tridescpre', name: 'tridescpre', methods: ['GET','POST'])]
+    public function tridescpre(ChauffeurRepository $chauffeurRepository): Response
+    {
+        $chauffeurs = $chauffeurRepository->findAllSorted4();
 
         return $this->render('chauffeur/card.html.twig', [
             'chauffeurs' => $chauffeurs,

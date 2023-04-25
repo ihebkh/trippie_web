@@ -138,5 +138,25 @@ public function advancedSearch($query, $cin, $nom, $prenom, $email, $etat)
         return $queryBuilder->getQuery()->getResult();
     }
 
+    public function findAllSorted3() : array
+    {
+        $queryBuilder = $this->createQueryBuilder('ch')
+        ->leftJoin('ch.id_role', 'r')
+        ->leftJoin('r.id_user', 'u')
+        ->orderBy('u.prenom', 'ASC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findAllSorted4() : array
+    {
+        $queryBuilder = $this->createQueryBuilder('ch')
+        ->leftJoin('ch.id_role', 'r')
+        ->leftJoin('r.id_user', 'u')
+        ->orderBy('u.prenom', 'DESC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 
 }
