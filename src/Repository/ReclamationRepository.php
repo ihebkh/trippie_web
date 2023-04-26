@@ -49,6 +49,16 @@ class ReclamationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countByLibelle($type)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.type)')
+            ->where('r.type = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects
 //     */

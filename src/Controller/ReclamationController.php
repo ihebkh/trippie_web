@@ -264,6 +264,29 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/stat', name: 'app_reclamation_stat', methods: ['POST','GET'])]
+    public function stat( ReclamationRepository $repo): Response
+    {
+        $total = $repo->countByLibelle('Technique') +
+            $repo->countByLibelle('Eco') +
+            $repo->countByLibelle('Other');
+
+        $TechniqueCount = $repo->countByLibelle('Technique');
+        $EcoCount = $repo->countByLibelle('Eco');
+        $OtherCount = $repo->countByLibelle('Other');
+
+
+        $TechniquePercentage = round(($TechniqueCount / $total) * 100);
+        $EcoPercentage = round(($EcoCount / $total) * 100);
+        $OtherPercentage = round(($OtherCount / $total) * 100);
+        return $this->render('reclamation/stat.html.twig', [
+            'TechniquePercentage' => $TechniquePercentage,
+            'EcoPercentage' => $EcoPercentage,
+            'OtherPercentage' => $OtherPercentage,
+
+        ]);
+    }
+
 
 
 }
