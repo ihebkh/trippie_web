@@ -1,12 +1,15 @@
 
-{% extends 'base.html.twig' %}
+{% extends 'frontbase.html.twig' %}
 
 {% block title %}Reclamation{% endblock %}
 
 
-{% block content %}
+{% block body %}
+<br></br>
+<br></br>
+<br></br>
 
-    <h1>Reclamation</h1>
+    <center><h1>Reclamation</h1>
 
     <table class="table">
     {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
@@ -39,5 +42,6 @@
 
         </div>
         {{ form_end(form) }}
+        </center>
 {% endblock %}
 

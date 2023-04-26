@@ -16,14 +16,21 @@ class Reclamation1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $fileContents = file('C:\xampp\htdocs\PiDev\src\Form\choices.txt', FILE_IGNORE_NEW_LINES);
+        $choices = array();
+        foreach ($fileContents as $line) {
+            // Trim any whitespace from the beginning and end of the line
+            $line = trim($line);
+        
+            // Use the line as both the label and the value for the choice
+            $choices[$line] = $line;
+        }
+        $choices['Other'] = 'Other';
+        
         $builder
             ->add('type', ChoiceType::class,
             array(
-                'choices' => array(
-                    'Technique' => 'Technique',
-                    'Other' => 'Other',
-
-                )))
+                'choices' => $choices ))
             ->add('commentaire')
             ->add('date_creation')
 

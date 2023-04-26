@@ -16,6 +16,7 @@ use App\Form\ReponseType;
 use App\Repository\ReponseRepository;
 
 use Twilio\Rest\Client;
+use App\Service\AjoutNotificationService;
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
@@ -29,7 +30,7 @@ class ReclamationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ReclamationRepository $reclamationRepository): Response
+    public function new(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService): Response
     {
         $reclamation = new Reclamation();
         $form = $this->createForm(Reclamation1Type::class, $reclamation);
@@ -57,7 +58,9 @@ class ReclamationController extends AbstractController
 
             $reclamationRepository->save($reclamation, true);
 
-            $sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
+            $notifcationService->sendEmail();
+
+            /*$sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
             $token  = "e0f542fecc731d9f8e9d87a4709aae32";
             $twilio = new Client($sid, $token);
 
@@ -67,12 +70,65 @@ class ReclamationController extends AbstractController
                             "from" => "+12766226225",
                             "body" => "Votre réclamation est recu !!!"
                         )
-                    );
+                    );*/
 
             return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reclamation/new.html.twig', [
+            'reclamation' => $reclamation,
+            'form' => $form,
+        ]);
+    }
+
+
+    #[Route('/newF', name: 'app_reclamation_newF', methods: ['GET', 'POST'])]
+    public function newF(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService): Response
+    {
+        $reclamation = new Reclamation();
+        $form = $this->createForm(Reclamation1Type::class, $reclamation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $file = $form->get('image')->getData();
+
+            if ($file) {
+                $fileName = uniqid().'.'.$file->guessExtension();
+    
+                try {
+                    $file->move(
+                        $this->getParameter('reclamation_images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // Handle the exception
+                }
+                $reclamation->setImage($fileName);
+            }
+
+            $reclamation->setEtat("non traité");
+
+            $reclamationRepository->save($reclamation, true);
+
+            $notifcationService->sendEmail();
+
+            /*$sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
+            $token  = "e0f542fecc731d9f8e9d87a4709aae32";
+            $twilio = new Client($sid, $token);
+
+            $message = $twilio->messages
+                ->create("+21654833493", // to
+                    array(
+                            "from" => "+12766226225",
+                            "body" => "Votre réclamation est recu !!!"
+                        )
+                    );*/
+
+            return $this->redirectToRoute('app_reclamation_front', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('reclamation/newF.html.twig', [
             'reclamation' => $reclamation,
             'form' => $form,
         ]);
@@ -89,7 +145,7 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
+    #[Route('/{id}/rep', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
     public function add(Reclamation $reclamation, Request $request, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository): Response
     {
         $reponse = new Reponse();
@@ -179,7 +235,7 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'app_reclamation_Fdelete', methods: ['POST'])]
+    #[Route('/front/{id}', name: 'app_reclamation_Fdelete', methods: ['POST'])]
     public function deleteF(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reclamation->getId(), $request->request->get('_token'))) {
