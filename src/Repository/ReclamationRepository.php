@@ -39,6 +39,16 @@ class ReclamationRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchBynom($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.commentaire LIKE :value OR e.commentaire LIKE :value OR e.etat LIKE :value  ')
+            ->setParameter('value', '%'.$value.'%')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Reclamation[] Returns an array of Reclamation objects
 //     */

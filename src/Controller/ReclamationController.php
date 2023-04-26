@@ -81,6 +81,16 @@ class ReclamationController extends AbstractController
         ]);
     }
 
+    #[Route('/search', name: 'search')]
+    public function search(Request $request, ReclamationRepository $repository): Response
+    {
+        $value = $request->request->get('value');
+        $reclamation = $repository->searchBynom($value);
+        return $this->render('reclamation/search.html.twig', [
+            'reclamations' => $reclamation
+        ]);
+    }
+
 
     #[Route('/newF', name: 'app_reclamation_newF', methods: ['GET', 'POST'])]
     public function newF(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService): Response
