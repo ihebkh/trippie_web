@@ -116,6 +116,14 @@ class CoVoiturageRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    public function findAvailable(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.nmbr_place > 0')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
 

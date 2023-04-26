@@ -34,78 +34,7 @@ class ParticipationController extends AbstractController
             'participations' => $participationRepository->findAll(),
         ]);
     }
-    /*
-    
-    #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
-    public function participate(
-        Request $request, 
-        CoVoiturageRepository $coVoiturageRepository, 
-        ParticipationRepository $participationRepository, 
-        int $id
-    ): Response
-    {
-        // Find the CoVoiturage by id
-        $cov = $coVoiturageRepository->find($id);
-    
-        // Throw an exception if the CoVoiturage does not exist
-        if (!$cov) {
-            throw $this->createNotFoundException('The CoVoiturage does not exist');
-        }
-    
-        // Create a new Participation instance and a ParticipationType form
-        $participation = new Participation();
-        $form = $this->createForm(ParticipationType::class, null, [
-            'data_class' => null,
-            'data' => [
-                'id_co' => $id,
-            ]
-        ]);
-    
-        // Handle the form submission
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                // Create a new email instance and send it using Gmail SMTP
-                $email = (new Email())
-                    ->from('symfonycopte822@gmail.com')
-                    ->to('aymen.rahali@esprit.tn')
-                    ->subject('Car Pool Reservation Confirmation')
-                    ->text('Dear user,
-    Thank you for choosing Trippie. We are pleased to confirm your PArticipation for car 
-    As a reminder, please bring a valid driver\'s license and a credit card in your name when you come to pick up the car. If you have any additional questions or special requests, please do not hesitate to contact us.
-    We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
-    Best regards,
-    Trippie');
-                $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
-                $mailer = new Mailer($transport);
-                $mailer->send($email);
-            } catch (TransportExceptionInterface $e) {
-                // Handle any errors that occur during email sending
-                $this->addFlash('error', 'An error occurred while sending the email');
-                return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);            }
-    
-            // Set the CoVoiturage id and save the Participation entity
-            $participation->setIdCo($cov);
-            $participationRepository->save($participation, true);
-            $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($participation);
-            $em->flush();
-            $participation->send_msg('+21692554097');
 
-
-    
-            // Redirect the user to the client's CoVoiturage index page
-            return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);
-        }
-    
-        // Render the form view
-        return $this->render('participation/newfront.html.twig', [
-            'form' => $form->createView(),
-            'cov' => $cov,
-        ]);
-    }
-*/
 
     #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
     public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id): Response
@@ -123,6 +52,32 @@ class ParticipationController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid() && $cov->getNmbrPlace() >= $participation->getNmbrPlacePart()) {
+            try {
+                $email = (new Email())
+                    ->from('symfonycopte822@gmail.com')
+                    ->to('aymen.rahali@esprit.tn')
+                    ->subject('Car Pool Participation Confirmation')
+                    ->text('        Dear user{{ user name }},
+
+                    Thank you for choosing Trippie. 
+                    We are pleased to confirm your Participation for '.$participation->getNmbrPlacePart().' personne(s) from '.$cov->getDepart().' to '.$cov->getDestination().' at '.$cov->getDateDep()->format('Y-m-d H:i:s').' . 
+                    If you have any additional questions or special requests, please do not hesitate to contact us.
+                    We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
+                    
+                    Best regards,
+        
+                    Trippie');
+        
+                $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+                $mailer = new Mailer($transport);
+                $mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+                // Handle any errors that occur during email sending
+                $this->addFlash('error', 'An error occurred while sending the email');
+                return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);
+            }
+
+
             $participation->setIdCo($cov);
             $participationRepository->save($participation, true);
             $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());

@@ -47,7 +47,7 @@ class CoVoiturageController extends AbstractController
     public function indexfrontclient(CoVoiturageRepository $coVoiturageRepository): Response
     {
         return $this->render('co_voiturage/indexFrontclient.html.twig', [
-            'co_voiturages' => $coVoiturageRepository->findAll(),
+            'co_voiturages' => $coVoiturageRepository->findAvailable(),
         ]);
     }
 
