@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Services;
-use App\Entity\Coupon;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Label\Margin\Margin;
@@ -22,18 +21,17 @@ class QrcodeService
         $this->builder = $builder;
     }
 
-    public function qrcode($query)
-    {
-        $url = 'https://www.google.com/search?q=';
+    public function qrcode($codeCoupon)
+    {  $url = 'https://www.google.com/search?q=' . urlencode($codeCoupon);
+
 
         $objDateTime = new \DateTime('NOW');
         $dateString = $objDateTime->format('d-m-Y H:i:s');
-
         $path = dirname(__DIR__, 2).'/public/assets2/';
-
+    
         // set qrcode
         $result = $this->builder
-            ->data($url.$query)
+            ->data($url .'?code_coupon=' . $codeCoupon)
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
             ->size(400)
@@ -45,15 +43,16 @@ class QrcodeService
             ->logoResizeToWidth('100')
             ->logoResizeToHeight('100')
             ->backgroundColor(new Color(221, 158, 3))
-            ->build()
-        ;
-
-        //generate name
+            ->build();
+    
+        // generate name
         $namePng = uniqid('', '') . '.png';
-
-        //Save img png
+    
+        // save img png
         $result->saveToFile($path.'qr-code/'.$namePng);
-
+    
         return $result->getDataUri();
     }
+    
+    
 }

@@ -32,12 +32,15 @@ function spin() {
     fetch(`/coupon/code_coupon/${value}`)
       .then((response) => response.text())
       .then((code_coupon) => {
-        // show alert with coupon code
+        // generate qrcode with code_coupon
+        const qrcode = generateQrcode(value, code_coupon);
+
+        // show alert with coupon code and optionally, qrcode
+        let showQrCode = true;
         Swal.fire({
           icon: "success",
-          title: "Congratulations!",
-          html: ` Your coupon code is: <strong>${code_coupon}  Click <a href="/qrcode/"  return false;">here</a> to generate your QR code.</strong>.`,
-          confirmButtonText: "Play again",
+          title: "Co!",
+          html: `You won ${value}! Your coupon code is: <strong>${code_coupon}${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
           showCancelButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
@@ -49,16 +52,8 @@ function spin() {
   }, 5000);
 }
 
-function generateQRCode(code) {
-  fetch(`/qrcode/generate/${code}`)
-    .then((response) => response.text())
-    .then((dataUri) => {
-      // show QR code in a popup
-      Swal.fire({
-        title: "QR Code",
-        html: `<img src="${dataUri}" alt="QR code"/>`,
-        confirmButtonText: "Close",
-      });
-    })
-    .catch((error) => console.log(error));
+function generateQrcode(value, code_coupon) {
+  const url = `/qrcode?text=${encodeURIComponent(value)}&code_coupon=${encodeURIComponent(code_coupon)}`;
+  console.log(url); // add this line
+  return url;
 }

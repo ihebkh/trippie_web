@@ -40,13 +40,6 @@ class CouponController extends AbstractController
     }
     
     
-    
-    
-    
-    
-    
-
-    
 
     #[Route('/new', name: 'app_coupon_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CouponRepository $couponRepository): Response

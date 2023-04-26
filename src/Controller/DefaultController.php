@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\SearchType;
+
 use App\Services\QrcodeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +18,15 @@ class DefaultController extends AbstractController
      * @param QrcodeService $qrcodeService
      * @return Response
      */
-    public function index(QrcodeService $qrcodeService): Response
-{
-    $qrCode = $qrcodeService->qrcode('https://www.google.com/');
+    public function index(Request $request, QrcodeService $qrcodeService): Response
+    {
+        $codeCoupon = $request->query->get('code_coupon');
+        $qrCode = $qrcodeService->qrcode($codeCoupon);
     
-    return $this->render('default/index.html.twig', [
-        'qrCode' => $qrCode
-    ]);
-}
+        return $this->render('default/index.html.twig', [
+            'qrCode' => $qrCode,
+            'codeCoupon' => $codeCoupon,
+        ]);
+    }
+    
 }

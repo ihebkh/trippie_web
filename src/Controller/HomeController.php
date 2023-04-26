@@ -6,7 +6,8 @@ use App\Repository\CouponRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
@@ -51,13 +52,32 @@ class HomeController extends AbstractController
     
 
     #[Route('/home/about', name: 'app_discount')]
-    public function discount(CouponRepository $couponRepository): Response
-    {
-        $codeCoupon = $couponRepository->getCodeCoupon();
+   public function discount(Request $request, CouponRepository $couponRepository): Response
+{
+    // get the coupon code from the request
+    $codeCoupon = $request->request->get('code_coupon');
     
-        return $this->render('home/discount.html.twig', [
-            'code_coupon' => $codeCoupon,
-        ]);
+    // if the coupon code is not provided in the request, render the template without a coupon code
+    if (!$codeCoupon) {
+        return $this->render('home/discount.html.twig');
     }
+    
+    // get the coupon with the provided code from the database
+    $coupon = $couponRepository->findByCodeCoupon($codeCoupon);
+    
+    // if the coupon is not found, render the template with an error message
+    if (!$coupon) {
+        $error = 'Coupon code not found';
+        return $this->render('home/discount.html.twig', ['error' => $error]);
+    }
+    
+    // render the template with the coupon code and discount rate
+    return $this->render('home/discount.html.twig', [
+        'code_coupon' => $coupon->getCodeCoupon(),
+        'taux' => $coupon->getTaux()
+    ]);
+}
+
+    
     
 }

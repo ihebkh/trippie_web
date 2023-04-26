@@ -1,14 +1,34 @@
 {% extends 'indexPromotion.html.twig' %}
 
 {% block body %}
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
   <form method="post" action="{{ path('app_discount') }}">
     <label for="inputPrice">Price:</label>
-    <input type="text" id="inputPrice" name="price">
+    <input type="text" id="inputPrice" name="price" >
     <br>
     <label for="inputCoupon">Coupon:</label>
     <input type="text" id="inputCoupon" name="code_coupon">
-    <br>
-    <button type="submit">Get Discount</button>
+    <button type="submit" id="discountButton">Get Discount</button>
   </form>
+  <script>
+    document.getElementById("discountButton").addEventListener("click", function(event) {
+      event.preventDefault(); // prevent the form from submitting
+      
+      // get the input values
+   var price = parseFloat(document.getElementById("inputPrice").value);
+   
+      var coupon = document.getElementById("inputCoupon").value;
+      
+      // check if the coupon code is valid and calculate the new price
+     
+      if (coupon === "ABC123") {
+        newPrice = price * 0.5;
+      } else if (coupon === "XYZ789") {
+        newPrice = price * 0.8;
+      }
+      
+      // show the new price in an alert message
+      alert("The new price is: " + newPrice);
+    });
+  </script>
 {% endblock %}
