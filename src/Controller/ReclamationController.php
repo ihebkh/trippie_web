@@ -19,6 +19,14 @@ use Twilio\Rest\Client;
 use App\Service\AjoutNotificationService;
 use Dompdf\Dompdf;
 
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
+
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
 {
@@ -183,10 +191,31 @@ class ReclamationController extends AbstractController
     }
 
     #[Route('/{id}/rec', name: 'app_reclamation_show', methods: ['GET'])]
-    public function show(Reclamation $reclamation): Response
+    public function show(Reclamation $reclamation, ReclamationRepository $repository, int $id): Response
     {
+        $carInfo = "Id: " . $reclamation->getId() . "\n" .
+            "Type : " . $reclamation->getType() . "\n" .
+            "Commentaire : " . $reclamation->getCommentaire() . "\n" .
+            "Etat : " . $reclamation->getEtat() . "\n";
+
+        // Generate QR code with car information
+        $qrCode = Builder::create()
+            ->writer(new PngWriter())
+            ->writerOptions([])
+            ->data($carInfo)
+            ->encoding(new Encoding('UTF-8'))
+            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+            ->size(300)
+            ->margin(10)
+            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->labelText("")
+            ->labelFont(new NotoSans(20))
+            ->labelAlignment(new LabelAlignmentCenter())
+            ->build();
+
         return $this->render('reclamation/show.html.twig', [
             'reclamation' => $reclamation,
+            'qr' => $qrCode->getDataUri(),
         ]);
     }
 
