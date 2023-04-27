@@ -18,15 +18,18 @@ class DefaultController extends AbstractController
      * @param QrcodeService $qrcodeService
      * @return Response
      */
-    public function index(Request $request, QrcodeService $qrcodeService): Response
-    {
-        $codeCoupon = $request->query->get('code_coupon');
-        $qrCode = $qrcodeService->qrcode($codeCoupon);
-    
-        return $this->render('default/index.html.twig', [
-            'qrCode' => $qrCode,
-            'codeCoupon' => $codeCoupon,
-        ]);
-    }
-    
+public function index(Request $request, QrcodeService $qrcodeService): Response
+{
+    $codeCoupon = $request->query->get('code_coupon');
+    $type = $request->query->get('type');
+    $qrCode = $qrcodeService->qrcode($codeCoupon);
+
+    return $this->render('default/index.html.twig', [
+        'qrCode' => $qrCode,
+        'codeCoupon' => $codeCoupon,
+        'type' => $type,
+        
+    ]);
+}
+
 }

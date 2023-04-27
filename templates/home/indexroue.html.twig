@@ -5,19 +5,19 @@
     <div class="box" id="box">
         <link rel="stylesheet" href="{{ asset('assets/css1/style.css') }}">
 
-           <div class="box1">
-            <span class="font span1"><h5>{% if taux[0] is empty %}vide{% else %}{{ taux[0] }}{% endif %}%</h5></span>
-            <span class="font span2"><h5>{% if taux[1] is empty %}vide{% else %}{{ taux[1] }}{% endif %}%</h5></span>
-            <span class="font span3"><h5>{% if taux[2] is empty %}vide{% else %}{{ taux[2] }}{% endif %}%</h5></span>
-            <span class="font span4"><h5>{% if taux[3] is empty %}vide{% else %}{{ taux[3] }}{% endif %}%</h5></span>
-            <span class="font span5"><h5>{% if taux[4] is empty %}vide{% else %}{{ taux[4] }}{% endif %}%</h5></span>
+         <div class="box1">
+            <span class="font span1"><h5>{{ taux[0] }}</h5></span>
+            <span class="font span2"><h5>{{ taux[1] }}</h5></span>
+            <span class="font span3"><h5>{{ taux[2] }}</h5></span>
+            <span class="font span4"><h5>{{ taux[3] }}</h5></span>
+            <span class="font span5"><h5>{{ taux[4] }}</h5></span>
         </div>
         <div class="box2">
-            <span class="font span1"><h5>{% if taux[5] is empty %}vide{% else %}{{ taux[5] }}{% endif %}%</h5></span>
-            <span class="font span2"><h5>{% if taux[6] is empty %}vide{% else %}{{ taux[6] }}{% endif %}%</h5></span>
-            <span class="font span3"><h5>{% if taux[7] is empty %}vide{% else %}{{ taux[7] }}{% endif %}%</h5></span>
-            <span class="font span4"><h5>{% if taux[8] is empty %}vide{% else %}{{ taux[8] }}{% endif %}%</h5></span>
-            <span class="font span5"><h5>{% if taux[9] is empty %}vide{% else %}{{ taux[9] }}{% endif %}%</h5></span>
+            <span class="font span1"><h5>{{ taux[5] }}</h5></span>
+            <span class="font span2"><h5>{{ taux[6] }}</h5></span>
+            <span class="font span3"><h5>{{ taux[7] }}</h5></span>
+            <span class="font span4"><h5>{{ taux[8] }}</h5></span>
+            <span class="font span5"><h5>{{ taux[9] }}</h5></span>
         </div>
     </div>
    
@@ -27,5 +27,5 @@
 <audio controls="controls" id="applause" src={{ asset('assets/audio/applause.mp3') }} type="audio/mp3"></audio>
 <audio controls="controls" id="wheel" src={{ asset('assets/audio/wheel.mp3') }} type="audio/mp3"></audio>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src={{ asset('assets/js8/main.js') }}></script>
+<script src={{ asset('assets/js10/main.js') }}></script>
 {% endblock %}
