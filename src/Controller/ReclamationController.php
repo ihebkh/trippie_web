@@ -17,6 +17,7 @@ use App\Repository\ReponseRepository;
 
 use Twilio\Rest\Client;
 use App\Service\AjoutNotificationService;
+use Dompdf\Dompdf;
 
 #[Route('/reclamation')]
 class ReclamationController extends AbstractController
@@ -285,6 +286,41 @@ class ReclamationController extends AbstractController
             'OtherPercentage' => $OtherPercentage,
 
         ]);
+    }
+
+    #[Route('/exportpdf', name: 'exportpdf')]
+    public function exportToPdf(ReclamationRepository $repository): Response
+    {
+        // Récupérer les données de réservation depuis votre base de données
+        $reclamations = $repository->findAll();
+
+        // Créer le tableau de données pour le PDF
+        $tableData = [];
+        foreach ($reclamations as $reclamation) {
+            $tableData[] = [
+                'type' => $reclamation->getType(),
+                'commentaire' => $reclamation->getCommentaire(),
+                'etat' => $reclamation->getEtat(),
+                //'price' => $reservation->getIdVoiture()->getPrixJours(), jointure
+                'date_creation' => $reclamation->getDateCreation()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        // Créer le PDF avec Dompdf
+        $dompdf = new Dompdf();
+        $html = $this->renderView('reclamation/export-pdf.html.twig', [
+            'tableData' => $tableData,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        // Envoyer le PDF au navigateur
+        $response = new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="reclamation.pdf"',
+        ]);
+        return $response;
     }
 
 
