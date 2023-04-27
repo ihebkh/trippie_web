@@ -32,14 +32,10 @@ class VoitureController extends AbstractController
 
 //admin
     #[Route('/voiture/Affichelist', name: 'app_voitureaffiche')]
-    public function Affiche(VoitureRepository $repository, PaginatorInterface $paginator, Request $request)
+    public function Affiche(VoitureRepository $repository, Request $request)
     {
         $voiture = $repository->findall();
-        $voiture = $paginator->paginate(
-            $voiture, /* query NOT result */
-            $request->query->getInt('page', 1),
-            5
-        );
+
         return $this->render('voiture/Affiche.html.twig', [
             'voiture' => $voiture,
         ]);
@@ -236,14 +232,7 @@ class VoitureController extends AbstractController
         ]);
     }
 
-    #[Route('/voiture/recherche', name: 'recherche')]
-    function Recherche(VoitureRepository $repository, Request $request)
-    {
-        $data = $request->get('search');
-        $voiture = $repository->findBy(['nsc' => $data]);
-        return $this->render('voiture/Affiche.html.twig',
-            ['voiture' => $voiture]);
-    }
+
     // stat
     #[Route('/dashboard/stat', name: 'stat', methods: ['POST','GET'])]
     public function VoitureStatistics( VoitureRepository $repo): Response
@@ -284,5 +273,70 @@ class VoitureController extends AbstractController
 
         ]);
     }
+    #[Route('/dashboard/stat2', name: 'stat2', methods: ['POST','GET'])]
+    public function VoitureStatistics2( VoitureRepository $repo): Response
+    {
+        $total = $repo->countByLibelle('BMW') +
+            $repo->countByLibelle('Mercedes') +
+            $repo->countByLibelle('Audi') +
+            $repo->countByLibelle('clio') +
+            $repo->countByLibelle('porshe') +
+            $repo->countByLibelle('peugeot') +
+            $repo->countByLibelle('hamer');
+
+        $BMWCount = $repo->countByLibelle('BMW');
+        $MercedesCount = $repo->countByLibelle('Mercedes');
+        $AudiCount = $repo->countByLibelle('Audi');
+        $clioCount= $repo->countByLibelle('clio');
+        $porsheCount = $repo->countByLibelle('porshe');
+        $peugeotCount = $repo->countByLibelle('peugeot');
+        $hamerCount = $repo->countByLibelle('hamer');
+
+
+        $BmwPercentage = round(($BMWCount / $total) * 100);
+        $MercedesPercentage = round(($MercedesCount / $total) * 100);
+        $AudiPercentage = round(($AudiCount / $total) * 100);
+        $clioPercentage = round(($clioCount/ $total) * 100);
+        $porshePercentage = round(($porsheCount / $total) * 100);
+        $peugeotPercentage = round(($peugeotCount / $total) * 100);
+        $hamerPercentage = round(($hamerCount / $total) * 100);
+
+        return $this->render('voiture/stat2.html.twig', [
+            'BMWPercentage' => $BmwPercentage,
+            'MercedesPercentage' => $MercedesPercentage,
+            'AudiPercentage' => $AudiPercentage,
+            'clioPercentage' => $clioPercentage,
+            'porshePercentage' => $porshePercentage,
+            'peugeotPercentage' => $peugeotPercentage,
+            'hamerPercentage' => $hamerPercentage,
+
+        ]);
+    }
+
+    #[Route('/voiture/search', name: 'search2', methods: ['GET', 'POST'])]
+    public function search2(Request $request, VoitureRepository $repo): Response
+    {
+        $query = $request->query->get('query');
+        $id = $request->query->get('id');
+        $marque = $request->query->get('marque');
+        $matricule = $request->query->get('matricule');
+
+        $voiture = $repo->advancedSearch($query, $id, $marque, $matricule);
+
+        return $this->render('voiture/Affiche.html.twig', [
+            'voiture' => $voiture,
+        ]);
+    }
+
+    #[Route('/voiture/tricroi', name: 'tri', methods: ['GET','POST'])]
+    public function triCroissant( VoitureRepository $VoitureRepository): Response
+    {
+        $voiture = $VoitureRepository->findAllSorted();
+
+        return $this->render('voiture/Affiche.html.twig', [
+            'voiture' => $voiture,
+        ]);
+    }
+
 
 }

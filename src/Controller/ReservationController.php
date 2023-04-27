@@ -22,7 +22,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
 use Twilio\Rest\Client;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+
 
 
 class ReservationController extends AbstractController
@@ -87,6 +87,7 @@ Trippie');
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
+
             return $this->redirectToRoute('app_reservationaffichefront');
         }
         return $this->render('reservation/AddR.html.twig', [
@@ -100,22 +101,14 @@ Trippie');
 //delete back
 
     #[Route('voiture/deleteReservation/{id}', name: 'app_DeleteReservation')]
-    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine,FlasherInterface $flasher): Response
+    public function deleteStatique($id, ReservationRepository $repo, ManagerRegistry $doctrine): Response
     {
 
         $reservation = $repo->find($id);
         $reservation->getIdVoiture()->setEtat("non reservé");
         $em = $doctrine->getManager();
-     //   $codedebut = $reservation->getDateDebut();
-      //  $datesysteme = new \DateTime();
-// Calcul de la différence en jours entre codedebut et datesysteme
-       // $diff = $codedebut->diff($datesysteme);
-// Affichage de la différence en jours
-        $flasher->addSuccess('Your message here.');
 
 
-
-        $this->addFlash('error', 'Reservation cannot be deleted as it is less than 3 days from the start date.');
 
 
         $em->remove($reservation);

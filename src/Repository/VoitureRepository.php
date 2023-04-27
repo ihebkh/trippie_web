@@ -72,4 +72,47 @@ class VoitureRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function advancedSearch($query, $id, $marque, $matricule)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($query) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('c.id', ':query'),
+                $qb->expr()->like('c.marque', ':query'),
+                $qb->expr()->like('c.matricule', ':query'),
+
+            ))
+                ->setParameter('query', '%' . $query . '%');
+        }
+
+        if ($id) {
+            $qb->andWhere('c.id = :id')
+                ->setParameter('id', $id);
+        }
+
+        if ($marque) {
+            $qb->andWhere('c.marque = :marque')
+                ->setParameter('marque', $marque);
+        }
+
+        if ($matricule) {
+            $qb->andWhere('c.matricule = :matricule')
+                ->setParameter('matricule', $matricule);
+        }
+
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAllSorted(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('cl')
+            ->orderBy('cl.marque', 'ASC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 }

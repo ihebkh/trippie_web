@@ -12,7 +12,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* reservation/addR.html.twig */
+/* reservation/AddR.html.twig */
 class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 {
     private $source;
@@ -39,9 +39,9 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reservation/addR.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "reservation/AddR.html.twig"));
 
-        $this->parent = $this->loadTemplate("indexClient.html.twig", "reservation/addR.html.twig", 1);
+        $this->parent = $this->loadTemplate("indexClient.html.twig", "reservation/AddR.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -152,30 +152,44 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 
                                     <div class=\"row mb-3\">
                                         <div class=\"col-sm-10\">
-                                            <div class=\"g-recaptcha\" data-sitekey=\"6LfxVIwlAAAAAGYsvc4M3oEYSoVkN4hcw35ZG7ad\"></div>
-                                            <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\" name=\"submit\">Save</button>
-                                            <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>
+                                            <input type=\"submit\" value=\"Confirm\" id=\"submit\" class=\"btn btn-primary\" onclick=\"return checkRecaptcha()\">
+
+
+                                            <script src=\"https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI\"></script>
 
                                             <script>
-                                                \$(document).on(\"click\", '#submit', function() {
-                                                var response = grecaptcha.getResponse();
-                                                let error = document.getElementById('error');
-                                                if (response.length == 0) {
-                                                error.innerHTML = \"Verify you are not a robot\";
-                                                return false;
-                                            } else {
-                                                error.innerHTML = \"\";
-                                            }
-                                            });
+                                                function checkRecaptcha() {
+                                                    if (grecaptcha.getResponse() == \"\") {
+                                                        alert(\"Please verify that you are not a robot by completing the reCAPTCHA challenge.\");
+                                                        return false;
+                                                    } else {
+                                                        return true;
+                                                    }
+                                                }
+
+                                                function onClick(e) {
+                                                    e.preventDefault();
+                                                    if (checkRecaptcha()) {
+                                                        grecaptcha.ready(function() {
+                                                            grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action: 'submit'}).then(function(token) {
+                                                                document.getElementById(\"myform\").submit();
+                                                            });
+                                                        });
+                                                    }
+                                                }
+
+                                                function validate(event) {
+                                                    event.preventDefault();
+                                                    grecaptcha.execute();
+                                                }
                                             </script>
 
-
-                                            <div id=\"error\"></div>
+                                            <div class=\"g-recaptcha\" data-sitekey=\"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI\" data-callback=\"onClick\"></div>
                                     </div>
                                 </center>
                                 ";
-        // line 105
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 105, $this->source); })()), 'form_end');
+        // line 119
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 119, $this->source); })()), 'form_end');
         echo "
 
                             </div>
@@ -215,7 +229,7 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 
     public function getTemplateName()
     {
-        return "reservation/addR.html.twig";
+        return "reservation/AddR.html.twig";
     }
 
     public function isTraitable()
@@ -225,7 +239,7 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 
     public function getDebugInfo()
     {
-        return array (  178 => 105,  143 => 73,  139 => 72,  130 => 66,  126 => 65,  119 => 61,  59 => 3,  52 => 2,  35 => 1,);
+        return array (  192 => 119,  143 => 73,  139 => 72,  130 => 66,  126 => 65,  119 => 61,  59 => 3,  52 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -313,25 +327,39 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 
                                     <div class=\"row mb-3\">
                                         <div class=\"col-sm-10\">
-                                            <div class=\"g-recaptcha\" data-sitekey=\"6LfxVIwlAAAAAGYsvc4M3oEYSoVkN4hcw35ZG7ad\"></div>
-                                            <button type=\"submit\" class=\"btn btn-primary\" id=\"submit\" name=\"submit\">Save</button>
-                                            <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>
+                                            <input type=\"submit\" value=\"Confirm\" id=\"submit\" class=\"btn btn-primary\" onclick=\"return checkRecaptcha()\">
+
+
+                                            <script src=\"https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI\"></script>
 
                                             <script>
-                                                \$(document).on(\"click\", '#submit', function() {
-                                                var response = grecaptcha.getResponse();
-                                                let error = document.getElementById('error');
-                                                if (response.length == 0) {
-                                                error.innerHTML = \"Verify you are not a robot\";
-                                                return false;
-                                            } else {
-                                                error.innerHTML = \"\";
-                                            }
-                                            });
+                                                function checkRecaptcha() {
+                                                    if (grecaptcha.getResponse() == \"\") {
+                                                        alert(\"Please verify that you are not a robot by completing the reCAPTCHA challenge.\");
+                                                        return false;
+                                                    } else {
+                                                        return true;
+                                                    }
+                                                }
+
+                                                function onClick(e) {
+                                                    e.preventDefault();
+                                                    if (checkRecaptcha()) {
+                                                        grecaptcha.ready(function() {
+                                                            grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action: 'submit'}).then(function(token) {
+                                                                document.getElementById(\"myform\").submit();
+                                                            });
+                                                        });
+                                                    }
+                                                }
+
+                                                function validate(event) {
+                                                    event.preventDefault();
+                                                    grecaptcha.execute();
+                                                }
                                             </script>
 
-
-                                            <div id=\"error\"></div>
+                                            <div class=\"g-recaptcha\" data-sitekey=\"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI\" data-callback=\"onClick\"></div>
                                     </div>
                                 </center>
                                 {{ form_end(form) }}
@@ -366,6 +394,6 @@ class __TwigTemplate_1b814986c93e5504b28494e2d8d0bd7f extends Template
 
 
 {% endblock %}
-", "reservation/addR.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\addR.html.twig");
+", "reservation/AddR.html.twig", "C:\\Users\\khmir\\Downloads\\trippie_web-Allocation\\trippie_web-Allocation\\templates\\reservation\\addR.html.twig");
     }
 }

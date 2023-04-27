@@ -22,13 +22,22 @@ class VoituremobileController extends AbstractController
         ]);
     }
 //affichage
-    #[Route("s", name: "list")]
+
+    #[Route("/voituremobile/list", name: "list")]
     public function getVoiture(VoitureRepository $repo, SerializerInterface $serializer)
     {
         $voitures = $repo->findAll();
         $json = $serializer->serialize($voitures, 'json', ['groups' => "voitures"]);
         return new Response($json);
     }
+
+
+
+
+
+
+
+
 //show
         #[Route("/voituremobile/{id}", name: "voiture")]
         public function VoitureId($id, NormalizerInterface $normalizer, VoitureRepository $repo)
@@ -39,7 +48,7 @@ class VoituremobileController extends AbstractController
     }
     //ajouter
     #[Route("addVoitureJSON/new", name: "addVoitureJSON")]
-    public function addVoitureJSON(ManagerRegistry $doctrine, Request $req,   NormalizerInterface $Normalizer)
+    public function addVoitureJSON(ManagerRegistry $doctrine, Request $req,NormalizerInterface $Normalizer)
     {
 
         $em = $doctrine->getManager();

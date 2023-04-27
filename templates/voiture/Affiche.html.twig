@@ -22,10 +22,24 @@
                         <div class="card-body">
 
                             <h5 class="card-title">car list</h5>
-<center>   <a href="{{ path('stat') }}">
+
+
+                            <form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search2') }}">
+                                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                            </form>
+
+
+ <a href="{{ path('stat') }}">
+
         <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">stat
         </button>
-</center>
+
+     <a href="{{ path('tri') }}">
+
+         <button type="button" style="float: left;padding: 10px;" class="btn btn-outline-info">tri
+         </button>
+
 
                             <!-- Default Table -->
                             <table class="table">
@@ -61,10 +75,6 @@
 
                                 </tbody>
                             </table>
-
-
-
-                 <center>  {{ knp_pagination_render(voiture, 'bootstrap_4_pagination.html.twig') }}</center>
 
                             <!-- End Default Table Example -->
 

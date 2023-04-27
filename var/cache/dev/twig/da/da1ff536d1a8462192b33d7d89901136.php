@@ -74,13 +74,13 @@ class __TwigTemplate_16d60cf248d7b6963d1368bf3eda87d4 extends Template
 ";
         // line 43
         $this->displayBlock('header', $context, $blocks);
-        // line 81
+        // line 82
         echo "
 
 ";
-        // line 83
+        // line 84
         $this->displayBlock('body', $context, $blocks);
-        // line 88
+        // line 89
         echo "
 </body>
 
@@ -220,6 +220,10 @@ class __TwigTemplate_16d60cf248d7b6963d1368bf3eda87d4 extends Template
         // line 66
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_reservationaffichefront");
         echo "\">Reservation list</a></li>
+                            <li><a href=\"";
+        // line 67
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("stat2");
+        echo "\">les voitures diponibles</a></li>
 
                         </ul>
                     </li>
@@ -239,14 +243,14 @@ class __TwigTemplate_16d60cf248d7b6963d1368bf3eda87d4 extends Template
 
     }
 
-    // line 83
+    // line 84
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 84
+        // line 85
         echo "
 
 
@@ -263,7 +267,7 @@ class __TwigTemplate_16d60cf248d7b6963d1368bf3eda87d4 extends Template
 
     public function getDebugInfo()
     {
-        return array (  250 => 84,  243 => 83,  221 => 66,  217 => 65,  200 => 51,  191 => 44,  184 => 43,  175 => 38,  171 => 37,  167 => 36,  163 => 35,  159 => 34,  155 => 33,  151 => 32,  146 => 31,  139 => 30,  130 => 27,  126 => 26,  122 => 25,  118 => 24,  114 => 23,  110 => 22,  106 => 21,  101 => 20,  94 => 19,  84 => 88,  82 => 83,  78 => 81,  76 => 43,  71 => 40,  69 => 30,  66 => 29,  64 => 19,  44 => 1,);
+        return array (  254 => 85,  247 => 84,  225 => 67,  221 => 66,  217 => 65,  200 => 51,  191 => 44,  184 => 43,  175 => 38,  171 => 37,  167 => 36,  163 => 35,  159 => 34,  155 => 33,  151 => 32,  146 => 31,  139 => 30,  130 => 27,  126 => 26,  122 => 25,  118 => 24,  114 => 23,  110 => 22,  106 => 21,  101 => 20,  94 => 19,  84 => 89,  82 => 84,  78 => 82,  76 => 43,  71 => 40,  69 => 30,  66 => 29,  64 => 19,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -334,6 +338,7 @@ class __TwigTemplate_16d60cf248d7b6963d1368bf3eda87d4 extends Template
                         <ul>
                             <li><a href=\"{{ path('app_voitureaffichClient') }}\">cars list</a></li>
                             <li><a href=\"{{ path('app_reservationaffichefront') }}\">Reservation list</a></li>
+                            <li><a href=\"{{ path('stat2') }}\">les voitures diponibles</a></li>
 
                         </ul>
                     </li>
