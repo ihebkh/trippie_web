@@ -9,11 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
 
 
 
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
 
 
 #[Route('/co/voiturage')]
@@ -22,15 +28,10 @@ class CoVoiturageController extends AbstractController
     #[Route('/', name: 'app_co_voiturage_index', methods: ['GET'])]
     public function index(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
     {
-        $searchQuery = $request->query->get('q');
-        $sort = $request->query->get('sort');
-        $order = $request->query->get('order', 'asc');
-
-        if ($searchQuery) {
-            $coVoiturage = $coVoiturageRepository->findByCoVoiturage($searchQuery);
-        } else {
+       
             $coVoiturage = $coVoiturageRepository->findAll();
-        }
+           
+        
         return $this->render('co_voiturage/index.html.twig', [
             'co_voiturages' => $coVoiturage,
         ]);
@@ -106,10 +107,40 @@ class CoVoiturageController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_co_voiturage_show', methods: ['GET'])]
-    public function show(CoVoiturage $coVoiturage): Response
+    public function show(CoVoiturage $coVoiturage,int $id): Response
     {
+        if ($coVoiturage->getId() !== $id) {
+            throw $this->createNotFoundException();
+        }
+
+        // Get car information
+        $carInfo = "Welcome to Trippie \n here's some information about your car pool \n"."\n".
+        "id: " . $coVoiturage->getId() . "\n" . 
+        "Departure: " . $coVoiturage->getDepart() . "\n" .
+        "Destination: " . $coVoiturage->getDestination() . "\n" .
+        "Date of Departure: " . $coVoiturage->getDateDep()->format('Y-m-d H:i:s') . "\n" .
+        "Number of seats: " . $coVoiturage->getNmbrPlace() . "\n" ;
+       /* "Driver's Name: " . $coVoiturage->getDriverName() . "\n" .
+        "Driver's Contact: " . $coVoiturage->getDriverContact() . "\n" .
+        "Car Type: " . $coVoiturage->getCarType() . "\n" .
+        "Car Plate Number: " . $coVoiturage->getCarPlateNumber() . "\n" ;*/
+        // Generate QR code with car information
+        $qrCode = Builder::create()
+            ->writer(new PngWriter())
+            ->writerOptions([])
+            ->data($carInfo)
+            ->encoding(new Encoding('UTF-8'))
+            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+            ->size(300)
+            ->margin(10)
+            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->labelText("")
+            ->labelFont(new NotoSans(20))
+            ->labelAlignment(new LabelAlignmentCenter())
+            ->build();
         return $this->render('co_voiturage/show.html.twig', [
             'co_voiturage' => $coVoiturage,
+            'qr' => $qrCode->getDataUri(),
         ]);
     }
 
@@ -346,6 +377,21 @@ class CoVoiturageController extends AbstractController
 {
     $coVoiturage = $CoVoiturageRepository->findAllSorted();
 
+    return $this->render('co_voiturage/index.html.twig', [
+        'co_voiturages' => $coVoiturage,
+    ]);
+}
+
+//admin
+#[Route('/co/voiturage/Affichelist', name: 'app_voitureaffiche')]
+public function Affiche(CoVoiturageRepository $repository, PaginatorInterface $paginator, Request $request)
+{
+    $coVoiturage = $repository->findall();
+    $coVoiturage = $paginator->paginate(
+        $coVoiturage, /* query NOT result */
+        $request->query->getInt('page', 1),
+        5
+    );
     return $this->render('co_voiturage/index.html.twig', [
         'co_voiturages' => $coVoiturage,
     ]);

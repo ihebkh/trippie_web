@@ -45,11 +45,20 @@
 
 						<div class="card-body">
 
-							<h5 class="card-title">Co Voiturage list</h5>
+							<h5 class="card-title">Participation list</h5>
+							<div class="search-form d-flex align-items-center justify-content-end">
+								<form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search') }}">
+									<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+									<button type="submit" title="Search">
+										<i class="bi bi-search"></i>
+									</button>
+								</form>
+							</div>
 
 
 							<!-- Default Table -->
 							<h1>Participation index</h1>
+							<a href="{{ path('exportpdf') }}">pdf</a>
 
 							<table class="table">
 								<thead>
@@ -70,7 +79,7 @@
 											<td>{{ participation.idUser }}</td>
 											<td>
 												<a href="{{ path('app_participation_show', {'id': participation.id}) }}">
-												<button type="button" class="btn btn-outline-dark">Detail</button>
+													<button type="button" class="btn btn-outline-dark">Detail</button>
 												</a>
 											</td>
 										</tr>
@@ -86,8 +95,11 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			      <center>  {{ knp_pagination_render(participations, 'bootstrap_4_pagination.html.twig') }}</center>
+		
 
 			<a href="{{ path('app_participation_new') }}">Create new</a>
+			
 
 			<!-- End Default Table Example -->
 

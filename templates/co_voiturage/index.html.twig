@@ -49,6 +49,15 @@
 						<div class="card-body">
 
 							<h5 class="card-title">Co Voiturage list</h5>
+							<div class="search-form d-flex align-items-center justify-content-end">
+
+								<form class="search-form d-flex align-items-center" method="GET" action="{{ path ('search2') }}">
+									<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+									<button type="submit" title="Search">
+										<i class="bi bi-search"></i>
+									</button>
+								</form>
+							</div>
 
 
 							<!-- Default Table -->
@@ -91,7 +100,6 @@
 									{% endfor %}
 								</tbody>
 							</table>
-
 							<a href="{{ path('app_co_voiturage_new') }}">Create new</a>
 
 							<!-- End Default Table Example -->

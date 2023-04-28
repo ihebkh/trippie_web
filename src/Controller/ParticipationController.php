@@ -20,6 +20,9 @@ use Symfony\Component\Form\FormTypeInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use SebastianBergmann\Environment\Console;
+use Knp\Component\Pager\PaginatorInterface;
+use Dompdf\Dompdf;
+
 
 interface TransportExceptionInterface extends \Throwable
 {
@@ -28,10 +31,21 @@ interface TransportExceptionInterface extends \Throwable
 class ParticipationController extends AbstractController
 {
     #[Route('/', name: 'app_participation_index', methods: ['GET'])]
-    public function index(ParticipationRepository $participationRepository): Response
+    public function index(ParticipationRepository $participationRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // Retrieve all participations from the database
+        $participations = $participationRepository->findAll();
+
+        // Paginate the query result
+        $participations = $paginator->paginate(
+            $participations, // Pass in the query, not the result
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        // Pass the paginated participations to the template
         return $this->render('participation/index.html.twig', [
-            'participations' => $participationRepository->findAll(),
+            'participations' => $participations,
         ]);
     }
 
@@ -60,14 +74,14 @@ class ParticipationController extends AbstractController
                     ->text('        Dear user{{ user name }},
 
                     Thank you for choosing Trippie. 
-                    We are pleased to confirm your Participation for '.$participation->getNmbrPlacePart().' personne(s) from '.$cov->getDepart().' to '.$cov->getDestination().' at '.$cov->getDateDep()->format('Y-m-d H:i:s').' . 
+                    We are pleased to confirm your Participation for ' . $participation->getNmbrPlacePart() . ' personne(s) from ' . $cov->getDepart() . ' to ' . $cov->getDestination() . ' at ' . $cov->getDateDep()->format('Y-m-d H:i:s') . ' . 
                     If you have any additional questions or special requests, please do not hesitate to contact us.
                     We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
                     
                     Best regards,
         
                     Trippie');
-        
+
                 $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
                 $mailer = new Mailer($transport);
                 $mailer->send($email);
@@ -145,12 +159,73 @@ class ParticipationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_participation_delete', methods: ['POST'])]
-    public function delete(Request $request, Participation $participation, ParticipationRepository $participationRepository): Response
+    public function delete(Request $request, Participation $participation, ParticipationRepository $participationRepository, CoVoiturageRepository $coVoiturageRepository, int $id): Response
     {
+        $cov = $coVoiturageRepository->find($id);
+        
+        if($cov) { // Check if $cov is not null before accessing its methods
+            $cov->setNmbrPlace($cov->getNmbrPlace() + $participation->getNmbrPlacePart());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($cov); // Fix the error by persisting $cov instead of $participation
+            $em->flush();
+        }
+    
         if ($this->isCsrfTokenValid('delete' . $participation->getId(), $request->request->get('_token'))) {
             $participationRepository->remove($participation, true);
         }
-
+    
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
+
+    #[Route('/participation/search', name: 'search', methods: ['GET', 'POST'])]
+    public function search2(Request $request, CoVoiturageRepository $repo): Response
+    {
+        $query = $request->query->get('query');
+        $id = $request->query->get('id');
+        $nmbrPlacePart = $request->query->get('Nmbr_place_part');
+        $id_co = $request->query->get('id_co');
+        $id_user = $request->query->get('id_user');
+
+        $participation = $repo->advancedSearch($query, $id, $nmbrPlacePart, $id_co, $id_user);
+
+        return $this->render('participation/index.html.twig', [
+            'participations' => $participation,
+        ]);
+    }
+    #[Route('/cov/exportpdf', name: 'exportpdf')]
+    public function exportToPdf(ParticipationRepository $repository): Response
+    {
+        // Récupérer les données de réservation depuis votre base de données
+        $participations = $repository->findAll();
+
+        // Créer le tableau de données pour le PDF
+        $tableData = [];
+        foreach ($participations as $participation) {
+            $tableData[] = [
+
+                'id' => $participation->getId(),
+                'id_co' => $participation->getIdCo()->getId(),
+                'nmbr_place_part' => $participation->getNmbrPlacePart(),
+
+
+            ];
+        }
+
+        // Créer le PDF avec Dompdf
+        $dompdf = new Dompdf();
+        $html = $this->renderView('participation/export-pdf.html.twig', [
+            'tableData' => $tableData,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        // Envoyer le PDF au navigateur
+        $response = new Response($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="reservations.pdf"',
+        ]);
+        return $response;
     }
 }

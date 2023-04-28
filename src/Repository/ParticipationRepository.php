@@ -39,6 +39,45 @@ class ParticipationRepository extends ServiceEntityRepository
         }
     }
 
+    public function advancedSearch($query, $id, $nmbrPlacePart, $id_co, $id_user)
+    {
+        $qb = $this->createQueryBuilder('c') ;
+
+        if ($query) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('c.id', ':query'),
+                $qb->expr()->like('c.Nmbr_place_part', ':query'),
+                $qb->expr()->like('c.id_co', ':query'),
+                $qb->expr()->like('c.id_user', ':query'),
+
+            ))
+                ->setParameter('query', '%' . $query . '%');
+        }
+
+        if ($id) {
+            $qb->andWhere('c.id = :id')
+                ->setParameter('id', $id);
+        }
+
+        if ($nmbrPlacePart) {
+            $qb->andWhere('c.nmbrPlacePart = :nmbrPlacePart')
+                ->setParameter('nmbrPlacePart', $nmbrPlacePart);
+        }
+
+        if ($id_co) {
+            $qb->andWhere('c.id_co = :id_co')
+                ->setParameter('id_co', $id_co);
+        }
+
+        if ($id_user) {
+            $qb->andWhere('c.id_user = :id_user')
+                ->setParameter('id_user', $id_user);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
 
 
