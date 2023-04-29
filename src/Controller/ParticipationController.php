@@ -98,7 +98,7 @@ class ParticipationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($participation);
             $em->flush();
-            //$participation->send_msg('+21692554097');
+            $participation->send_msg('+21692554097');
 
 
 
