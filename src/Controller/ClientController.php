@@ -268,7 +268,7 @@ public function request(Request $request, ClientRepository $userRepository, Toke
          return $this->redirectToRoute('app_forgot_password_request_client_gsm', [] ,Response::HTTP_SEE_OTHER);
      }
  
-     #[Route('/login/role/reset_gsm', name: 'app_forgot_password_request_client_gsm', methods: ['GET','POST'])]
+     #[Route('/login/role/reset_client_gsm', name: 'app_forgot_password_request_client_gsm', methods: ['GET','POST'])]
      public function requestgsm(Request $request, ClientRepository $userRepository, TokenGeneratorInterface $tokenGenerator): Response
          {
              $form = $this->createForm(GsmFormType::class);
@@ -299,7 +299,7 @@ public function request(Request $request, ClientRepository $userRepository, Toke
                  }    
      
                  $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-                 $authToken = '3c4688246ca0faa1da7d45b5a7f84319';
+                 $authToken = 'cc1b12f585b55fc4afc6b7d88c5e23f9';
                  $twilioService = new TwilioService($accountSid, $authToken);
 
                 $to = '+216' . $user->getGsm(); // recipient's phone number
@@ -311,7 +311,7 @@ public function request(Request $request, ClientRepository $userRepository, Toke
                 
                  $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
                 
-                 return $this->redirectToRoute('codeverif', ['token' => $code ]);
+                 return $this->redirectToRoute('codeverif_cl', ['token' => $code ]);
              }
      
              return $this->render('login/gsm.html.twig', [
@@ -320,7 +320,7 @@ public function request(Request $request, ClientRepository $userRepository, Toke
          }
  
  
-         #[Route('/login/role/reset_gsm/{token}', name: 'codeverif', methods: ['GET','POST'])]
+         #[Route('/login/role/reset_client_gsm/{token}', name: 'codeverif_cl', methods: ['GET','POST'])]
          public function VerifCode(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
          {
              $user = $this->getDoctrine()->getRepository(Client::class)->findOneBy(['resetToken' => $token]);

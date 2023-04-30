@@ -372,7 +372,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
                 }    
     
                 $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-                $authToken = '3c4688246ca0faa1da7d45b5a7f84319';
+                $authToken = 'cc1b12f585b55fc4afc6b7d88c5e23f9';
                 $client = new Client($accountSid, $authToken);
                 $message = $client->messages->create(
                     '+216' . $user->getGsm(), // recipient's phone number
@@ -385,7 +385,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
                
                 $this->addFlash('success', 'Un e-mail de réinitialisation de mot de passe vient de vous être envoyé.');
                
-                return $this->redirectToRoute('codeverif', ['token' => $code ]);
+                return $this->redirectToRoute('codeverif_ch', ['token' => $code ]);
             }
     
             return $this->render('login/gsm.html.twig', [
@@ -394,7 +394,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
         }
 
 
-        #[Route('/login/role/reset_gsm/{token}', name: 'codeverif', methods: ['GET','POST'])]
+        #[Route('/login/role/reset_gsm/{token}', name: 'codeverif_ch', methods: ['GET','POST'])]
         public function VerifCode(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
         {
             $user = $this->getDoctrine()->getRepository(Chauffeur::class)->findOneBy(['resetToken' => $token]);
