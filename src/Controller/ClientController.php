@@ -43,7 +43,7 @@ class ClientController extends AbstractController
     }
 
     #[Route('/new/{idRole<\d+>}', name: 'app_client_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole): Response
+    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole,UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $roleRepository = $this->getDoctrine()->getRepository(Role::class);
         $role = $roleRepository->find($idRole);
