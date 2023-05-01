@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 use App\Entity\Coupon;
+use App\Entity\Cadeau;
 use App\Repository\CouponRepository;
+use App\Repository\CadeauRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    
+
     #[Route('/home/roue', name: 'app_roue')]
     public function index2(CouponRepository $couponRepository): Response
     {
@@ -56,40 +54,27 @@ class HomeController extends AbstractController
     
 
     #[Route('/home/about', name: 'appllycoupon')]
- /*  public function discount(Request $request, CouponRepository $couponRepository): Response
-{
-    // get the coupon code from the request
-    $codeCoupon = $request->request->get('code_coupon');
-    
-    // if the coupon code is not provided in the request, render the template without a coupon code
-    if (!$codeCoupon) {
-        return $this->render('home/discount.html.twig');
-    }
-    
-    // get the coupon with the provided code from the database
-    $coupon = $couponRepository->findByCodeCoupon($codeCoupon);
-    
-    // if the coupon is not found, render the template with an error message
-    if (!$coupon) {
-        $error = 'Coupon code not found';
-        return $this->render('home/discount.html.twig', ['error' => $error]);
-    }
-    
-    // render the template with the coupon code and discount rate
-    return $this->render('home/discount.html.twig', [
-        'code_coupon' => $coupon->getCodeCoupon(),
-        'taux' => $coupon->getTaux()
-    ]);
-}*/
-
-
-
 public function appllycoupon (CouponRepository $couponRepository,Request $request ):Response
 {
-    $form=$this->createFormBuilder()
-    ->add('price',TextType::class)
-    ->add('code_coupon',TextType::class)
-    ->add('submit',SubmitType::class,['label'=>'Submit'])
+    $form = $this->createFormBuilder()
+    ->add('price', TextType::class, [
+        'attr' => [
+            'class' => 'form-control mb-3',
+            'placeholder' => 'Price',
+        ],
+    ])
+    ->add('code_coupon', TextType::class, [
+        'attr' => [
+            'class' => 'form-control mb-3',
+            'placeholder' => 'Coupon code',
+        ],
+    ])
+    ->add('submit', SubmitType::class, [
+        'attr' => [
+            'class' => 'btn btn-primary',
+        ],
+        'label' => 'Submit',
+    ])
     ->getForm();
     $price=0;
     $newPrice=0;
@@ -105,10 +90,22 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
      $coupon = $discount->findOneByCodeCoupon(['code_coupon'=>$data['code_coupon']]); 
     if ($coupon){
     $price =$data['price'];
+    if ($coupon->getNbrUtilisation() > 0) {
+        $coupon->setNbrUtilisation($coupon->getNbrUtilisation() - 1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($coupon);
+        $entityManager->flush();
+        if ($coupon->getNbrUtilisation() == 0) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($coupon);
+            $entityManager->flush();
+        }
+    }
     
     $discountedPrice=$coupon->getTaux()*$price/100;
 
     $newPrice=$price-$discountedPrice;
+
 
 return $this->render('home/discount.html.twig',[
 'price'=>$price,
@@ -128,5 +125,14 @@ return $this->render('home/discount.html.twig',[
     ]);   
      
 }
-       
+#[Route('/home/Services', name: 'GIFT')]
+
+public function gift(CadeauRepository $cadeauRepository): Response
+{
+    $cadeaux = $cadeauRepository->findAll();
+
+    return $this->render('home/gift.html.twig', [
+        'cadeaux' => $cadeaux,
+    ]);
+}    
 }

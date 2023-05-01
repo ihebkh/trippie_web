@@ -8,7 +8,7 @@ body{
     display:flex ;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 111vh;
     overflow: hidden;
     background-color: rgb(233, 95, 95);
     background-size: cover;
@@ -16,10 +16,10 @@ body{
 }
 .mainbox{
     position: relative;
-    width: 500px;
-    height: 500px
+    width: 400px;
+    height: 400px
     ;
-    margin-top: 50px;
+    margin-top: 70px;
 
 }
 .mainbox::after{
@@ -70,7 +70,7 @@ span{
     background-color: #ff8300        ;
 }
 .box2 .span3{
-        background-color: #d1ddd1;
+        background-color: #1b6075;
 }
 .box2{
 width: 100%;

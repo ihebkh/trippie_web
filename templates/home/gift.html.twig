@@ -1,0 +1,24 @@
+{% extends 'indexPromotion.html.twig' %}
+
+{% block body %}
+    <h1>Liste des cadeaux</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cadeau in cadeaux %}
+                <tr>
+                    <td>{{ cadeau.nom_cadeay }}</td>
+                    <td>{{ cadeau.description }}</td>
+                    <td>{{ cadeau.valeur }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
