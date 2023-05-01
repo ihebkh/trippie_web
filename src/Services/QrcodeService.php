@@ -39,8 +39,8 @@ class QrcodeService
             ->labelText($dateString)
             ->labelAlignment(new LabelAlignmentCenter())
             ->labelMargin(new Margin(15, 5, 5, 5))
-            ->logoPath($path.'img/logo.png')
-            ->logoResizeToWidth('100')
+            ->logoPath($path.'img/img1.png')
+            ->logoResizeToWidth('50')
             ->logoResizeToHeight('100')
             ->backgroundColor(new Color(221, 158, 3))
             ->build();

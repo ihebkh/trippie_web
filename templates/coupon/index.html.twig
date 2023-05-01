@@ -6,7 +6,12 @@
     <main id="main" class="main">
 
 
-
+     <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="GET" action="{{ path('app_coupon_index') }}">
+  <input type="text" name="q" placeholder="Search by code coupon or type" title="Enter code coupon or type">
+  <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+</form>
+ <a href="{{ path('app_coupon_index') }}" class="">Retour</a>
         <div class="pagetitle">
             <h1>Les Coupons</h1>
             <nav>

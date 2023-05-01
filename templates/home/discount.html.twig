@@ -2,21 +2,20 @@
 
 {% block body %}
 <br><br><br><br><br><br><br><br><br>
-  <form method="post" action="{{ path('app_discount') }}">
-    <label for="inputPrice">Price:</label>
-    <input type="text" id="inputPrice" name="price" >
-    <br>
-    <label for="inputCoupon">Coupon:</label>
-    <input type="text" id="inputCoupon" name="code_coupon">
-    <button type="submit" id="discountButton">Get Discount</button>
-  </form>
+
+{{ form_start(form) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.code_coupon) }}
+    {{ form_widget(form.submit) }}
+{{ form_end(form) }}  
+<h1>price : {{price}}</h1>
+<h1> discount : {{newPrice}}</h1>
   <script>
     document.getElementById("discountButton").addEventListener("click", function(event) {
       event.preventDefault(); // prevent the form from submitting
       
       // get the input values
    var price = parseFloat(document.getElementById("inputPrice").value);
-   
       var coupon = document.getElementById("inputCoupon").value;
       
       // check if the coupon code is valid and calculate the new price

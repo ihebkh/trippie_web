@@ -85,7 +85,14 @@ public function findAllSortedByTauxReduction($order = 'ASC')
 
     return $queryBuilder->getQuery()->getResult();
 }
-
+public function findOneByCodeCoupon($codeCoupon): ?Coupon
+{
+    return $this->createQueryBuilder('c')
+        ->andWhere('c.code_coupon = :codeCoupon')
+        ->setParameter('codeCoupon', $codeCoupon)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
 public function getCodeCouponByTaux($taux)
     {
         $queryBuilder = $this->createQueryBuilder('c')

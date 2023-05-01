@@ -22,33 +22,59 @@ function spin() {
     audio.currentTime = 0;
     box.style.transition = "initial";
     box.style.transform = "rotate(90deg)";
-
+   
     const resultBox = document.getElementById("result");
-    const sections = document.querySelectorAll(".box .font");
+    const sections = document.querySelectorAll(".box .font ");
+    const sectionType=document.querySelectorAll('[id=type]')
     const index = Math.floor(Math.random() * sections.length);
     const section = sections[index];
     const value = section.textContent;
+    const section1=sectionType[index];
+    
+    const type =section1.textContent;
 
     fetch(`/coupon/code_coupon/${value}`)
       .then((response) => response.text())
       .then((code_coupon) => {
         // generate qrcode with code_coupon
         const qrcode = generateQrcode(value, code_coupon);
-
+       
+       
+          
         // show alert with coupon code and optionally, qrcode
+        console.log(typeof type);
+        if(type.length===4){
+   console.log(type.length);
+}
+   else {console.log(type.length);}
         let showQrCode = true;
+       if(type.length===7){
+      
         Swal.fire({
+            
           icon: "success",
           title: "Congrats!",
-          html: `You won ! ${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
+          html: `You won${value} ! ${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
           showCancelButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
             spin();
           }
         });
+    }
+   
+   else { Swal.fire({
+        icon: "success",
+        title: "Congrats!",
+        html: `You won${value} ! ${showQrCode ? `  Click <a href="" target="_blank">here</a> to view your gift.</strong>.` : '</strong>'}`,
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          spin();
+        }
+      });}
       })
-      .catch((error) => console.log(error));
+      
   }, 5000);
 }
 
