@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf8d78746e1fe4367ebfd5741d118006",
+    "content-hash": "7f3496055e76158c1b6c85b35e424ed9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4071,6 +4071,72 @@
             "time": "2023-03-31T08:25:44+00:00"
         },
         {
+            "name": "symfony/google-mailer",
+            "version": "v5.4.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/google-mailer.git",
+                "reference": "9eae0b7443cf0d57ace2e511a034a6d49f60ab13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/google-mailer/zipball/9eae0b7443cf0d57ace2e511a034a6d49f60ab13",
+                "reference": "9eae0b7443cf0d57ace2e511a034a6d49f60ab13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "psr/event-dispatcher": "^1",
+                "symfony/mailer": "^5.4.21|^6.2.7"
+            },
+            "require-dev": {
+                "symfony/http-client": "^4.4|^5.0|^6.0"
+            },
+            "type": "symfony-mailer-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\Bridge\\Google\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Google Mailer Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/google-mailer/tree/v5.4.23"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-04-10T16:27:27+00:00"
+        },
+        {
             "name": "symfony/http-client",
             "version": "v5.4.22",
             "source": {
@@ -4682,16 +4748,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v5.4.21",
+            "version": "v5.4.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "ef57d9fb9cdd5e6b2ffc567d109865d10b6920cd"
+                "reference": "ae0a1032a450a3abf305ee44fc55ed423fbf16e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/ef57d9fb9cdd5e6b2ffc567d109865d10b6920cd",
-                "reference": "ef57d9fb9cdd5e6b2ffc567d109865d10b6920cd",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/ae0a1032a450a3abf305ee44fc55ed423fbf16e3",
+                "reference": "ae0a1032a450a3abf305ee44fc55ed423fbf16e3",
                 "shasum": ""
             },
             "require": {
@@ -4746,7 +4812,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.4.21"
+                "source": "https://github.com/symfony/mime/tree/v5.4.23"
             },
             "funding": [
                 {
@@ -4762,7 +4828,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-21T19:46:44+00:00"
+            "time": "2023-04-19T09:49:13+00:00"
         },
         {
             "name": "symfony/monolog-bridge",

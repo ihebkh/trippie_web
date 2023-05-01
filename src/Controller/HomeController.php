@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
@@ -135,4 +138,5 @@ public function gift(CadeauRepository $cadeauRepository): Response
         'cadeaux' => $cadeaux,
     ]);
 }    
+
 }
