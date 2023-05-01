@@ -2,23 +2,36 @@
 
 {% block body %}
     <h1>Liste des cadeaux</h1>
+    <br><br><br><br> 
+    <div class="row">
+        {% for cadeau in cadeaux %}
+            <div class="col-md-5 mb-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cadeau.nom_cadeay }}</h5>
+                        <p class="card-text">{{ cadeau.description }}</p>
+                        <p class="card-text"><strong>Valeur :</strong> {{ cadeau.valeur }}%</p>
+                        <a class="btn btn-primary btn-lg btn-block gift-btn" href="#" role="button">Get your Gift</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Valeur</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cadeau in cadeaux %}
-                <tr>
-                    <td>{{ cadeau.nom_cadeay }}</td>
-                    <td>{{ cadeau.description }}</td>
-                    <td>{{ cadeau.valeur }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card {
+            border-color: #ddd;
+        }
+        .gift-btn {
+            background-color: #009688;
+            border-color: #009688;
+        }
+        .gift-btn:hover {
+            background-color: #00796b;
+            border-color: #00796b;
+        }
+    </style>
 {% endblock %}
