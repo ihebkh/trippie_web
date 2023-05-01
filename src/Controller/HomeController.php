@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mailer\MailerInterface;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
@@ -138,5 +139,33 @@ public function gift(CadeauRepository $cadeauRepository): Response
         'cadeaux' => $cadeaux,
     ]);
 }    
+#[Route('/home/Services/{idcadeau<\d+>}', name: 'gift')]   
+public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cadeauRepository, MailerInterface $mailer): Response
+{
+    $cadeau = $cadeauRepository->find($idcadeau);
+
+    // create the email
+    $email = (new Email())
+                ->from('symfonycopte822@gmail.com')
+                ->to('rim.mdimagh@esprit.tn')
+                ->subject('Car Rental Reservation Confirmation')
+                ->text('Dear user,
+
+
+As a reminder, please bring a valid driver\'s license and a credit card in your name when you come to pick up the car. If you have any additional questions or special requests, please do not hesitate to contact us.
+
+We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
+
+Best regards,
+Trippie');
+            $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+            $mailer = new Mailer($transport);
+            $mailer->send($email);
+            return $this->redirectToRoute('GIFT');
+
+
+
+    
+}
 
 }
