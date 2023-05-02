@@ -130,7 +130,6 @@ return $this->render('home/discount.html.twig',[
      
 }
 #[Route('/home/Services', name: 'GIFT')]
-
 public function gift(CadeauRepository $cadeauRepository): Response
 {
     $cadeaux = $cadeauRepository->findAll();
@@ -142,22 +141,21 @@ public function gift(CadeauRepository $cadeauRepository): Response
 #[Route('/home/Services/{idcadeau<\d+>}', name: 'gift')]   
 public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cadeauRepository, MailerInterface $mailer): Response
 {
-    $cadeau = $cadeauRepository->find($idcadeau);
-
+    $cadeau = $cadeauRepository->find($idcadeau);   
     // create the email
     $email = (new Email())
                 ->from('symfonycopte822@gmail.com')
                 ->to('rim.mdimagh@esprit.tn')
-                ->subject('Car Rental Reservation Confirmation')
-                ->text('Dear user,
+                ->subject('GIFT Confirmation')
+                ->html("
+                <div style='background-color: #f2f2f2; padding: 20px;'>
+                    <h3 style='color: #ff9900;'>Request for gift: {$cadeau->getNomCadeay()}</h3>
+                    <p style='font-size: 16px;'>DESCRIPTION: {$cadeau->getDescription()}</p>
+                    <p style='font-size: 14px;'><strong>PS: Get your gift from our location</strong></p>
+                </div>
+            ");
 
 
-As a reminder, please bring a valid driver\'s license and a credit card in your name when you come to pick up the car. If you have any additional questions or special requests, please do not hesitate to contact us.
-
-We look forward to serving you and hope you have a safe and enjoyable rental experience with us.
-
-Best regards,
-Trippie');
             $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
             $mailer = new Mailer($transport);
             $mailer->send($email);

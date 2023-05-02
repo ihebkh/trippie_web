@@ -66,8 +66,7 @@ function spin() {
    else { Swal.fire({
         icon: "success",
         title: "Congrats!",
-        html: `You won${value} ! ${showQrCode ? `  Click <a href="" target="_blank">here</a> to view your gift.</strong>.` : '</strong>'}`,
-        showCancelButton: true,
+        html: `You won ${value}! ${showQrCode ? `Click <a href="/home/Services">here</a> to view your gift.</strong>.` : '</strong>'}`,        showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
           spin();
