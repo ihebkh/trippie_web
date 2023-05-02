@@ -16,6 +16,11 @@
             icon: 'success',
             html: `Discount: {{ newPrice }}`,
             showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.getElementById('{{ form.price.vars.id }}').value = '';
+            document.getElementById('{{ form.code_coupon.vars.id }}').value = '';
+          }
         });
     {% endif %}
 </script>
