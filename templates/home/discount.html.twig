@@ -9,9 +9,14 @@
     {{ form_widget(form.submit) }}
 {{ form_end(form) }}  
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    {% if price is defined and newPrice is defined %}
-        alert("price : {{price}} \n discount : {{newPrice}}");
+    {% if newPrice %}
+        Swal.fire({
+            icon: 'success',
+            html: `Discount: {{ newPrice }}`,
+            showCancelButton: true,
+        });
     {% endif %}
 </script>
  

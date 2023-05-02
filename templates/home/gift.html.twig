@@ -12,6 +12,7 @@
                         <p class="card-text">{{ cadeau.description }}</p>
                         <p class="card-text"><strong>Valeur :</strong> {{ cadeau.valeur }}%</p>
                         <a class="btn btn-primary btn-lg btn-block gift-btn" href="{{ path('gift', {'idcadeau': cadeau.idcadeau}) }}" role="button">Get your Gift</a>
+                    
                     </div>
                 </div>
             </div>
@@ -34,4 +35,5 @@
             border-color: #00796b;
         }
     </style>
+    
 {% endblock %}
