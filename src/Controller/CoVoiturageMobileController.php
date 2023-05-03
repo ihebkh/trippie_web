@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\CoVoiturage;
+use App\Entity\Participation;
 use App\Repository\CoVoiturageRepository;
+use App\Repository\ParticipationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,8 +31,8 @@ class CoVoiturageMobileController extends AbstractController
     #[Route("/co/voiturage/mobile/list", name: "list_co_voiturage")]
     public function getVoiture(CoVoiturageRepository $repo, SerializerInterface $serializer)
     {
-        $co_voiturage = $repo->findAll();
-        $json = $serializer->serialize($co_voiturage, 'json', ['groups' => "co_voiturages"]);
+        $co_voiturage = $repo->findAll2();
+        $json = $serializer->serialize($co_voiturage, 'json', ['groups' => "Co_voiturages"]);
         return new Response($json);
     }
 
@@ -41,14 +43,14 @@ class CoVoiturageMobileController extends AbstractController
     public function VoitureId($id, NormalizerInterface $normalizer, CoVoiturageRepository $repo)
     {
         $voiture = $repo->find($id);
-        $voitureNormalises = $normalizer->normalize($voiture, 'json', ['groups' => "co_voiturages"]);
+        $voitureNormalises = $normalizer->normalize($voiture, 'json', ['groups' => "Co_voiturages"]);
         return new Response(json_encode($voitureNormalises));
     }
 
 
     //ajouter
     #[Route("/co/voiturage/addCo_voiturageJSON/new", name: "addCo_voiturageJSON")]
-    public function addVoitureJSON(ManagerRegistry $doctrine, Request $req, NormalizerInterface $Normalizer)
+    public function addVoitureJSON(ManagerRegistry $doctrine, Request $req, NormalizerInterface $Normalizer,CoVoiturageRepository $repo )
     {
 
         $em = $doctrine->getManager();
@@ -60,6 +62,8 @@ class CoVoiturageMobileController extends AbstractController
         $co_voiturage->setIdChauff($req->get('id_ch'));
         $em->persist($co_voiturage);
         $em->flush();
+        $repo->email();
+        //$repo->send_msg('+21692554097');
 
         $jsonContent = $Normalizer->normalize($co_voiturage, 'json', ['groups' => 'co_voiturages']);
         return new Response(json_encode($jsonContent));

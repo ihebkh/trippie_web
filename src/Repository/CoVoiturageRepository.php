@@ -5,6 +5,12 @@ namespace App\Repository;
 use App\Entity\CoVoiturage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Twilio\Rest\Client;
+
+
 
 /**
  * @extends ServiceEntityRepository<CoVoiturage>
@@ -14,6 +20,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method CoVoiturage[]    findAll()
  * @method CoVoiturage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+interface TransportExceptionInterface extends \Throwable
+{
+}
 class CoVoiturageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -107,6 +116,12 @@ class CoVoiturageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findAll2()
+{
+    return $this->createQueryBuilder('e')
+        ->getQuery()
+        ->getResult();
+}
 
     public function findAllSorted(): array
     {
@@ -122,6 +137,39 @@ class CoVoiturageRepository extends ServiceEntityRepository
             ->where('c.nmbr_place > 0')
             ->getQuery()
             ->getResult();
+    }
+
+    public function email()
+    {
+
+        try {
+            $email = (new Email())
+                ->from('symfonycopte822@gmail.com')
+                ->to('aymen.rahali@esprit.tn')
+                ->subject('Car Pool Participation Confirmation')
+                ->text('test');
+
+            $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+            $mailer = new Mailer($transport);
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            // Handle any errors that occur during email sending
+            $this->addFlash('error', 'An error occurred while sending the email');
+        }
+    }
+    public function send_msg(String $num): void
+    {
+
+        $accountSid = 'AC99faaf6c18b526197934d98bd930d0e1';
+        $authToken = '0cda48fe6688e201370ebb88918e42b0';
+        $client = new Client($accountSid, $authToken);
+        $message = $client->messages->create(
+            $num, // recipient's phone number
+            array(
+                'from' => '+16206282479', // your Twilio phone number
+                'body' => 'Participation added !'
+            )
+        );
     }
 
 
