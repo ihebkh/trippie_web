@@ -41,7 +41,7 @@ class CoVoiturage
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cov_img = null;
     
-    #[ORM\ManyToOne(inversedBy:'participations')]
+    #[ORM\ManyToOne(inversedBy:'id_co')]
     #[ORM\JoinColumn(name: "id_ch", referencedColumnName: "id_ch")]
     private ?Chauffeur $id_ch = null;
 

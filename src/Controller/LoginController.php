@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Client;
 use App\Entity\Chauffeur;
 use App\Entity\Locateur;
+use App\Entity\CoVoiturage;
 use App\Form\LoginFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Routing\Annotation\Route;

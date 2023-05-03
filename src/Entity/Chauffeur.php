@@ -64,8 +64,8 @@ class Chauffeur implements UserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $resetToken = null;
 
-    #[ORM\OneToMany(targetEntity: 'App\Entity\Chauffeur', mappedBy: 'id_chauff')]
-    private $covs;
+    #[ORM\OneToMany(targetEntity: 'App\Entity\CoVoiturage', mappedBy: 'id_co')]
+    private $covoiturages;
 
 
     public function getIdCh(): ?int

@@ -97,7 +97,7 @@ class CoVoiturageType extends AbstractType
                     )
                 )
             )
-            ->add('id_ch')
+           // ->add('id_ch')
 
 
             ->add('cov_img', FileType::class, [
@@ -115,6 +115,7 @@ class CoVoiturageType extends AbstractType
                     ])
                 ],
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

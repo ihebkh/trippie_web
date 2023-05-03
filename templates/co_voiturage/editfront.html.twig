@@ -68,7 +68,7 @@
 
 								{{ include('co_voiturage/_form2.html.twig', {'button_label': 'Update'}) }}
 
-								<a href="{{ path('app_co_voiturage_index_fornt') }}">
+								<a href="{{ path('app_co_voiturage_index_fornt',{'id_ch':chauffeur.idCh}) }}">
 									back to list</a>
 							</div>
 						</div>

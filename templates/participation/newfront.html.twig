@@ -68,7 +68,7 @@
 
 								{{ include('participation/_form2.html.twig') }}
 
-								<a href="{{ path('app_co_voiturage_index_client') }}">
+								<a href="{{ path('app_co_voiturage_index_client',{'id_client': client.idClient}) }}">
 									back to list</a>
 							</div>
 						</div>

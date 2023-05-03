@@ -47,7 +47,7 @@
                                 <li><strong>Status</strong>: {{ voiture.etat }}</li>
                           <center>    <table border="0">
                                   <tr>
-                                      <th><center>      <a href="{{ path('updateVoiture2',{id:voiture.id}) }}">
+                                      <th><center>      <a href="{{ path('updateVoiture2',{'id_loc':locateur.idLoc, id:voiture.id}) }}">
                                                   <button type="button" class="btn btn-outline-success">Update</button></a>          </center></th>
                                       <td><center>
 

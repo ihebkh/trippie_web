@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\CoVoiturage;
+use App\Entity\Client;
 use App\Form\CoVoiturageType;
 use App\Repository\CoVoiturageRepository;
+use App\Repository\ChauffeurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +20,7 @@ use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 use App\Entity\Chauffeur;
-use App\Repository\ChauffeurRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface ;
 
 
 
@@ -38,17 +40,25 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
-    #[Route('/index', name: 'app_co_voiturage_index_fornt', methods: ['GET'])]
-    public function indexfront(CoVoiturageRepository $coVoiturageRepository): Response
+    #[Route('chauffeur/{id_ch}/profilch/index', name: 'app_co_voiturage_index_fornt', methods: ['GET','POST'])]
+    public function indexfront(CoVoiturageRepository $coVoiturageRepository, SessionInterface $session,Chauffeur $chauffeur,int $id_ch): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+        $user = $userRepository->find($id_ch);
         return $this->render('co_voiturage/indexFront.html.twig', [
+            'id_ch' => $id_ch,
+            'chauffeur' => $chauffeur,
             'co_voiturages' => $coVoiturageRepository->findAll(),
         ]);
     }
-    #[Route('/index/client', name: 'app_co_voiturage_index_client', methods: ['GET'])]
-    public function indexfrontclient(CoVoiturageRepository $coVoiturageRepository): Response
+    #[Route('client/{id_client}/profilcl/index/client', name: 'app_co_voiturage_index_client', methods: ['GET'])]
+    public function indexfrontclient(CoVoiturageRepository $coVoiturageRepository,Client $client, int $id_client): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
         return $this->render('co_voiturage/indexFrontclient.html.twig', [
+            'id_client' => $id_client,
+            'client' => $client,
             'co_voiturages' => $coVoiturageRepository->findAvailable(),
         ]);
     }
@@ -56,6 +66,7 @@ class CoVoiturageController extends AbstractController
     #[Route('/new', name: 'app_co_voiturage_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
     {
+        
         $coVoiturage = new CoVoiturage();
         $form = $this->createForm(CoVoiturageType::class, $coVoiturage);
         $form->handleRequest($request);
@@ -80,15 +91,21 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
-    #[Route('index/new', name: 'app_co_voiturage_new2', methods: ['GET', 'POST'])]
-    public function newFront(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
+    #[Route('chauffeur/{id_ch}/profilch/index/new', name: 'app_co_voiturage_new2', methods: ['GET', 'POST'])]
+    public function newFront(Request $request, CoVoiturageRepository $coVoiturageRepository, SessionInterface $session, Chauffeur $chauffeur,int $id_ch,ChauffeurRepository $userRepository): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+        $user = $userRepository->find($id_ch);
         $coVoiturage = new CoVoiturage();
+        $coVoiturage->setIdCh($user);
         $form = $this->createForm(CoVoiturageType::class, $coVoiturage);
         $form->handleRequest($request);
         $file = $form->get('cov_img')->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            
+          
             if ($file) {
                 $uploadsDirectory = $this->getParameter('uploads_directory');
                 $imgFilename = $file->getClientOriginalName();
@@ -98,10 +115,12 @@ class CoVoiturageController extends AbstractController
             }
             $coVoiturageRepository->save($coVoiturage, true);
 
-            return $this->redirectToRoute('app_co_voiturage_index_fornt', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_co_voiturage_index_fornt', ['id_ch' => $id_ch], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('co_voiturage/newfront.html.twig', [
+            'id_ch' => $id_ch,
+            'chauffeur'=>$chauffeur,
             'co_voiturage' => $coVoiturage,
             'form' => $form,
         ]);
@@ -145,20 +164,34 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
-    #[Route('/index/{id}', name: 'app_co_voiturage_show_front', methods: ['GET'])]
-    public function showFront(CoVoiturage $coVoiturage): Response
-
-    {
-
+    #[Route('chauffeur/{id_ch}/profilch/index/{id}/', name: 'app_co_voiturage_show_front', methods: ['GET','POST'])]
+    public function showFront(CoVoiturage $coVoiturage, SessionInterface $session,Chauffeur $chauffeur,int $id_ch): Response
+    { 
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $chauffeur = $entityManager->getRepository(Chauffeur::class)->find($id_ch);
+        
+    if (!$chauffeur) {
+        throw $this->createNotFoundException('Chauffeur non trouvé pour l\'ID: '.$chauffeur->getIdCh());
+    }
         return $this->render('co_voiturage/showFront.html.twig', [
+            'chauffeur' => $chauffeur,
+            //'id_ch' => $id_ch,
             'co_voiturage' => $coVoiturage,
 
         ]);
     }
-    #[Route('/index/client/{id}', name: 'app_co_voiturage_show_frontclient', methods: ['GET'])]
-    public function showFrontclient(CoVoiturage $coVoiturage): Response
+    #[Route('/client/{id_client}/profilcl/index/client/{id}', name: 'app_co_voiturage_show_frontclient', methods: ['GET','POST'])]
+    public function showFrontclient(CoVoiturage $coVoiturage,Client $client, int $id_client,int $id): Response
     {
+        $coVoiturageRepo = $this->getDoctrine()->getRepository(CoVoiturage::class);
+        $coVoiturage = $coVoiturageRepo->find($id);
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
         return $this->render('co_voiturage/showFrontClient.html.twig', [
+            'id_client'=> $id_client,
+            'client'=> $client,
+            'id'=>$id,
             'co_voiturage' => $coVoiturage,
         ]);
     }
@@ -183,9 +216,12 @@ class CoVoiturageController extends AbstractController
         ]);
     }
 
-    #[Route('index/client/{id}/edit', name: 'app_co_voiturage_edit_front', methods: ['GET', 'POST'])]
-    public function editfront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
+    #[Route('chauffeur/{id_ch}/profilch/index/{id}/edit', name: 'app_co_voiturage_edit_front', methods: ['GET', 'POST'])]
+    public function editfront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository, SessionInterface $session,Chauffeur $chauffeur,int $id_ch): Response
     {
+
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
         $form = $this->createForm(CoVoiturageType::class, $coVoiturage);
         $form->handleRequest($request);
 
@@ -196,6 +232,8 @@ class CoVoiturageController extends AbstractController
         }
 
         return $this->renderForm('co_voiturage/editfront.html.twig', [
+            'chauffeur'=> $chauffeur,
+            'id_ch' => $id_ch,
             'co_voiturage' => $coVoiturage,
             'form' => $form,
         ]);
@@ -211,7 +249,7 @@ class CoVoiturageController extends AbstractController
     }
     //chauffeur 
     #[Route('/chauffeur/{id}', name: 'app_co_voiturage_delete2', methods: ['POST'])]
-    public function deleteFront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository): Response
+    public function deleteFront(Request $request, CoVoiturage $coVoiturage, CoVoiturageRepository $coVoiturageRepository, SessionInterface $session): Response
     {
         if ($this->isCsrfTokenValid('delete' . $coVoiturage->getId(), $request->request->get('_token'))) {
             $coVoiturageRepository->remove($coVoiturage, true);

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Voiture;
+use App\Entity\Locateur;
 use App\Form\VoitureFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,14 +43,20 @@ class VoitureController extends AbstractController
     }
 
 //locateur
-    #[Route('/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
-    public function Affichernoneserve(VoitureRepository $repository, PaginatorInterface $paginator, Request $request)
+    #[Route('locateur/{id_loc}/profilloc/voiture/Affichelocateur', name: 'app_voitureaffichenonreserve')]
+    public function Affichernoneserve(VoitureRepository $repository, PaginatorInterface $paginator, Request $request , int $id_loc)
     {
+        $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+        $locateur = $userRepository->find($id_loc);
 
         $voiture = $repository->findall();
         //$voiture = $repository->findBy(idLocateur=);
         return $this->render('voiture/Affichereserve.html.twig',
-            ['voiture' => $voiture]);
+            [
+                'id_loc' => $id_loc,
+                'locateur'=>$locateur,
+                'voiture' => $voiture
+        ]);
     }
 
 //admin                                                                                                                                                                                   
@@ -70,10 +77,13 @@ class VoitureController extends AbstractController
     public function deleteStatique2($id, VoitureRepository $repo, ManagerRegistry $doctrine): Response
     {
         $voiture = $repo->find($id);
+        $id_loc = $voiture->getIdLoc();
+        $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+        $locateur = $userRepository->find($id_loc);
         $em = $doctrine->getManager();
         $em->remove($voiture);
         $em->flush();
-        return $this->redirectToRoute("app_voitureaffichenonreserve");
+        return $this->redirectToRoute('app_voitureaffichenonreserve',['id_loc'=>$locateur->getIdLoc()]);
 
 
     }
@@ -105,11 +115,14 @@ class VoitureController extends AbstractController
     }
 
     //locateur
-    #[Route('/updateVoiture//locateurvoiture/{id}', name: 'updateVoiture2')]
+    #[Route('/{id_loc}/updateVoiture/locateurvoiture/{id}', name: 'updateVoiture2')]
     public function updateVoiture2(Request $request, ManagerRegistry $doctrine, Voiture $voiture)
     {
         $form = $this->createForm(VoitureFormType::class, $voiture);
         // $form->add('Update',SubmitType::class);
+        $id_loc = $voiture->getIdLoc();
+        $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+        $locateur = $userRepository->find($id_loc);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -121,20 +134,26 @@ class VoitureController extends AbstractController
                 $file->move($uploadsDirectory, $imgFilename);
                 $voiture->setPicture($imgFilename);
             }
+            
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
-            return $this->redirectToRoute('app_voitureaffichenonreserve', ['id' => $voiture->getId()]);
+            return $this->redirectToRoute('app_voitureaffichenonreserve',['id_loc'=>$locateur->getIdLoc()]);
         }
         return $this->render('voiture/updateV2.html.twig', [
+            'id_loc'=> $id_loc,
+            'locateur'=> $locateur,
             'form' => $form->createView(),
         ]);
     }
 
     //locateur
-    #[Route('/voiture/add', name: 'addVoiture')]
-    public function addVoiture(ManagerRegistry $doctrine, Request $request): Response
+    #[Route('locateur/{id_loc}/profilloc/voiture/add', name: 'addVoiture')]
+    public function addVoiture(ManagerRegistry $doctrine, Request $request,Locateur $locateur,int $id_loc): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+        $user = $userRepository->find($id_loc);
         $voiture = new Voiture();
+        $voiture->setIdLoc($user);
         $form = $this->createForm(VoitureFormType::class, $voiture);
 
         $form->handleRequest($request);
@@ -157,10 +176,12 @@ class VoitureController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('app_voitureaffichenonreserve');
+            return $this->redirectToRoute('app_voitureaffichenonreserve',['id_loc'=>$user->getIdLoc()]);
         }
 
         return $this->render('voiture/addV.html.twig', [
+            'id_loc'=>$id_loc,
+            'locateur'=>$locateur,
             'form' => $form->createView(),
         ]);
     }
@@ -203,10 +224,16 @@ class VoitureController extends AbstractController
     }
 
 //locateur
-    #[Route('/voiture/locateurvoiture/show/{id}', name: 'app_locateurvoiture_show', methods: ['GET'])]
-    public function show2(Voiture $voiture): Response
+    #[Route('voiture/locateurvoiture/show/{id}', name: 'app_locateurvoiture_show', methods: ['GET'])]
+    public function show2(Voiture $voiture, int $id, VoitureRepository $voitureRepository): Response
     {
+        $voiture = $voitureRepository->find($id);
+        $id_loc = $voiture->getIdLoc();
+        $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+        $locateur = $userRepository->find($id_loc);
+        
         return $this->render('voiture/show2.html.twig', [
+            'locateur' => $locateur,
             'voiture' => $voiture,
         ]);
     }

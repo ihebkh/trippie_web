@@ -13,7 +13,7 @@
             <div class="container">
             <br>
             <br>
-                            <a href="{{ path('app_co_voiturage_new2') }}">
+                            <a href="{{ path('app_co_voiturage_new2', {'id_ch': chauffeur.idCh}) }}">
                     <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Add new car
                     </button>
                 <br>
@@ -28,7 +28,7 @@
                             <div class="portfolio-info">
 
                                 <div class="portfolio-links">
-                                    <a href="{{ path('app_co_voiturage_show_front', {'id': co.id}) }}" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="{{ path('app_co_voiturage_show_front', {'id_ch':chauffeur.idCh, 'id': co.id}) }}" title="More Details"><i class="bx bx-link"></i></a>
 
                                 </div>
                                </div>

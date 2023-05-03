@@ -62,6 +62,9 @@ class Voiture
     #[ORM\JoinColumn(name: "id_loc", referencedColumnName: "id_loc")]
     private ?Locateur $id_loc = null;
 
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Locateur', mappedBy: 'idVoiture')]
+    private $locateurs;
+
     #[ORM\OneToMany(mappedBy: 'idVoiture', targetEntity: Reservation::class, cascade: ['remove'])]
     private Collection $reservations;
 

@@ -9,7 +9,7 @@
             <div class="container">
                 <br>
                 <br>
-                <a href="{{ path('addVoiture') }}">
+                <a href="{{ path('addVoiture',{'id_loc':locateur.idLoc}) }}">
                     <button type="button" style="float: right;padding: 10px;" class="btn btn-outline-info">Add new car
                     </button>
 
@@ -29,7 +29,7 @@
                                 <h4>{{ v.prixJours }}</h4>
 
                                 <div class="portfolio-links">
-                                    <a href="{{ path('app_locateurvoiture_show',{id:v.id}) }}" title="More Details"><i
+                                    <a href="{{ path('app_locateurvoiture_show',{'id':v.id}) }}" title="More Details"><i
                                                 class="bx bx-plus"></i></a>
                                 </div>
                             </div>

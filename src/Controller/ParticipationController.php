@@ -25,9 +25,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Dompdf\Dompdf;
 
 
-interface TransportExceptionInterface extends \Throwable
-{
-}
+
 #[Route('/participation')]
 class ParticipationController extends AbstractController
 {
@@ -51,11 +49,13 @@ class ParticipationController extends AbstractController
     }
 
 
-    #[Route('/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
-    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id): Response
+    #[Route('client/{id_client}/profilcl/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
+    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id, Client $client,int $id_client): Response
     {
         $cov = $coVoiturageRepository->find($id);
-
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
+        
         if (!$cov) {
             throw $this->createNotFoundException('The CoVoiturage does not exist');
         }
@@ -67,6 +67,7 @@ class ParticipationController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid() && $cov->getNmbrPlace() >= $participation->getNmbrPlacePart()) {
+           
             try {
                 $email = (new Email())
                     ->from('symfonycopte822@gmail.com')
@@ -92,7 +93,7 @@ class ParticipationController extends AbstractController
                 return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);
             }
 
-
+            $participation->setIdClient($user);
             $participation->setIdCo($cov);
             $participationRepository->save($participation, true);
             $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());
@@ -103,11 +104,14 @@ class ParticipationController extends AbstractController
 
 
 
-            return $this->redirectToRoute('app_co_voiturage_index_client');
+            return $this->redirectToRoute('app_co_voiturage_index_client',['id_client' => $id_client]);
         }
 
         return $this->render('participation/newfront.html.twig', [
+            'id_client'=>$id_client,
+            'client'=>$client,   
             'cov' => $cov,
+            'participation'=> $participation,
             'form' => $form->createView(),
         ]);
     }
@@ -133,10 +137,14 @@ class ParticipationController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}', name: 'app_participation_show', methods: ['GET'])]
-    public function show(Participation $participation): Response
+    #[Route('client/{id_client}/profilcl/index/client/{id}', name: 'app_participation_show', methods: ['GET'])]
+    public function show(Participation $participation,Client $client,int $id_client): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
         return $this->render('participation/show.html.twig', [
+            'id_client' =>$id_client,
+            'client' => $client,
             'participation' => $participation,
         ]);
     }

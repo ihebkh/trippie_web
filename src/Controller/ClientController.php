@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\Role;
+use App\Entity\Participation;
 use App\Form\ClientType;
 use App\Form\EditCliType;
 use App\Form\ChangePasswordFormType;
