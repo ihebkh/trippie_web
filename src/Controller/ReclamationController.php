@@ -21,6 +21,12 @@ use App\Repository\ClientRepository;
 use App\Entity\Role;
 use App\Repository\RoleRepository;
 
+use App\Entity\Locateur;
+use App\Repository\LocateurRepository;
+
+use App\Entity\Chauffeur;
+use App\Repository\ChauffeurRepository;
+
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 
@@ -123,7 +129,7 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-
+//client ajout front
     #[Route('/{id_client}/newF', name: 'app_reclamation_newF', methods: ['GET', 'POST'])]
     public function newF(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService, int $id_client): Response
     {
@@ -187,135 +193,192 @@ class ReclamationController extends AbstractController
         ]);
     }
 
-    /*#[Route('/{id_loc}/newF', name: 'app_reclamation_newF', methods: ['GET', 'POST'])]
-    public function newFloc(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService, int $id_client): Response
-    {
-        
-        //$userRepository = $this->getDoctrine()->getRepository(Locateur::class);
-        //$locateur = $userRepository->find($id_loc);
-        
-        $reclamation = new Reclamation();
-        $form = $this->createForm(Reclamation1Type::class, $reclamation);
-        $form->handleRequest($request);
 
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $file = $form->get('image')->getData();
-
-            if ($file) {
-                $fileName = $file->getClientOriginalName();
+//locateur ajout front
+#[Route('/loc/{id_loc}/newF', name: 'app_reclamation_newFloc', methods: ['GET', 'POST'])]
+public function newFloc(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService, int $id_loc): Response
+{
     
-                try {
-                    $file->move(
-                        $this->getParameter('uploads_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    // Handle the exception
-                }
-                $reclamation->setImage($fileName);
+    $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+    $locateur = $userRepository->find($id_loc);
+    $role = $locateur->getIdRole();
+    $id = $role->getIdRole();
+    $id_user = $id;
+    
+    $reclamation = new Reclamation();
+    $form = $this->createForm(Reclamation1Type::class, $reclamation);
+    $form->handleRequest($request);
+
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        $file = $form->get('image')->getData();
+
+        if ($file) {
+            $fileName = $file->getClientOriginalName();
+
+            try {
+                $file->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // Handle the exception
             }
-
-            $reclamation->setEtat("non traité");
-
-            $reclamationRepository->save($reclamation, true);
-
-            $notifcationService->sendEmail();
-
-            $sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
-            $token  = "e0f542fecc731d9f8e9d87a4709aae32";
-            $twilio = new Client($sid, $token);
-
-            $message = $twilio->messages
-                ->create("+21654833493", // to
-                    array(
-                            "from" => "+12766226225",
-                            "body" => "Votre réclamation est recu !!!"
-                        )
-                    );
-
-            return $this->redirectToRoute('app_reclamation_front', [], Response::HTTP_SEE_OTHER);
+            $reclamation->setImage($fileName);
         }
 
-        return $this->renderForm('reclamation/newF.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form,
-        ]);
+        $reclamation->setEtat("non traité");
+
+        $reclamation->setIdUser($id_user);
+
+        $reclamationRepository->save($reclamation, true);
+
+        $notifcationService->sendEmail();
+
+        /*$sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
+        $token  = "e0f542fecc731d9f8e9d87a4709aae32";
+        $twilio = new Client($sid, $token);
+
+        $message = $twilio->messages
+            ->create("+21654833493", // to
+                array(
+                        "from" => "+12766226225",
+                        "body" => "Votre réclamation est recu !!!"
+                    )
+                );*/
+
+        return $this->redirectToRoute('app_reclamation_frontloc', ['id_loc'=> $id_loc], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id_ch}/newF', name: 'app_reclamation_newF', methods: ['GET', 'POST'])]
-    public function newFch(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService, int $id_client): Response
+    return $this->renderForm('reclamation/newF.html.twig', [
+        'locateur' => $locateur,
+        'reclamation' => $reclamation,
+        'form' => $form,
+    ]);
+}
+
+
+//chauffeur ajout front
+    #[Route('/ch/{id_ch}/newF', name: 'app_reclamation_newFCh', methods: ['GET', 'POST'])]
+    public function newFch(Request $request, ReclamationRepository $reclamationRepository, AjoutNotificationService $notifcationService, int $id_ch): Response
     {
-        
-        //$userRepository = $this->getDoctrine()->getRepository(Locateur::class);
-        //$locateur = $userRepository->find($id_loc);
-        
-        $reclamation = new Reclamation();
-        $form = $this->createForm(Reclamation1Type::class, $reclamation);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $file = $form->get('image')->getData();
-
-            if ($file) {
-                $fileName = $file->getClientOriginalName();
+           
+    $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+    $chauffeur = $userRepository->find($id_ch);
+    $role = $chauffeur->getIdRole();
+    $id = $role->getIdRole();
+    $id_user = $id;
     
-                try {
-                    $file->move(
-                        $this->getParameter('uploads_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    // Handle the exception
-                }
-                $reclamation->setImage($fileName);
+    $reclamation = new Reclamation();
+    $form = $this->createForm(Reclamation1Type::class, $reclamation);
+    $form->handleRequest($request);
+
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        $file = $form->get('image')->getData();
+
+        if ($file) {
+            $fileName = $file->getClientOriginalName();
+
+            try {
+                $file->move(
+                    $this->getParameter('uploads_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // Handle the exception
             }
-
-            $reclamation->setEtat("non traité");
-
-            $reclamationRepository->save($reclamation, true);
-
-            $notifcationService->sendEmail();
-
-            $sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
-            $token  = "e0f542fecc731d9f8e9d87a4709aae32";
-            $twilio = new Client($sid, $token);
-
-            $message = $twilio->messages
-                ->create("+21654833493", // to
-                    array(
-                            "from" => "+12766226225",
-                            "body" => "Votre réclamation est recu !!!"
-                        )
-                    );
-
-            return $this->redirectToRoute('app_reclamation_front', [], Response::HTTP_SEE_OTHER);
+            $reclamation->setImage($fileName);
         }
 
-        return $this->renderForm('reclamation/newF.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form,
-        ]);
-    }*/
+        $reclamation->setEtat("non traité");
+
+        $reclamation->setIdUser($id_user);
+
+        $reclamationRepository->save($reclamation, true);
+
+        $notifcationService->sendEmail();
+
+        /*$sid    = "ACac8596dd282c3072d3da4dbb09625ab1";
+        $token  = "e0f542fecc731d9f8e9d87a4709aae32";
+        $twilio = new Client($sid, $token);
+
+        $message = $twilio->messages
+            ->create("+21654833493", // to
+                array(
+                        "from" => "+12766226225",
+                        "body" => "Votre réclamation est recu !!!"
+                    )
+                );*/
+
+        return $this->redirectToRoute('app_reclamation_frontCh', ['id_ch'=> $id_ch], Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->renderForm('reclamation/newF.html.twig', [
+        'chauffeur' => $chauffeur,
+        'reclamation' => $reclamation,
+        'form' => $form,
+    ]);
+
+    }
 
 
     
-
-     #[Route('/{id_client}/front', name: 'app_reclamation_front', methods: ['GET'])]
+//client front
+     #[Route('/client/{id_client}/front', name: 'app_reclamation_front', methods: ['GET'])]
     public function front(ReclamationRepository $reclamationRepository, int $id_client): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $client = $userRepository->find($id_client);
-
+        $role = $client->getIdRole();
+        $id_user = $role->getIdRole();
+        $reclamations = $reclamationRepository->findBy(['id_user'=>$id_user]);
+   
         return $this->render('reclamation/showAll.html.twig', [
             'id_client' => $id_client,
             'client' => $client,
-            'reclamations' => $reclamationRepository->findAll(),
+            'reclamations' => $reclamations,
         ]);
     }
+
+
+//locateur front
+#[Route('/loc/{id_loc}/front', name: 'app_reclamation_frontloc', methods: ['GET'])]
+public function frontloc(ReclamationRepository $reclamationRepository, int $id_loc): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+    $locateur = $userRepository->find($id_loc);
+    $role = $locateur->getIdRole();
+    $id_user = $role->getIdRole();
+    $reclamations = $reclamationRepository->findBy(['id_user'=>$id_user]);
+   
+    return $this->render('reclamation/showAllLoc.html.twig', [
+        'id_loc' => $id_loc,
+        'locateur' => $locateur,
+        'reclamations' => $reclamations,
+    ]);
+}
+
+
+//chauffeur front
+#[Route('/chauffeur/{id_ch}/front', name: 'app_reclamation_frontCh', methods: ['GET'])]
+public function frontlocCh(ReclamationRepository $reclamationRepository, int $id_ch): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+    $chauffeur = $userRepository->find($id_ch);
+    $role = $chauffeur->getIdRole();
+    $id_user = $role->getIdRole();
+    $reclamations = $reclamationRepository->findBy(['id_user'=>$id_user]);
+   
+    return $this->render('reclamation/showAllCh.html.twig', [
+        'id_ch' => $id_ch,
+        'chauffeur' => $chauffeur,
+        'reclamations' => $reclamations,
+    ]);
+}
+
 
     #[Route('/{id}/rep', name: 'app_reclamation_add', methods: ['GET', 'POST'])]
     public function add(Reclamation $reclamation, Request $request, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository): Response
@@ -428,7 +491,9 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('app_reclamation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/front/{id}/{id_client}', name: 'app_reclamation_Fdelete', methods: ['POST','GET'])]
+
+//delete client
+    #[Route('/delcli/front/{id}/{id_client}', name: 'app_reclamation_Fdelete', methods: ['POST','GET'])]
     public function deleteF(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository, int $id_client, ManagerRegistry $doctrine, int $id): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
@@ -439,6 +504,33 @@ class ReclamationController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('app_reclamation_front',['id_client'=>$id_client]);
     }
+
+//delete locatuer
+#[Route('/delloc/front/{id}/{id_loc}', name: 'app_reclamation_Fdeleteloc', methods: ['POST','GET'])]
+public function deleteFLoc(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository, int $id_loc, ManagerRegistry $doctrine, int $id): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+    $locateur = $userRepository->find($id_loc);
+    $id_loc = $locateur->getIdLoc();
+    $em = $doctrine->getManager();
+    $em->remove($reclamation);
+    $em->flush();
+    return $this->redirectToRoute('app_reclamation_frontloc',['id_loc'=>$id_loc]);
+}
+
+//delete chauffeur
+#[Route('/delch/front/{id}/{id_ch}', name: 'app_reclamation_FdeleteCh', methods: ['POST','GET'])]
+public function deleteFch(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository, int $id_ch, ManagerRegistry $doctrine, int $id): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+    $chauffeur = $userRepository->find($id_ch);
+    $id_ch = $chauffeur->getIdCh();
+    $em = $doctrine->getManager();
+    $em->remove($reclamation);
+    $em->flush();
+    return $this->redirectToRoute('app_reclamation_frontCh',['id_ch'=>$id_ch]);
+}
+
 
     #[Route('/{id}/traite', name: 'app_reclamation_traite', methods: ['GET', 'POST'])]
     public function traite(Request $request, Reclamation $reclamation, ReclamationRepository $reclamationRepository): Response

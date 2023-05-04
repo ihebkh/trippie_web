@@ -20,6 +20,12 @@ use App\Repository\ClientRepository;
 use App\Entity\Role;
 use App\Repository\RoleRepository;
 
+use App\Entity\Locateur;
+use App\Repository\LocateurRepository;
+
+use App\Entity\Chauffeur;
+use App\Repository\ChauffeurRepository;
+
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 
@@ -53,6 +59,8 @@ class ReponseController extends AbstractController
         ]);
     }
 
+
+//client reponses
     #[Route('/{id}/{id_client}', name: 'app_reponse_front', methods: ['GET'])]
     public function front(int $id, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository, int $id_client): Response
     {
@@ -69,6 +77,46 @@ class ReponseController extends AbstractController
         'reponses' => $reponses,
     ]);
     }
+
+//locateur reponses
+#[Route('/loc/{id}/{id_loc}', name: 'app_reponse_frontloc', methods: ['GET'])]
+public function frontloc(int $id, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository, int $id_loc): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
+    $locateur = $userRepository->find($id_loc);
+    
+    $reclamation = $reclamationRepository->find($id);
+    $reponses = $reclamation->getReponses();
+
+return $this->render('reponse/showAllLoc.html.twig', [
+    'id_loc' => $id_loc,
+    'locateur' => $locateur,
+    'reclamation' => $reclamation,
+    'reponses' => $reponses,
+]);
+}
+
+
+
+//chauffeur reponses
+#[Route('/chauffeur/{id}/{id_ch}', name: 'app_reponse_frontCh', methods: ['GET'])]
+public function frontch(int $id, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository, int $id_ch): Response
+{
+    $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
+    $chauffeur = $userRepository->find($id_ch);
+    
+    $reclamation = $reclamationRepository->find($id);
+    $reponses = $reclamation->getReponses();
+
+return $this->render('reponse/showAllCh.html.twig', [
+    'id_ch' => $id_ch,
+    'chauffeur' => $chauffeur,
+    'reclamation' => $reclamation,
+    'reponses' => $reponses,
+]);
+}
+
+
 
     #[Route('/{id}/rep', name: 'app_reponse_show', methods: ['GET'])]
     public function show(Reponse $reponse): Response
