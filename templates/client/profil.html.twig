@@ -19,7 +19,13 @@
             <li><a class="nav-link scrollto active" href="{{ path('app_co_voiturage_index_client', {'id_client' : client.idClient }) }}">Car pool participation</a></li>
             <li><a class="nav-link scrollto active" href="{{ path('app_voitureaffichClient', {'id_client' : client.idClient}) }}">Car</a></li>
             <li><a class="nav-link scrollto active" href="{{ path('app_reclamation_front', {'id_client' : client.idClient }) }}">Reclamation</a></li>
-                    <li><a class="nav-link scrollto active" href="{{ path('app_roue', {'id_client' : client.idClient }) }}">Roue</a></li>
+            <li><a class="nav-link scrollto active" href="{{ path('app_roue', {'id_client' : client.idClient }) }}">Roue</a></li>
+                    <li class="dropdown"><a href="#"><span>Membership</span> <i class="bi bi-chevron-down"></i></a>
+                        
+                             <li>   <a href="{{ path('app_abonnement_newC') }}">Buy New membership</a></li>
+                             <li><a href="{{ path('unity_game') }}">Earn money</a></li>
+                            
+                <li><a href="{{ path('app_highscores_indexClient') }}"><i class="bi bi-wallet2">Wallet</i></a></li>
 
           <li class="dropdown">
       <a class="nav-link scrollto active" href="">  <i class="bi bi-gear" style="font-size: 1.9em;"></i></a>
