@@ -53,7 +53,7 @@ function spin() {
         Swal.fire({
             
           icon: "success",
-          title: "Congrats!",
+          title: "Con!",
           html: `You won${value} ! ${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
           showCancelButton: true,
         }).then((result) => {
@@ -61,12 +61,14 @@ function spin() {
             spin();
           }
         });
+         
     }
    
    else { Swal.fire({
         icon: "success",
         title: "Congrats!",
         html: `You won ${value}! ${showQrCode ? `Click <a href="/home/Services">here</a> to view your gift.</strong>.` : '</strong>'}`,        showCancelButton: true,
+        
       }).then((result) => {
         if (result.isConfirmed) {
           spin();
@@ -77,8 +79,12 @@ function spin() {
   }, 5000);
 }
 
+  
+
 function generateQrcode(value, code_coupon) {
   const url = `/qrcode?text=${encodeURIComponent(value)}&code_coupon=${encodeURIComponent(code_coupon)}`;
   console.log(url); // add this line
   return url;
 }
+
+

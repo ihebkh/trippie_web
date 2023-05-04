@@ -6,6 +6,8 @@ use App\Entity\Cadeau;
 use App\Repository\CouponRepository;
 use App\Repository\CadeauRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\QrcodeService;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +18,8 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\MailerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
@@ -134,7 +138,7 @@ public function gift(CadeauRepository $cadeauRepository): Response
 {
     $cadeaux = $cadeauRepository->findAll();
 
-    return $this->render('home/gift.html.twig', [
+    return $this->render('home/gift2.html.twig', [
         'cadeaux' => $cadeaux,
     ]);
 }    
@@ -154,16 +158,26 @@ public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cad
                     <p style='font-size: 14px;'><strong>PS: Get your gift from our location</strong></p>
                 </div>
             ");
-
-
+            if ($cadeau->getReccurence() > 0) {
+                $cadeau->setReccurence($cadeau->getReccurence() - 1);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($cadeau);
+                $entityManager->flush();
+                if ($cadeau->getReccurence() == 0) {
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->remove($cadeau);
+                    $entityManager->flush();
+                }
             $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
             $mailer = new Mailer($transport);
             $mailer->send($email);
             return $this->redirectToRoute('GIFT');
-
+            }
 
 
     
 }
+ 
+
 
 }

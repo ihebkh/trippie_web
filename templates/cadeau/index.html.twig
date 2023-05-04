@@ -1,14 +1,20 @@
-{% extends 'base.html.twig' %}
+
 
 {% block title %}cadeau index{% endblock %}
 
 {% block body %}
     <main id="main" class="main">
 
-
-
+   
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="GET" action="{{ path('app_cadeau_index') }}">
+  <input type="text" name="q" placeholder="Search by nom cadeau  " title="Enter nom cadeau ">
+  <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+</form>
+ <a href="{{ path('app_cadeau_index') }}" class="">Retour</a>
         <div class="pagetitle">
             <h1>Les Articles</h1>
+            
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -22,7 +28,18 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
+  <th>
+    <a href="{{ path('app_cadeau_index', {'sort': 'valeur', 'order': order == 'asc' ? 'desc' : 'asc'}) }}">
+       valeur
+        {% if sort == 'valeur' %}
+            {% if order == 'asc' %}
+                <i class="bi bi-caret-down-fill"></i>
+            {% else %}
+                <i class="bi bi-caret-up-fill"></i>
+            {% endif %}
+        {% endif %}
+    </a>
+</th>
                     <div class="card">
 
                         {% for message in app.flashes('notice') %}

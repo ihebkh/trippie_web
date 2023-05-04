@@ -36,6 +36,11 @@ class Cadeau
     #[ORM\JoinColumn(name: "coupon_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?Coupon $coupon = null;
 
+   
+   
+
+   
+
     public function getId(): ?int
     {
         return $this->idcadeau;
@@ -105,4 +110,8 @@ class Cadeau
     {
         return $this->idcadeau;
     }
+
+    
+
+   
 }

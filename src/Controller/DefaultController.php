@@ -24,7 +24,7 @@ public function index(Request $request, QrcodeService $qrcodeService): Response
     $type = $request->query->get('type');
     $qrCode = $qrcodeService->qrcode($codeCoupon);
 
-    return $this->render('default/index.html.twig', [
+    return $this->render('default/QRcode.html.twig', [
         'qrCode' => $qrCode,
         'codeCoupon' => $codeCoupon,
         'type' => $type,

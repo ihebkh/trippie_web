@@ -38,6 +38,22 @@ class CadeauRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findAllSortedByvaleur($order = 'ASC')
+{
+    $queryBuilder = $this->createQueryBuilder('c')
+        ->orderBy('c.valeur', $order);
+
+    return $queryBuilder->getQuery()->getResult();
+}
+public function findBycadeau(string $query): array
+{
+    return $this->createQueryBuilder('c')
+        ->andWhere('c.nom_cadeay LIKE :query ')
+        ->setParameter('query', '%'.$query.'%')
+        ->orderBy('c.idcadeau', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
 
 //    /**
 //     * @return Cadeau[] Returns an array of Cadeau objects

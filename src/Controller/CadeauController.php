@@ -14,10 +14,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class CadeauController extends AbstractController
 {
     #[Route('/', name: 'app_cadeau_index', methods: ['GET'])]
-    public function index(CadeauRepository $cadeauRepository): Response
+    public function index(Request $request,CadeauRepository $cadeauRepository): Response
     {
+        $searchQuery = $request->query->get('q');
+        $sort = $request->query->get('sort');
+        $order = $request->query->get('order', 'asc');
+        if ($searchQuery) {
+            $cadeaus = $cadeauRepository->findBycadeau($searchQuery);
+        } elseif ($sort === 'valeur' && $order === 'asc') {
+            $cadeaus = $cadeauRepository->findAllSortedByvaleur('ASC');
+        } elseif ($sort === 'valeur' && $order === 'desc') {
+            $cadeaus = $cadeauRepository->findAllSortedByvaleur('DESC');
+        } else {
+            $cadeaus = $cadeauRepository->findAll();
+        }
+        
         return $this->render('cadeau/index.html.twig', [
-            'cadeaus' => $cadeauRepository->findAll(),
+            'cadeaus' => $cadeaus,
+            'sort' => $sort,
+            'order' => $order,
         ]);
     }
 
