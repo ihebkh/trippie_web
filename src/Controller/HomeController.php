@@ -3,11 +3,11 @@
 namespace App\Controller;
 use App\Entity\Coupon;
 use App\Entity\Cadeau;
-use App\Entity\Client;
 use App\Repository\CouponRepository;
 use App\Repository\CadeauRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\QrcodeService;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,14 +19,14 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\MailerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Entity\Client;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
     
 
-    #[Route('/home/roue/{id_client}', name: 'app_roue')]
-    public function index2(CouponRepository $couponRepository,int $id_client): Response
+    #[Route('/home/roue/', name: 'app_roue')]
+    public function index2(CouponRepository $couponRepository): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $client = $userRepository->find($id_client);
@@ -35,8 +35,12 @@ class HomeController extends AbstractController
         $taux = [];
         $type=[];
 
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         
         foreach ($coupons as $coupon) {
+           
+                
            $taux[] = $coupon->getTaux();
            $type[]=$coupon->getType(); 
         }
@@ -44,8 +48,8 @@ class HomeController extends AbstractController
        
         // Pass the taux and type values to the Twig template
         return $this->render('home/indexroue.html.twig', [
+           'client'=>$client,
             'id_client'=>$id_client,
-            'client'=>$client,
             'taux' => $taux,
             'type'=>$type,
             
@@ -65,12 +69,10 @@ class HomeController extends AbstractController
     }
     
 
-    #[Route('/home/about/{id_client}', name: 'appllycoupon')]
-public function appllycoupon (CouponRepository $couponRepository,Request $request ,int $id_client):Response
+    #[Route('/home/about', name: 'appllycoupon')]
+public function appllycoupon (CouponRepository $couponRepository,Request $request ):Response
 {
-    $userRepository = $this->getDoctrine()->getRepository(Client::class);
-    $client = $userRepository->find($id_client);
-        
+
     $form = $this->createFormBuilder()
     ->add('price', TextType::class, [
         'attr' => [
@@ -97,11 +99,11 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     if ($request->isMethod('POST'))
     {
     $form->handleRequest($request);
-   
+    
      if ($form->isSubmitted() && $form->isValid()) {
      $data=$form->getData();
      $discount=$this->getDoctrine()->getRepository(coupon::class);
-    
+
      $coupon = $discount->findOneByCodeCoupon(['code_coupon'=>$data['code_coupon']]); 
      if ($coupon) {
         $expirationDate = $coupon->getDateExperatio();
@@ -131,8 +133,6 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
             return $this->render('home/discount.html.twig', [
                 'price' => $price,
                 'newPrice' => $newPrice,
-                'client'=>$client,
-                'id_client'=>$id_client,
                 'form' => $form->createView(),
             ]);
         }
@@ -142,8 +142,6 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     }
     
     return $this->render('home/discount.html.twig', [
-        'client'=>$client,
-        'id_client'=>$id_client,
         'form' => $form->createView(),
         'price' => $price,
         'newPrice' => $newPrice,
@@ -153,12 +151,11 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
 }}
      
     return $this->render('home/discount.html.twig', [
-        'client'=>$client,
-        'id_client'=>$id_client,
         'form' => $form->createView(),
         'price'=>$price,
         'newPrice'=>$newPrice,
       
+        
     ]);   
      
 }

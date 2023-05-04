@@ -4,8 +4,11 @@
 app_role_login:
     path: /role_log
     controller: App\Controller\RoleLoginController::rolelogin
+
+
+
 index:
-    path: /
+    path: /roue
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
     defaults:
         path: /qrcode
@@ -14,8 +17,3 @@ index:
 qrcode:
     path: /qrcode
     controller: App\Controller\DefaultController::index
-
-
-
-
-

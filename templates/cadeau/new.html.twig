@@ -1,11 +1,9 @@
 
-{% extends 'base2.html.twig' %}
 
 {% block title %}New cadeau
 {% endblock %}
 
 {% block body %}
-<main id="main" class="main">
 	<style>
 		.example-wrapper {
 			margin: 1em auto;
@@ -62,5 +60,4 @@
 		{{ include('cadeau/_form.html.twig') }}
 		<a href="{{ path('app_cadeau_index') }}">back to list</a>
 	</div>
-	</main>
 {% endblock %}

@@ -137,14 +137,11 @@ class ParticipationController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('index/client/{id}/{id_client}', name: 'app_participation_show', methods: ['GET'])]
-    public function show(Participation $participation,int $id_client): Response
+    #[Route('index/client/{id}', name: 'app_participation_show', methods: ['GET'])]
+    public function show(Participation $participation): Response
     {
-        $userRepository = $this->getDoctrine()->getRepository(Client::class);
-        $client = $userRepository->find($id_client);
+        
         return $this->render('participation/show.html.twig', [
-            'id_client' =>$id_client,
-            'client' => $client,
             'participation' => $participation,
         ]);
     }
