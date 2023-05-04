@@ -63,12 +63,12 @@ class Reservation
 
     public function getIdClient(): ?Client
     {
-        return $this->idClient;
+        return $this->id_client;
     }
 
-    public function setIdClient(?Client $idClient): self
+    public function setIdClient(?Client $id_client): self
     {
-        $this->idClient = $idClient;
+        $this->id_client = $id_client;
 
         return $this;
     }

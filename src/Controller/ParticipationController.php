@@ -50,11 +50,11 @@ class ParticipationController extends AbstractController
 
 
     #[Route('client/{id_client}/profilcl/participate/{id}', name: 'app_participate', methods: ['GET', 'POST'])]
-    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id, Client $client,int $id_client): Response
+    public function participate(Request $request, CoVoiturageRepository $coVoiturageRepository, ParticipationRepository $participationRepository, int $id, int $id_client): Response
     {
         $cov = $coVoiturageRepository->find($id);
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
-        $user = $userRepository->find($id_client);
+        $client = $userRepository->find($id_client);
         
         if (!$cov) {
             throw $this->createNotFoundException('The CoVoiturage does not exist');
@@ -90,10 +90,10 @@ class ParticipationController extends AbstractController
             } catch (TransportExceptionInterface $e) {
                 // Handle any errors that occur during email sending
                 $this->addFlash('error', 'An error occurred while sending the email');
-                return $this->redirectToRoute('app_co_voiturage_index_client', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_co_voiturage_index_client', ['id_client' => $id_client], Response::HTTP_SEE_OTHER);
             }
 
-            $participation->setIdClient($user);
+            $participation->setIdClient($client);
             $participation->setIdCo($cov);
             $participationRepository->save($participation, true);
             $cov->setNmbrPlace($cov->getNmbrPlace() - $participation->getNmbrPlacePart());
@@ -137,11 +137,11 @@ class ParticipationController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('client/{id_client}/profilcl/index/client/{id}', name: 'app_participation_show', methods: ['GET'])]
-    public function show(Participation $participation,Client $client,int $id_client): Response
+    #[Route('index/client/{id}/{id_client}', name: 'app_participation_show', methods: ['GET'])]
+    public function show(Participation $participation,int $id_client): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
-        $user = $userRepository->find($id_client);
+        $client = $userRepository->find($id_client);
         return $this->render('participation/show.html.twig', [
             'id_client' =>$id_client,
             'client' => $client,

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Voiture;
 use App\Entity\Locateur;
+use App\Entity\Client;
 use App\Form\VoitureFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +50,7 @@ class VoitureController extends AbstractController
         $userRepository = $this->getDoctrine()->getRepository(Locateur::class);
         $locateur = $userRepository->find($id_loc);
 
-        $voiture = $repository->findall();
+        $voiture = $repository->findby(['id_loc'=>$id_loc]);
         //$voiture = $repository->findBy(idLocateur=);
         return $this->render('voiture/Affichereserve.html.twig',
             [
@@ -58,6 +59,25 @@ class VoitureController extends AbstractController
                 'voiture' => $voiture
         ]);
     }
+
+
+    //client
+    #[Route('client/{id_client}/profilloc/voiture/AfficheCli', name: 'app_voitureaffichenonreserveCli')]
+    public function AffichernoneserveCli(VoitureRepository $repository, PaginatorInterface $paginator, Request $request , int $id_client)
+    {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
+
+        $voiture = $repository->findall();
+        //$voiture = $repository->findBy(idLocateur=);
+        return $this->render('voiture/AffichereserveCli.html.twig',
+            [
+                'id_client' => $id_client,
+                'client'=>$client,
+                'voiture' => $voiture
+        ]);
+    }
+
 
 //admin                                                                                                                                                                                   
     #[Route('voiture/deleteVoiture/{id}', name: 'app_DeleteVoiture')]
@@ -186,6 +206,46 @@ class VoitureController extends AbstractController
         ]);
     }
 
+     //client
+   /*  #[Route('client/{id_client}/profilcli/voiture/add', name: 'addVoitureCli')]
+     public function addVoitureCli(ManagerRegistry $doctrine, Request $request,Client $client,int $id_client): Response
+     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $user = $userRepository->find($id_client);
+         $voiture = new Voiture();
+         $voiture->setIdClient($user);
+         $form = $this->createForm(VoitureFormType::class, $voiture);
+ 
+         $form->handleRequest($request);
+ 
+         if ($form->isSubmitted() && $form->isValid()) {
+             $file = $form->get('picture')->getData();
+ 
+ 
+             if ($file) {
+                 $uploadsDirectory = $this->getParameter('uploads_directory');
+                 $imgFilename = $file->getClientOriginalName();
+                 $file->move($uploadsDirectory, $imgFilename);
+                 $voiture->setPicture($imgFilename);
+             }
+ 
+ 
+             $voiture->setEtat("non réservé");
+             $em = $doctrine->getManager();
+             $em->persist($voiture);
+             $em->flush();
+ 
+ 
+             return $this->redirectToRoute('app_voitureaffichenonreserveCli',['id_client'=>$user->getIdClient()]);
+         }
+ 
+         return $this->render('voiture/addV.html.twig', [
+             'id_client'=>$id_client,
+             'client'=>$client,
+             'form' => $form->createView(),
+         ]);
+     }*/
+
 //admin
     #[Route('/voiture/show/{id}', name: 'app_voiture_show', methods: ['GET'])]
     public function show(Voiture $voiture, VoitureRepository $repository, int $id): Response
@@ -239,22 +299,31 @@ class VoitureController extends AbstractController
     }
 
     //client
-    #[Route('/voiture/AffichelistClient', name: 'app_voitureaffichClient')]
-    public function AfficherClient(VoitureRepository $repository)
+    #[Route('/voiture/AffichelistClient/{id_client}', name: 'app_voitureaffichClient')]
+    public function AfficherClient(VoitureRepository $repository,int $id_client)
     {
-
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         //$repo=$this->getDoctrine()->getRepository(Voiture::class);
         $voiture = $repository->findBy(['etat' => 'non réservé']);
 
 
         return $this->render('voiture/AfficheClient.html.twig',
-            ['voiture' => $voiture]);
+            [
+                'id_client'=>$id_client,
+                'client'=> $client,
+                'voiture' => $voiture
+            ]);
     }
 
-    #[Route('/voiture/Clientvoiture/show/{id}', name: 'app_Clientvoiture_show', methods: ['GET'])]
-    public function show3(Voiture $voiture): Response
+    #[Route('/voiture/Clientvoiture/show/{id_client}/{id}', name: 'app_Clientvoiture_show', methods: ['GET'])]
+    public function show3(Voiture $voiture,int $id_client): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         return $this->render('voiture/show3.html.twig', [
+            'id_client'=>$id_client,
+            'client'=>$client,
             'voiture' => $voiture,
         ]);
     }

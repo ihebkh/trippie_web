@@ -36,7 +36,7 @@ class ParticipationType extends AbstractType
                 )
             )
             ->add('id_co')
-            ->add('id_client')
+           // ->add('id_client')
         ;
     }
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\Client;
 use  Flasher\Prime\FlasherInterface;
 use App\Form\ReservationFormType;
 use App\Repository\VoitureRepository;
@@ -21,7 +22,7 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
-use Twilio\Rest\Client;
+//use Twilio\Rest\Client;
 
 
 
@@ -38,23 +39,29 @@ class ReservationController extends AbstractController
 
 
 //front
-    #[Route('/reservation/Add/{id<\d+>}', name: 'app_reservation_add')]
-    public function addReservation(Request $request, int $id, VoitureRepository $voitureRepository): Response
+    #[Route('/reservation/Add/{id_client}/{id<\d+>}', name: 'app_reservation_add')]
+    public function addReservation(Request $request, int $id, VoitureRepository $voitureRepository,int $id_client): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         $voiture = $voitureRepository->find($id);
 
         $reservation = new Reservation();
         $reservation->setIdVoiture($voiture);
-
+        $reservation->setIdClient($client);
+   
+        
+    
         $form = $this->createForm(ReservationFormType::class, $reservation, [
             'data_class' => Reservation::class,
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+           
             $startDate = $reservation->getDateDebut()->format('Y-m-d H:i:s');
             $endDate = $reservation->getDateFin()->format('Y-m-d H:i:s');
             $marque = $reservation->getIdVoiture()->getMarque();
-            $email = (new Email())
+          /*  $email = (new Email())
                 ->from('symfonycopte822@gmail.com')
                 ->to('khmiri.iheb@esprit.tn')
                 ->subject('Car Rental Reservation Confirmation')
@@ -72,7 +79,7 @@ Trippie');
             $mailer = new Mailer($transport);
             $mailer->send($email);
 
-        /*    $sid    = "AC97af6cfbfbc82f196871ee9045e9f0b4";
+           $sid    = "AC97af6cfbfbc82f196871ee9045e9f0b4";
             $token  = "4afe0454c765c4178b483b9410fcb137";
             $twilio = new Client($sid, $token);
             $call = $twilio->calls
@@ -83,15 +90,17 @@ Trippie');
 
             print($call->sid);
         */
-
+            //dd($client);    
             $voiture->setEtat("reservé");
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
 
-            return $this->redirectToRoute('app_reservationaffichefront');
+            return $this->redirectToRoute('app_reservationaffichefront',['id_client'=>$id_client]);
         }
         return $this->render('reservation/AddR.html.twig', [
+            'id_client'=>$id_client,
+            'client'=>$client,
             'id' => $id,
             'form' => $form->createView(),
         ]);
@@ -116,11 +125,12 @@ Trippie');
     }
 
     // clientsymfo
-    #[Route('/reservation/client/Affichelist', name: 'app_reservationaffichefront')]
-    public function Affichefront(ReservationRepository $repository, PaginatorInterface $paginator, Request $request)
+    #[Route('/reservation/client/Affichelist/{id_client}', name: 'app_reservationaffichefront')]
+    public function Affichefront(ReservationRepository $repository, PaginatorInterface $paginator, Request $request,int $id_client)
     {
-        // $reservation = $repository->findBy(['idClient' => '30']);
-        $reservation = $repository->findAll();
+        
+        $reservation = $repository->findBy(['id_client' => $id_client]);
+        //$reservation = $repository->findAll();
         $reservation = $paginator->paginate(
             $reservation, /* query NOT result */
             $request->query->getInt('page', 1),
@@ -184,12 +194,14 @@ Trippie');
     #[Route('voiture/client/deleteReservation/{id}', name: 'app_DeleteReservation2')]
     public function deleteStatique2($id, ReservationRepository $repo, ManagerRegistry $doctrine, VoitureRepository $voitureRepository): Response
     {
+        
         $reservation = $repo->find($id);
+    
         $em = $doctrine->getManager();
         $reservation->getIdVoiture()->setEtat("non reservé");
         $em->remove($reservation);
         $em->flush();
-        return $this->redirectToRoute("app_reservationaffichefront");
+        return $this->redirectToRoute("app_reservationaffichefront",['id_client'=>$reservation->getIdClient()]);
     }
 
 
@@ -220,7 +232,7 @@ Trippie');
         if ($form->isSubmitted()) {
             $em = $doctrine->getManager();
             $em->flush();
-            return $this->redirectToRoute("app_reservationaffichefront");
+            return $this->redirectToRoute("app_reservationaffichefront",['id_client'=>$c->getIdClient()]);
         }
         return $this->renderForm('reservation/UpdateRfront.html.twig',
             array("form" => $form)
