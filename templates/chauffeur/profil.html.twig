@@ -1,3 +1,4 @@
+{% extends 'base.html.twig' %}
 {% block head %}
 <head>
   <meta charset="utf-8">
@@ -46,26 +47,17 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html">Tripee</a></h1>
+        <h1><a href="{{path('profilch', {'id_ch' : chauffeur.idCh})}}"</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{path('profilch', {'id_ch' : chauffeur.idCh})}}">Home</a></li>
           <li><a class="nav-link scrollto active" href="{{ path('app_co_voiturage_index_fornt', {'id_ch' : chauffeur.idCh}) }}">Car pool</a></li>
           <li><a class="nav-link scrollto active" href="{{ path('app_reclamation_frontCh', {'id_ch' : chauffeur.idCh }) }}">Reclamation</a></li>
-          <li class="dropdown">
-      <a class="nav-link scrollto active" href="">  <i class="bi bi-gear" style="font-size: 1.9em;"></i></a>
-      <ul>
-       <li>
-       <a href="{{ path('app_chauffeur_delete', {'id_ch': chauffeur.idCh})}}"></a>
-       {{ include('chauffeur/_delete_form.html.twig') }}
-       </li>
-       
-      </ul>
-      </li>
+         
       
           <li class="scrollto" style="margin-left: 20px" >
       

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/highscores')]
 class HighscoresController extends AbstractController
 {
-    #[Route('/{id_client}', name: 'app_highscores_indexClient', methods: ['GET'])]
+    #[Route('/{id_client}', name: 'app_highscores_indexClient', methods: ['GET','POST'])]
     public function indexClient(EntityManagerInterface $entityManager, Request $request,int $id_client): Response
     {
         $order = $request->query->get('order', 'desc'); // Default sorting order is descending
@@ -23,7 +23,7 @@ class HighscoresController extends AbstractController
         $highscores = $entityManager
             ->getRepository(Highscores::class)
             ->findBy(['id_client' => $id_client], ['score' => $order]);
-
+        
         return $this->render('highscores/index.html.twig', [
             'client'=>$client,
             'id_client'=>$id_client,

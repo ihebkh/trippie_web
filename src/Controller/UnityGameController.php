@@ -14,6 +14,8 @@ class UnityGameController extends AbstractController
     #[Route('/unity-game/{id_client}/', name: 'unity_game')]
     public function index(int $id_client,EntityManagerInterface $entityManager): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         $id = 294;
         $highscores = $entityManager
             ->getRepository(Highscores::class)
@@ -21,6 +23,9 @@ class UnityGameController extends AbstractController
         $highscores->setScore(1000);
         $entityManager->persist($highscores);
         $entityManager->flush();
-        return $this->render('unity_game/index.html.twig');
+        return $this->render('unity_game/index.html.twig',[
+            'client'=>$client,
+            'id_client'=>$id_client,
+        ]);
     }
 }

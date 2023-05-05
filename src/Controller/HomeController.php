@@ -72,10 +72,12 @@ class HomeController extends AbstractController
     }
     
 
-    #[Route('/home/about', name: 'appllycoupon')]
-public function appllycoupon (CouponRepository $couponRepository,Request $request ):Response
+    #[Route('/home/about/{id_client}', name: 'appllycoupon')]
+public function appllycoupon (CouponRepository $couponRepository,Request $request, int $id_client):Response
 {
 
+    $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
     $form = $this->createFormBuilder()
     ->add('price', TextType::class, [
         'attr' => [
@@ -134,6 +136,8 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
             $newPrice = $price - $discountedPrice;
     
             return $this->render('home/discount.html.twig', [
+                'client' => $client,
+                'id_client'=>$id_client,
                 'price' => $price,
                 'newPrice' => $newPrice,
                 'form' => $form->createView(),
@@ -145,6 +149,8 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     }
     
     return $this->render('home/discount.html.twig', [
+        'client' => $client,
+        'id_client'=>$id_client,
         'form' => $form->createView(),
         'price' => $price,
         'newPrice' => $newPrice,
@@ -154,6 +160,8 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
 }}
      
     return $this->render('home/discount.html.twig', [
+        'client' => $client,
+        'id_client'=>$id_client,
         'form' => $form->createView(),
         'price'=>$price,
         'newPrice'=>$newPrice,

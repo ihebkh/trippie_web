@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cartefidelite;
 use App\Entity\Highscores;
+use App\Entity\Client;
 
 
 use App\Entity\Abonnement;
@@ -50,6 +51,8 @@ class AbonnementController extends AbstractController
     #[Route('/new', name: 'app_abonnement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
         $abonnement = new Abonnement();
            // Set the dateAchat and dateExpiration attributes
     $today = new \DateTime('today');
@@ -94,9 +97,11 @@ class AbonnementController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/newC', name: 'app_abonnement_newC', methods: ['GET', 'POST'])]
-public function newC(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
-{
+    #[Route('/newC/{id_client}', name: 'app_abonnement_newC', methods: ['GET', 'POST'])]
+public function newC(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer,int $id_client): Response
+{ 
+    $userRepository = $this->getDoctrine()->getRepository(Client::class);
+    $client = $userRepository->find($id_client);
         $abonnement = new Abonnement();
          // Set the dateAchat and dateExpiration attributes
     $today = new \DateTime('today');
@@ -184,6 +189,8 @@ public function newC(Request $request, EntityManagerInterface $entityManager, Ma
         }
     
         return $this->renderForm('abonnement/newC.html.twig', [
+            'client'=>$client,
+            'id_client'=>$id_client,
             'abonnement' => $abonnement,
             'form' => $form,
             'highscores' => $highscores,

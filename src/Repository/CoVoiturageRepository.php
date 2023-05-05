@@ -108,6 +108,16 @@ class CoVoiturageRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findById_client(string $id_client): array
+{
+    return $this->createQueryBuilder('c')
+        ->andWhere('c.id_client = :id_client')
+        ->setParameter('id_client', $id_client)
+        ->orderBy('c.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+
     public function findAllSorted(): array
     {
         $queryBuilder = $this->createQueryBuilder('cl')

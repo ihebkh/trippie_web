@@ -8,14 +8,14 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html">Tripee</a></h1>
+        <h1><a href="{{path('profilloc', {'id_loc' : locateur.idLoc})}}">Tripee</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{path('profilloc', {'id_loc' : locateur.idLoc})}}">Home</a></li>
           <li><a class="nav-link scrollto active" href="{{ path('app_voitureaffichenonreserve', {'id_loc' : locateur.idLoc}) }}">Car</a></li>
           <li><a class="nav-link scrollto active" href="{{ path('app_reclamation_frontloc', {'id_loc' : locateur.idLoc }) }}">Reclamation</a></li>
           <li class="dropdown">

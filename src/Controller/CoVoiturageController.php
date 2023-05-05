@@ -97,7 +97,7 @@ class CoVoiturageController extends AbstractController
         $userRepository = $this->getDoctrine()->getRepository(Chauffeur::class);
         $chauffeur = $userRepository->find($id_ch);
         $coVoiturage = new CoVoiturage();
-        $coVoiturage->setIdCh($user);
+        $coVoiturage->setIdCh($chauffeur);
         $form = $this->createForm(CoVoiturageType::class, $coVoiturage);
         $form->handleRequest($request);
         $file = $form->get('cov_img')->getData();
@@ -437,4 +437,21 @@ public function Affiche(CoVoiturageRepository $repository, PaginatorInterface $p
         'co_voiturages' => $coVoiturage,
     ]);
 }
+
+#[Route('client/{id_client}/profilcl/index/client/MyCarPool', name: 'app_co_voiturage_My_cov', methods: ['GET'])]
+public function My_carsPool(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
+{
+   
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $userRepository->find($id_client);
+        $coVoiturage = $coVoiturageRepository->findById_client($id_client);
+
+        return $this->render('co_voiturage/indexFront2.html.twig', [
+            'id_client' => $id_client,
+            'client' => $client,
+            'co_voiturages' => $coVoiturage,
+        ]);
+}
+
+
 }
