@@ -165,7 +165,7 @@ public function newC(Request $request, EntityManagerInterface $entityManager, Ma
     </div>
 ')
 // Attach the membership card image to the email
-->embedFromPath('/resources/taswira.jpg', 'membership_card');
+->embedFromPath('C:\Users\aymen\Desktop\Integration\public\uploads\test.jpg', 'membership_card');
 
 
     

@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Role;
 use App\Entity\Participation;
 use App\Form\ClientType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EditCliType;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
@@ -27,6 +28,7 @@ use Symfony\Component\Mime\Header\Headers;
 use Symfony\Component\Mailer\Mailer;
 use App\Form\GsmFormType;
 use App\Form\CodeFormType;
+use App\Entity\Highscores;
 use App\Service\TwilioService;
 
 
@@ -44,8 +46,9 @@ class ClientController extends AbstractController
     }
 
     #[Route('/new/{idRole<\d+>}', name: 'app_client_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole, UserPasswordEncoderInterface $passwordEncoder ): Response
+    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole, UserPasswordEncoderInterface $passwordEncoder,EntityManagerInterface $entityManager ): Response
     {
+       
         $roleRepository = $this->getDoctrine()->getRepository(Role::class);
         $role = $roleRepository->find($idRole);
         
@@ -59,6 +62,14 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $highscores = new Highscores();
+            $highscores->setIdClient($client); // associe le client à l'entité Highscores
+            $highscores->setScore(0); // initialise le score à 0
+            
+          
+            
+            
             $client->setPassword($passwordEncoder->encodePassword(
                 $client,
                 $form->get('password')->getData()
@@ -72,6 +83,8 @@ class ClientController extends AbstractController
                 $client->setImg($imgFilename);
             }
             $clientRepository->save($client, true);
+            $entityManager->persist($highscores);
+            $entityManager->flush();
 
             return $this->redirectToRoute('login', [], Response::HTTP_SEE_OTHER);
         }

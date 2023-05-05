@@ -26,9 +26,9 @@
                
                 <th>Your balance history</th>
                <div>
-        <a href="{{ path('app_highscores_indexClient', {'order': 'asc'}) }}"><i class="bi bi-arrow-down"><strong>Sort by Lowest</strong></i></a>
+        <a href="{{ path('app_highscores_indexClient', {'order': 'asc','id_client':client.idClient}) }}"><i class="bi bi-arrow-down"><strong>Sort by Lowest</strong></i></a>
         
-        <a href="{{ path('app_highscores_indexClient', {'order': 'desc'}) }}"><i class="bi bi-arrow-up"><strong>Sort by Highest</strong></i></a>
+        <a href="{{ path('app_highscores_indexClient', {'order': 'desc','id_client':client.idClient}) }}"><i class="bi bi-arrow-up"><strong>Sort by Highest</strong></i></a>
     </div>
                
             </tr>
@@ -41,7 +41,7 @@
                 <td>{{ highscore.score }}</td>
               
                 <td>
-                    <a href="{{ path('app_highscores_show', {'idS': highscore.ids}) }}"></a>
+                    <a href="{{ path('app_highscores_show', {'idS': highscore.ids,'id_client':client.idClient}) }}"></a>
 
                 </td>
             </tr>
