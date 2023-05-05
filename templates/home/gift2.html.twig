@@ -12,7 +12,7 @@
                         <h5 class="card-title">{{ cadeau.nom_cadeay }}</h5>
                         <p class="card-text">{{ cadeau.description }}</p>
                         <p class="card-text"><strong>Valeur :</strong> {{ cadeau.valeur }}DT</p>
-                      <a class="btn btn-primary btn-lg btn-block gift-btn" href="{{ path('gift', {'idcadeau': cadeau.idcadeau}) }}" role="button" id="gift-button" onclick="sendEmail()">Get your Gift</a>
+                      <a class="btn btn-primary btn-lg btn-block gift-btn" href="{{ path('gift', {'idcadeau': cadeau.idcadeau,'id_client':client.idClient}) }}" role="button" id="gift-button" onclick="sendEmail()">Get your Gift</a>
 
                     </div>
                 </div>

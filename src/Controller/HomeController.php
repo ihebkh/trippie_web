@@ -20,16 +20,19 @@ use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\MailerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Client;
+
+
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
     
 
-    #[Route('/home/roue/', name: 'app_roue')]
-    public function index2(CouponRepository $couponRepository): Response
+    #[Route('/home/roue/{id_client}', name: 'app_roue', methods:['POST','GET' ])]
+    public function index2(CouponRepository $couponRepository,int $id_client): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $client = $userRepository->find($id_client);
+        
         // Get the taux and type values from the database
         $coupons = $couponRepository->findAll();
         $taux = [];
@@ -159,23 +162,31 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     ]);   
      
 }
-#[Route('/home/Services', name: 'GIFT')]
-public function gift(CadeauRepository $cadeauRepository): Response
+#[Route('/home/Services/{id_client}', name: 'GIFT2')]
+public function gift(CadeauRepository $cadeauRepository,int $id_client): Response
 {
+    $userRepository = $this->getDoctrine()->getRepository(Client::class);
+    $client = $userRepository->find($id_client);
     $cadeaux = $cadeauRepository->findAll();
 
     return $this->render('home/gift2.html.twig', [
+        'client'=>$client,
         'cadeaux' => $cadeaux,
     ]);
 }    
-#[Route('/home/Services/{idcadeau<\d+>}', name: 'gift')]   
-public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cadeauRepository, MailerInterface $mailer): Response
+#[Route('/home/Services/{idcadeau<\d+>}/{id_client}', name: 'gift')]   
+public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cadeauRepository, MailerInterface $mailer,int $id_client): Response
 {
+    $userRepository = $this->getDoctrine()->getRepository(Client::class);
+    $client = $userRepository->find($id_client);
+    $email=$client->getEmail();
+  
+
     $cadeau = $cadeauRepository->find($idcadeau);   
     // create the email
     $email = (new Email())
                 ->from('symfonycopte822@gmail.com')
-                ->to('rim.mdimagh@esprit.tn')
+                ->to($email)
                 ->subject('GIFT Confirmation')
                 ->html("
                 <div style='background-color: #f2f2f2; padding: 20px;'>
@@ -197,7 +208,7 @@ public function sendEmail(Request $request, int $idcadeau, CadeauRepository $cad
             $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
             $mailer = new Mailer($transport);
             $mailer->send($email);
-            return $this->redirectToRoute('GIFT');
+            return $this->redirectToRoute('GIFT2',['id_client'=>$id_client]);
             }
 
 

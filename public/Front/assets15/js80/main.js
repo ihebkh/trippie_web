@@ -3,6 +3,10 @@
 let spinCount = 0;
 let sections = [];
 
+
+
+
+
 function spin() {
   if (spinCount >= 3) {
     alert("Sorry, you have the right to play only 3 times.");
@@ -18,6 +22,8 @@ function spin() {
   audio.play();
   box.style.transition = "all 5s ease-in-out";
   box.style.transform = `rotate(${degrees}deg)`;
+  let idClient; // Define idClient in a higher scope
+
 
   setTimeout(() => {
     audio.pause();
@@ -35,15 +41,36 @@ function spin() {
     
     const type =section1.textContent;
 
+
+   
+  
+  
+ 
+
     fetch(`/coupon/code_coupon/${value}`)
       .then((response) => response.text())
       .then((code_coupon) => {
         // generate qrcode with code_coupon
         const qrcode = generateQrcode(value, code_coupon);
        
-       
+      fetch('templates/indexPromotion.html.twig')
+        .then((response) => response.text())
+        .then((html) => {
+          // Insert the template HTML into the DOM
+          const container = document.createElement('div');
           
-        // show alert with coupon code and optionally, qrcode
+          document.body.appendChild(container);
+      
+          // Get the value of the id-client input element
+          const idClientInput = document.querySelector('#id-client');
+          const idClient = idClientInput.value;
+     
+      
+        
+       
+        
+          
+        // show alert with couon code and optionally, qrcode
         console.log(typeof type);
         if(type.length===4){
    console.log(type.length);
@@ -55,7 +82,7 @@ function spin() {
         Swal.fire({
             
           icon: "success",
-          title: "Congrats!",
+          title: "Congr!",
           html: `You won${value} ! ${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
           showCancelButton: true,
         }).then((result) => {
@@ -69,7 +96,7 @@ function spin() {
    else { Swal.fire({
         icon: "success",
         title: "Congrats!",
-        html: `You won ${value}! ${showQrCode ? `Click <a href="/home/Services">here</a> to view your gift.</strong>.` : '</strong>'}`,
+        html: `You won ${value}! ${showQrCode ? `Click <a href="/home/Services/${idClient}">here</a> to view your gift.</strong>.` : '</strong>'}`,
        showCancelButton: true,
         
       }).then((result) => {
@@ -78,9 +105,13 @@ function spin() {
         }
       });}
       })
-      
+    })  
   }, 5000);
+
 }
+
+
+
 
   
 
@@ -89,5 +120,8 @@ function generateQrcode(value, code_coupon) {
   console.log(url); // add this line
   return url;
 }
+
+
+
 
 
