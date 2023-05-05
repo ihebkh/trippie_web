@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\VoitureRepository;
+use App\Repository\RoleRepository;
+use App\Repository\ReclamationRepository;
+use App\Repository\CoVoiturageRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
@@ -24,7 +27,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class VoitureController extends AbstractController
 {
-    #[Route('/voiture', name: 'app_voiture')]
+    #[Route(' ', name: 'app_voiture')]
     public function index(): Response
     {
         return $this->render('voiture/index.html.twig', [
@@ -331,7 +334,7 @@ class VoitureController extends AbstractController
 
     // stat
     #[Route('/dashboard/stat', name: 'stat', methods: ['POST','GET'])]
-    public function VoitureStatistics( VoitureRepository $repo): Response
+    public function VoitureStatistics( VoitureRepository $repo,CoVoiturageRepository $Cov_repo,RoleRepository $roleRepository,ReclamationRepository $rec_repo): Response
     {
         $total = $repo->countByLibelle('BMW') +
             $repo->countByLibelle('Mercedes') +
@@ -358,6 +361,116 @@ class VoitureController extends AbstractController
         $peugeotPercentage = round(($peugeotCount / $total) * 100);
         $hamerPercentage = round(($hamerCount / $total) * 100);
 
+
+        $total = $Cov_repo->countByLibelle('Aryanah') +
+        $Cov_repo->countByLibelle('Bizerte') +
+        $Cov_repo->countByLibelle('Beja') +
+        $Cov_repo->countByLibelle('Tunis') +
+        $Cov_repo->countByLibelle('Sfax') +
+        $Cov_repo->countByLibelle('Kairouan') +
+        $Cov_repo->countByLibelle('Jandouba') +
+        $Cov_repo->countByLibelle('Ben Arous') +
+        $Cov_repo->countByLibelle('Manouba') +
+        $Cov_repo->countByLibelle('Gabes') +
+        $Cov_repo->countByLibelle('Nabeul') +
+        $Cov_repo->countByLibelle('Zaghouan');
+
+    $AryanahCount = $Cov_repo->countByLibelle('Aryanah');
+    $BizerteCount = $Cov_repo->countByLibelle('Bizerte');
+    $BejaCount = $Cov_repo->countByLibelle('Beja');
+    $TunisCount = $Cov_repo->countByLibelle('Tunis');
+    $SfaxCount = $Cov_repo->countByLibelle('Sfax');
+    $KairouanCount = $Cov_repo->countByLibelle('Kairouan');
+    $JandoubaCount = $Cov_repo->countByLibelle('Jandouba');
+    $Ben_ArousCount = $Cov_repo->countByLibelle('Ben Arous');
+    $ManoubaCount = $Cov_repo->countByLibelle('Manouba');
+    $NabeulCount = $Cov_repo->countByLibelle('Nabeul');
+    $ZaghouanCount = $Cov_repo->countByLibelle('Zaghouan');
+    $GabesCount = $Cov_repo->countByLibelle('Gabes');
+
+    $AryanahPercentage = round(($AryanahCount / $total) * 100);
+    $BizertePercentage = round(($BizerteCount / $total) * 100);
+    $BejaPercentage = round(($BejaCount / $total) * 100);
+    $TunisPercentage = round(($TunisCount / $total) * 100);
+    $SfaxPercentage = round(($SfaxCount / $total) * 100);
+    $KairouanPercentage = round(($KairouanCount / $total) * 100);
+    $JandoubaPercentage = round(($JandoubaCount / $total) * 100);
+    $Ben_ArousPercentage = round(($Ben_ArousCount / $total) * 100);
+    $ManoubaPercentage = round(($ManoubaCount / $total) * 100);
+    $NabeulPercentage = round(($NabeulCount / $total) * 100);
+    $ZaghouanPercentage = round(($ZaghouanCount / $total) * 100);
+    $GabesPercentage = round(($GabesCount / $total) * 100);
+
+
+
+
+    $total = $Cov_repo->countByLibelle2('Aryanah') +
+        $Cov_repo->countByLibelle2('Bizerte') +
+        $Cov_repo->countByLibelle2('Beja') +
+        $Cov_repo->countByLibelle2('Tunis') +
+        $Cov_repo->countByLibelle2('Sfax') +
+        $Cov_repo->countByLibelle2('Kairouan') +
+        $Cov_repo->countByLibelle2('Jandouba') +
+        $Cov_repo->countByLibelle2('Ben Arous') +
+        $Cov_repo->countByLibelle2('Manouba') +
+        $Cov_repo->countByLibelle2('Gabes') +
+        $Cov_repo->countByLibelle2('Nabeul') +
+        $Cov_repo->countByLibelle2('Zaghouan');
+
+    $AryanahCount2 = $Cov_repo->countByLibelle2('Aryanah');
+    $BizerteCount2 = $Cov_repo->countByLibelle2('Bizerte');
+    $BejaCount2 = $Cov_repo->countByLibelle2('Beja');
+    $TunisCount2 = $Cov_repo->countByLibelle2('Tunis');
+    $SfaxCount2 = $Cov_repo->countByLibelle2('Sfax');
+    $KairouanCount2 = $Cov_repo->countByLibelle2('Kairouan');
+    $JandoubaCount2 = $Cov_repo->countByLibelle2('Jandouba');
+    $Ben_ArousCount2 = $Cov_repo->countByLibelle2('Ben Arous');
+    $ManoubaCount2 = $Cov_repo->countByLibelle2('Manouba');
+    $NabeulCount2 = $Cov_repo->countByLibelle2('Nabeul');
+    $ZaghouanCount2 = $Cov_repo->countByLibelle2('Zaghouan');
+    $GabesCount2 = $Cov_repo->countByLibelle2('Gabes');
+
+    $AryanahPercentage2 = round(($AryanahCount2 / $total) * 100);
+    $BizertePercentage2 = round(($BizerteCount2 / $total) * 100);
+    $BejaPercentage2 = round(($BejaCount2 / $total) * 100);
+    $TunisPercentage2 = round(($TunisCount2 / $total) * 100);
+    $SfaxPercentage2 = round(($SfaxCount2 / $total) * 100);
+    $KairouanPercentage2 = round(($KairouanCount2 / $total) * 100);
+    $JandoubaPercentage2 = round(($JandoubaCount2 / $total) * 100);
+    $Ben_ArousPercentage2 = round(($Ben_ArousCount2 / $total) * 100);
+    $ManoubaPercentage2 = round(($ManoubaCount2 / $total) * 100);
+    $NabeulPercentage2 = round(($NabeulCount2 / $total) * 100);
+    $ZaghouanPercentage2 = round(($ZaghouanCount2 / $total) * 100);
+    $GabesPercentage2 = round(($GabesCount2 / $total) * 100);
+
+    $total = $roleRepository->countByLibelle('client') +
+    $roleRepository->countByLibelle('locateur') +
+    $roleRepository->countByLibelle('chauffeur');
+
+    $clientCount = $roleRepository->countByLibelle('client');
+    $locateurCount = $roleRepository->countByLibelle('locateur');
+    $chauffeurCount = $roleRepository->countByLibelle('chauffeur');          
+
+$clientPercentage = round(($clientCount / $total) * 100);
+$locateurPercentage = round(($locateurCount / $total) * 100);
+$chauffeurPercentage = round(($chauffeurCount / $total) * 100);
+
+$total = $rec_repo->countByLibelle('Technique') +
+$rec_repo->countByLibelle('Eco') +
+$rec_repo->countByLibelle('Other');
+
+$TechniqueCount = $rec_repo->countByLibelle('Technique');
+$EcoCount = $rec_repo->countByLibelle('Eco');
+$OtherCount = $rec_repo->countByLibelle('Other');
+
+
+$TechniquePercentage = round(($TechniqueCount / $total) * 100);
+$EcoPercentage = round(($EcoCount / $total) * 100);
+$OtherPercentage = round(($OtherCount / $total) * 100);
+
+
+
+
         return $this->render('voiture/stat.html.twig', [
             'BMWPercentage' => $BmwPercentage,
             'MercedesPercentage' => $MercedesPercentage,
@@ -366,6 +479,37 @@ class VoitureController extends AbstractController
             'porshePercentage' => $porshePercentage,
             'peugeotPercentage' => $peugeotPercentage,
             'hamerPercentage' => $hamerPercentage,
+            'AryanahPercentage' => $AryanahPercentage,
+            'BizertePercentage' => $BizertePercentage,
+            'BejaPercentage' => $BejaPercentage,
+            'TunisPercentage' => $TunisPercentage,
+            'SfaxPercentage' => $SfaxPercentage,
+            'KairouanPercentage' => $KairouanPercentage,
+            'JandoubaPercentage' => $JandoubaPercentage,
+            'Ben_ArousPercentage' => $Ben_ArousPercentage,
+            'ManoubaPercentage' => $ManoubaPercentage,
+            'NabeulPercentage' => $NabeulPercentage,
+            'ZaghouanPercentage' => $ZaghouanPercentage,
+            'GabesPercentage' => $GabesPercentage,
+            'AryanahPercentage2' => $AryanahPercentage2,
+            'BizertePercentage2' => $BizertePercentage2,
+            'BejaPercentage2' => $BejaPercentage2,
+            'TunisPercentage2' => $TunisPercentage2,
+            'SfaxPercentage2' => $SfaxPercentage2,
+            'KairouanPercentage2' => $KairouanPercentage2,
+            'JandoubaPercentage2' => $JandoubaPercentage2,
+            'Ben_ArousPercentage2' => $Ben_ArousPercentage2,
+            'ManoubaPercentage2' => $ManoubaPercentage2,
+            'NabeulPercentage2' => $NabeulPercentage2,
+            'ZaghouanPercentage2' => $ZaghouanPercentage2,
+            'GabesPercentage2' => $GabesPercentage2,
+            'clientPercentage' => $clientPercentage,
+            'locateurPercentage' => $locateurPercentage,
+            'chauffeurPercentage' => $chauffeurPercentage,
+            'TechniquePercentage' => $TechniquePercentage,
+            'EcoPercentage' => $EcoPercentage,
+            'OtherPercentage' => $OtherPercentage,
+
 
         ]);
     }

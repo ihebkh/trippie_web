@@ -564,7 +564,7 @@ public function deleteFch(Request $request, Reclamation $reclamation, Reclamatio
         ]);
     }
 
-    #[Route('/exportpdf', name: 'exportpdf')]
+    #[Route('/exportpdf', name: 'exportpdf_rec')]
     public function exportToPdf(ReclamationRepository $repository): Response
     {
         // Récupérer les données de réservation depuis votre base de données
@@ -584,7 +584,7 @@ public function deleteFch(Request $request, Reclamation $reclamation, Reclamatio
 
         // Créer le PDF avec Dompdf
         $dompdf = new Dompdf();
-        $html = $this->renderView('reclamation/export-pdf.html.twig', [
+        $html = $this->renderView('reclamation/export-pdf-rec.html.twig', [
             'tableData' => $tableData,
         ]);
         $dompdf->loadHtml($html);

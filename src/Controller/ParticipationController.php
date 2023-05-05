@@ -199,7 +199,7 @@ class ParticipationController extends AbstractController
             'participations' => $participation,
         ]);
     }
-    #[Route('/cov/exportpdf', name: 'exportpdf')]
+    #[Route('/cov/exportpdf', name: 'exportpdf_cov')]
     public function exportToPdf(ParticipationRepository $repository): Response
     {
         // Récupérer les données de réservation depuis votre base de données
@@ -220,7 +220,7 @@ class ParticipationController extends AbstractController
 
         // Créer le PDF avec Dompdf
         $dompdf = new Dompdf();
-        $html = $this->renderView('participation/export-pdf.html.twig', [
+        $html = $this->renderView('participation/export-pdf-cov.html.twig', [
             'tableData' => $tableData,
         ]);
         $dompdf->loadHtml($html);
@@ -230,7 +230,7 @@ class ParticipationController extends AbstractController
         // Envoyer le PDF au navigateur
         $response = new Response($dompdf->output(), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="reservations.pdf"',
+            'Content-Disposition' => 'attachment; filename="Participations.pdf"',
         ]);
         return $response;
     }

@@ -138,7 +138,7 @@ public function roleStatistics(RoleRepository $roleRepository): Response
     $locateurPercentage = round(($locateurCount / $total) * 100);
     $chauffeurPercentage = round(($chauffeurCount / $total) * 100);
 
-    return $this->render('role/statistics.html.twig', [
+    return $this->render('voiture/stat.html.twig', [
         'clientPercentage' => $clientPercentage,
         'locateurPercentage' => $locateurPercentage,
         'chauffeurPercentage' => $chauffeurPercentage,

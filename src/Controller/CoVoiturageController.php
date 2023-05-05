@@ -345,7 +345,7 @@ class CoVoiturageController extends AbstractController
         $ZaghouanPercentage2 = round(($ZaghouanCount2 / $total) * 100);
         $GabesPercentage2 = round(($GabesCount2 / $total) * 100);
 
-        return $this->render('co_voiturage/stat.html.twig', [
+        return $this->render('voiture/stat.html.twig', [
             'AryanahPercentage' => $AryanahPercentage,
             'BizertePercentage' => $BizertePercentage,
             'BejaPercentage' => $BejaPercentage,

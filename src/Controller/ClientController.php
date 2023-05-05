@@ -66,8 +66,7 @@ class ClientController extends AbstractController
             $highscores = new Highscores();
             $highscores->setIdClient($client); // associe le client à l'entité Highscores
             $highscores->setScore(0); // initialise le score à 0
-            
-          
+   
             
             
             $client->setPassword($passwordEncoder->encodePassword(
