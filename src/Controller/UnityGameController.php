@@ -16,13 +16,20 @@ class UnityGameController extends AbstractController
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $client = $userRepository->find($id_client);
-        $id = 294;
-        $highscores = $entityManager
-            ->getRepository(Highscores::class)
-            ->find($id);
-        $highscores->setScore(1000);
-        $entityManager->persist($highscores);
-        $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('h')
+    ->from('App\Entity\Highscores', 'h')
+    ->orderBy('h.ids', 'DESC')
+    ->setMaxResults(1);
+$lastHighscore = $queryBuilder->getQuery()->getOneOrNullResult();
+
+if ($lastHighscore !== null) {
+    $lastHighscore->setScore(1000);
+    $entityManager->persist($lastHighscore);
+    $entityManager->flush();
+}
+
         return $this->render('unity_game/index.html.twig',[
             'client'=>$client,
             'id_client'=>$id_client,
