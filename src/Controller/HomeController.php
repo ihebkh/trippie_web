@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Controller;
+
+
 use App\Entity\Coupon;
 use App\Entity\Cadeau;
+use App\Entity\Reservation;
+use App\Entity\Voiture;
 use App\Repository\CouponRepository;
 use App\Repository\CadeauRepository;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\QrcodeService;
 
@@ -32,6 +37,8 @@ class HomeController extends AbstractController
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $client = $userRepository->find($id_client);
+       
+
         
         // Get the taux and type values from the database
         $coupons = $couponRepository->findAll();
@@ -73,17 +80,35 @@ class HomeController extends AbstractController
     
 
     #[Route('/home/about/{id_client}', name: 'appllycoupon')]
-public function appllycoupon (CouponRepository $couponRepository,Request $request, int $id_client):Response
+public function appllycoupon (CouponRepository $couponRepository,Request $request, int $id_client,ReservationRepository $reserRepository):Response
 {
 
     $userRepository = $this->getDoctrine()->getRepository(Client::class);
-        $client = $userRepository->find($id_client);
+    $client = $userRepository->find($id_client);
+    $id_cl= $client->getIdClient();
+    
+   
+    $reservations = $reserRepository->findBy(['id_client' => $id_cl]);
+   
+
+foreach ($reservations as $reservation) {
+    $price = $reservation->getIdVoiture()->getPrixJours();
+    
+    
+    // Faites quelque chose avec $id_rev
+}
+
+   
+    
+   
     $form = $this->createFormBuilder()
     ->add('price', TextType::class, [
         'attr' => [
             'class' => 'form-control mb-3',
             'placeholder' => 'Price',
+            'readonly' => true,
         ],
+        'data' => $price, 
     ])
     ->add('code_coupon', TextType::class, [
         'attr' => [
@@ -98,7 +123,7 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
         'label' => 'Submit',
     ])
     ->getForm();
-    $price=0;
+    
     $newPrice=0;
 
     if ($request->isMethod('POST'))
@@ -106,9 +131,10 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     $form->handleRequest($request);
     
      if ($form->isSubmitted() && $form->isValid()) {
+   
      $data=$form->getData();
      $discount=$this->getDoctrine()->getRepository(coupon::class);
-
+         
      $coupon = $discount->findOneByCodeCoupon(['code_coupon'=>$data['code_coupon']]); 
      if ($coupon) {
         $expirationDate = $coupon->getDateExperatio();
@@ -134,7 +160,7 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     
             $discountedPrice = $coupon->getTaux() * $price / 100;
             $newPrice = $price - $discountedPrice;
-    
+           
             return $this->render('home/discount.html.twig', [
                 'client' => $client,
                 'id_client'=>$id_client,
@@ -158,7 +184,7 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
     
     
 }}
-     
+
     return $this->render('home/discount.html.twig', [
         'client' => $client,
         'id_client'=>$id_client,
@@ -168,7 +194,7 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
       
         
     ]);   
-     
+    
 }
 #[Route('/home/Services/{id_client}', name: 'GIFT2')]
 public function gift(CadeauRepository $cadeauRepository,int $id_client): Response
