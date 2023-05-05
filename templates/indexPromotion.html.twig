@@ -74,7 +74,7 @@
                     <li class="dropdown"><a href=""><span>Membership</span> <i class="bi bi-chevron-down"></i></a>
                          <ul>
                              <li>  
-                             <a href="{{ path('app_abonnement_newC') }}">Buy New membership</a>
+                             <a href="{{ path('app_abonnement_newC',{'id_client':client.idClient}) }}">Buy New membership</a>
                              </li>
                              <li>
                              <a href="{{ path('unity_game', {'id_client' : client.idClient }) }}">Earn money</a>

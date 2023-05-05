@@ -128,15 +128,21 @@ Trippie');
     #[Route('/reservation/client/Affichelist/{id_client}', name: 'app_reservationaffichefront')]
     public function Affichefront(ReservationRepository $repository, PaginatorInterface $paginator, Request $request,int $id_client)
     {
-        
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
         $reservation = $repository->findBy(['id_client' => $id_client]);
+        $client = $userRepository->find($id_client);
         //$reservation = $repository->findAll();
         $reservation = $paginator->paginate(
             $reservation, /* query NOT result */
             $request->query->getInt('page', 1),
             5
         );
-        return $this->render('reservation/Afficheclient.html.twig', ['reservation' => $reservation]);
+        return $this->render('reservation/Afficheclient.html.twig', [
+            'reservation' => $reservation,
+            'id_client'=>$id_client,
+            'client'=>$client
+        ]
+    );
     }
 
     #[Route('/exportexcel', name: 'exportexcel')]
@@ -226,16 +232,26 @@ Trippie');
     #[Route('/modifC/{id}', name: 'modifC')]
     public function modifC($id, ReservationRepository $repository, ManagerRegistry $doctrine, Request $request): Response
     {
+        $userRepository = $this->getDoctrine()->getRepository(Client::class);
+        
         $c = $repository->find($id);
+        $id_client= $c->getIdClient();
+        $client = $userRepository->find($id_client);
         $form = $this->createForm(ReservationFormType::class, $c);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $em = $doctrine->getManager();
             $em->flush();
-            return $this->redirectToRoute("app_reservationaffichefront",['id_client'=>$c->getIdClient()]);
+            return $this->redirectToRoute("app_reservationaffichefront",['id_client'=>$id_client]);
         }
         return $this->renderForm('reservation/UpdateRfront.html.twig',
-            array("form" => $form)
+               
+            [
+                'id_client'=>$id_client,
+                'client'=>$client,
+                'form'=>$form
+              
+            ]
         );
     }
 

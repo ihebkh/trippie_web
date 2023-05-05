@@ -73,7 +73,7 @@ class ParticipationController extends AbstractController
                     ->from('symfonycopte822@gmail.com')
                     ->to('aymen.rahali@esprit.tn')
                     ->subject('Car Pool Participation Confirmation')
-                    ->text('        Dear user{{ user name }},
+                    ->text('        Dear user Mr.{{ user name }},
 
                     Thank you for choosing Trippie. 
                     We are pleased to confirm your Participation for ' . $participation->getNmbrPlacePart() . ' personne(s) from ' . $cov->getDepart() . ' to ' . $cov->getDestination() . ' at ' . $cov->getDateDep()->format('Y-m-d H:i:s') . ' . 
