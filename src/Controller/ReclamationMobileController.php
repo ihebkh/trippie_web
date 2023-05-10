@@ -41,8 +41,7 @@ class ReclamationMobileController extends AbstractController
         $reclamation->setImage($req->get('image'));
         $client = $ClientRepository->find($req->get('id_client'));
         $role = $client->getIdRole();
-        $id_role = $role->getIdRole();
-        $reclamation->setIdUser($id_role);
+        $reclamation->setIdUser($role->getIdRole());
         $email = (new Email())
         ->from('symfonycopte822@gmail.com')
         ->to('mohamedtaher.guerfala@esprit.tn')

@@ -78,14 +78,14 @@ class AbonnementMobileController extends AbstractController
         </div>
     ');
     
-    if ($abonnement->getType() === 'Gold') {
+   /* if ($abonnement->getType() === 'Gold') {
         $email->embedFromPath('C:\xampp\htdocs\membership\resources\Gold.png', 'membership_card');
     } else if ($abonnement->getType() === 'Bronze') {
         $email->embedFromPath('C:\xampp\htdocs\membership\resources\Bronze.png', 'membership_card');
     }
     else if ($abonnement->getType() === 'Platinum') {
         $email->embedFromPath('C:\xampp\htdocs\membership\resources\Plat.png', 'membership_card');
-    }
+    }*/
 
 
 
