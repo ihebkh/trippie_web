@@ -12,12 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/", name="homepage")
-     * @param Request $request
-     * @param QrcodeService $qrcodeService
-     * @return Response
-     */
+    #[Route('/index', name: 'app_home')] 
 public function index(Request $request, QrcodeService $qrcodeService): Response
 {
     $codeCoupon = $request->query->get('code_coupon');
@@ -27,7 +22,7 @@ public function index(Request $request, QrcodeService $qrcodeService): Response
     return $this->render('default/QRcode.html.twig', [
         'qrCode' => $qrCode,
         'codeCoupon' => $codeCoupon,
-        'type' => $type,
+        'type' => $type, 
         
     ]);
 }

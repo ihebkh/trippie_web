@@ -22,7 +22,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+   
     
 
     #[Route('/home/roue', name: 'app_roue')]
@@ -64,6 +64,7 @@ class HomeController extends AbstractController
     #[Route('/home/about', name: 'appllycoupon')]
 public function appllycoupon (CouponRepository $couponRepository,Request $request ):Response
 {
+
     $form = $this->createFormBuilder()
     ->add('price', TextType::class, [
         'attr' => [
@@ -96,34 +97,51 @@ public function appllycoupon (CouponRepository $couponRepository,Request $reques
      $discount=$this->getDoctrine()->getRepository(coupon::class);
 
      $coupon = $discount->findOneByCodeCoupon(['code_coupon'=>$data['code_coupon']]); 
-    if ($coupon){
-    $price =$data['price'];
-    if ($coupon->getNbrUtilisation() > 0) {
-        $coupon->setNbrUtilisation($coupon->getNbrUtilisation() - 1);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($coupon);
-        $entityManager->flush();
-        if ($coupon->getNbrUtilisation() == 0) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($coupon);
-            $entityManager->flush();
+     if ($coupon) {
+        $expirationDate = $coupon->getDateExperatio();
+        $today = new \DateTime();
+    
+        if ($expirationDate < $today) {
+            // coupon has expired
+            $this->addFlash('error', 'Coupon has expired.'); 
+            echo '<script>alert("Coupon has expired.");</script>';
+        } else {
+            $price = $data['price'];
+            if ($coupon->getNbrUtilisation() > 0) {
+                $coupon->setNbrUtilisation($coupon->getNbrUtilisation() - 1);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($coupon);
+                $entityManager->flush();
+                if ($coupon->getNbrUtilisation() == 0) {
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->remove($coupon);
+                    $entityManager->flush();
+                }
+            }
+    
+            $discountedPrice = $coupon->getTaux() * $price / 100;
+            $newPrice = $price - $discountedPrice;
+    
+            return $this->render('home/discount.html.twig', [
+                'price' => $price,
+                'newPrice' => $newPrice,
+                'form' => $form->createView(),
+            ]);
         }
+    } else {
+        // coupon not found
+        $this->addFlash('error', 'Coupon not found.');
     }
     
-    $discountedPrice=$coupon->getTaux()*$price/100;
-
-    $newPrice=$price-$discountedPrice;
-
-
-return $this->render('home/discount.html.twig',[
-'price'=>$price,
-'newPrice'=>$newPrice,
-'form'=>$form->createView(),
-
-]);
+    return $this->render('home/discount.html.twig', [
+        'form' => $form->createView(),
+        'price' => $price,
+        'newPrice' => $newPrice,
+    ]);
+    
     
 }}
-    } 
+     
     return $this->render('home/discount.html.twig', [
         'form' => $form->createView(),
         'price'=>$price,

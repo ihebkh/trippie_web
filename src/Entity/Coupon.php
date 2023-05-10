@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource()]
 #[ORM\Entity(repositoryClass: CouponRepository::class)]
 class Coupon
@@ -16,34 +16,41 @@ class Coupon
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("coupon")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\GreaterThanOrEqual("today")]
+    #[Groups("coupon")]
     public ?\DateTimeInterface $date_debut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\GreaterThan(propertyPath: "date_debut", message: "The expiration date should be greater than the start date")]
+    #[Groups("coupon")]
     public ?\DateTimeInterface $date_experatio = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "The reduction rate should not be blank.")]
     #[Assert\Range(min: 0, max: 100, notInRangeMessage: "The reduction rate should be between {{ min }} and {{ max }}.")]
+    #[Groups("coupon")]
     private ?int $taux = null;
   
     #[ORM\Column(length: 200)]
+    #[Groups("coupon")]
     public ?string $code_coupon = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
 #[Assert\Type(type: 'integer', message: "The value {{ value }} is not a valid {{ type }}.")]
 #[Assert\GreaterThan(0, message: "The number of uses must be greater than 0.")]
+#[Groups("coupon")]
     public ?int $nbr_utilisation = null;
 
     #[ORM\Column(length: 200)]
     #[Assert\Choice(choices: ['vip', 'simple'], message: 'The type must be either "vip" or "simple".')]
+    #[Groups("coupon")]
     private ?string $type = null;
 
     #[ORM\OneToMany(mappedBy: 'coupon', targetEntity: Cadeau::class)]
