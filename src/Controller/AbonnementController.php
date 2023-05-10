@@ -51,8 +51,7 @@ class AbonnementController extends AbstractController
     #[Route('/new', name: 'app_abonnement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $userRepository = $this->getDoctrine()->getRepository(Client::class);
-        $client = $userRepository->find($id_client);
+        
         $abonnement = new Abonnement();
            // Set the dateAchat and dateExpiration attributes
     $today = new \DateTime('today');

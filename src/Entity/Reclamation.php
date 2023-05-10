@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ReclamationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,28 +16,38 @@ class Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamations")]
     private ?int $id = null;
+
+
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: 'Type cannot be empty')]
     #[Assert\Regex(pattern: '/^[^0-9]*$/', message: 'Type cannot contain any numbers')]
+    #[Groups("reclamations")]
     private ?string $type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: 'Commentaire cannot be empty')]
     #[Assert\Length(min: 16, minMessage: 'Commentaire must be at least {{ limit }} characters long')]
+    #[Groups("reclamations")]
     private ?string $commentaire = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("reclamations")]
     private ?string $etat = null;
 
     #[ORM\Column(nullable: false)]
+    #[Groups("reclamations")]
     private ?int $id_user = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\NotNull(message: 'Date creation cannot be empty')]
     #[Assert\EqualTo(value: 'today', message: 'Date creation must be the same as the PC date')]
+    #[Groups("reclamations")]
     private ?\DateTimeInterface $date_creation = null;
+
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("reclamations")]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'id_rec', targetEntity: Reponse::class)]

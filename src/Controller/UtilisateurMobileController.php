@@ -19,26 +19,9 @@ class UtilisateurMobileController extends AbstractController
    
 
 
-    #[Route("/utilisateur/mobile/AllUsers", name: "list")]
-    //* Dans cette fonction, nous utilisons les services NormlizeInterface et StudentRepository, 
-    //* avec la méthode d'injection de dépendances.
-    public function getUsers(UtilisateurRepository $repo, SerializerInterface $serializer)
-    {
-        $users = $repo->findAll();
-        //* Nous utilisons la fonction normalize qui transforme le tableau d'objets 
-        //* students en  tableau associatif simple.
-        // $studentsNormalises = $normalizer->normalize($students, 'json', ['groups' => "students"]);
+    
 
-        // //* Nous utilisons la fonction json_encode pour transformer un tableau associatif en format JSON
-        // $json = json_encode($studentsNormalises);
-
-        $json = $serializer->serialize($users, 'json', ['groups' => "utilisateurs"]);
-
-        //* Nous renvoyons une réponse Http qui prend en paramètre un tableau en format JSON
-        return new Response($json);
-    }
-
-    #[Route("/utilisateur/mobile/addUtilisateurJSON/new/{cin}/{nom}/{prenom}", name: "addUtilisateurJSON", methods: ['GET'])]
+    #[Route("/addUtilisateurJSON/new/{cin}/{nom}/{prenom}", name: "addUtilisateurJSON", methods: ['GET'])]
     public function addUtilisateurJSON(Request $req,   NormalizerInterface $Normalizer)
     {
 
@@ -53,4 +36,30 @@ class UtilisateurMobileController extends AbstractController
         $jsonContent = $Normalizer->normalize($user, 'json', ['groups' => 'utilisateurs']);
         return new Response(json_encode($jsonContent));
     }
+
+
+    #[Route("/user", name: "id_user", methods: ['GET'])]
+    public function getById(int $id): JsonResponse
+    {
+        $utilisateur = $this->getDoctrine()
+            ->getRepository(Utilisateur::class)
+            ->find($id);
+
+        if (!$utilisateur) {
+            return $this->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
+
+        $data = [
+            'id' => $utilisateur->getIdUser(),
+            'nom' => $utilisateur->getNom(),
+            'prenom' => $utilisateur->getPrenom(),
+            // Ajoutez les autres propriétés que vous voulez inclure dans la réponse JSON
+        ];
+
+        return $this->json($data);
+    }
+
+    
 }
+
+

@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Chauffeur;
 use Symfony\Component\Validator\Constraints as Assert;
 use Twilio\Rest\Client;
-use App\Entity\Chauffeur;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 #[ORM\Entity(repositoryClass: CoVoiturageRepository::class)]
@@ -18,34 +20,38 @@ class CoVoiturage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("covs")]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("covs")]
     private ?string $depart = null;
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
-
+    #[Groups("covs")]
     private ?string $destination = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
     #[Assert\GreaterThanOrEqual("today")]
+    #[Groups("covs")]
     private ?\DateTimeInterface $date_dep = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "You must complete all empty fields")]
+    #[Groups("covs")]
     private ?int $nmbr_place = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("covs")]
     private ?string $cov_img = null;
-    
+
     #[ORM\ManyToOne(inversedBy:'id_co')]
     #[ORM\JoinColumn(name: "id_ch", referencedColumnName: "id_ch")]
+    #[Groups("covs")]
     private ?Chauffeur $id_ch = null;
-
-
 
     #[ORM\OneToMany(mappedBy: 'id_co', targetEntity: Participation::class)]
     private Collection $participations;
@@ -120,7 +126,17 @@ class CoVoiturage
         return $this;
     }
 
-   
+    public function getIdCh(): ?Chauffeur
+    {
+        return $this->id_ch;
+    }
+
+    public function setIdCh(?Chauffeur $id_ch): self
+    {
+        $this->id_ch = $id_ch;
+
+        return $this;
+    }
 
     public function toString(): string
     {
@@ -204,17 +220,5 @@ class CoVoiturage
                 'body' => 'Participation added !'
             )
         );
-    }
-
-    public function getIdCh(): ?Chauffeur
-    {
-        return $this->id_ch;
-    }
-
-    public function setIdCh(?Chauffeur $id_ch): self
-    {
-        $this->id_ch = $id_ch;
-
-        return $this;
     }
 }

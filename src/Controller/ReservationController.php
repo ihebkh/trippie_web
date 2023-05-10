@@ -61,7 +61,7 @@ class ReservationController extends AbstractController
             $startDate = $reservation->getDateDebut()->format('Y-m-d H:i:s');
             $endDate = $reservation->getDateFin()->format('Y-m-d H:i:s');
             $marque = $reservation->getIdVoiture()->getMarque();
-          /*  $email = (new Email())
+            $email = (new Email())
                 ->from('symfonycopte822@gmail.com')
                 ->to('khmiri.iheb@esprit.tn')
                 ->subject('Car Rental Reservation Confirmation')
@@ -78,18 +78,7 @@ Trippie');
             $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
             $mailer = new Mailer($transport);
             $mailer->send($email);
-
-           $sid    = "AC97af6cfbfbc82f196871ee9045e9f0b4";
-            $token  = "4afe0454c765c4178b483b9410fcb137";
-            $twilio = new Client($sid, $token);
-            $call = $twilio->calls
-                ->create("+21692554097", // to
-                    "+16076227386", // from
-                    ["url" => "http://demo.twilio.com/docs/voice.xml"]
-                );
-
-            print($call->sid);
-        */
+        
             //dd($client);    
             $voiture->setEtat("reservé");
             $em = $this->getDoctrine()->getManager();
