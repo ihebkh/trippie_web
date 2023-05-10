@@ -16,15 +16,19 @@ class Cadeau
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $idcadeau = null;
+    
     #[Assert\NotBlank(message: "Nom du cadeau est vide")]
     #[ORM\Column(length: 200)]
     public ?string $nom_cadeay = null;
+
     #[Assert\NotNull(message: "La récurrence ne doit pas être vide")]
     #[ORM\Column]
     private ?int $reccurence = null;
+
     #[Assert\NotNull(message: "La description ne doit pas être vide")]
     #[ORM\Column(length: 200)]
     private ?string $description = null;
+
     #[Assert\NotNull(message: "valeur ne doit pas être vide")]
     #[Assert\Range(min: 0, max: 100, notInRangeMessage: "La valeur doit être entre {{ min }} et {{ max }}.")]
    
