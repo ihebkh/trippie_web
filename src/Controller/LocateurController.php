@@ -58,10 +58,7 @@ class LocateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $locateur->setPassword($passwordEncoder->encodePassword(
-                $locateur,
-                $form->get('password')->getData()
-            ));
+           
             $file = $form->get('img')->getData();
 
             if ($file) {
@@ -245,10 +242,9 @@ public function request(Request $request, LocateurRepository $userRepository, To
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setResetToken(null);
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
+            $user->setPassword(
                 $form->get('plainPassword')->getData()
-            ));
+            );
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -302,7 +298,7 @@ public function requestgsm(Request $request, LocateurRepository $userRepository,
             }    
 
             $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-            $authToken = 'cc1b12f585b55fc4afc6b7d88c5e23f9';
+            $authToken = 'e0cbfc8640120b578d622e411f0f7821';
             $twilioService = new TwilioService($accountSid, $authToken);
 
            $to = '+216' . $user->getGsm(); // recipient's phone number

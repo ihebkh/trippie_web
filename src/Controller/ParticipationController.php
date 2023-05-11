@@ -184,7 +184,7 @@ class ParticipationController extends AbstractController
     }
     
 
-    #[Route('/participation/search', name: 'search', methods: ['GET', 'POST'])]
+    #[Route('/participation/search', name: 'searchpartrahali', methods: ['GET', 'POST'])]
     public function search2(Request $request, CoVoiturageRepository $repo, Client $id_client): Response
     {
         $query = $request->query->get('query');

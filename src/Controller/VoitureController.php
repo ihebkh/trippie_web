@@ -27,7 +27,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class VoitureController extends AbstractController
 {
-    #[Route(' ', name: 'app_voiture')]
+    #[Route('/voiture', name: 'app_voiture')]
     public function index(): Response
     {
         return $this->render('voiture/index.html.twig', [
@@ -553,7 +553,7 @@ $OtherPercentage = round(($OtherCount / $total) * 100);
         ]);
     }
 
-    #[Route('/voiture/search', name: 'search2', methods: ['GET', 'POST'])]
+    #[Route('/voiture/search', name: 'searchvoiture', methods: ['GET', 'POST'])]
     public function search2(Request $request, VoitureRepository $repo): Response
     {
         $query = $request->query->get('query');

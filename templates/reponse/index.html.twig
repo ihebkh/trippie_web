@@ -9,21 +9,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+           
                 <th>Reponse</th>
                 <th>Reclamation</th>
-                <th>Actions</th>
+               
+                <th>show</th>
+                 <th>delete</th>
             </tr>
         </thead>
         <tbody>
         {% for reponse in reponses %}
             <tr>
-                <td>{{ reponse.id }}</td>
+           
                 <td>{{ reponse.reponse }}</td>
                 <td>{{ reponse.getIdrec() }}</td>
                 <td>
-                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}"><button type="button" class="btn btn-info">Show</button></a>
+                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}"><button type="button" class="btn btn-outline-dark">Show</button></a>
                     <br></br>
+                    </td>
+                    <td>
                     {{ include('reponse/_delete_form.html.twig') }}
                 </td>
             </tr>

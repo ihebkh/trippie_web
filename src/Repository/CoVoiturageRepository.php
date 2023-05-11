@@ -5,6 +5,10 @@ namespace App\Repository;
 use App\Entity\CoVoiturage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mailer\Mailer;
+use Twilio\Rest\Client;
+use Symfony\Component\Mime\Email;
 
 /**
  * @extends ServiceEntityRepository<CoVoiturage>
@@ -161,4 +165,70 @@ class CoVoiturageRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function email()
+    {
+
+        try {
+            $email = (new Email())
+                ->from('symfonycopte822@gmail.com')
+                ->to('aymen.rahali@esprit.tn')
+                ->subject('Car Pool Participation Confirmation')
+                ->text('test');
+
+            $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+            $mailer = new Mailer($transport);
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            // Handle any errors that occur during email sending
+            $this->addFlash('error', 'An error occurred while sending the email');
+        }
+    }
+
+    public function email_rec()
+    {
+
+        try {
+            $email = (new Email())
+                ->from('symfonycopte822@gmail.com')
+                ->to('mohamedtaher.guerfala@esprit.tn')
+                ->subject('Reclamation')
+                ->text('Votre réclamation est reçu avec succés');
+
+            $transport = new GmailSmtpTransport('symfonycopte822@gmail.com', 'cdwgdrevbdoupxhn');
+            $mailer = new Mailer($transport);
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            // Handle any errors that occur during email sending
+            $this->addFlash('error', 'An error occurred while sending the email');
+        }
+    }
+    public function send_msg(String $num): void
+    {
+
+        $accountSid = 'ACb8ac250d94d237ea91634b8def26f57d';
+        $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+        $client = new Client($accountSid, $authToken);
+        $message = $client->messages->create(
+            $num, // recipient's phone number
+            array(
+                'from' => '+15673132411', // your Twilio phone number
+                'body' => 'Participation added !'
+            )
+        );
+    }
+
+    public function sms(String $num): void
+    {
+
+        $accountSid = 'ACb8ac250d94d237ea91634b8def26f57d';
+        $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+        $client = new Client($accountSid, $authToken);
+        $message = $client->messages->create(
+            $num, // recipient's phone number
+            array(
+                'from' => '+15673132411', // your Twilio phone number
+                'body' => 'Reclamation reçu !'
+            )
+        );
+    }
 }

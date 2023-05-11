@@ -36,7 +36,7 @@
 	<script>
 		var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-type: 'doughnut',
+type: 'polarArea',
 data: {
 labels: [
 'BMW',
@@ -175,58 +175,54 @@ beginAtZero: true
 });
 	</script>
 
+<main id="main" class="main">
+    <div class="pagetitle">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="search-bar" style="position: absolute; margin-top: -4.6%; right: 4.5%"></div>
+                            <br>
+                            <center>
+                                <h1>Graphique des destinations</h1>
+                            </center>
+                            <br>
 
-	<main id="main" class="main">
-		<div class="pagetitle">
-			<section class="section">
-				<div class="row">
-					<div class="col-lg-6 offset-lg-3">
-						<div class="card">
-							<div class="card-body">
-								<div class="search-bar" style="position: absolute; margin-top: -4.6%; right: 4.5%"></div>
-								<br>
-								<center>
-									<h1>Graphique des destinations
-									</h1>
-								</center>
-								<br>
+                            <canvas id="departureChart"></canvas>
 
-								<canvas id="departureChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
 
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	</main>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<script>
-
-
-		var ctxDestination = document.getElementById('destinationChart').getContext('2d');
-var destinationChart = new Chart(ctxDestination, {
-type: 'doughnut',
-data: {
-labels: [
-'Aryanah',
-'Bizerte',
-'Beja',
-'Tunis',
-'Sfax',
-'Kairouan',
-'Jandouba',
-'Ben Arous',
-'Manouba',
-'Nabeul',
-'Gabes',
-'Zaghouan'
-],
-datasets: [
-{
-label: 'Pourcentage %',
-data: [
+<script>
+    var ctxDestination = document.getElementById('departureChart').getContext('2d');
+    var destinationChart = new Chart(ctxDestination, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Aryanah',
+                'Bizerte',
+                'Beja',
+                'Tunis',
+                'Sfax',
+                'Kairouan',
+                'Jandouba',
+                'Ben Arous',
+                'Manouba',
+                'Nabeul',
+                'Gabes',
+                'Zaghouan'
+            ],
+            datasets: [{
+                label: 'Pourcentage %',
+                data: [
 {{ AryanahPercentage }},
 {{ BizertePercentage }},
 {{ BejaPercentage }},
@@ -239,50 +235,46 @@ data: [
 {{ ManoubaPercentage }},
 {{ NabeulPercentage }},
 {{ ZaghouanPercentage }}
-],
-backgroundColor: [
-'#ffcd56',
-'#ff6384',
-'#36a2eb',
-'#fd6b19',
-'#4bc0c0',
-'#9966ff',
-'#ff99cc',
-'#ffd700',
-'#00ff7f',
-'#8a2be2'
-],
-borderColor: [
-'#ffcd56',
-'#ff6384',
-'#36a2eb',
-'#fd6b19',
-'#4bc0c0',
-'#9966ff',
-'#ff99cc',
-'#ffd700',
-'#00ff7f',
-'#8a2be2'
-],
+                ],
+                backgroundColor: [
+                    '#ffcd56',
+                    '#ff6384',
+                    '#36a2eb',
+                    '#fd6b19',
+                    '#4bc0c0',
+                    '#9966ff',
+                    '#ff99cc',
+                    '#ffd700',
+                    '#00ff7f',
+                    '#8a2be2'
+                ],
+                borderColor: [
+                    '#ffcd56',
+                    '#ff6384',
+                    '#36a2eb',
+                    '#fd6b19',
+                    '#4bc0c0',
+                    '#9966ff',
+                    '#ff99cc',
+                    '#ffd700',
+                    '#00ff7f',
+                    '#8a2be2'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
-borderWidth: 1
-}
-]
-},
-options: {
-scales: {
-yAxes: [
-{
-ticks: {
-beginAtZero: true
-}
-}
-]
-}
-
-}
-});
-	</script>
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -312,7 +304,7 @@ beginAtZero: true
 	<script>
 		var ctx = document.getElementById('rec_chart').getContext('2d');
 var rec_chart = new Chart(ctx, {
-type: 'doughnut',
+type: 'line',
 data: {
 labels: [
 'Technique', 'Eco', 'Other'
@@ -358,6 +350,114 @@ beginAtZero: true
 }
 });
 	</script>
+
+
+	<main id="main" class="main">
+    <div class="pagetitle">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="search-bar" style="position: absolute; margin-top: -4.6%; right: 4.5%"></div>
+                            <br>
+                            <center>
+                                <h1>Graphique des destinations</h1>
+                            </center>
+                            <br>
+
+                            <canvas id="departureChart2"></canvas>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctxDestination = document.getElementById('departureChart2').getContext('2d');
+    var departureChart2 = new Chart(ctxDestination, {
+        type: 'bar',
+        data: {
+            labels: [
+                'Aryanah',
+                'Bizerte',
+                'Beja',
+                'Tunis',
+                'Sfax',
+                'Kairouan',
+                'Jandouba',
+                'Ben Arous',
+                'Manouba',
+                'Nabeul',
+                'Gabes',
+                'Zaghouan'
+            ],
+            datasets: [
+                {
+                    label: 'Pourcentage %',
+                    data: [
+                        {{ AryanahPercentage }},
+                        {{ BizertePercentage }},
+                        {{ BejaPercentage }},
+                        {{ GabesPercentage }},
+                        {{ TunisPercentage }},
+                        {{ SfaxPercentage }},
+                        {{ KairouanPercentage }},
+                        {{ JandoubaPercentage }},
+                        {{ Ben_ArousPercentage }},
+                        {{ ManoubaPercentage }},
+                        {{ NabeulPercentage }},
+                        {{ ZaghouanPercentage }}
+                    ],
+                    backgroundColor: [
+                        '#ffcd56',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#fd6b19',
+                        '#4bc0c0',
+                        '#9966ff',
+                        '#ff99cc',
+                        '#ffd700',
+                        '#00ff7f',
+                        '#8a2be2'
+                    ],
+                    borderColor: [
+                        '#ffcd56',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#fd6b19',
+                        '#4bc0c0',
+                        '#9966ff',
+                        '#ff99cc',
+                        '#ffd700',
+                        '#00ff7f',
+                        '#8a2be2'
+                    ],
+
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            }
+        }
+    });
+</script>
+
+
+
 
 
 {% endblock %}

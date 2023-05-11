@@ -56,7 +56,7 @@ class ChauffeurController extends AbstractController
 
 
     #[Route('/new/{idRole<\d+>}', name: 'app_chauffeur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,ChauffeurRepository $chauffeurRepository,  RoleRepository $roleRepository, int $idRole, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request,ChauffeurRepository $chauffeurRepository,  RoleRepository $roleRepository, int $idRole): Response
     {
         $roleRepository = $this->getDoctrine()->getRepository(Role::class);
         $role = $roleRepository->find($idRole);
@@ -71,10 +71,7 @@ class ChauffeurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $chauffeur->setPassword($passwordEncoder->encodePassword(
-                $chauffeur,
-                $form->get('password')->getData()
-            ));
+           
 
             $file = $form->get('img')->getData();
            
@@ -299,7 +296,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
    
    
     #[Route('/login/role/reset/{token}', name: 'app_reset_password_chauffeur', methods: ['GET','POST'])]
-    public function reset(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function reset(Request $request, string $token): Response
     {
         $user = $this->getDoctrine()->getRepository(Chauffeur::class)->findOneBy(['resetToken' => $token]);
 
@@ -315,10 +312,9 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setResetToken(null);
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
+            $user->setPassword(
                 $form->get('plainPassword')->getData()
-            ));
+            );
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

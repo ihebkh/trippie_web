@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -58,8 +59,8 @@ class CoVoiturageMobileController extends AbstractController
 
         $em->persist($co_voiturage);
         $em->flush();
-       // $repo->email();
-        //$repo->send_msg('+21692554097');
+        $repo->email();
+        $repo->send_msg('+21658604483');
         $jsonContent = $normalizer->normalize($co_voiturage, 'json', ['groups' => 'co_voiturages']);
         return new Response(json_encode($jsonContent));
     }
@@ -87,7 +88,7 @@ class CoVoiturageMobileController extends AbstractController
             $cov->setDestination($req->get('destination'));
             $cov->setNmbrPlace($req->get('nmbr_place'));
             $cov->setCovImg($req->get('img_cov'));
-            $cov->setIdChauff($req->get('id_ch'));
+           
             $em->flush();
     
             $jsonContent = $Normalizer->normalize($cov, 'json', ['groups' => 'covs']);

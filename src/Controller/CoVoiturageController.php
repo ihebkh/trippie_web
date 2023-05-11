@@ -395,7 +395,7 @@ class CoVoiturageController extends AbstractController
 
 
 
-    #[Route('/co/voiturage/search2', name: 'app_search', methods: ['GET'])]
+    #[Route('/co/voiturage/search2', name: 'searchvovrahali', methods: ['GET'])]
     public function search(Request $request, CoVoiturageRepository $coVoiturageRepository): Response
     {
         $searchQuery = $request->query->get('query');

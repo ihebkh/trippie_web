@@ -72,9 +72,13 @@
   
 
                          <div class="form-group">
-
-    {{ include('abonnement/_form.html.twig') }}
+                    
+    
+  
 </div>
+
+  {{ include('abonnement/_form.html.twig') }}
+
 {% if success %}
         <div class="alert alert-success">
             You bought a new membership! and your new token balance is: {{ highscores.score }} $

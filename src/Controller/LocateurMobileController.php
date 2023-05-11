@@ -15,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\Mailer;
+use App\Service\TwilioService;
 use Symfony\Component\Mime\Email;
 
 class LocateurMobileController extends AbstractController
@@ -100,6 +101,41 @@ class LocateurMobileController extends AbstractController
     // Envoi de la requête
     $jsonContent = $NormalizerInterface->normalize($locateur, 'json', ['groups' => 'locateurs']);
     return new JsonResponse($jsonContent);
+}
+
+#[Route('/locateur/forget/{gsm}', name: 'forgetLOC', methods: ['POST','GET'])]
+public function forgetPassword(Request $request,UserPasswordHasherInterface $userPasswordHasher, TokenGeneratorInterface $tokenGenerator,int $gsm,NormalizerInterface $NormalizerInterface): JsonResponse
+{
+
+   
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(Locateur::class)->findOneBy(['gsm' => $gsm]);
+   
+
+
+    $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
+    $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+    $twilioService = new TwilioService($accountSid, $authToken);
+    
+    $to = '+216' . $user->getGsm(); // recipient's phone number
+    $from = '+15673132411'; // your Twilio phone number
+    $body = 'This is your new password: ' . $code;
+
+    $twilioService->sendSms($from, $to, $body);
+    $code = bin2hex(random_bytes(3));
+    $user->setPassword(
+        $userPasswordHasher->hashPassword(
+            $user,
+            $code
+        )
+    );
+    $em->persist($user);
+    $em->flush();
+    
+
+     
+                $jsonContent = $NormalizerInterface->normalize($user, 'json', ['groups' => 'locateurs']);
+                return new JsonResponse($jsonContent);
 }
 
 

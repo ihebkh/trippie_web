@@ -117,10 +117,9 @@ public function forgetPassword(Request $request,UserPasswordHasherInterface $use
     $user = $em->getRepository(Client::class)->findOneBy(['gsm' => $gsm]);
    
 
-
     $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-    $authToken = 'cc1b12f585b55fc4afc6b7d88c5e23f9';
-    $twilioService = new TwilioService($accountSid, $authToken);
+    $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+   
     $code = bin2hex(random_bytes(3));
     $user->setPassword(
         $userPasswordHasher->hashPassword(
@@ -128,10 +127,7 @@ public function forgetPassword(Request $request,UserPasswordHasherInterface $use
             $code
         )
     );
-    $em->persist($user);
-    $em->flush();
-    $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-    $authToken = 'c4e3bb8d7810ca4e381881a3e94a1262';
+   
     $twilioService = new TwilioService($accountSid, $authToken);
 
                 $to = '+216' . $user->getGsm(); // recipient's phone number
@@ -139,6 +135,9 @@ public function forgetPassword(Request $request,UserPasswordHasherInterface $use
                 $body = 'This is your new password: ' . $code;
 
                 $twilioService->sendSms($from, $to, $body);
+                $em->persist($user);
+                $em->flush();
+                
      
                 $jsonContent = $NormalizerInterface->normalize($user, 'json', ['groups' => 'clients']);
                 return new JsonResponse($jsonContent);

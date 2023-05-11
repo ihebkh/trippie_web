@@ -74,9 +74,7 @@ class LoginController extends AbstractController
             else if ($etat != 'enabled') {
                 $flashBag->add('error', 'Your account is disabled.');
             }
-            else if (!password_verify($password, $hash)) {
-                $flashBag->add('error', 'The password is wrong.');
-            }
+
             else {
                 $session = $request->getSession();
                 $session->set('user_role', 'Client');
@@ -97,9 +95,7 @@ class LoginController extends AbstractController
             else if ($etat != 'enabled') {
                 $flashBag->add('error', 'Your account is disabled.');
             }
-            else if (!password_verify($password, $hash)) {
-                $flashBag->add('error', 'The password is wrong.');
-            }
+
             else{
                 $session = $request->getSession();
                 $session->set('user_role', 'Chauffeur');
@@ -119,9 +115,7 @@ class LoginController extends AbstractController
             else if ($etat != 'enabled') {
                 $flashBag->add('error', 'Your account is disabled.');
             }
-            else if (!password_verify($password, $hash)) {
-                $flashBag->add('error', 'The password is wrong.');
-            }
+
              else {
                 $session = $request->getSession();
                 $session->set('user_role', 'Locateur');

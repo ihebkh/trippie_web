@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LoginMobileController extends AbstractController
 {
-    #[Route('/client/login/{email}/{password}', name: 'login', methods: ['GET','POST'])]
+    #[Route('/client/login/{email}/{password}', name: 'loginCl', methods: ['GET','POST'])]
     public function loginJSON(Request $request, NormalizerInterface $normalizer, ManagerRegistry $registry,String $email,String $password)
 {
     $em = $registry->getManager();

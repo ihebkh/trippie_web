@@ -61,7 +61,7 @@ class ReponseController extends AbstractController
 
 
 //client reponses
-    #[Route('/{id}/{id_client}', name: 'app_reponse_front', methods: ['GET'])]
+    #[Route('/client/{id}/{id_client}', name: 'app_reponse_front', methods: ['GET'])]
     public function front(int $id, ReponseRepository $reponseRepository, ReclamationRepository $reclamationRepository, int $id_client): Response
     {
         $userRepository = $this->getDoctrine()->getRepository(Client::class);
@@ -118,7 +118,7 @@ return $this->render('reponse/showAllCh.html.twig', [
 
 
 
-    #[Route('/{id}/rep', name: 'app_reponse_show', methods: ['GET'])]
+    #[Route('/rep/{id}', name: 'app_reponse_show', methods: ['GET'])]
     public function show(Reponse $reponse): Response
     {
         return $this->render('reponse/show.html.twig', [

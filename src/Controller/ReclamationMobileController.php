@@ -6,6 +6,7 @@ use App\Entity\Reclamation;
 use Doctrine\ORM\EntityRepository;
 use App\Repository\ReclamationRepository;
 use App\Repository\ClientRepository;
+use App\Repository\CoVoiturageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +29,7 @@ class ReclamationMobileController extends AbstractController
     }
 
     #[Route("addReclamationSON/new", name: "addReclamationjSON")]
-    public function addReclamationJSON(ManagerRegistry $doctrine, Request $req,NormalizerInterface $Normalizer,ClientRepository $ClientRepository)
+    public function addReclamationJSON(ManagerRegistry $doctrine, Request $req,NormalizerInterface $Normalizer,ClientRepository $ClientRepository,CoVoiturageRepository $rec)
     {
 
         $em = $doctrine->getManager();
@@ -42,6 +43,7 @@ class ReclamationMobileController extends AbstractController
         $client = $ClientRepository->find($req->get('id_client'));
         $role = $client->getIdRole();
         $reclamation->setIdUser($role->getIdRole());
+        $rec->sms("+21658604483");
         $email = (new Email())
         ->from('symfonycopte822@gmail.com')
         ->to('mohamedtaher.guerfala@esprit.tn')

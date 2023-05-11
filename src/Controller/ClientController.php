@@ -46,7 +46,7 @@ class ClientController extends AbstractController
     }
 
     #[Route('/new/{idRole<\d+>}', name: 'app_client_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole, UserPasswordEncoderInterface $passwordEncoder,EntityManagerInterface $entityManager ): Response
+    public function new(Request $request, ClientRepository $clientRepository,RoleRepository $roleRepository, int $idRole, EntityManagerInterface $entityManager ): Response
     {
        
         $roleRepository = $this->getDoctrine()->getRepository(Role::class);
@@ -69,10 +69,9 @@ class ClientController extends AbstractController
    
             
             
-            $client->setPassword($passwordEncoder->encodePassword(
-                $client,
+            $client->setPassword( 
                 $form->get('password')->getData()
-            ));
+            );
             $file = $form->get('img')->getData();
 
             if ($file) {
@@ -256,10 +255,9 @@ public function request(Request $request, ClientRepository $userRepository, Toke
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setResetToken(null);
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
+            $user->setPassword(
                 $form->get('plainPassword')->getData()
-            ));
+            );
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

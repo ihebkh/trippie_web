@@ -45,9 +45,11 @@
             <tr>
                 
                 <th>Pointmerci</th>
-                <th>Dateexpiration</th>
-                
-                <th>actions</th>
+                <th>Dateexpiration</th>   
+              
+                <th>show</th>
+                <th>edit</th>
+             
             </tr>
         </thead>
         <tbody>
@@ -58,15 +60,20 @@
                 <td>{{ cartefidelite.getDateexpiration ? cartefidelite.dateexpiration|date('Y-m-d') : '' }}</td>
                 
                 <td>
-                    <a href="{{ path('app_cartefidelite_show', {'idCf': cartefidelite.idCf}) }}">show</a>
-                    <a href="{{ path('app_cartefidelite_edit', {'idCf': cartefidelite.idCf}) }}">edit</a>
+                <button class="btn btn-outline-dark" >   <a href="{{ path('app_cartefidelite_show', {'idCf': cartefidelite.idCf}) }}">show</a> </button> 
+                </td>
+                <td>
+                 <button  class="btn btn-outline-success">     <a href="{{ path('app_cartefidelite_edit', {'idCf': cartefidelite.idCf}) }}">edit</a></button> 
                     
 
                 </td>
+
+
+                
             </tr>
         
         {% endfor %}
-                    <a href="{{ path('app_abonnement_new') }}">Create new</a>
+                <button class="btn btn-outline-info">    <a href="{{ path('app_abonnement_new') }}">Create new</a></button>
 
         </tbody>
     </table>

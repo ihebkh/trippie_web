@@ -31,12 +31,7 @@
                         {% endfor %}
 
 
-                        {% for message in app.flashes('noticedelete') %}
-                            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
-                                {{ message }}
-                            </div>
-
-                        {% endfor %}
+                       
 
                         <div class="card-body">
 
@@ -83,27 +78,20 @@
                                     <th>type</th>
                                     <td>{{ coupon.type }}</td>
                                 </tr>
-                           <tr>
-                               <th><center>      <a href="{{ path('app_coupon_show',{id:coupon.id}) }}">
-                                          <th><center>      <a href="{{ path('app_coupon_edit',{id:coupon.id}) }}">
-                                           <button type="button" class="btn btn-outline-success ">Update</button></a>          </center></th>
-                                          
-                               
-                             <tr>
-    <th>
-        <center>
-            <a href="{{ path('app_coupon_delete',{id:coupon.id}) }}">
-                <button type="button" class="btn btn-outline-danger">Delete</button>
-            </a>
-        </center>
-    </th>
-</tr>
+                         
+                              
+ 
 
-                           </tr>
+                        
                            
 
                                 </tbody>
                             </table>
+                             <center>      <a href="{{ path('app_coupon_show',{id:coupon.id}) }}">
+                                          <th><center>      <a href="{{ path('app_coupon_edit',{id:coupon.id}) }}">
+                                           <button type="button" class="btn btn-outline-success ">Update</button></a>          </center>
+                                          
+                               
                             <!-- End Default Table Example -->
 
                         </div>
