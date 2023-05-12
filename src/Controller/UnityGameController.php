@@ -25,7 +25,9 @@ class UnityGameController extends AbstractController
 $lastHighscore = $queryBuilder->getQuery()->getOneOrNullResult();
 
 if ($lastHighscore !== null) {
-    $lastHighscore->setScore(1000);
+    $randomNumber = rand(1, 1000); // Generate a random number between 1 and 1000
+    $newScore = $lastHighscore->getScore() + $randomNumber;
+    $lastHighscore->setScore($newScore);
     $entityManager->persist($lastHighscore);
     $entityManager->flush();
 }

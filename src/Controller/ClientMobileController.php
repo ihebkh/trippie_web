@@ -118,15 +118,14 @@ public function forgetPassword(Request $request,UserPasswordHasherInterface $use
    
 
     $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-    $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+    $authToken = '54d4d6dfa4a3e8c998d386857a985a8e';
    
     $code = bin2hex(random_bytes(3));
     $user->setPassword(
-        $userPasswordHasher->hashPassword(
-            $user,
+      
             $code
         )
-    );
+    ;
    
     $twilioService = new TwilioService($accountSid, $authToken);
 

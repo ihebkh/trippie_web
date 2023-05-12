@@ -83,7 +83,7 @@ function spin() {
             
           icon: "success",
           title: "Congr!",
-          html: `You won${value} ! ${showQrCode ? `  Click <a href="${qrcode}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
+          html: `You won${value} ! ${showQrCode ? `  Click <a href="${qrcode}/${idClient}" target="_blank">here</a> to view your QR code.</strong>.` : '</strong>'}`,
           showCancelButton: true,
         }).then((result) => {
           if (result.isConfirmed) {

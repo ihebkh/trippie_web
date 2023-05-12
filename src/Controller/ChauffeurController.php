@@ -368,7 +368,7 @@ public function request(Request $request, ChauffeurRepository $userRepository, T
                 }    
     
                 $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-                $authToken = 'cc1b12f585b55fc4afc6b7d88c5e23f9';
+                $authToken = '54d4d6dfa4a3e8c998d386857a985a8e';
                 $client = new Client($accountSid, $authToken);
                 $message = $client->messages->create(
                     '+216' . $user->getGsm(), // recipient's phone number

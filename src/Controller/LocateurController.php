@@ -298,7 +298,7 @@ public function requestgsm(Request $request, LocateurRepository $userRepository,
             }    
 
             $accountSid ='ACb8ac250d94d237ea91634b8def26f57d';
-            $authToken = 'e0cbfc8640120b578d622e411f0f7821';
+            $authToken = '54d4d6dfa4a3e8c998d386857a985a8e';
             $twilioService = new TwilioService($accountSid, $authToken);
 
            $to = '+216' . $user->getGsm(); // recipient's phone number
